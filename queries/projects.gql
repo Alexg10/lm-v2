@@ -1,0 +1,9 @@
+{
+    projects{
+        nodes{
+            id
+            title
+            slug
+        }
+    }
+}

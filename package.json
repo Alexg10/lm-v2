@@ -1,0 +1,22 @@
+{
+  "name": "lm",
+  "version": "1.0.0",
+  "description": "LM Portfolio",
+  "author": "Alex",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/apollo": "^4.0.0-rc19",
+    "graphql-tag": "^2.10.3",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^8.0.2",
+    "vue-awesome-swiper": "^3.1.3"
+  },
+  "devDependencies": {}
+}

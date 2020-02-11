@@ -1,0 +1,28 @@
+.listFade-enter-active{
+    animation: listFade-in 4s
+}
+.listFade-leave-active {
+    animation: listFade-out 2s
+}
+
+@keyframes listFade-in{
+    0%{ opacity: 0}
+    100%{ opacity: 1}
+}
+
+@keyframes listFade-out{
+    0%{ opacity: 1}
+    100%{ opacity: 1}
+}
+
+
+.cover-enter-active .cover-project,
+.cover-leave-active  .cover-project{
+    transition: all 60s;
+}
+
+.cover-enter .cover-project,
+.cover-leave-to .cover-project{
+    visibility: visible;
+    display: block;
+}

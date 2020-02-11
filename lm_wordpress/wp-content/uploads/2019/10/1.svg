@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="280px" height="995px" viewBox="0 0 280 995" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>degradé turquoise copy 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-102.405134%" y1="55.2889447%" x2="-571.450893%" y2="-17.2880025%" id="linearGradient-1">
+            <stop stop-color="#4BD1CA" offset="0%"></stop>
+            <stop stop-color="#D6FFED" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="G---About" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="G.1.0---About" transform="translate(-279.000000, -966.000000)" fill="url(#linearGradient-1)">
+            <g id="fond-convictions" transform="translate(840.000000, 1431.500000) scale(-1, 1) translate(-840.000000, -1431.500000) translate(-5.000000, 865.000000)">
+                <rect id="degradé-turquoise-copy-6" x="1126" y="101" width="280" height="995"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
