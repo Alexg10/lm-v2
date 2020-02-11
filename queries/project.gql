@@ -1,110 +1,108 @@
-query getProjectBySlug($slug : String!)
-{
-	projectBy(slug: $slug){
-      id
-    	title
-    	acfProjectFields{
-        blocs{
-          ... on Project_Acfprojectfields_Blocs_BlocStep{
-            fieldGroupName
-            color
-            number
-            stepTitle
+query getProjectBySlug($slug: String!) {
+  projectBy(slug: $slug) {
+    id
+    title
+    acfProjectFields {
+      blocs {
+        ... on Project_Acfprojectfields_Blocs_BlocStep {
+          fieldGroupName
+          color
+          number
+          stepTitle
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocLaptop {
+          fieldGroupName
+          laptopPicture {
+            sourceUrl(size: SKETCH_PICTURE)
           }
-          ... on Project_Acfprojectfields_Blocs_BlocLaptop{
-            fieldGroupName
-            laptopPicture {
+          laptopVideo {
+            uri
+          }
+          pictureVideo
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocTxt {
+          fieldGroupName
+          text
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocSketch {
+          fieldGroupName
+          sketchImages {
+            sketchImage {
               sourceUrl(size: SKETCH_PICTURE)
-            }
-            laptopVideo{
-              uri
-            }
-            pictureVideo
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocTxt{
-            fieldGroupName
-            text
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocSketch{
-            fieldGroupName
-            sketchImages{
-              sketchImage{
-                sourceUrl(size: SKETCH_PICTURE)
-              }
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocFourSectionContent{
-            fieldGroupName
-            blocFourSectionImg{
-              image{
-                sourceUrl(size: LARGE)
-              }
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocImgFullCenter{
-            fieldGroupName
-            blocImgFullCenterImg{
-              sourceUrl(size: LARGE)
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocColors{
-            fieldGroupName
-            blocColorsColor{
-              colorHexa
-              colorTitle
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocBgGradient{
-            fieldGroupName
-            blocBgGradientTxt
-            gradientBackground{
-              gradientBackgroundImage{
-                sourceUrl(size: LARGE)
-              }
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocPatchwork{
-            fieldGroupName
-            firstPatchwork{
-              firstPatchworkImages{
-                sourceUrl(size: LARGE)
-              }
-            }
-            patchworkTxt
-            secondPatchwork{
-              secondPatchworkImg{
-                sourceUrl(size: LARGE)
-              }
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocAnimation{
-            fieldGroupName
-						imageDesktop{
-              sourceUrl(size: LARGE)
-            }
-            imageMobile{
-              sourceUrl(size: LARGE)
-            }
-          }
-          ... on Project_Acfprojectfields_Blocs_BlocAfterEffect{
-            fieldGroupName
-						imageMiddle{
-              sourceUrl(size: LARGE)
-            }
-            imageTopLeft{
-              sourceUrl(size: LARGE)
-            }
-            imageTopRight{
-              sourceUrl(size: LARGE)
-            }
-            imagesFullHeight{
-             imageFullHeight{
-              sourceUrl(size: LARGE)
-            } 
             }
           }
         }
-        __typename
+        ... on Project_Acfprojectfields_Blocs_BlocFourSectionContent {
+          fieldGroupName
+          blocFourSectionImg {
+            image {
+              sourceUrl(size: LARGE)
+            }
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocImgFullCenter {
+          fieldGroupName
+          blocImgFullCenterImg {
+            sourceUrl(size: LARGE)
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocColors {
+          fieldGroupName
+          blocColorsColor {
+            colorHexa
+            colorTitle
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocBgGradient {
+          fieldGroupName
+          blocBgGradientTxt
+          gradientBackground {
+            gradientBackgroundImage {
+              sourceUrl(size: LARGE)
+            }
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocPatchwork {
+          fieldGroupName
+          firstPatchwork {
+            firstPatchworkImages {
+              sourceUrl(size: LARGE)
+            }
+          }
+          patchworkTxt
+          secondPatchwork {
+            secondPatchworkImg {
+              sourceUrl(size: LARGE)
+            }
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocAnimation {
+          fieldGroupName
+          imageDesktop {
+            sourceUrl(size: LARGE)
+          }
+          imageMobile {
+            sourceUrl(size: LARGE)
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocAfterEffect {
+          fieldGroupName
+          imageMiddle {
+            sourceUrl(size: LARGE)
+          }
+          imageTopLeft {
+            sourceUrl(size: LARGE)
+          }
+          imageTopRight {
+            sourceUrl(size: LARGE)
+          }
+          imagesFullHeight {
+            imageFullHeight {
+              sourceUrl(size: LARGE)
+            }
+          }
+        }
       }
+    }
   }
 }

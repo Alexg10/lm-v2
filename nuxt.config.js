@@ -46,7 +46,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:8888/lm/lm_wordpress/graphql'
+        httpEndpoint: 'http://192.168.1.39:8888/lm/lm_wordpress/graphql'
       }
     }
   },
