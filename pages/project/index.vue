@@ -1,11 +1,12 @@
 <template>
     <div>
-        Project list
-
         <div v-if="projects" v-swiper:mySwiper="swiperOption">
             <div class="swiper-wrapper">
                 <div v-for="project in projects" class="swiper-slide" :key="project.id">
-                    <nuxt-link :to="`/project/${project.slug}`">{{project.title}}</nuxt-link>
+                    <nuxt-link :to="`/project/${project.slug}`">
+                        <div class="project-name">{{project.title}}</div>
+                        <img :src="`${project.acfProjectFields.headerPicture.sourceUrl}`" alt="">
+                    </nuxt-link>
                 </div>
             </div>
             <div class="swiper-pagination swiper-pagination-bullets"></div>
@@ -29,7 +30,6 @@
                     hashNavigation: {
                         watchState: true,
                     },
-                    // virtualTranslate: true,
                     navigation: {
                         nextEl: '.swiper-button-next',
                         prevEl: '.swiper-button-prev'
@@ -51,5 +51,14 @@
 </script>
 
 <style lang="scss" scoped>
+
+    .swiper-slide{
+        overflow: hidden;
+    }
+    .project-name{
+        display: inline-block;
+        text-decoration: none;      
+        white-space: nowrap;  
+    }
 
 </style>
