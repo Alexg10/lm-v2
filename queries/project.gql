@@ -16,7 +16,7 @@ query getProjectBySlug($slug: String!) {
             sourceUrl(size: SKETCH_PICTURE)
           }
           laptopVideo {
-            uri
+            sourceUrl
           }
           pictureVideo
         }
@@ -44,6 +44,14 @@ query getProjectBySlug($slug: String!) {
           fieldGroupName
           blocImgFullCenterImg {
             sourceUrl(size: LARGE)
+          }
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocImgFullHalf{
+          fieldGroupName
+          blocImgFullHalfImages{
+            blocImgFullHalfImage{
+              sourceUrl(size: LARGE)
+            }
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocColors {

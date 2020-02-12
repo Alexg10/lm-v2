@@ -1,8 +1,10 @@
 <template>
     <div v-if="project">
         <h1>{{project.title}}</h1>
-        <div v-for="bloc in project.acfProjectFields.blocs">
-          <component :is="bloc.fieldGroupName.split('_').reverse().shift()" :bloc="bloc"/>
+        <!-- {{project.acfProjectFields.blocs}} -->
+        <div v-for="bloc in project.acfProjectFields.blocs" :key="bloc.fieldGroupName">
+            {{bloc.fieldGroupName}}
+            <component :is="bloc.fieldGroupName.split('_').reverse().shift()" :bloc="bloc"/>
         </div>
     </div>
 </template>
@@ -14,11 +16,20 @@
     // Blocs
     import BlocStep from '~/blocs/BlocStep'
     import BlocTxt from '~/blocs/BlocTxt'
+    import BlocLaptop from '~/blocs/BlocLaptop'
+    import BlocSketch from '~/blocs/BlocSketch'
+    import BlocImgFullCenter from '~/blocs/BlocImgFullCenter'
+    import BlocImgFullHalf from '~/blocs/BlocImgFullHalf'
+
 
     export default {
         components: {
             BlocStep,
-            BlocTxt
+            BlocTxt,
+            BlocLaptop,
+            BlocSketch,
+            BlocImgFullCenter,
+            BlocImgFullHalf
         },
         apollo: {
             project : {

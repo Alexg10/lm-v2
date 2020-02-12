@@ -46,7 +46,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://192.168.1.39:8888/lm/lm_wordpress/graphql'
+        httpEndpoint: 'http://localhost:8888/lm/lm_wordpress/graphql'
       }
     }
   },
@@ -60,4 +60,10 @@ export default {
     extend (config, ctx) {
     }
   }
+  // modules: ['@nuxtjs/style-resources'],
+  // styleResources: {
+  //   scss: [
+  //     '~assets/scss/_variables.scss' // use underscore "_" & also file extension ".scss"
+  //   ]
+  // }
 }
