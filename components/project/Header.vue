@@ -13,7 +13,7 @@
             <div class="project-description">
                 <p>{{description}}</p>
                 <div v-if="link" class="link-container" >
-                    <a :href="link.url" target="_blank" class="project-link link linkHover link-stagger">View the website</a>
+                    <a :href="link" target="_blank" class="project-link link linkHover link-stagger">View the website</a>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
 </script>
 
 <style lang="scss" scoped>
-.project-header{
+    .project-header{
         position: relative;
         height: 100vh;
         width: 100vw;

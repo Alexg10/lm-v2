@@ -11,6 +11,7 @@
         <div v-for="bloc in project.acfProjectFields.blocs" :key="bloc.fieldGroupName">
             <component :is="bloc.fieldGroupName.split('_').reverse().shift()" :bloc="bloc"/>
         </div>
+        <Footer :link = "project.acfProjectFields.footerLink" />
     </div>
 </template>
 
@@ -18,8 +19,11 @@
     // Queries
     import project from '~/queries/project'
 
-    // Blocs
+    // Components
     import Header                   from '~/components/project/Header'
+    import Footer                   from '~/components/project/Footer'
+
+    // Blocs
     import BlocStep                 from '~/blocs/BlocStep'
     import BlocTxt                  from '~/blocs/BlocTxt'
     import BlocLaptop               from '~/blocs/BlocLaptop'
@@ -38,6 +42,7 @@
     export default {
         components: {
             Header,
+            Footer,
             BlocStep,
             BlocTxt,
             BlocLaptop,
