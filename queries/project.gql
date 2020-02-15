@@ -3,6 +3,18 @@ query getProjectBySlug($slug: String!) {
     id
     title
     acfProjectFields {
+      projectTitle
+      projectType
+      projectDescription
+      projectLink
+      headerPicture{
+        sourceUrl(size: LARGE)
+      }
+      footerLink{
+        url
+        title
+        target
+      }
       blocs {
         ... on Project_Acfprojectfields_Blocs_BlocStep {
           fieldGroupName
