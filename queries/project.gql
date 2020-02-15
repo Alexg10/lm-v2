@@ -53,6 +53,19 @@ query getProjectBySlug($slug: String!) {
               sourceUrl(size: LARGE)
             }
           }
+          
+        }
+        ... on Project_Acfprojectfields_Blocs_BlocSixImgTxt{
+          fieldGroupName
+          blocSixTxt
+          chapter
+          chapterName
+          blocSixImages{
+            blocSixImg{
+              sourceUrl(size: LARGE)
+            }
+          }
+          
         }
         ... on Project_Acfprojectfields_Blocs_BlocColors {
           fieldGroupName
