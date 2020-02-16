@@ -5,6 +5,8 @@
       title
       slug
       acfProjectFields{
+        projectTitle
+        projectType
         headerPicture{
           sourceUrl(size: SKETCH_PICTURE)
         }
