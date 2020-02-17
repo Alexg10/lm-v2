@@ -109,8 +109,25 @@ function wpc_mime_types($mimes) {
 }
 add_filter('upload_mimes', 'wpc_mime_types');
 
-if( function_exists('acf_add_options_page') ) {
-	acf_add_options_page();
+function register_acf_options_pages() {
+
+    // check function exists
+    if ( ! function_exists( 'acf_add_options_page' ) ) {
+        return;
+    }
+
+    // register options page
+    $my_options_page = acf_add_options_page(
+        array(
+            'page_title'      => __( 'Options' ),
+            'menu_title'      => __( 'Options' ),
+            'menu_slug'       => 'options-page',
+            'capability'      => 'edit_posts',
+            'show_in_graphql' => true,
+        )
+    );
 }
+
+add_action( 'acf/init', 'register_acf_options_pages' )
 
 ?>

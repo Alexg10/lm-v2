@@ -31,6 +31,7 @@
     import projects from '~/queries/projects'
 
     export default {
+        transition: 'listFade',
         data(){
             return{
                 swiperOption: {
@@ -59,25 +60,6 @@
                 query : projects,
                 update: (data) => data.projects.nodes
             }
-        },
-        methods: {
-            slideNext(){
-                this.$refs.mySwiper.swiper.slidePrev(1000);
-            },
-            slidePrev(){
-                this.$refs.mySwiper.swiper.slidePrev(1000);
-            }
-        },
-        mounted(){
-            var vm = this;
-            console.log(this.$refs.mySwiper.swiper);
-            document.querySelector('.swiper-slide-next').addEventListener('click',function (e){
-                e.preventDefault();
-                console.log("mdjnfjsfjk");
-                vm.$refs.mySwiper.swiper.slidePrev(1000);
-                vm.slideNext();
-                return false;
-            });
         }
     }
 </script>
