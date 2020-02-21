@@ -24,6 +24,7 @@ export default {
   */
   css: [
     'swiper/dist/css/swiper.css',
+    'slick-carousel/slick/slick.css',
     '@/assets/scss/styles.scss'
   ],
   /*
@@ -31,6 +32,7 @@ export default {
   */
   plugins: [
     {src: '~/plugins/swiper.js', ssr: false },
+    {src: '~/plugins/slick.js', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

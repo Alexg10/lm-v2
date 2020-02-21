@@ -1,7 +1,6 @@
 <template>
-    <div v-swiper:mySwiper="swiperOption" ref="mySwiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
+        <div class="homepage-container">
+            <div class="swiper-slide love-container">
                 <div class="home-slide-content red">
                     <div class="bg-love"></div>
                     <div class="word-container" v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
@@ -26,50 +25,65 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide">
+            <div class="swiper-slide work-container">
                 <div class="home-slide-content orange">
-                    <!-- <nuxt-link to="project"> -->
+                    <nuxt-link to="project">
                         <div class="word-container" v-on:click="workClick">
                             <span class="word work">work</span>
                             <span class="word work">work</span>
                             <span class="word work">work</span>
                         </div>
-                    <!-- </nuxt-link> -->
+                    </nuxt-link>
                 </div>
             </div>
         </div>
-        <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div> -->
-    </div>
 </template>
 
 <script>
     import gsap from "gsap"
-    
+
     export default {
         data(){
             return{
-                swiperOption: {
-                    loop: true,
-                    speed:1100,
-                    slidesPerView: 1,
-                    mousewheel: true,
-                    spaceBetween: 0,
-                    direction: 'vertical',
-                    // navigation: {
-                    //     nextEl: '.swiper-button-next',
-                    //     prevEl: '.swiper-button-prev'
-                    // },
-                    keyboard: {
-                        enabled: true,
-                    }
-                },
                 LoveClickTl : gsap.timeline({paused: true}),
-                workClickTl : gsap.timeline({paused: true})
-
+                workClickTl : gsap.timeline({paused: true}),
             }
         },
+
         methods: {
+            scrollSlide(){
+                const work = document.querySelector('.work-container');
+                var vm = this;
+                var scrollable = true;
+                window.addEventListener('wheel', function(e) {
+                    if (e.deltaY < 0 && scrollable) {
+                        scrollable = false;
+                        console.log('up');
+                        // vm.$refs.slick.prev();
+                        if( !work.classList.contains('visible') ){
+                            work.classList.add("visible");
+                        }else{
+                            work.classList.remove("visible");
+                        }
+                        setTimeout(() => {
+                            scrollable = true;
+                        }, 1500);
+                    }
+                    if (e.deltaY > 0 && scrollable) {
+                        console.log('down');
+                        scrollable = false;
+                        // vm.$refs.slick.next();
+                        if( work.classList.contains('visible') ){
+                            work.classList.remove("visible");
+                        }else{
+                            work.classList.add("visible");
+                        }
+                        setTimeout(() => {
+                            scrollable = true;
+                        }, 1500);
+                    }
+                });
+            },
             loveHover(){
                 document.querySelector('.bg-love').classList.add("visible");
             },
@@ -97,12 +111,30 @@
             this.workClickTl.to(".work:nth-child(1)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire")
                             .to(".work:nth-child(2)", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire+=0.1")
                             .to(".work:nth-child(3)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire+=0.2");
+            
+            this.scrollSlide();
         }
     }
 </script>
 
 <style lang="scss" scoped>
 
+    body{
+        overflow: hidden;
+    }
+    .homepage-container{
+        position: relative;
+        overflow: hidden;
+        .work-container{
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            &.visible{
+                display: block;
+            }
+        }
+    }
     a{
         text-decoration: none;
         color: black;
@@ -112,6 +144,7 @@
         height: 100vh;
     }
     .swiper-slide{
+        width: 100vw;
         // height: 100%!important;
     }
     .bg-love{
@@ -138,10 +171,10 @@
         text-align: center;
         font-weight: bold;
         &.red{
-            // background-color: red;
+            background-color: red;
         }
         &.orange{
-            // background-color: orange;
+            background-color: orange;
         }
 
         .word-container{

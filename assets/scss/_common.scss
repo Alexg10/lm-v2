@@ -158,3 +158,55 @@ body{
         background-image: url('../images/sparkles/sparkle-12.svg');
     }
 }
+
+    .slick-track{
+        // max-width: 600px;
+        height: 100vh;
+        display: flex;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-slide {
+        overflow: hidden;
+        height: 80vh;   
+    // margin: 0 200px;
+    // max-width: 620px;
+        // min-width: 620px;
+
+    }
+
+    .slick-slide {
+        margin: 0 130px;
+        & > div{
+            display: block;
+            height: 100%;
+        }
+    }
+
+     /* the parent */
+    .slick-list {
+        margin: 0 -130px;
+        overflow: visible;
+    }
+
+    .slick-cloned {
+        transition: 0.6s ease-in-out;
+        cursor:pointer;
+        &:hover {
+            transform: translateX(30px);
+            transition: 0.6s ease-in-out;
+        }
+    }
+    .slick-current {
+        &+div{
+            transition: 0.6s ease-in-out;
+            cursor:pointer;
+
+            &:hover {
+                transform: translateX(-30px);
+                transition: 0.6s ease-in-out;
+            }
+        }
+
+    }
