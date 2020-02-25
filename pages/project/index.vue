@@ -1,12 +1,12 @@
 <template>
     <div class="list-container">
-        <div class="project-cover">
+        <!-- <div class="project-cover">
             <img src="http://localhost:8888/lm/lm_wordpress/wp-content/uploads/2019/11/diskocover-600x337.png" alt="">
-        </div>
+        </div> -->
         <div v-if="projects"  class="project-list">
             <slick-slide ref="slick" :options="slickOptions" class="home-slider">
                 <div v-for="project in projects" class="project-slide" :key="project.id">
-                    <div class="slide-link" @click="animOutro">
+                    <div class="slide-link">
                         <div class="project-infos">
                             <div class="project-name-container">
                                 <div class="project-name">{{project.acfProjectFields.projectTitle}}</div>
@@ -53,26 +53,15 @@
         },
         methods: {
             animIntro(){
-                var slideActive = document.getElementsByClassName('swiper-slide-active')[0].children[0].getElementsByClassName("slide-container");
-                var introTl = gsap.timeline({delay: 0.75})
-                introTl.add('start');
-                introTl.to( ".swiper-slide", {opacity: 1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .from( slideActive, {width:"100vw", height:"100vh", duration: 4, ease: "power4.out"},'animIntroStart+=3')
-                    .from( ".slide-background", {scale: 1, duration: 4, ease: "power4.out"},'animIntroStart+=3')
-                    .from( ".swiper-slide-prev", {x: "-20vw", duration: 0.8}, 'animIntroStart+=5.5')
-                    .from( ".swiper-slide-next", {x: "20vw", duration: 0.8}, 'animIntroStart+=5.5')
-                    .from( ".swiper-slide-active .project-name", {top: 210, duration: 0.6}, 'animIntroStart+=6.2');
-            },
-            animOutro(){
                 // var slideActive = document.getElementsByClassName('swiper-slide-active')[0].children[0].getElementsByClassName("slide-container");
-                // var outroTl = gsap.timeline({delay: 0.75})
-                // outroTl.add('start');
-                // outroTl
-                //     .to( ".swiper-slide-prev", {x: "-20vw", duration: 0.8}, 'animOutroStart')
-                //     .to( ".swiper-slide-next", {x: "20vw", duration: 0.8}, 'animOutroStart')
-                //     .to( ".slide-layer", {opacity: 0, duration: 0.8}, 'animOutroStart+=0.6')
-                //     .to( ".slide-background", {scale: 1, duration: 2, ease: "power4.out"}, 'fire')
-                //     .to( slideActive, {width:"100vw", height:"100vh", duration: 2, ease: "power4.out"},'fire')
+                // var introTl = gsap.timeline({delay: 0.75})
+                // introTl.add('start');
+                // introTl.to( ".swiper-slide", {opacity: 1, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                //     .from( slideActive, {width:"100vw", height:"100vh", duration: 4, ease: "power4.out"},'animIntroStart+=3')
+                //     .from( ".slide-background", {scale: 1, duration: 4, ease: "power4.out"},'animIntroStart+=3')
+                //     .from( ".swiper-slide-prev", {x: "-20vw", duration: 0.8}, 'animIntroStart+=5.5')
+                //     .from( ".swiper-slide-next", {x: "20vw", duration: 0.8}, 'animIntroStart+=5.5')
+                //     .from( ".swiper-slide-active .project-name", {top: 210, duration: 0.6}, 'animIntroStart+=6.2');
             },
             scrollSlide(){
                 var vm = this;
@@ -215,42 +204,6 @@
             }
         }
     }
-    // //SWIPE NEXT
-    // .swiper-slide-next,
-    // .swiper-slide-duplicate-next{
-    //     transform: translateX(0px);
-    //     transition: all 0.5s ease;
-    //     pointer-events: none;
-    //     &:hover{
-    //         transform: translateX(-30px);
-    //         transition: all 0.6s ease;
-    //     }
-    // }
-    // //SWIPE PREV
-    // .swiper-slide-prev,
-    // .swiper-slide-duplicate-prev{
-    //     transform: translateX(0);
-    //     transition: all 0.5s ease;
-    //     pointer-events: none;
-    //     &:hover{
-    //         transform: translateX(30px);
-    //         transition: all 0.6s ease;
-    //     }
-    // }
-    // .swiper-button-prev,
-    // .swiper-button-next{
-    //     top: 0;
-    //     width: 22%;
-    //     height: 100%;
-    //     margin-top: 0;
-    //     right: 0!important;
-    //     opacity: 0;
-    //     z-index: 10;
-    // }
-    // .swiper-button-prev{
-    //     right: auto!important;
-    //     left: 0!important;
-    // }
 
     .project-infos{
         position: absolute;
@@ -287,17 +240,16 @@
     //     z-index: 99;
     //     transform: translate(-50%, -50%) scale(0.8);
     //     // transform: translate(-50%, -50%);
-
-    //     .slide-layer{
-    //         position: absolute;
-    //         top: 0;
-    //         left: 0;
-    //         width: 100%;
-    //         height: 100%;
-    //         background-color: #FF9170;
-    //         opacity: 0;
-    //         transition: opacity 0.5s ease;
-    //     }
     // }
+    .slide-layer{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #FF9170;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
 
 </style>
