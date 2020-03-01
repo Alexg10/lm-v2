@@ -169,18 +169,16 @@ body{
     }
     .slick-slide {
         overflow: hidden;
-        height: 80vh;   
-    // margin: 0 200px;
-    // max-width: 620px;
-        // min-width: 620px;
+        height: 70vh;   
 
     }
 
     .slick-slide {
         margin: 0 130px;
         & > div{
-            display: block;
+            display: flex;
             height: 100%;
+            justify-content: center;
         }
     }
 

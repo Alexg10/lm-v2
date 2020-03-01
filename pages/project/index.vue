@@ -4,8 +4,8 @@
             <img src="http://localhost:8888/lm/lm_wordpress/wp-content/uploads/2019/11/diskocover-600x337.png" alt="">
         </div> -->
         <div v-if="projects"  class="project-list">
-            <slick-slide ref="slick" :options="slickOptions" class="home-slider">
-                <div v-for="project in projects" class="project-slide" :key="project.id">
+            <slick-slide ref="slick" :options="slickOptions" class="home-slider"  >
+                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide">
                     <div class="slide-link">
                         <div class="project-infos">
                             <div class="project-name-container">
@@ -24,7 +24,6 @@
             </slick-slide>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -38,9 +37,11 @@
             return{
                 slickOptions: {
                     slidesToShow: 1,
+                    speed: 1200,
                     infinite: true,
                     centerMode: true,
-                    arrows: false
+                    arrows: false,
+                    cssEase: 'cubic-bezier(.19,.77,.2,1)'
                 }
             }
         },
@@ -85,10 +86,51 @@
                     }
                 });
             },
+            keySlide(e) {
+                var vm = this;
+                document.onkeydown = function(e){
+                    e = e || window.event;
+                    if (e.keyCode == '38') {
+                        vm.$refs.slick.prev();
+                    }
+                    else if (e.keyCode == '40') {
+                        vm.$refs.slick.next();
+
+                    }
+                    else if (e.keyCode == '37') {
+                        vm.$refs.slick.prev();
+
+                    }
+                    else if (e.keyCode == '39') {
+                        vm.$refs.slick.next();
+
+                    }
+                }
+            },
+            clickSlide(elem){
+                var vm = this;
+                console.log(this);
+                console.log(elem);
+
+                // var slide = document.querySelector('.slick-slide');
+                // currentIndex = document.querySelector('.slick-slide').dataset.slick-index;
+                // console.log(currentIndex)
+
+                // var index = this.dataset.slick-index;
+                // console.log(index);
+                // if(index < currentIndex){
+                //     vm.$refs.slick.prev();
+                // }else if(index > currentIndex){
+                //     vm.$refs.slick.next();
+                // }else{
+                //     goToProject();
+                // }
+            }
         },
         mounted() {
             // this.animIntro();
             this.scrollSlide();
+            this.keySlide();
         },
     }
 </script>
@@ -124,6 +166,8 @@
         overflow: visible;
         display: block;
         height: 100%;
+        max-width: 540px;
+        overflow: hidden;
         transition: all 1.1s cubic-bezier(.19,.77,.2,1);
     }
     .project-name-container,
@@ -172,6 +216,7 @@
     .slick-slide{
         overflow: hidden;
         margin: 0 20%;
+        max-width: 630px;
     }
 
     //SWIPE ACTIVE
@@ -189,18 +234,20 @@
             transition-delay: 1s;
             transition-property: transform;
         }
-        &:hover{
-            .project-name{
-                opacity: 1;
-                transition: all 0.5s ease;
-            }
-            .slide-layer{
-                opacity: 0.4;
-                transition: opacity 0.5s ease;
-            }
-            .project-type{
-                transform: translateY(0);
-                transition: transform 0.4s ease;
+        .project-slide{
+            &:hover{
+                .project-name{
+                    opacity: 1;
+                    transition: all 0.5s ease;
+                }
+                .slide-layer{
+                    opacity: 0.4;
+                    transition: opacity 0.5s ease;
+                }
+                .project-type{
+                    transform: translateY(0);
+                    transition: transform 0.4s ease;
+                }
             }
         }
     }
@@ -212,35 +259,6 @@
         transform: translate(-50%, -50%);
         z-index: 99;
     }
-    // .slide-container{
-    //     text-decoration: none;
-    //     height: 70vh;
-    //     width: 560px;
-    //     display: block;
-    //     overflow: hidden;
-    //     position: absolute;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-    // }
-    // .slide-background{
-    //     position: absolute;
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
-    //     height: 100vh;
-    //     // max-height: 70vh;
-    //     width: 560px;
-    //     background-size: cover;
-    //     top: 50%;
-    //     left: 50%;
-    //     width: 100vw;
-    //     height: 100vh;
-    //     z-index: 99;
-    //     transform: translate(-50%, -50%) scale(0.8);
-    //     // transform: translate(-50%, -50%);
-    // }
     .slide-layer{
         position: absolute;
         top: 0;
@@ -249,6 +267,7 @@
         height: 100%;
         background-color: #FF9170;
         opacity: 0;
+        pointer-events: none;
         transition: opacity 0.5s ease;
     }
 
