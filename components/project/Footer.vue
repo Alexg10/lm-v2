@@ -15,7 +15,14 @@
 </template>
 
 <script>
+    import arrowDown from '~/assets/images/ico/arrow-down-ico.svg'
+
     export default {
+        data(){
+            return{
+                arrowDown
+            }
+        },
         props: [
             'link'
         ]

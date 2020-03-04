@@ -3854,6 +3854,11 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
+cursor-dot@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/cursor-dot/-/cursor-dot-1.0.4.tgz#a8710529fb0018a17e8487be9bae09625579e00f"
+  integrity sha512-C8t3ELFUL2KrLVsEsmUmrVOpTcE98WSbzwqqKxzSe3B61nKDUayVWVIYnNQBBxDd5h7LceUCOBJr8sVxyzRJxA==
+
 cyclist@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"

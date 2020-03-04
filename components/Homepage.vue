@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="word-container" v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
+                    <div class="word-container link-hover" v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
                         <div class="word elle">
                             <span class="hide">
                                 <div class="hide-right">el</div>
@@ -80,7 +80,7 @@
             <div class="swiper-slide work-container">
                 <div class="home-slide-content orange">
                     <nuxt-link to="project">
-                        <div class="word-container" v-on:click="workClick">
+                        <div class="word-container" v-on:mouseenter="workHover" v-on:mouseleave="particuleAnimLeave"  v-on:click="workClick">
                             <span class="word work">work</span>
                             <span class="word work">work</span>
                             <span class="word work">work</span>
@@ -154,6 +154,9 @@
             loveClick(){
                 this.LoveClickTl.play()
             },
+            workHover(){
+                this.particuleAnim()
+            },
             workClick(){
                 var vm=this;
                 this.workClickTl.play();
@@ -191,6 +194,49 @@
                     this.coverIndex=0;
                 }
             },
+            particuleAnim(){
+                function random(min, max) {
+                    return Math.floor(Math.random() * (1 + max - min) + min);
+                }
+                var tlexplosion = gsap.timeline({});
+                var num = 0;
+
+                this.inter = window.setInterval(function () {
+                    var typeParticule = random(1,12);
+                    var div = document.createElement("div");
+                    div.setAttribute("class", "sparkle part-" + num);
+                    var particules = document.getElementById("cursor")[0];
+                    document.querySelector("#cursor").appendChild(div);
+                    var lastPart = document.querySelector(".part-" + num);
+                    lastPart.classList.add("sparkle-"+typeParticule);
+                    createDot(lastPart)
+                    num++
+                },100); 
+
+                function createDot(elem){
+                    gsap.fromTo(elem, {
+                        left: "+=" + random(-20,20) + "px",
+                        top: "+=" + random(-20,20) + "px",
+                        z: 0,
+                        opacity: 1
+                    }, {
+                        duration: 1.25,
+                        left: "+=" + random(-200,200) + "px",
+                        top: "+=" + random(-200,200) + "px",
+                        z: "+=" + random(-725,600),
+                        opacity: 0,
+                        ease: "power4.inOut"
+                    });
+                }
+            },
+            particuleAnimLeave(){
+                clearInterval(this.inter);
+                setTimeout(function(){
+                    document.querySelectorAll('.sparkle').forEach(
+                        e => e.remove()
+                    );
+                }, 1500)
+            }
         },
         mounted() {
             this.LoveClickTl.to(".elle", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire")
