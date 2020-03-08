@@ -34,32 +34,33 @@
         mounted() {
             
             var anim = gsap.timeline({});
-            var sectionTl= gsap.timeline({paused: true});
+            var sectionTl= new TimelineMax({ paused: false});
 
             var projectName = document.querySelector('.project-name-content');
             var categoryType = document.querySelector('.category-type');
             var description = document.querySelector('.project-description p');
             var link = document.querySelector('.project-link');
             var img = document.querySelector('.bg-cover');
+
             var scrollB = this.$scrollmagic;
 
-            // sectionTl.fromTo(img, 2,{y:0}, {y:200});
+            sectionTl.fromTo(img, 2,{y:0}, {y:200});
 
-            // const sceneParallax = scrollB.scene({
-            //     triggerElement: '.bg-cover',
-            //     triggerHook: 0,
-            //     offset: 0,
-            //     duration: 900
-            // })
-            // .setTween(sectionTl)
-            // scrollB.addScene(sceneParallax);
+            const sceneParallax = scrollB.scene({
+                triggerElement: '.bg-cover',
+                triggerHook: 0,
+                offset: 0,
+                duration: 900
+            })
+            .setTween(sectionTl)
+            scrollB.addScene(sceneParallax);
 
             if( link){
                 anim
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
                     .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                    .from(description, {y: 30, opacity:0, duration: 1.5 },"fire-=1.5" )
-                    .from(link, {y:30, opacity:0, duration: 1.5  },"-=1" );
+                    .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
+                    .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" );
             }else{
                 anim
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")

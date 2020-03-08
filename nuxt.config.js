@@ -31,8 +31,10 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~/plugins/swiper.js', ssr: false },
     {src: '~/plugins/slick.js', ssr: false },
+    {src: '~/plugins/vue-scrollmagic.js', ssr: false},
+    {src: '~/plugins/gsap.js', ssr: false}
+
   ],
   /*
   ** Nuxt.js dev-modules

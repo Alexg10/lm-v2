@@ -11,24 +11,29 @@
                     </div>
                     <LoveContent/>
                     <div class="word-container link-hover" v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
-                        <div class="word elle">
-                            <span class="hide">
-                                <div class="hide-right">el</div>
-                            </span>
-                            <span class="hide">l</span>
-                            <span class="hide">
-                                <div class="hide-left">e</div>
-                            </span>
+                        <div class="word-wrapper word-wrapper-elle">
+                            <div class="word elle">
+                                <span class="hide">
+                                    <div class="hide-right">el</div>
+                                </span>
+                                <span class="hide">l</span>
+                                <span class="hide">
+                                    <div class="hide-left">e</div>
+                                </span>
+                            </div>
                         </div>
-                        <div class="word aime">
-                            <span class="hide">
-                                <div class="hide-right">ai</div>
-                            </span>
-                            <span class="hide">m</span>
-                            <span class="hide">
-                                <div class="hide-left">e</div>
-                            </span>
+                        <div class="word-wrapper word-wrapper-aime">
+                            <div class="word aime">
+                                <span class="hide">
+                                    <div class="hide-right">ai</div>
+                                </span>
+                                <span class="hide">m</span>
+                                <span class="hide">
+                                    <div class="hide-left">e</div>
+                                </span>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -36,9 +41,15 @@
                 <div class="home-slide-content orange">
                     <nuxt-link to="project">
                         <div class="word-container" v-on:mouseenter="workHover" v-on:mouseleave="particuleAnimLeave"  v-on:click="workClick">
-                            <span class="word work">work</span>
-                            <span class="word work">work</span>
-                            <span class="word work">work</span>
+                            <div class="word-wrapper word-wrapper-work">
+                                <span class="word work">work</span>
+                            </div>
+                            <div class="word-wrapper word-wrapper-work">
+                                <span class="word work">work</span>
+                            </div>
+                            <div class="word-wrapper word-wrapper-work">
+                                <span class="word work">work</span>
+                            </div>
                         </div>
                     </nuxt-link>
                 </div>
@@ -60,6 +71,10 @@
                 playing:'',
                 LoveClickTl : gsap.timeline({paused: true}),
                 workClickTl : gsap.timeline({paused: true}),
+                loveUp : gsap.timeline({paused: true}),
+                loveDown : gsap.timeline({paused: true}),
+                workUp : gsap.timeline({paused: true})
+
             }
         },
 
@@ -72,27 +87,45 @@
                     if (e.deltaY < 0 && scrollable) {
                         scrollable = false;
                         console.log('up');
+
                         if( !work.classList.contains('visible') ){
                             work.classList.add("visible");
                         }else{
                             work.classList.remove("visible");
                         }
+                        vm.loveDown.play(0);
+
                         setTimeout(() => {
                             scrollable = true;
                         }, 1500);
+
                     }
                     if (e.deltaY > 0 && scrollable) {
                         console.log('down');
                         scrollable = false;
-
+                        // vm.loveUp.play(0);
+                        vm.loveUp.eventCallback("onComplete", function () {
+                            console.log('complete');
+                            // if( work.classList.contains('visible') ){
+                            //     work.classList.remove("visible");
+                            // }else{
+                            //     work.classList.add("visible");
+                                // vm.workUp.play();
+                            // }
+                        });
+                        //TODO SAME AS UNDER TO DELETE
                         if( work.classList.contains('visible') ){
                             work.classList.remove("visible");
                         }else{
                             work.classList.add("visible");
+                            // vm.workUp.play();
                         }
+
+
                         setTimeout(() => {
                             scrollable = true;
                         }, 1500);
+
                     }
                 });
             },
@@ -184,9 +217,18 @@
             // this.LoveClickTl.to(".elle", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire")
             //                 .to(".aime", {x: "80vw", duration: 1, ease: "power4.in"}, "fire");
 
-            this.workClickTl.to(".work:nth-child(1)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire")
-                            .to(".work:nth-child(2)", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire+=0.1")
-                            .to(".work:nth-child(3)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire+=0.2");
+            this.loveUp.to(".elle", {y:-160, duration: 0.6, ease: "power4.in" },"lmUp")
+                .to(".aime", {y:-160, duration: 0.6, ease: "power4.in"},"lmUp+=0.2")
+                .to(".aime", {opacity:0, duration: 0.5});
+            // this.loveDown.to(".elle", {y:0, duration: 0.5},"loveDown")
+            //     .to(".aime", {y:0, duration: 0.5},"loveDown+=0.1");
+
+            // this.workUp.from(".work", {y:160, duration: 0.6, ease: "power4.in", stagger:0.3 },"lmUp");
+
+
+            this.workClickTl.to(".word-wrapper-work:nth-child(1)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire")
+                .to(".word-wrapper-work:nth-child(2)", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire+=0.1")
+                .to(".word-wrapper-work:nth-child(3)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire+=0.2");
             
             this.scrollSlide();
 
@@ -290,19 +332,27 @@
                     }
                 }
                 //ELLE AIME
+                .word-wrapper{
+                    &-elle{
+                        left: -79px;
+                        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    }
+                    &-aime{
+                        left: 125px;
+                        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    }
+                }
                 .elle{
                     color: #FF9170;
-                    left: -79px;
                     transition: all 0.9s cubic-bezier(.19,.77,.2,1);
                 }
                 .aime{
                     color: #FF9170;
-                    left: 125px;
                     transition: all 0.9s cubic-bezier(.19,.77,.2,1);
                 }
 
                 //WORK
-                .work{
+                .word-wrapper-work{
                     transition: all 1.05s cubic-bezier(.19,.77,.2,1);
                     &:nth-child(1){
                         position: relative;
@@ -338,6 +388,7 @@
                     }
                 }
             }
+
             .word{
                 display: flex;
                 line-height: 160px;
@@ -363,29 +414,38 @@
                     transition: all 1.1s cubic-bezier(.19,.77,.2,1);
                 }
             }
+            .word-wrapper{
+                overflow: hidden;
+                &-elle{
+                    position: relative;
+                    bottom: -38px;
+                    left: -37px;
+                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    @media ( max-width : 680px ) {
+                        bottom: -48px;
+                        left: -27px;
+                    }
+                }
+                &-aime{
+                    position: relative;
+                    top: -39px;
+                    left: 9px;
+                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    @media ( max-width : 680px ) {
+                        top: -58px;
+                        left: 3px;
+                    }
+                }
+            }
             //ELLE AIME
             .elle{
-                position: relative;
-                bottom: -38px;
-                left: -37px;
-                transition: all 1.1s cubic-bezier(.19,.77,.2,1);
-                @media ( max-width : 680px ) {
-                    bottom: -48px;
-                    left: -27px;
-                }
+                transition: 0.5s cubic-bezier(.19,.77,.2,1);
             }
             .aime{
-                position: relative;
-                top: -39px;
-                left: 9px;
-                transition: all 1.1s cubic-bezier(.19,.77,.2,1);
-                @media ( max-width : 680px ) {
-                    top: -58px;
-                    left: 3px;
-                }
+                transition: 0.5s cubic-bezier(.19,.77,.2,1);
             }
             //WORK
-            .work{
+            .word-wrapper-work{
                 transition: all 1.1s cubic-bezier(.19,.77,.2,1);
                 &:nth-child(1){
                     position: relative;

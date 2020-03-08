@@ -6,17 +6,43 @@
                 <span class="number">{{bloc.number}}.</span>
             </div>
             <div class="project-category">
-                <span class="project-category-name">{{bloc.name}}</span>
+                <span class="project-category-name">{{bloc.stepTitle}}</span>
             </div>
         </div>
     </section>
 </template>
 
 <script>
+
+  import gsap from 'gsap'
+
   export default {
     props: [
       'bloc'
-    ]
+    ],
+    mounted() {
+      
+      var chapters = document.getElementsByClassName("chapter");
+      var scrollM = this.$scrollmagic;
+
+      Array.prototype.forEach.call(chapters,function(el, i) {
+          var number = el.children[0].getElementsByClassName("number")[0];
+          var name = el.children[0].getElementsByClassName("project-category-name")[0];
+
+          var tl = new TimelineMax({ paused: false});
+          tl.fromTo(number, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false})
+          .fromTo(name, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false}, 0.3);
+          
+          const scene2 = scrollM.scene({
+              triggerElement: el,
+              triggerHook: 0.65,
+              offset: -100
+          })
+          .setTween(tl)
+          .reverse(false)
+          scrollM.addScene(scene2)
+      });
+    },
   }
 </script>
 
