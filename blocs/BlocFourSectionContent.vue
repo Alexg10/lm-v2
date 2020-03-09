@@ -14,7 +14,26 @@
     export default {
         props: [
             'bloc'
-        ]
+        ],
+        mounted(){
+            var imgs = document.getElementsByClassName("img-4-container");
+            var scrollM = this.$scrollmagic;
+            
+            Array.prototype.forEach.call(imgs,function(el, i) {
+                var img = el.getElementsByClassName("img-4");
+                var tl = new TimelineMax({ paused: false});
+                tl.staggerFromTo(".img-4", 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},0.35);
+                const scene2 = scrollM.scene({
+                    triggerElement: el,
+                    triggerHook: 0.65,
+                    offset: -100
+                })
+                .setTween(tl)
+                .reverse(false)
+                // .addIndicators({ name: '2 (IMG 4' })
+                scrollM.addScene(scene2)
+            });
+        }
     }
 </script>
 

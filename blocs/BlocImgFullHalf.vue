@@ -9,10 +9,35 @@
 </template>
 
 <script>
+    import gsap from 'gsap'
+
     export default {
         props: [
             'bloc'
-        ]
+        ],
+        mounted() {
+            var img1 = document.querySelector(".img-full-half-container:nth-child(1) .img-full-half-container-img");
+            var img2 = document.querySelector(".img-full-half-container:nth-child(2) .img-full-half-container-img");
+            var img3 = document.querySelector(".img-full-half-container:nth-child(3) .img-full-half-container-img");
+            var img4 = document.querySelector(".img-full-half-container:nth-child(4) .img-full-half-container-img");
+
+            var scrollM = this.$scrollmagic;
+            var tlA = new TimelineMax({ paused: false});
+
+            tlA.fromTo(img1, 1, {y: -30},{y: 30, overwrite: false},"start")
+            .fromTo(img2, 1, {y: -30},{y: 30, overwrite: false}, "start")
+            .fromTo(img3, 1, {y: -30},{y: 30, overwrite: false}, "start")
+            .fromTo(img4, 1, {y: -30},{y: 30, overwrite: false}, "start");
+
+            const sceneHalfSection = scrollM.scene({
+                triggerElement: ".img-full-half-section",
+                triggerHook: 0.65,
+                offset: -150,
+                duration: window.innerHeight*2
+            })
+            .setTween(tlA)
+            scrollM.addScene(sceneHalfSection);
+        }
     }
 </script>
 

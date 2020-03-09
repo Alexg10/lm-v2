@@ -14,10 +14,31 @@
 </template>
 
 <script>
+    import gsap from 'gsap'
+
     export default {
         props: [
             'bloc'
-        ]
+        ],
+        mounted(){
+            var colors = document.getElementsByClassName("color-section-container");
+            var scrollM = this.$scrollmagic;
+            
+            Array.prototype.forEach.call(colors,function(el, i) {
+                var color = el.getElementsByClassName("color-container");
+                var tl = new TimelineMax({ paused: false});
+                tl.staggerFromTo(".color-container", 2, {y: 80, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.35);
+                const colorScene = scrollM.scene({
+                    triggerElement: el,
+                    triggerHook: 0.65,
+                    offset: -200
+                })
+                .setTween(tl)
+                .reverse(false)
+                // .addIndicators({ name: 'COLOR' })
+                scrollM.addScene(colorScene)
+            });
+        }
     }
 </script>
 
