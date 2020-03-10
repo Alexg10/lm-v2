@@ -1087,7 +1087,7 @@
             "key": "field_5daf78e645c2b",
             "label": "Footer link",
             "name": "footer_link",
-            "type": "link",
+            "type": "post_object",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -1096,7 +1096,15 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array"
+            "show_in_graphql": 1,
+            "post_type": [
+                "projets"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
         }
     ],
     "location": [
@@ -1118,5 +1126,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "acfProjectFields",
-    "modified": 1581454263
+    "modified": 1583794845
 }

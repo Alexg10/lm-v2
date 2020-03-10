@@ -1,5 +1,5 @@
 <template>
-    <div v-if="project">
+    <div class="project" v-if="project">
         <Header :bloc        = "bloc" 
                 :title       = "project.acfProjectFields.projectTitle" 
                 :type        = "project.acfProjectFields.projectType" 
@@ -11,7 +11,7 @@
         <div v-for="bloc in project.acfProjectFields.blocs" :key="bloc.fieldGroupName">
             <component :is="bloc.fieldGroupName.split('_').reverse().shift()" :bloc="bloc"/>
         </div>
-        <Footer :link = "project.acfProjectFields.footerLink" />
+        <Footer :link="project.acfProjectFields.footerLink" v-if="project.acfProjectFields.footerLink"/>
     </div>
 </template>
 
@@ -68,6 +68,16 @@
                     }
                 },
                 update: (data) => data.projectBy
+            }
+        },
+        scrollToTop: true,
+        transition () {
+            return {
+                name: 'project',
+                duration: 400,
+                beforeEnter(){
+                    this.$store.commit('setCover', null);
+                }
             }
         }
     }

@@ -11,9 +11,16 @@ query getProjectBySlug($slug: String!) {
         sourceUrl(size: LARGE)
       }
       footerLink{
-        url
-        title
-        target
+				... on Project {
+          id
+          slug
+          acfProjectFields {
+          	projectTitle
+            headerPicture{
+              sourceUrl(size: LARGE)
+            }
+          }
+        }
       }
       blocs {
         ... on Project_Acfprojectfields_Blocs_BlocStep {

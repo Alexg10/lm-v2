@@ -1,11 +1,11 @@
 <template>
     <div class="list-container">
-        <!-- <div class="project-cover">
-            <img src="http://localhost:8888/lm/lm_wordpress/wp-content/uploads/2019/11/diskocover-600x337.png" alt="">
-        </div> -->
-        <div v-if="projects"  class="project-list">
-            <slick-slide ref="slick" :options="slickOptions" class="home-slider"  >
-                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide">
+        <div v-if="projects" class="project-list">
+            <div ref="cover" class="project-cover" >
+                <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
+            </div>
+            <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit">
+                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide" ref="slides">
                     <div class="slide-link">
                         <div class="project-infos">
                             <div class="project-name-container">
@@ -40,9 +40,15 @@
                     speed: 1200,
                     infinite: true,
                     centerMode: true,
+                    centerPadding: '20%',
                     arrows: false,
-                    cssEase: 'cubic-bezier(.19,.77,.2,1)'
+                    cssEase: 'cubic-bezier(.19,.77,.2,1)',
                 }
+            }
+        },
+        computed: {
+            cover(){
+                return this.projects[0].acfProjectFields.headerPicture.sourceUrl;
             }
         },
         apollo: {
@@ -53,16 +59,28 @@
             }
         },
         methods: {
-            animIntro(){
-                // var slideActive = document.getElementsByClassName('swiper-slide-active')[0].children[0].getElementsByClassName("slide-container");
-                // var introTl = gsap.timeline({delay: 0.75})
-                // introTl.add('start');
-                // introTl.to( ".swiper-slide", {opacity: 1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                //     .from( slideActive, {width:"100vw", height:"100vh", duration: 4, ease: "power4.out"},'animIntroStart+=3')
-                //     .from( ".slide-background", {scale: 1, duration: 4, ease: "power4.out"},'animIntroStart+=3')
-                //     .from( ".swiper-slide-prev", {x: "-20vw", duration: 0.8}, 'animIntroStart+=5.5')
-                //     .from( ".swiper-slide-next", {x: "20vw", duration: 0.8}, 'animIntroStart+=5.5')
-                //     .from( ".swiper-slide-active .project-name", {top: 210, duration: 0.6}, 'animIntroStart+=6.2');
+            handleInit(event, slick){
+                const current = slick.$slides[0];
+                const prev    = current.previousSibling;
+                const next    = current.nextSibling;
+
+
+                var introTl = gsap.timeline({delay: 1})
+                introTl.add('start');
+                introTl.to( this.$refs.cover, {width: 507, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    .to( this.$refs.cover, {height: 640, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                    .to(this.$refs.coverImg, {scale: 1, x:"-50%", y:"-50%", duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
+                    .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
+
+
+                introTl.eventCallback("onComplete", ()=> this.$refs.cover.style.display = "none");
+            },
+            handleAfterChange(){
+                
+            },
+            handleBeforeChange(){
+
             },
             scrollSlide(){
                 var vm = this;
@@ -128,9 +146,9 @@
             }
         },
         mounted() {
-            // this.animIntro();
             this.scrollSlide();
             this.keySlide();
+
         },
     }
 </script>
@@ -142,21 +160,21 @@
         height: 100vh;
     }
     .project-cover{
-        position: relative;
-        top: 0;
-        left: 0;
+        position: fixed;
+        top: 50%;
+        left: 50%;
         width: 100vw;
         height: 100vh;
-        object-fit: cover;
-        img{
+        z-index: 999;
+        overflow: hidden;
+        transform: translate(-50%,-50%);
+        .project-cover-img{
             position: absolute;
             width: 100vw;
             height: 100vh;
-            object-fit: cover;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            object-fit: cover;
+            top: 50%;
+            left: 50%;
+            transform: scale(1.1) translate(-50%,-50%);
         }
     }
     .project-slide{
@@ -166,9 +184,9 @@
         overflow: visible;
         display: block;
         height: 100%;
-        max-width: 540px;
         overflow: hidden;
         transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+        margin: 0 15%;
     }
     .project-name-container,
     .project-type-container{
@@ -176,15 +194,14 @@
     }
 
     .project-list{
-        width: 50%;
-        margin: 0 auto;
         .slide-img{
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 50%;
             height: 100vh;
-            object-fit: cover;
-            transform: translate(-50%, -12%);
+
+            width: 100vw;
+            transform: translate(-50%, -50%);
         }
     }
 
@@ -211,12 +228,6 @@
         transition: 0.5s ease-in-out;
         pointer-events: none;
         text-align: center;
-    }
-
-    .slick-slide{
-        overflow: hidden;
-        margin: 0 20%;
-        max-width: 630px;
     }
 
     //SWIPE ACTIVE

@@ -2,14 +2,14 @@
     <div class="footer-project">
         <div class="foter-project-content">
             <!-- //TODO : CHANGE URL BY SLUG NEXT PROJECT -->
-            <nuxt-link :to="`/project/${link.slug}`">
+            <div @click="changeProject">
                 <div class="link-to linkHover">
                     <div class="next-project up-letters">next project</div> 
-                    <div class="next-project-name up-letters">{{link.title}}</div>
+                    <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
                     <img class="arrow" :src="arrowDown" alt="">
                 </div>
-                <!-- <div class="next-cover" :style="{ backgroundImage: `url(${project.cover})` }"></div> -->
-            </nuxt-link>
+                <div class="next-cover" :style="{ backgroundImage: `url(${link.acfProjectFields.headerPicture.sourceUrl})` }"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -25,7 +25,18 @@
         },
         props: [
             'link'
-        ]
+        ],
+        methods: {
+            changeProject() {
+                // Set project to store
+                this.$store.commit('setCover', this.link);
+
+                // Animate out
+                this.$router.push({
+                    path: `/project/${this.link.slug}`
+                })
+            }
+        },
     }
 </script>
 
