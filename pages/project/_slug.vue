@@ -74,7 +74,7 @@
         transition () {
             return {
                 name: 'project',
-                duration: 400,
+                duration: 500,
                 beforeEnter(){
                     this.$store.commit('setCover', null);
                 }

@@ -1,8 +1,7 @@
 <template>
     <div class="footer-project">
-        <div class="foter-project-content">
-            <!-- //TODO : CHANGE URL BY SLUG NEXT PROJECT -->
-            <div @click="changeProject">
+        <div class="footer-project-content">
+            <div @click="changeProject" class="link-to-link">
                 <div class="link-to linkHover">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
@@ -16,6 +15,8 @@
 
 <script>
     import arrowDown from '~/assets/images/ico/arrow-down-ico.svg'
+    import gsap from 'gsap'
+    import jump from 'jump.js'
 
     export default {
         data(){
@@ -29,13 +30,83 @@
         methods: {
             changeProject() {
                 // Set project to store
+                console.log(this.link)
                 this.$store.commit('setCover', this.link);
 
                 // Animate out
                 this.$router.push({
                     path: `/project/${this.link.slug}`
                 })
-            }
+            },
+            letterContainer(className){
+                var word = document.getElementsByClassName(className)[0];
+                var wordContent = word.textContent.trim();
+                var wordContentSplit = wordContent.split("");
+                word.innerHTML = "";
+
+                for(var i=0; i< wordContentSplit.length; i++){
+                    var newSpan = document.createElement('span');
+                    newSpan.style.display = "inline-block";
+                    newSpan.innerHTML = wordContentSplit[i];
+                    word.appendChild(newSpan);
+                }
+            },
+        },
+        mounted() {
+            var vm = this;
+            var footerTl= new TimelineMax({ paused: false});
+            var scrollB = this.$scrollmagic;
+            var scrollM = this.$scrollmagic;
+
+            var upLetter = document.getElementsByClassName("up-letters");
+
+            this.letterContainer("next-project");
+            this.letterContainer("next-project-name");
+
+            footerTl.fromTo(".next-cover",2, {opacity: 0.25, width: "70%"},{opacity: 1, width: "100%"})
+            .fromTo(".arrow",2, {opacity: 1, y:0},{opacity: 0, y:100});
+            const sceneFooter = scrollB.scene({
+                triggerElement: '.footer-project-content',
+                triggerHook: 70,
+                offset: 0,
+                duration: 1000
+            })
+            .setTween(footerTl)
+            // .addIndicators({ name: 'Footer' })
+            scrollB.addScene(sceneFooter);
+
+            footerTl.eventCallback("onComplete", function () {
+                console.log("complete");
+                jump('.next-cover',{
+                    // callback: function(){
+                    //     vm.changeProject();
+                    // }
+                })
+
+            });
+
+
+            Array.prototype.forEach.call(upLetter,function(el, i) {
+                var elements = el.childNodes;
+                var upLetterTl = new TimelineMax({ paused: false});
+                var element;
+                for(var i=0; i<el.childNodes.length; i++ ){
+                    var yValue= Math.floor(Math.random() * 90) + 1;
+                    upLetterTl.fromTo(el.childNodes[i], 2, {y: 0},{y: -yValue, opacity: 0, ease: Power4.easeInOut, overwrite: false}, "start");                
+                }
+                const animLetterScene = scrollM.scene({
+                    triggerElement: ".footer-project",
+                    triggerHook: 0.65,
+                    duration: 900,
+                    offset: -80
+                })
+                .setTween(upLetterTl)
+                // .addIndicators({ name: 'upLetter' })
+                scrollM.addScene(animLetterScene)
+
+            });
+
+            
         },
     }
 </script>
