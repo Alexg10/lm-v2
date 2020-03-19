@@ -1,12 +1,11 @@
 <template>
-    <div class="list-container">
+    <div class="list-container" @mousemove="parallax">
         <div v-if="projects" class="project-list">
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
             <div class="project-title-container" @mouseenter="projectEnter" @mouseleave="projectLeave">
                 <div class="project-title"></div>
-
             </div>
             
             <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit" >
@@ -138,6 +137,14 @@
                         vm.$refs.slick.next();
                     }
                 }
+            },
+            parallax(e){
+                var imgW = window.innerWidth*0.53;
+                var imgH = window.innerHeight*0.53;
+                var amountMovedX = (e.pageX * -0.3 / 10)-imgW;
+                var amountMovedY = (e.pageY * -0.3 / 10)-imgH;
+
+                document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
                 document.querySelector('.project-title').classList.add('hover');
