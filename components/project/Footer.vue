@@ -78,11 +78,12 @@
             footerTl.eventCallback("onComplete", function () {
                 console.log("complete");
                 jump('.next-cover',{
-                    // callback: function(){
-                    //     vm.changeProject();
-                    // }
+                    callback: function(){
+                    console.log("JUMP complete");
+                        //! BUG IF CALLED
+                        // vm.changeProject();
+                    }
                 })
-
             });
 
 

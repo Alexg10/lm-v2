@@ -168,6 +168,7 @@ body{
     .slick-slide {
         overflow: hidden;
         height: 70vh;
+        outline: none;
     }
 
     .slick-slide {
@@ -181,8 +182,8 @@ body{
     .slick-cloned {
         transition: 0.6s ease-in-out;
         cursor:pointer;
-        &:hover {
-            transform: translateX(30px);
+        &.hover {
+            transform: translateX(30px)!important;
             transition: 0.6s ease-in-out;
         }
     }
@@ -190,9 +191,8 @@ body{
         &+div{
             transition: 0.6s ease-in-out;
             cursor:pointer;
-
-            &:hover {
-                transform: translateX(-30px);
+            &.hover {
+                transform: translateX(-30px)!important;
                 transition: 0.6s ease-in-out;
             }
         }

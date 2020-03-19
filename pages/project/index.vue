@@ -4,9 +4,14 @@
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
-            <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit">
+            <div class="project-title-container" @mouseenter="projectEnter" @mouseleave="projectLeave">
+                <div class="project-title"></div>
+
+            </div>
+            
+            <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit" >
                 <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide" ref="slides">
-                    <div class="slide-link">
+                    <div class="slide-link" @mouseenter="projectEnter" @mouseleave="projectLeave">
                         <div class="project-infos">
                             <div class="project-name-container">
                                 <div class="project-name">{{project.acfProjectFields.projectTitle}}</div>
@@ -22,6 +27,8 @@
                     </div>
                 </div> 
             </slick-slide>
+            <div class="prev-project" @mouseenter="prevSlideEnter" @mouseleave="prevSlideLeave" @click="prevSlide"></div>
+            <div class="next-project" @mouseenter="nextSlideEnter" @mouseleave="nextSlideLeave" @click="nextSlide"></div>
         </div>
     </div>
 </template>
@@ -63,24 +70,34 @@
                 const current = slick.$slides[0];
                 const prev    = current.previousSibling;
                 const next    = current.nextSibling;
+                const currentName = current.querySelector('.project-name').textContent;
 
+                document.querySelector('.project-title').innerHTML = currentName
 
                 var introTl = gsap.timeline({delay: 1})
                 introTl.add('start');
-                introTl.to( this.$refs.cover, {width: 507, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .to( this.$refs.cover, {height: 640, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
-                    .to(this.$refs.coverImg, {scale: 1, x:"-50%", y:"-50%", duration: 3, ease: "power4.inOut"},'animIntroStart')
+                introTl.to( this.$refs.cover, {width: 590, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    .to( this.$refs.cover, {height: 740, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                    .to(this.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                     .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
                     .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
 
-
-                introTl.eventCallback("onComplete", ()=> this.$refs.cover.style.display = "none");
+                introTl.eventCallback("onComplete", ()=> {
+                    this.$refs.cover.style.display = "none";
+                    document.querySelector('.project-title').classList.add("visible");
+                });
             },
-            handleAfterChange(){
-                
+            handleAfterChange(event, slick){
+                var currentNb = slick.currentSlide
+                var current = slick.$slides[currentNb];
+                const currentName = current.querySelector('.project-name').textContent;
+
+                document.querySelector('.project-title').innerHTML = currentName;
+                document.querySelector('.project-title').classList.add("visible");
             },
             handleBeforeChange(){
-
+                document.querySelector('.project-title').classList.remove("visible");
             },
             scrollSlide(){
                 var vm = this;
@@ -113,42 +130,57 @@
                     }
                     else if (e.keyCode == '40') {
                         vm.$refs.slick.next();
-
                     }
                     else if (e.keyCode == '37') {
                         vm.$refs.slick.prev();
-
                     }
                     else if (e.keyCode == '39') {
                         vm.$refs.slick.next();
-
                     }
                 }
             },
+            projectEnter(){
+                document.querySelector('.project-title').classList.add('hover');
+                document.querySelector('.slick-current .project-slide').classList.add('hover');
+            },
+            projectLeave(){
+                document.querySelector('.project-title').classList.remove('hover');
+                document.querySelector('.slick-current .project-slide').classList.remove('hover');
+            },
+            //PREV
+            prevSlide(){
+                this.$refs.slick.prev();
+            },
+            prevSlideEnter(){
+                document.querySelector('.prev-project').classList.add('hover');
+                document.querySelector('.slick-current').previousSibling.classList.add('hover');
+            },
+            prevSlideLeave(){
+                document.querySelector('.prev-project').classList.remove('hover');
+                document.querySelector('.slick-current').previousSibling.classList.remove('hover');
+            },
+            //NEXT
+            nextSlide(){
+                this.$refs.slick.next();
+            },
+            nextSlideEnter(){
+                document.querySelector('.next-project').classList.add('hover');
+                document.querySelector('.slick-current+div').classList.add('hover');
+            },
+            nextSlideLeave(){
+                document.querySelector('.next-project').classList.remove('hover');
+                document.querySelector('.slick-current+div').classList.remove('hover');
+            },
+            //CLICK
             clickSlide(elem){
                 var vm = this;
                 console.log(this);
                 console.log(elem);
-
-                // var slide = document.querySelector('.slick-slide');
-                // currentIndex = document.querySelector('.slick-slide').dataset.slick-index;
-                // console.log(currentIndex)
-
-                // var index = this.dataset.slick-index;
-                // console.log(index);
-                // if(index < currentIndex){
-                //     vm.$refs.slick.prev();
-                // }else if(index > currentIndex){
-                //     vm.$refs.slick.next();
-                // }else{
-                //     goToProject();
-                // }
             }
         },
         mounted() {
             this.scrollSlide();
             this.keySlide();
-
         },
     }
 </script>
@@ -159,8 +191,29 @@
         width: 100vw;
         height: 100vh;
     }
+    .prev-project,
+    .next-project{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 10%;
+        height: 100%;
+        max-height: 746px;
+        background-color: transparent;
+        transform: translateY(-50%);
+        transition: 0.6s ease-in-out;
+        cursor: pointer;
+        &.hover{
+            width: calc(10% + 30px);
+            transition: 0.6s ease-in-out;
+        }
+    }
+    .next-project{
+        left: auto;
+        right: 0;
+    }
     .project-cover{
-        position: fixed;
+        position: absolute;
         top: 50%;
         left: 50%;
         width: 100vw;
@@ -184,6 +237,7 @@
         overflow: visible;
         display: block;
         height: 100%;
+        max-width: 590px;
         overflow: hidden;
         transition: all 1.1s cubic-bezier(.19,.77,.2,1);
         margin: 0 15%;
@@ -199,13 +253,13 @@
             top: 50%;
             left: 50%;
             height: 100vh;
-
             width: 100vw;
-            transform: translate(-50%, -50%);
+            transform: scale(1.1) translate(-50%,-50%);
         }
     }
 
-    .project-name{
+    .project-name,
+    .project-title{
         position: relative;
         display: inline-block;
         text-decoration: none;      
@@ -214,9 +268,28 @@
         text-decoration: none;     
         transform: translateY(210px);
         color: #FF9170;
-        opacity: 0.3;
+        opacity: 0;
         transition: all 0.5s ease;
         z-index: 101;
+    }
+    .project-title-container{
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9;
+        overflow: hidden;
+        .project-title{
+            opacity: 0.3;
+            &.visible{
+                transform: translateY(0);
+                transition: all 0.6s ease;
+            }
+            &.hover{
+                opacity: 1;
+            }
+        }
+
     }
     .project-type{
         color: white;
@@ -238,19 +311,9 @@
         .project-infos{
             z-index: 101;
         }
-        .project-name{
-            transform: translateY(0);
-            opacity: 0.3;
-            transition: color 0.5s ease, opacity 0.5s ease, transform 5s ease;
-            transition-delay: 1s;
-            transition-property: transform;
-        }
         .project-slide{
+            &.hover,
             &:hover{
-                .project-name{
-                    opacity: 1;
-                    transition: all 0.5s ease;
-                }
                 .slide-layer{
                     opacity: 0.4;
                     transition: opacity 0.5s ease;
