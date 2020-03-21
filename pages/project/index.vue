@@ -1,15 +1,14 @@
 <template>
-    <div class="list-container" @mousemove="parallax">
+    <div class="list-container">
         <div v-if="projects" class="project-list">
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
             <div class="project-title-container" @mouseenter="projectEnter" @mouseleave="projectLeave">
-                <div class="project-title"></div>
+                <div class="project-title" @click="clickSlide"></div>
             </div>
-            
             <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit" >
-                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide" ref="slides">
+                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide" ref="slides" :data-slug="project.slug">
                     <div class="slide-link" @mouseenter="projectEnter" @mouseleave="projectLeave">
                         <div class="project-infos">
                             <div class="project-name-container">
@@ -42,13 +41,13 @@
         data(){
             return{
                 slickOptions: {
-                    slidesToShow: 1,
-                    speed: 1200,
-                    infinite: true,
-                    centerMode: true,
+                    slidesToShow : 1,
+                    speed        : 1200,
+                    infinite     : true,
+                    centerMode   : true,
                     centerPadding: '20%',
-                    arrows: false,
-                    cssEase: 'cubic-bezier(.19,.77,.2,1)',
+                    arrows       : false,
+                    cssEase      : 'cubic-bezier(.19,.77,.2,1)',
                 }
             }
         },
@@ -59,24 +58,26 @@
         },
         apollo: {
             projects : {
-                prefetch : true,
-                query : projects,
-                update: (data) => data.projects.nodes
+                prefetch: true,
+                query   : projects,
+                update  : (data) => data.projects.nodes
             }
         },
         methods: {
             handleInit(event, slick){
-                const current = slick.$slides[0];
-                const prev    = current.previousSibling;
-                const next    = current.nextSibling;
-                const currentName = current.querySelector('.project-name').textContent;
+                const current            = slick.$slides[0];
+                const prev               = current.previousSibling;
+                const next               = current.nextSibling;
+                const currentName        = current.querySelector('.project-name').textContent;
+                const projectSlideWidth  = current.querySelector('.project-slide').offsetWidth;
+                const projectSlideHeight = current.querySelector('.project-slide').offsetHeight;
 
-                document.querySelector('.project-title').innerHTML = currentName
+                document.querySelector('.project-title').innerHTML = currentName;
 
                 var introTl = gsap.timeline({delay: 1})
                 introTl.add('start');
-                introTl.to( this.$refs.cover, {width: 590, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .to( this.$refs.cover, {height: 740, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
                     .to(this.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                     .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                     .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
@@ -86,10 +87,14 @@
                     this.$refs.cover.style.display = "none";
                     document.querySelector('.project-title').classList.add("visible");
                 });
+
+                document.querySelector('.list-container').onmousemove = event => {
+                    this.parallax(event);
+                }
             },
             handleAfterChange(event, slick){
-                var currentNb = slick.currentSlide
-                var current = slick.$slides[currentNb];
+                var   currentNb   = slick.currentSlide
+                var   current     = slick.$slides[currentNb];
                 const currentName = current.querySelector('.project-name').textContent;
 
                 document.querySelector('.project-title').innerHTML = currentName;
@@ -99,7 +104,7 @@
                 document.querySelector('.project-title').classList.remove("visible");
             },
             scrollSlide(){
-                var vm = this;
+                var vm         = this;
                 var scrollable = true;
                 window.addEventListener('wheel', function(e) {
                     if (e.deltaY < 0 && scrollable) {
@@ -139,8 +144,8 @@
                 }
             },
             parallax(e){
-                var imgW = window.innerWidth*0.53;
-                var imgH = window.innerHeight*0.53;
+                var imgW         = window.innerWidth*0.53;
+                var imgH         = window.innerHeight*0.53;
                 var amountMovedX = (e.pageX * -0.3 / 10)-imgW;
                 var amountMovedY = (e.pageY * -0.3 / 10)-imgH;
 
@@ -178,11 +183,87 @@
                 document.querySelector('.next-project').classList.remove('hover');
                 document.querySelector('.slick-current+div').classList.remove('hover');
             },
+            animLeaveLetters(){
+                var word = document.querySelector(".project-title");
+
+                //ADD SPAN TO LETTERS
+                var wordContent      = word.textContent.trim();
+                var wordContentSplit = wordContent.split("");
+                    word.innerHTML   = "";
+                var tabLetterLength  = [];
+
+                for(var i=0; i< wordContentSplit.length; i++){
+                    var newSpan = document.createElement('span');
+                    newSpan.style.display = "inline-block";
+                    newSpan.style.minWidth = "40px";
+                    newSpan.setAttribute("class", "letter-"+i);
+                    newSpan.innerHTML = wordContentSplit[i];
+                    word.appendChild(newSpan);
+                    tabLetterLength.push(i)
+                }
+
+                var currentIndex = tabLetterLength.length, 
+                    temporaryValue, 
+                    randomIndex;
+                while (0 !== currentIndex) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+                    temporaryValue = tabLetterLength[currentIndex];
+                    tabLetterLength[currentIndex] = tabLetterLength[randomIndex];
+                    tabLetterLength[randomIndex] = temporaryValue;
+                }
+
+                document.querySelector(".project-title-container").classList.add('visible');
+                document.querySelector(".project-title").classList.add('visibleOpacity');
+                //Anim LETTERS
+                var letterTrans = new TimelineMax({});
+                setTimeout(() => {
+                    tabLetterLength.forEach(function(element){
+                        var elemToAnim = document.querySelector('.project-title .letter-'+element+'');
+                        letterTrans.fromTo(elemToAnim , 0.8, {scaleX:1, scaleY:1, opacity:1},{scaleX:3, scaleY:3, opacity:0, ease: Power4.easeInOut, overwrite: false},"-=0.55");    
+                        //! IF PASS TO WHITE
+                        // letterTrans.fromTo(elemToAnim , 0.75, {scaleX:1, scaleY:1, opacity:1},{color: "white", ease: Power4.easeInOut, overwrite: false},"-=0.55");    
+                    });
+                }, 300);
+            },
+
             //CLICK
-            clickSlide(elem){
-                var vm = this;
-                console.log(this);
-                console.log(elem);
+            clickSlide(elem, slick){
+                var vm             = this;
+                var currentNbSlide = this.$refs.slick.$el.slick.currentSlide;
+                var currentCover   = this.$refs.slick.$el.querySelector('.slide-img').src;
+                var prev           = this.$refs.slick.$el.slick.$slides[currentNbSlide].previousElementSibling;
+                var next           = this.$refs.slick.$el.slick.$slides[currentNbSlide].nextElementSibling;
+                var projectSlug    = document.querySelector('.slick-current .project-slide').dataset.slug;
+
+                document.querySelector('.slide-layer').classList.add('visible');
+                //! STORE COVER DOESN'T WORK
+                // vm.$store.commit('setCover', currentCover);
+
+                this.animLeaveLetters();
+
+                var outroTl = gsap.timeline({timeScale: 0.5})
+                outroTl.add('start');
+                outroTl
+                    .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
+                    .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
+                    .to('.slick-current .slide-img',{x:"-50%", y:"-50%", scale:1, duration: 2, ease: "power4.inOut"},'start')
+                    .to('.slide-layer',{opacity:0, duration: 0.5, ease: "power4.inOut"},'start+=1.5')
+                    .set('.project-cover',{display:"block"},'start+=2')
+                    .set('.project-cover-img',{x:"-50%", y:"-50%"},'start+=2')
+                    .to('.project-cover', {width: "100vw", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+
+                outroTl.eventCallback("onComplete", ()=> {
+                    //! HOW TO DELTE METHODS?
+                    delete this.projectLeave();
+                    delete this.projectEnter();
+                    // delete this.parallax();
+                    vm.$store.commit('setCover', currentCover);
+                    vm.$router.push({
+                        path: `/project/${projectSlug}`
+                    })
+                });
+
             }
         },
         mounted() {
@@ -225,7 +306,7 @@
         left: 50%;
         width: 100vw;
         height: 100vh;
-        z-index: 999;
+        z-index: 99;
         overflow: hidden;
         transform: translate(-50%,-50%);
         .project-cover-img{
@@ -284,10 +365,16 @@
         top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 9;
+        z-index: 100;
         overflow: hidden;
+        &.visible{
+            overflow: visible;
+        }
         .project-title{
             opacity: 0.3;
+            &.visibleOpacity{
+                opacity: 1;
+            }
             &.visible{
                 transform: translateY(0);
                 transition: all 0.6s ease;
@@ -350,6 +437,9 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.5s ease;
+        &.visible{
+            opacity: 1;
+        }
     }
 
 </style>
