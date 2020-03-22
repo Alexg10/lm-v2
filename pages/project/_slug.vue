@@ -75,7 +75,7 @@
             return {
                 name: 'project',
                 duration: 500,
-                beforeEnter(){
+                afterEnter(){
                     this.$store.commit('setCover', null);
                 }
             }

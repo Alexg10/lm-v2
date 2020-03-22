@@ -28,7 +28,8 @@
       });
 
       cursor.over('.link-hover', {
-          diameter: 25
+          diameter: 25,
+          borderColor: 'transparent'
       });
     },
   }

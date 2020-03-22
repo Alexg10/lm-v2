@@ -4,11 +4,11 @@
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
-            <div class="project-title-container" @mouseenter="projectEnter" @mouseleave="projectLeave">
-                <div class="project-title" @click="clickSlide"></div>
+            <div v-if="currentProject.acfProjectFields" class="project-title-container"  @mouseenter="projectEnter" @mouseleave="projectLeave">
+                <div class="project-title link-hover" @click="clickSlide">{{currentProject.acfProjectFields.projectTitle}}</div>
             </div>
             <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit" >
-                <div v-for="project in projects" class="project-slide" :key="project.id" @click="clickSlide" ref="slides" :data-slug="project.slug">
+                <div v-for="project in projects" class="project-slide link-hover" :key="project.id" @click="clickSlide" ref="slides">
                     <div class="slide-link" @mouseenter="projectEnter" @mouseleave="projectLeave">
                         <div class="project-infos">
                             <div class="project-name-container">
@@ -40,6 +40,8 @@
         transition: 'listFade',
         data(){
             return{
+                currentIndex: 0,
+                isLeave: false,
                 slickOptions: {
                     slidesToShow : 1,
                     speed        : 1200,
@@ -53,7 +55,10 @@
         },
         computed: {
             cover(){
-                return this.projects[0].acfProjectFields.headerPicture.sourceUrl;
+                return this.projects[this.currentIndex].acfProjectFields.headerPicture.sourceUrl;
+            },
+            currentProject(){
+                return this.projects[this.currentIndex];
             }
         },
         apollo: {
@@ -68,11 +73,8 @@
                 const current            = slick.$slides[0];
                 const prev               = current.previousSibling;
                 const next               = current.nextSibling;
-                const currentName        = current.querySelector('.project-name').textContent;
                 const projectSlideWidth  = current.querySelector('.project-slide').offsetWidth;
                 const projectSlideHeight = current.querySelector('.project-slide').offsetHeight;
-
-                document.querySelector('.project-title').innerHTML = currentName;
 
                 var introTl = gsap.timeline({delay: 1})
                 introTl.add('start');
@@ -92,12 +94,8 @@
                     this.parallax(event);
                 }
             },
-            handleAfterChange(event, slick){
-                var   currentNb   = slick.currentSlide
-                var   current     = slick.$slides[currentNb];
-                const currentName = current.querySelector('.project-name').textContent;
-
-                document.querySelector('.project-title').innerHTML = currentName;
+            handleAfterChange(event, slick, currentId){
+                this.currentIndex = currentId;
                 document.querySelector('.project-title').classList.add("visible");
             },
             handleBeforeChange(){
@@ -152,12 +150,17 @@
                 document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
-                document.querySelector('.project-title').classList.add('hover');
-                document.querySelector('.slick-current .project-slide').classList.add('hover');
+                if(!this.isLeave){
+                    document.querySelector('.project-title').classList.add('hover');
+                    document.querySelector('.slick-current .project-slide').classList.add('hover');
+                }
+
             },
             projectLeave(){
-                document.querySelector('.project-title').classList.remove('hover');
-                document.querySelector('.slick-current .project-slide').classList.remove('hover');
+                if(!this.isLeave){
+                    document.querySelector('.project-title').classList.remove('hover');
+                    document.querySelector('.slick-current .project-slide').classList.remove('hover');
+                }
             },
             //PREV
             prevSlide(){
@@ -227,16 +230,13 @@
 
             //CLICK
             clickSlide(elem, slick){
+                this.isLeave = true;
                 var vm             = this;
                 var currentNbSlide = this.$refs.slick.$el.slick.currentSlide;
-                var currentCover   = this.$refs.slick.$el.querySelector('.slide-img').src;
                 var prev           = this.$refs.slick.$el.slick.$slides[currentNbSlide].previousElementSibling;
                 var next           = this.$refs.slick.$el.slick.$slides[currentNbSlide].nextElementSibling;
-                var projectSlug    = document.querySelector('.slick-current .project-slide').dataset.slug;
 
                 document.querySelector('.slide-layer').classList.add('visible');
-                //! STORE COVER DOESN'T WORK
-                // vm.$store.commit('setCover', currentCover);
 
                 this.animLeaveLetters();
 
@@ -252,22 +252,17 @@
                     .to('.project-cover', {width: "100vw", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
 
                 outroTl.eventCallback("onComplete", ()=> {
-                    //! HOW TO DELTE METHODS?
-                    delete this.projectLeave();
-                    delete this.projectEnter();
-                    // delete this.parallax();
-                    vm.$store.commit('setCover', currentCover);
+                    vm.$store.commit('setCover', vm.currentProject);
                     vm.$router.push({
-                        path: `/project/${projectSlug}`
+                        path: `/project/${vm.currentProject.slug}`
                     })
                 });
-
             }
         },
         mounted() {
             this.scrollSlide();
             this.keySlide();
-        },
+        }
     }
 </script>
 
@@ -307,6 +302,7 @@
         z-index: 99;
         overflow: hidden;
         transform: translate(-50%,-50%);
+        pointer-events: none;
         .project-cover-img{
             position: absolute;
             width: 100vw;

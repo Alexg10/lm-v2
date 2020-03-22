@@ -56,12 +56,12 @@
             var scrollB = this.$scrollmagic;
             var scrollM = this.$scrollmagic;
             var VueScrollTo = require('vue-scrollto');
-            var scrollOptions = {
+            const scrollOptions = {
                 easing: 'ease-in',
                 force: true,
                 cancelable: false,
                 onDone: function(element) {
-                    console.log("complete DONE");
+                    VueScrollTo.unbind(element);
                     vm.changeProject();
                 }
             }
@@ -84,10 +84,9 @@
             scrollB.addScene(sceneFooter);
 
             footerTl.eventCallback("onComplete", function () {
-                console.log("complete");
-                VueScrollTo.scrollTo('.next-cover', 800, scrollOptions)
+                VueScrollTo.scrollTo('.next-cover', 800, scrollOptions);
+                footerTl.kill();
             });
-
 
             Array.prototype.forEach.call(upLetter,function(el, i) {
                 var elements = el.childNodes;
@@ -108,9 +107,7 @@
                 scrollM.addScene(animLetterScene)
 
             });
-
-            
-        },
+        }
     }
 </script>
 
