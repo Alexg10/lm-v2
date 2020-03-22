@@ -16,7 +16,6 @@
 <script>
     import arrowDown from '~/assets/images/ico/arrow-down-ico.svg'
     import gsap from 'gsap'
-    import jump from 'jump.js'
 
     export default {
         data(){
