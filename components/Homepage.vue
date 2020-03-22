@@ -72,8 +72,11 @@
                 LoveClickTl : gsap.timeline({paused: true}),
                 workClickTl : gsap.timeline({paused: true}),
                 loveUp : gsap.timeline({paused: true}),
+                loveUpUp : gsap.timeline({paused: true}),
                 loveDown : gsap.timeline({paused: true}),
-                workUp : gsap.timeline({paused: true})
+                workUp : gsap.timeline({paused: true}),
+                workUpUp : gsap.timeline({paused: true})
+
 
             }
         },
@@ -86,42 +89,35 @@
                 window.addEventListener('wheel', function(e) {
                     if (e.deltaY < 0 && scrollable) {
                         scrollable = false;
-                        console.log('up');
-
                         if( !work.classList.contains('visible') ){
                             work.classList.add("visible");
+                            console.log('UP FROM LOVE ')
                         }else{
                             work.classList.remove("visible");
+                            console.log('UP FROM WORK ')
                         }
-                        vm.loveDown.play(0);
-
                         setTimeout(() => {
                             scrollable = true;
                         }, 1500);
 
                     }
                     if (e.deltaY > 0 && scrollable) {
-                        console.log('down');
                         scrollable = false;
-                        // vm.loveUp.play(0);
-                        vm.loveUp.eventCallback("onComplete", function () {
-                            console.log('complete');
-                            // if( work.classList.contains('visible') ){
-                            //     work.classList.remove("visible");
-                            // }else{
-                            //     work.classList.add("visible");
-                                // vm.workUp.play();
-                            // }
-                        });
-                        //TODO SAME AS UNDER TO DELETE
                         if( work.classList.contains('visible') ){
+                            // this.workUpUp.play(0);
                             work.classList.remove("visible");
+                            console.log('Down FROM Work ')
                         }else{
-                            work.classList.add("visible");
-                            // vm.workUp.play();
+                            console.log('Down FROM LOVE ');
+                            vm.loveUp.tweenTo("lmUp");
+
+                            // vm.loveUp.tweenTo("lmDown, lmDown+=0.2").pause();
+                            // vm.workUp.tweenFromTo("workInit", "workUp").pause();
+                            // vm.loveUpUp.eventCallback("onComplete", function () {
+                            //     vm.workUp.play(0);
+                            // });
+
                         }
-
-
                         setTimeout(() => {
                             scrollable = true;
                         }, 1500);
@@ -217,19 +213,24 @@
             // this.LoveClickTl.to(".elle", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire")
             //                 .to(".aime", {x: "80vw", duration: 1, ease: "power4.in"}, "fire");
 
-            this.loveUp.to(".elle", {y:-160, duration: 0.6, ease: "power4.in" },"lmUp")
+            this.loveUp.addLabel('lmStart')
+                .to(".elle", {y:-170, duration: 0.6, ease: "power4.in" },"lmUp")
                 .to(".aime", {y:-160, duration: 0.6, ease: "power4.in"},"lmUp+=0.2")
-                .to(".aime", {opacity:0, duration: 0.5});
-            // this.loveDown.to(".elle", {y:0, duration: 0.5},"loveDown")
-            //     .to(".aime", {y:0, duration: 0.5},"loveDown+=0.1");
+                .to(".elle", {y:0, duration: 0.6, ease: "power4.in" },"lmInit")
+                .to(".aime", {y:0, duration: 0.6, ease: "power4.in"},"lmInit+=0.2")
+                .to(".elle", {y:170, duration: 0.6, ease: "power4.in" },"lmDown")
+                .to(".aime", {y:160, duration: 0.6, ease: "power4.in"},"lmDown+=0.2");
 
-            // this.workUp.from(".work", {y:160, duration: 0.6, ease: "power4.in", stagger:0.3 },"lmUp");
+            this.workUp
+                .to(".work", {y:-170, duration: 0.6, ease: "power4.in", stagger:0.3 },"workUp")
+                .to(".work", {y: 0, duration: 0.6, ease: "power4.in", stagger:0.3 },"workInit")
+                .to(".work", {y: 340, duration: 0.6, ease: "power4.in", stagger:0.3 },"workDown");
 
+            this.loveUp.tweenTo("lmStart");
+            this.workUp.tweenTo("workInit");
+            // this.loveUp.play(0.5);
+            // this.workUp.pause();
 
-            this.workClickTl.to(".word-wrapper-work:nth-child(1)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire")
-                .to(".word-wrapper-work:nth-child(2)", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire+=0.1")
-                .to(".word-wrapper-work:nth-child(3)", {x: "80vw", duration: 1, ease: "power4.in"}, "fire+=0.2");
-            
             this.scrollSlide();
 
         }
@@ -249,7 +250,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            display: none;
+            // display: none;
             &.visible{
                 display: block;
             }
@@ -301,7 +302,7 @@
         font-size: 200px;
         text-align: center;
         font-weight: bold;
-        background: white;
+        // background: white;
         @media ( max-width : 680px ) {
             font-size: 130px;
         }

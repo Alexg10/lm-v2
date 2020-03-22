@@ -221,8 +221,6 @@
                     tabLetterLength.forEach(function(element){
                         var elemToAnim = document.querySelector('.project-title .letter-'+element+'');
                         letterTrans.fromTo(elemToAnim , 0.8, {scaleX:1, scaleY:1, opacity:1},{scaleX:3, scaleY:3, opacity:0, ease: Power4.easeInOut, overwrite: false},"-=0.55");    
-                        //! IF PASS TO WHITE
-                        // letterTrans.fromTo(elemToAnim , 0.75, {scaleX:1, scaleY:1, opacity:1},{color: "white", ease: Power4.easeInOut, overwrite: false},"-=0.55");    
                     });
                 }, 300);
             },
