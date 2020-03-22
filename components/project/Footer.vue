@@ -30,7 +30,6 @@
         methods: {
             changeProject() {
                 // Set project to store
-                console.log(this.link)
                 this.$store.commit('setCover', this.link);
 
                 // Animate out
@@ -57,6 +56,16 @@
             var footerTl= new TimelineMax({ paused: false});
             var scrollB = this.$scrollmagic;
             var scrollM = this.$scrollmagic;
+            var VueScrollTo = require('vue-scrollto');
+            var scrollOptions = {
+                easing: 'ease-in',
+                force: true,
+                cancelable: false,
+                onDone: function(element) {
+                    console.log("complete DONE");
+                    vm.changeProject();
+                }
+            }
 
             var upLetter = document.getElementsByClassName("up-letters");
 
@@ -77,13 +86,7 @@
 
             footerTl.eventCallback("onComplete", function () {
                 console.log("complete");
-                jump('.next-cover',{
-                    callback: function(){
-                    console.log("JUMP complete");
-                        //! BUG IF CALLED
-                        // vm.changeProject();
-                    }
-                })
+                VueScrollTo.scrollTo('.next-cover', 800, scrollOptions)
             });
 
 
