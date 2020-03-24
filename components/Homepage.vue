@@ -69,6 +69,7 @@
             return{
                 coverIndex: 1, 
                 playing:'',
+                scrollable: true,
                 LoveClickTl : gsap.timeline({paused: true}),
                 workClickTl : gsap.timeline({paused: true}),
                 loveInit : gsap.timeline({}),
@@ -85,65 +86,86 @@
         },
 
         methods: {
-            scrollSlide(){
-                const work = document.querySelector('.work-container');
+            scrollUp(){
                 var vm = this;
-                var scrollable = true;
+                vm.scrollable = false;
+                if( !document.querySelector('.work-container').classList.contains('visible') ){
+                    document.querySelector('.work-container').classList.add("visible");
+                    console.log('UP FROM LOVE ');
+                    vm.loveDown.pause(0);
+                    vm.loveDown.play();
+                    vm.loveDown.eventCallback("onComplete", function () {
+                        vm.workDownDown.pause(0);
+                        vm.workDownDown.play();
+                    });
+                }else{
+                    console.log('UP FROM WORK ')
+                    vm.workDown.pause(0);
+                    vm.workDown.play();
+                    vm.workDown.eventCallback("onComplete", function () {
+                        document.querySelector('.work-container').classList.remove("visible");
+                        vm.loveDownDown.pause(0);
+                        vm.loveDownDown.play();
+                    });
+                }
+                setTimeout(() => {
+                    vm.scrollable = true;
+                }, 1500);
+            },
+            scrollDown(){
+                var vm = this;
+                vm.scrollable = false;
+                if( document.querySelector('.work-container').classList.contains('visible') ){
+                    console.log('Down FROM Work ');
+                    vm.workUpUp.time(0);
+                    vm.workUpUp.play();
+                    vm.workUpUp.eventCallback("onComplete", function () {
+                        document.querySelector('.work-container').classList.remove("visible");
+                        vm.loveUpR.pause(0);
+                        vm.loveUpR.play();
+                    });
+                }else{
+                    document.querySelector('.work-container').classList.add("visible");
+                    console.log('Down FROM LOVE ');
+                    vm.loveUpUp.pause(0);
+                    vm.loveUpUp.play();
+                    vm.loveUpUp.eventCallback("onComplete", function () {
+                        vm.workUp.pause(0);
+                        vm.workUp.play();
+                    });
+                }
+                setTimeout(() => {
+                    vm.scrollable = true;
+                }, 1500);
+            },
+            scrollSlide(){
+                var vm = this;
                 window.addEventListener('wheel', function(e) {
-                    if (e.deltaY < 0 && scrollable) {
-                        scrollable = false;
-                        if( !work.classList.contains('visible') ){
-                            work.classList.add("visible");
-                            console.log('UP FROM LOVE ');
-                            vm.loveDown.pause(0);
-                            vm.loveDown.play();
-                            vm.loveDown.eventCallback("onComplete", function () {
-                               vm.workDownDown.pause(0);
-                               vm.workDownDown.play();
-                            });
-                        }else{
-                            console.log('UP FROM WORK ')
-                            vm.workDown.pause(0);
-                            vm.workDown.play();
-                            vm.workDown.eventCallback("onComplete", function () {
-                               work.classList.remove("visible");
-                               vm.loveDownDown.pause(0);
-                               vm.loveDownDown.play();
-                            });
-                        }
-                        setTimeout(() => {
-                            scrollable = true;
-                        }, 1500);
-
+                    if (e.deltaY < 0 && vm.scrollable) {
+                        vm.scrollUp();
                     }
-                    if (e.deltaY > 0 && scrollable) {
-                        scrollable = false;
-                        if( work.classList.contains('visible') ){
-                            // this.workUpUp.play(0);
-                            console.log('Down FROM Work ');
-                            vm.workUpUp.time(0);
-                            vm.workUpUp.play();
-                            vm.workUpUp.eventCallback("onComplete", function () {
-                               work.classList.remove("visible");
-                               vm.loveUpR.pause(0);
-                               vm.loveUpR.play();
-                            });
-                        }else{
-                            work.classList.add("visible");
-                            console.log('Down FROM LOVE ');
-                            vm.loveUpUp.pause(0);
-                            vm.loveUpUp.play();
-                            vm.loveUpUp.eventCallback("onComplete", function () {
-                               vm.workUp.pause(0);
-                               vm.workUp.play();
-                            });
-                        }
-                        setTimeout(() => {
-                            scrollable = true;
-                        }, 1500);
-
+                    if (e.deltaY > 0 && vm.scrollable) {
+                        vm.scrollDown()
                     }
                 });
+            },
+            keySlide(e) {
+                var vm = this;
+                document.onkeydown = function(e){
+                    e = e || window.event;
+                    if (e.keyCode == '38') {
+                        vm.scrollUp();
+                    }
+                    else if (e.keyCode == '40') {
+                        vm.scrollDown();
+                    }
+                    else if (e.keyCode == '37') {
+                        vm.scrollUp();
+                    }
+                    else if (e.keyCode == '39') {
+                        vm.scrollDown();
+                    }
+                }
             },
             loveHover(){
                 document.querySelector('.bg-love').classList.add("visible");
@@ -263,6 +285,7 @@
                 .fromTo(".work", {y: 0},{y: 170, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
 
             this.scrollSlide();
+            this.keySlide();
         }
     }
 </script>
