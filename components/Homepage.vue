@@ -71,13 +71,16 @@
                 playing:'',
                 LoveClickTl : gsap.timeline({paused: true}),
                 workClickTl : gsap.timeline({paused: true}),
-                loveUp : gsap.timeline({paused: true}),
+                loveInit : gsap.timeline({}),
+                loveUp : gsap.timeline({}),
+                loveUpR : gsap.timeline({}),
                 loveUpUp : gsap.timeline({paused: true}),
-                loveDown : gsap.timeline({paused: true}),
-                workUp : gsap.timeline({paused: true}),
-                workUpUp : gsap.timeline({paused: true})
-
-
+                loveDown : gsap.timeline({}),
+                loveDownDown : gsap.timeline({}),
+                workUp : gsap.timeline({progress: 1}),
+                workUpUp : gsap.timeline({progress: 1}),
+                workDownDown : gsap.timeline({progress: 1}),
+                workDown : gsap.timeline({progress: 1})
             }
         },
 
@@ -91,10 +94,22 @@
                         scrollable = false;
                         if( !work.classList.contains('visible') ){
                             work.classList.add("visible");
-                            console.log('UP FROM LOVE ')
+                            console.log('UP FROM LOVE ');
+                            vm.loveDown.pause(0);
+                            vm.loveDown.play();
+                            vm.loveDown.eventCallback("onComplete", function () {
+                               vm.workDownDown.pause(0);
+                               vm.workDownDown.play();
+                            });
                         }else{
                             work.classList.remove("visible");
                             console.log('UP FROM WORK ')
+                            vm.workDown.pause(0);
+                            vm.workDown.play();
+                            vm.workDown.eventCallback("onComplete", function () {
+                               vm.loveDownDown.pause(0);
+                               vm.loveDownDown.play();
+                            });
                         }
                         setTimeout(() => {
                             scrollable = true;
@@ -106,17 +121,22 @@
                         if( work.classList.contains('visible') ){
                             // this.workUpUp.play(0);
                             work.classList.remove("visible");
-                            console.log('Down FROM Work ')
+                            console.log('Down FROM Work ');
+                            vm.workUpUp.time(0);
+                            vm.workUpUp.play();
+                            vm.workUpUp.eventCallback("onComplete", function () {
+                               vm.loveUpR.pause(0);
+                               vm.loveUpR.play();
+                            });
                         }else{
+                            work.classList.add("visible");
                             console.log('Down FROM LOVE ');
-                            vm.loveUp.tweenTo("lmUp");
-
-                            // vm.loveUp.tweenTo("lmDown, lmDown+=0.2").pause();
-                            // vm.workUp.tweenFromTo("workInit", "workUp").pause();
-                            // vm.loveUpUp.eventCallback("onComplete", function () {
-                            //     vm.workUp.play(0);
-                            // });
-
+                            vm.loveUpUp.pause(0);
+                            vm.loveUpUp.play();
+                            vm.loveUpUp.eventCallback("onComplete", function () {
+                               vm.workUp.pause(0);
+                               vm.workUp.play();
+                            });
                         }
                         setTimeout(() => {
                             scrollable = true;
@@ -210,29 +230,39 @@
             }
         },
         mounted() {
-            // this.LoveClickTl.to(".elle", {x: "-80vw", duration: 1, ease: "power4.in"}, "fire")
-            //                 .to(".aime", {x: "80vw", duration: 1, ease: "power4.in"}, "fire");
+            this.loveUpUp
+                .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
+                .fromTo(".aime", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"loveUpUp+=0.25");
 
-            this.loveUp.addLabel('lmStart')
-                .to(".elle", {y:-170, duration: 0.6, ease: "power4.in" },"lmUp")
-                .to(".aime", {y:-160, duration: 0.6, ease: "power4.in"},"lmUp+=0.2")
-                .to(".elle", {y:0, duration: 0.6, ease: "power4.in" },"lmInit")
-                .to(".aime", {y:0, duration: 0.6, ease: "power4.in"},"lmInit+=0.2")
-                .to(".elle", {y:170, duration: 0.6, ease: "power4.in" },"lmDown")
-                .to(".aime", {y:160, duration: 0.6, ease: "power4.in"},"lmDown+=0.2");
+            this.loveUp
+                .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
+                .fromTo(".aime", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"loveUpUp+=0.25");
+
+            this.loveUpR
+                .fromTo(".elle", {y: 170},{y:0, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
+                .fromTo(".aime", {y: 170},{y:0, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"loveUpUp+=0.25");
+
+            this.loveDown
+                .fromTo(".aime", {y:0},{y: 170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"lmUp")
+                .fromTo(".elle", {y:0},{y: 170, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"lmUp+=0.25");
+
+            this.loveDownDown
+                .fromTo(".aime", {y:-170},{y:0, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"lmUp")
+                .fromTo(".elle", {y:-170},{y:0, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"lmUp+=0.25");
 
             this.workUp
-                .to(".work", {y:-170, duration: 0.6, ease: "power4.in", stagger:0.3 },"workUp")
-                .to(".work", {y: 0, duration: 0.6, ease: "power4.in", stagger:0.3 },"workInit")
-                .to(".work", {y: 340, duration: 0.6, ease: "power4.in", stagger:0.3 },"workDown");
+                .fromTo(".work", {y:170}, {y: 0, duration: 1, ease: "power4.inOut", stagger:0.3 },"workInit");
 
-            this.loveUp.tweenTo("lmStart");
-            this.workUp.tweenTo("workInit");
-            // this.loveUp.play(0.5);
-            // this.workUp.pause();
+            this.workUpUp
+                .fromTo(".work", {y: 0},{y: -170, duration: 1, ease: "power4.inOut", stagger:0.3 },"workInit");
+
+            this.workDownDown
+                .fromTo(".work", {y: -170},{y: 0, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
+
+            this.workDown
+                .fromTo(".work", {y: 0},{y: 170, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
 
             this.scrollSlide();
-
         }
     }
 </script>
@@ -394,7 +424,6 @@
                 display: flex;
                 line-height: 160px;
                 color: black;
-                transition: all 1.1s cubic-bezier(.19,.77,.2,1);
             }
             .hide{
                 width: auto;
@@ -439,12 +468,7 @@
                 }
             }
             //ELLE AIME
-            .elle{
-                transition: 0.5s cubic-bezier(.19,.77,.2,1);
-            }
-            .aime{
-                transition: 0.5s cubic-bezier(.19,.77,.2,1);
-            }
+
             //WORK
             .word-wrapper-work{
                 transition: all 1.1s cubic-bezier(.19,.77,.2,1);
