@@ -64,11 +64,12 @@
         methods: {
             backHome(){
                 document.querySelector('.cross').classList.remove("active");
+                this.loveContentLeave.pause(0);
                 this.loveContentLeave.play();
-                this.loveContentLeave.eventCallback("onComplete", function () {
+                setTimeout(function(){
                     document.querySelector('.word-container').classList.remove("clicked");
-                });
-                document.querySelector('.love-content').classList.remove("visible");
+                    document.querySelector('.love-content').classList.remove("visible");
+                },3500);
             },
             cocktailPlay(){
                 this.cocktailAnim.goToAndPlay(1,1);
@@ -79,8 +80,12 @@
         },
         mounted() {
             this.loveContentLeave
-                .to(".word-wrapper-elle", {x:"0", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
-                .to(".word-wrapper-aime", {x:"0", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+                .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
+                .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
+                .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2")
+                .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2");
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({
                 container: document.getElementById('pizza-ico'),
@@ -106,45 +111,43 @@
 
 <style lang="scss" scoped>
     .love-content{
-        position: absolute;
-        background: white;
-        width: 100vw;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        // display: none;
-        font-size: 60px;
-        text-align: center;
+        position   : absolute;
+        background : white;
+        width      : 100vw;
+        height     : 100vh;
+        top        : 0;
+        left       : 0;
+        font-size  : 60px;
+        text-align : center;
         font-weight: bold;
-        overflow: hidden;
-        visibility: hidden;
-        z-index: 99;
-        opacity: 0;
-        transition: opacity 1.1s cubic-bezier(.19,.77,.2,1);
+        overflow   : hidden;
+        visibility : hidden;
+        z-index    : 99;
+        opacity    : 0;
+        transition : opacity 1.1s cubic-bezier(.19,.77,.2,1);
         &.visible{
-            // display: block;
             visibility: visible;
-            opacity: 1;
+            opacity   : 1;
             transition: opacity 1.1s cubic-bezier(.19,.77,.2,1);
         }
         .base-line{
             font-size: 190px;
             // color: $main-color;
-            color: #FF9170;
-            white-space: nowrap;
-            line-height: 270px;
+            color        : #FF9170;
+            white-space  : nowrap;
+            line-height  : 270px;
             padding-right: 40px;
-            margin-right: 40px;
+            margin-right : 40px;
             @media ( max-width : 680px ) {
-                font-size: 78px;
+                font-size  : 78px;
                 line-height: 100px;
             }
         }
         .base-line-container{
-            display: block;
-            width: 100vw;
+            display : block;
+            width   : 100vw;
             overflow: hidden;
-            margin: 110px 0;
+            margin  : 110px 0;
             @media ( max-width : 680px ) {
                 margin-bottom: 30px;
             }
@@ -153,7 +156,7 @@
             display: flex;            
             .ico-heart{
                 margin-right: 10px;
-                transition: 0.5s ease;
+                transition  : 0.5s ease;
             }
             &:hover{
                 .ico-heart{
@@ -162,49 +165,49 @@
             }
         }
         .bottom-container{
-            display: flex;
+            display        : flex;
             justify-content: space-between;
-            width: 100%;
-            max-width: 1180px;
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0 20px;
+            width          : 100%;
+            max-width      : 1180px;
+            position       : fixed;
+            bottom         : 90px;
+            left           : 50%;
+            transform      : translateX(-50%);
+            padding        : 0 20px;
             @media ( max-width : 780px ) {
                 flex-direction: column;
             }
 
             .ico-anim{
-                max-width: 40px;
+                max-width   : 40px;
                 margin-right: 17px;
-                display: inline-block;
-                float: left;
+                display     : inline-block;
+                float       : left;
                 @media ( max-width : 780px ) {
                     max-width: 60px;
                 }
                 @media ( max-width : 780px ) {
                     max-width: 50px;
                     &#pizza-ico{
-                        max-width: 40px;
+                        max-width : 40px;
                         min-height: 59px;
                     }
                 }
             }
             .left-bottom{
-                display: flex;
+                display : flex;
                 overflow: hidden;
                 @media ( max-width : 780px ) {
                     justify-content: center;
                 }
                 a{
-                    display: flex;
+                    display    : flex;
                     align-items: center;
                     // color: $main-color;
-                    color: #FF9170;
+                    color          : #FF9170;
                     text-decoration: none;
-                    font-family: 'GTWalsheimProMedium';
-                    font-size: 18px;
+                    font-family    : 'GTWalsheimProMedium';
+                    font-size      : 18px;
                     @media ( max-width : 780px ) {
                         justify-content: center;
                         flex-direction: column;
@@ -217,14 +220,14 @@
                     display: flex;
                 }
                 .contact-me{
-                    font-family: 'GTWalsheimProMedium';
+                    font-family : 'GTWalsheimProMedium';
                     margin-right: 88px;
                     img{
-                        width: 45px;
+                        width        : 45px;
                         margin-bottom: 20px;
                     }
                     a{
-                        letter-spacing: 0.3px;
+                        letter-spacing : 0.3px;
                         text-decoration: none;
                     }
                 }
@@ -234,10 +237,10 @@
                 align-items: center;
             }
             .developped{
-                font-family: 'GTWalsheimProMedium';
-                font-size: 18px;
+                font-family : 'GTWalsheimProMedium';
+                font-size   : 18px;
                 padding-left: 6px;
-                overflow: hidden;
+                overflow    : hidden;
                 @media ( max-width : 780px ) {
                     transform: translateY(50px);
                 }
@@ -246,18 +249,18 @@
 
                 }
                 a{
-                    color: black;
+                    color          : black;
                     text-decoration: none;
-                    font-size: 14px;
-                    line-height: 22px;
+                    font-size      : 14px;
+                    line-height    : 22px;
                     @media ( max-width : 780px ) {
                         justify-content: center;
                     }
                 }
                 span{
                     font-weight: bold;
-                    position: relative;
-                    overflow: hidden;
+                    position   : relative;
+                    overflow   : hidden;
                 }
                 .ico-heart{
                     display: flex;
@@ -265,47 +268,61 @@
             }
         }
         .love-description-separator{
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 1px;
-            width: 20px;
+            position        : absolute;
+            bottom          : -20px;
+            left            : 50%;
+            transform       : translateX(-50%);
+            height          : 1px;
+            width           : 20px;
             background-color: black;
         }
         .love-description{
-            position: relative;
-            font-size: 22px;
+            position   : relative;
+            font-size  : 22px;
             font-family: 'GTWalsheimProMedium';
             font-weight: bold;
-            max-width: 444px;
+            max-width  : 444px;
             line-height: 32px;
-            margin: 0 auto;
+            margin     : 0 auto;
             @media ( max-width : 780px ) {
-                margin-top: 45px;
+                margin-top : 45px;
                 line-height: 40px;
-                font-size: 28px;
-                max-width: 415px;
-                margin: 0 auto;
+                font-size  : 28px;
+                max-width  : 415px;
+                margin     : 0 auto;
             }
             @media ( max-width : 680px ) {
-                margin-top: 45px;
+                margin-top : 45px;
                 line-height: 28px;
-                font-size: 16px;
-                max-width: 300px;
+                font-size  : 16px;
+                max-width  : 300px;
             }
         }
         .word-container{
             line-height: 80px;
             @media ( max-width : 780px ) {
-                font-size: 50px;
-                line-height: 50px;
+                font-size     : 50px;
+                line-height   : 50px;
                 letter-spacing: -1.3px;
-                max-width: 80%;
-                margin: 0 auto;
+                max-width     : 80%;
+                margin        : 0 auto;
             }
             @media ( max-width : 680px ) {
                 line-height: 48px;
+            }
+        }
+
+
+
+        @keyframes heart-beat {
+            0%{
+                transform: scale(1);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
             }
         }
     }

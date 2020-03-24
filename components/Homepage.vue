@@ -67,21 +67,22 @@
         },
         data(){
             return{
-                coverIndex: 1, 
-                playing:'',
-                scrollable: true,
-                LoveClickTl : gsap.timeline({paused: true}),
-                workClickTl : gsap.timeline({paused: true}),
-                loveInit : gsap.timeline({}),
-                loveUp : gsap.timeline({}),
-                loveUpR : gsap.timeline({}),
-                loveUpUp : gsap.timeline({paused: true}),
-                loveDown : gsap.timeline({}),
-                loveDownDown : gsap.timeline({}),
-                workUp : gsap.timeline({progress: 1}),
-                workUpUp : gsap.timeline({progress: 1}),
-                workDownDown : gsap.timeline({progress: 1}),
-                workDown : gsap.timeline({progress: 1})
+                coverIndex     : 1,
+                playing        : '',
+                scrollable     : true,
+                LoveClickTl    : gsap.timeline({paused: true}),
+                workClickTl    : gsap.timeline({paused: true}),
+                loveInit       : gsap.timeline(),
+                loveUp         : gsap.timeline(),
+                loveUpR        : gsap.timeline(),
+                loveUpUp       : gsap.timeline({paused: true}),
+                loveDown       : gsap.timeline(),
+                loveDownDown   : gsap.timeline(),
+                workUp         : gsap.timeline({progress: 1}),
+                workUpUp       : gsap.timeline({progress: 1}),
+                workDownDown   : gsap.timeline({progress: 1}),
+                workDown       : gsap.timeline({progress: 1}),
+                loveShowContent: gsap.timeline({paused: true})
             }
         },
 
@@ -179,12 +180,13 @@
             },
             loveClick(){
                 document.querySelector('.word-container').classList.add("clicked");
+                this.LoveClickTl.pause(0);
+                this.loveShowContent.pause(0);
                 this.LoveClickTl.play();
                 this.LoveClickTl.eventCallback("onComplete", function () {
                     document.querySelector('.love-content').classList.add("visible");
-                    //TODO ADD 3SEC
-                    document.querySelector('.cross').classList.add("active");
                 });
+                this.loveShowContent.play();
             },
             workHover(){
                 this.particuleAnim()
@@ -256,10 +258,26 @@
             }
         },
         mounted() {
+            this.loveShowContent
+                .to({}, 2, {})
+                .to(".love-content", {opacity:1, duration:1, ease: "power4.inOut" }, "loveShowContent")
+                .from(".marquee-text-text", {opacity:0, duration:1, ease: "power4.inOut" }, "loveShowContent")
+                .from(".love-description", {y: 20, opacity:0, duration: 1.8, ease: "power4.inOut" }, "loveShowContent+=0.5")
+                .from(".infos-link a", {y: 50, duration:1, ease: "power4.inOut", stagger: 0.5 }, "loveShowContent+=1")
+                .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=1.7");
+
+            this.loveShowContent.eventCallback("onComplete", function () {
+                document.querySelector('.cross').classList.add("active");
+            });
 
             this.LoveClickTl
-            .to(".word-wrapper-elle", {x:"-80vw", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
-            .to(".word-wrapper-aime", {x:"80vw", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+            .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
+            .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+
+            this.workClickTl
+                .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
+                .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
+                .to(".word-wrapper-work:nth-child(3)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl");
 
             this.loveUpUp
                 .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
@@ -463,18 +481,18 @@
                 overflow: hidden;
                 display: inline-block;
                 color: black;
-                transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+                transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                 .hide-right{
                     color: black;
                     transform: translateX(100%);
-                    opacity: 0.3;
-                    transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+                    opacity: 0;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                 }
                 .hide-left{
                     color: black;
                     transform: translateX(-100%);
-                    opacity: 0.3;
-                    transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+                    opacity: 0;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                 }
             }
             .word-wrapper{
@@ -533,88 +551,4 @@
             }
         }
     }
-    @keyframes heart-beat {
-        0%{
-            transform: scale(1);
-        }
-        50%{
-            transform: scale(1.5);
-        }
-        100%{
-            transform: scale(1);
-        }
-    }
-
-
-
-
-
-
-    .cross{
-		position: absolute;
-        top: 15px;
-        left: 50%;
-		width: 40px;
-		height: 40px;
-		// border: 1px solid black;
-		// border-radius: 100px;
-        transform: translateX(-50%);
-		&:hover{
-			cursor: pointer;
-		}
-		&.active{
-			.crossLineOne{
-				.crossLineOne_content{
-					transform: translate(0%, 0%);
-					transition: 0.4s ease;
-					transition-delay:0.3s;
-				}
-			}
-			.crossLineTwo{
-				.crossLineTwo_content{
-					transform: translate(0%, 0%);
-					transition: 0.4s ease;
-				}
-			}
-		}
-	}
-	.crossLineOne{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 20px;
-        height: 2px;
-        transform: translate(-50%,-50%) rotate(-45deg);
-        overflow: hidden;
-		&_content{
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-color: #3b4046;
-			transform: translate(100%, 0%);
-			transition: 0.4s ease;
-			transition-delay:0.3s;
-		}
-	}
-	.crossLineTwo{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 20px;
-        height: 2px;
-        transform: translate(-50%,-50%) rotate(45deg);
-        overflow: hidden;
-		&_content{
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-color: #3b4046;
-			transform: translate(-100%, 0%);
-			transition: 0.4s ease;
-		}
-	}
 </style>
