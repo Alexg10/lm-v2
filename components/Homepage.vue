@@ -102,11 +102,11 @@
                                vm.workDownDown.play();
                             });
                         }else{
-                            work.classList.remove("visible");
                             console.log('UP FROM WORK ')
                             vm.workDown.pause(0);
                             vm.workDown.play();
                             vm.workDown.eventCallback("onComplete", function () {
+                               work.classList.remove("visible");
                                vm.loveDownDown.pause(0);
                                vm.loveDownDown.play();
                             });
@@ -120,11 +120,11 @@
                         scrollable = false;
                         if( work.classList.contains('visible') ){
                             // this.workUpUp.play(0);
-                            work.classList.remove("visible");
                             console.log('Down FROM Work ');
                             vm.workUpUp.time(0);
                             vm.workUpUp.play();
                             vm.workUpUp.eventCallback("onComplete", function () {
+                               work.classList.remove("visible");
                                vm.loveUpR.pause(0);
                                vm.loveUpR.play();
                             });
@@ -280,7 +280,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            // display: none;
+            display: none;
             &.visible{
                 display: block;
             }
