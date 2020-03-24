@@ -50,15 +50,24 @@
 <script>
     import MarqueeText from 'vue-marquee-text-component'
     import lottie from 'lottie-web'
+    import gsap from 'gsap'
 
     export default {
         components:{
             MarqueeText
         },
+        data(){
+            return{
+                loveContentLeave : gsap.timeline({paused: true}),
+            }
+        },
         methods: {
             backHome(){
                 document.querySelector('.cross').classList.remove("active");
-                document.querySelector('.word-container').classList.remove("clicked");
+                this.loveContentLeave.play();
+                this.loveContentLeave.eventCallback("onComplete", function () {
+                    document.querySelector('.word-container').classList.remove("clicked");
+                });
                 document.querySelector('.love-content').classList.remove("visible");
             },
             cocktailPlay(){
@@ -69,6 +78,9 @@
             }
         },
         mounted() {
+            this.loveContentLeave
+                .to(".word-wrapper-elle", {x:"0", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
+                .to(".word-wrapper-aime", {x:"0", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({
                 container: document.getElementById('pizza-ico'),

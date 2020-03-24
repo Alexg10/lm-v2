@@ -177,6 +177,15 @@
                 document.querySelector('.bg-love').classList.remove("visible");
                 clearInterval(this.playing);
             },
+            loveClick(){
+                document.querySelector('.word-container').classList.add("clicked");
+                this.LoveClickTl.play();
+                this.LoveClickTl.eventCallback("onComplete", function () {
+                    document.querySelector('.love-content').classList.add("visible");
+                    //TODO ADD 3SEC
+                    document.querySelector('.cross').classList.add("active");
+                });
+            },
             workHover(){
                 this.particuleAnim()
             },
@@ -190,12 +199,7 @@
                     })
                 });
             }, 
-            loveClick(){
-                document.querySelector('.word-container').classList.add("clicked");
-                document.querySelector('.love-content').classList.add("visible");
-                //TODO ADD 3SEC
-                document.querySelector('.cross').classList.add("active");
-            },
+
             gif(){
                 const foo = document.querySelector('.bg-love');
                 var gifLenght = foo.children.length;
@@ -252,6 +256,11 @@
             }
         },
         mounted() {
+
+            this.LoveClickTl
+            .to(".word-wrapper-elle", {x:"-80vw", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
+            .to(".word-wrapper-aime", {x:"80vw", duration: 1, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+
             this.loveUpUp
                 .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
                 .fromTo(".aime", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut"},"loveUpUp+=0.25");
@@ -398,11 +407,11 @@
                 }
                 .elle{
                     color: #FF9170;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    transition: color 0.9s cubic-bezier(.19,.77,.2,1);
                 }
                 .aime{
                     color: #FF9170;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                    transition: color 0.9s cubic-bezier(.19,.77,.2,1);
                 }
 
                 //WORK
@@ -424,20 +433,21 @@
             }
             &.clicked{
                 .elle{
-                    left: -79px;
-                    transform: translateX(-80vh);
-                    transition: all 2s cubic-bezier(.19,.77,.2,1);
+                    // left: -79px;
+                    // transform: translateX(-80vh);
+                    // transition: all 2s cubic-bezier(.19,.77,.2,1);
 
                 }
                 .aime{
-                    transform: translateX(80vh);
-                    left: 125px;
-                    transition: all 2s cubic-bezier(.19,.77,.2,1);
+                    // transform: translateX(80vh);
+                    // left: 125px;
+                    // transition: all 2s cubic-bezier(.19,.77,.2,1);
 
                 }
                 .hide{
                     .hide-right,
                     .hide-left{
+                        opacity: 1;
                         transform: translateX(0);
                     }
                 }
