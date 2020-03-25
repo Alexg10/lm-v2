@@ -71,12 +71,12 @@
             this.letterContainer("next-project");
             this.letterContainer("next-project-name");
 
-            footerTl.fromTo(".next-cover",2, {opacity: 0.25, width: "70%"},{opacity: 1, width: "100%"})
-            .fromTo(".arrow",2, {opacity: 1, y:0},{opacity: 0, y:100});
+            footerTl.fromTo(".next-cover",1, {opacity: 0.25, width: "70%"},{opacity: 1, width: "100%"},"start")
+            .fromTo(".arrow",2, {opacity: 1, y:0},{opacity: 0, y:100},"start");
             const sceneFooter = scrollB.scene({
                 triggerElement: '.footer-project-content',
-                triggerHook: 70,
-                offset: 0,
+                triggerHook: 0.9,
+                offset: -100,
                 duration: 1000
             })
             .setTween(footerTl)
@@ -98,9 +98,9 @@
                 }
                 const animLetterScene = scrollM.scene({
                     triggerElement: ".footer-project",
-                    triggerHook: 0.65,
+                    triggerHook: 0.70,
                     duration: 900,
-                    offset: -80
+                    offset: -120
                 })
                 .setTween(upLetterTl)
                 // .addIndicators({ name: 'upLetter' })

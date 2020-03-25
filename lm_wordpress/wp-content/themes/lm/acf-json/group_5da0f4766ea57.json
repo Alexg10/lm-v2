@@ -626,9 +626,10 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "show_in_graphql": 1,
                             "collapsed": "",
-                            "min": 0,
-                            "max": 0,
+                            "min": 6,
+                            "max": 6,
                             "layout": "table",
                             "button_label": "",
                             "sub_fields": [
@@ -1126,5 +1127,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "acfProjectFields",
-    "modified": 1583794845
+    "modified": 1585174762
 }

@@ -22,10 +22,70 @@
 </template>
 
 <script>
+    import lottie from 'lottie-web'
+
     export default {
         props: [
             'bloc'
-        ]
+        ],
+        mounted(){
+            var scrollM = this.$scrollmagic;
+            var tl = new TimelineMax({ paused: false});
+            var tlPara = new TimelineMax({ paused: false});
+            var imgContain = document.getElementsByClassName("bloc-after-full-height-container")[0];
+            var imgH1 = document.querySelector(".bloc-after-full-height-container");
+            var imgH2 = document.querySelector(".bloc-after-full-height-container:last-of-type");
+
+            tlPara.fromTo(imgH1, 1, {y: 0},{y: 100, overwrite: false}, "start")
+            .fromTo(imgH2, 1, {y: 0},{y: -50, overwrite: false}, "start");                
+
+            tl.staggerFromTo(".bloc-after-full-height-container", 2, {y: 40, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false}, 0.35);                
+            const imgSectionScene = scrollM.scene({
+                triggerElement: imgContain,
+                triggerHook: 0.55,
+                offset: -50
+            })
+            .setTween(tl)
+            .reverse(false)
+            // .addIndicators({ name: 'bloc-after-full-height-container' })
+            scrollM.addScene(imgSectionScene)
+
+            // if(!this.$device.mobile){
+
+                const animFullHeightScenePara = scrollM.scene({
+                    triggerElement: ".bloc-after-full-height-container:last-of-type",
+                    triggerHook: 0.75,
+                    offset: 100,
+                    duration: window.innerHeight*2
+                })
+                .setTween(tlPara)
+                // .addIndicators({ name: 'bloc-after-full-height-container' })
+                scrollM.addScene(animFullHeightScenePara);
+            // }
+            
+            lottie.loadAnimation({
+                container: document.getElementById('animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: "/images/anim_img/anim_intro.json"
+            });
+
+            lottie.loadAnimation({
+                container: document.getElementById('anim-htu'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: "/images/anim_img/anim-htu.json"
+            });
+            lottie.loadAnimation({
+                container: document.getElementById('anim-result'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: "/images/anim_img/anim-result.json"
+            });
+        }
     }
 </script>
 
@@ -84,6 +144,11 @@
         .bloc-after-full-height-container{
             width: 50%;
             float: left;
+            text-align: center;
+            img{
+                width: 100%;
+                max-width: 500px;
+            }
         }
         @media ( max-width : 780px ) {
             padding: 0 10px;
@@ -127,6 +192,9 @@
             }
             .bloc-after-full-height-container{
                 width: 100%;
+                img{
+                    width: 100%;
+                }
             }
         }
     }
