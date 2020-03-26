@@ -105,6 +105,8 @@ add_action( 'init', 'wpm_custom_post_type', 0 );
 /* Autoriser les fichiers SVG */
 function wpc_mime_types($mimes) {
 	$mimes['svg'] = 'image/svg+xml';
+	$mimes['mp4'] = 'video/mp4';
+
 	return $mimes;
 }
 add_filter('upload_mimes', 'wpc_mime_types');

@@ -34,9 +34,7 @@ query getProjectBySlug($slug: String!) {
           laptopPicture {
             sourceUrl(size: SKETCH_PICTURE)
           }
-          laptopVideo {
-            sourceUrl
-          }
+          laptopVideo
           pictureVideo
         }
         ... on Project_Acfprojectfields_Blocs_BlocTxt {

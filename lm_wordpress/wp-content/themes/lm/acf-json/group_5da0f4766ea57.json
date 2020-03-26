@@ -262,8 +262,8 @@
                             "key": "field_5e41e069bd477",
                             "label": "Laptop vidéo",
                             "name": "laptop_video",
-                            "type": "file",
-                            "instructions": "",
+                            "type": "url",
+                            "instructions": "Aller dans médias, sélectionner la vidéo voulu, copier son lien et le coller ici",
                             "required": 0,
                             "conditional_logic": [
                                 [
@@ -285,11 +285,9 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "array",
-                            "library": "all",
-                            "min_size": "",
-                            "max_size": "",
-                            "mime_types": ""
+                            "show_in_graphql": 1,
+                            "default_value": "",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1127,5 +1125,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "acfProjectFields",
-    "modified": 1585174762
+    "modified": 1585254910
 }
