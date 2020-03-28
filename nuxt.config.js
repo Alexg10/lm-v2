@@ -34,7 +34,9 @@ export default {
     {src: '~/plugins/slick.js', ssr: false },
     {src: '~/plugins/vue-scrollmagic.js', ssr: false},
     {src: '~/plugins/gsap.js', ssr: false},
-    {src: '~/plugins/cursor.js', ssr: false}
+    {src: '~/plugins/cursor.js', ssr: false},
+    {src: '~/plugins/touch.js', ssr: false}
+
   ],
   /*
   ** Nuxt.js dev-modules

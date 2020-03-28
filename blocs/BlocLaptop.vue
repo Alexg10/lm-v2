@@ -54,6 +54,9 @@
         img{
             width: 100%;
         }
+        .project-laptop-preview-video{
+            width: 100%;
+        }
         @media ( max-width : 780px ) {
             padding: 0 20px;
             text-align: center;

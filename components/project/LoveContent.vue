@@ -169,15 +169,20 @@
                 margin-bottom: 30px;
             }
         }
-        .developped-link{
-            display: flex;            
-            .ico-heart{
-                margin-right: 10px;
-                transition  : 0.5s ease;
+        .developped{
+            @media ( max-width : 780px ) {
+                width: 100%;
             }
-            &:hover{
+            .developped-link{
+                display: flex;            
                 .ico-heart{
-                    animation: heart-beat 0.45s ease;
+                    margin-right: 10px;
+                    transition  : 0.5s ease;
+                }
+                &:hover{
+                    .ico-heart{
+                        animation: heart-beat 0.45s ease;
+                    }
                 }
             }
         }

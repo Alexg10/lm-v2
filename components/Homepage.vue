@@ -1,5 +1,5 @@
 <template>
-        <div class="homepage-container">
+        <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp">
             <div class="swiper-slide love-container">
                 <div class="home-slide-content red">
                     <div class="bg-love">
@@ -60,6 +60,7 @@
 <script>
     import gsap from "gsap"
     import LoveContent from '~/components/project/LoveContent.vue'
+
 
     export default {
         components:{

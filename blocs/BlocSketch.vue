@@ -91,6 +91,9 @@
         }
         .img-container{
             width: 100%;
+            img{
+                width: 100%;
+            }
         }
         .phone-container{
             text-align: center;

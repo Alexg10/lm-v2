@@ -193,6 +193,12 @@ body{
         overflow: hidden;
         height: 70vh;
         outline: none;
+        @media (max-width : 780px) {
+            height: 60vh;
+        }
+        @media (max-width : 680px) {
+            height: 50vh;
+        }
     }
 
     .slick-slide {

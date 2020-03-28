@@ -360,6 +360,12 @@
         opacity: 0;
         transition: all 0.5s ease;
         z-index: 101;
+        @media ( max-width : 780px ) {
+            font-size: 140px;
+        }
+        @media ( max-width : 680px ) {
+            font-size: 70px;
+        }
     }
     .project-title-container{
         position: absolute;
