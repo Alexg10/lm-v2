@@ -1,6 +1,6 @@
 <template>
     <div class="love-content">
-        <div class="cross" v-on:click="backHome">
+        <div class="cross link-hover" v-on:click="backHome">
             <div class="crossLineOne">
                 <div class="crossLineOne_content"></div>
             </div>
@@ -21,13 +21,13 @@
         <div class="bottom-container">
             <div class="left-bottom">
                 <div class="contact-me infos-link">
-                    <a href="https://nuxtjs.org" class="link" v-on:mouseenter="cocktailPlay">
+                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay">
                         <div id="ico-cocktail" class="ico-anim"></div>
                         <p>contact me</p>
                     </a>
                 </div>
                 <div class="toppings-me infos-link">
-                    <a href="" class="link" v-on:mouseenter="pizzaPlay">
+                    <a href="" class="link link-hover" v-on:mouseenter="pizzaPlay">
                         <div id="pizza-ico" class="ico-anim"></div>
                         <p>my toppings</p>
                     </a>
@@ -35,7 +35,7 @@
             </div>
             <div class="right-bottom">
                 <div class="developped">
-                    <a href=""  class="developped-link">
+                    <a href=""  class="developped-link link-hover">
                         <div class="ico-heart">
                             <img src="~/assets/images/ico/heart.svg" alt="">
                         </div>
@@ -76,6 +76,22 @@
             },
             pizzaPlay(){
                 this.pizzaAnim.goToAndPlay(1,1);
+            },
+            hoverAddClass(){
+                var link = document.getElementsByClassName("link-hover");
+                var hoverAddClassFunction = function() {
+                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    console.log('hoverlink');
+                };
+                var hoverRemoveClassFunction = function() {
+                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    console.log('hoverlink');
+                };
+
+                for (var i = 0; i < link.length; i++) {
+                    link[i].addEventListener('mouseenter', hoverAddClassFunction, false);
+                    link[i].addEventListener('mouseleave', hoverRemoveClassFunction, false);
+                }
             }
         },
         mounted() {
@@ -105,6 +121,7 @@
             });
             this.cocktailAnim.goToAndStop(75,1);
             //* END LOTTIE ANIMATION
+            this.hoverAddClass();
         },
     }
 </script>
@@ -253,6 +270,8 @@
                     text-decoration: none;
                     font-size      : 14px;
                     line-height    : 22px;
+                    padding        : 5px 0 15px;
+                    margin-top     : 10px;
                     @media ( max-width : 780px ) {
                         justify-content: center;
                     }

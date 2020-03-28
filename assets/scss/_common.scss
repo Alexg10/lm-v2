@@ -1,7 +1,10 @@
 html,
 body{
     font-family: 'Didot';
-    // cursor: none;
+    cursor: none;
+    a:hover{
+        cursor: none;
+    }
     &.fixed{
         overflow: hidden;
     }
@@ -17,6 +20,26 @@ body{
     background-color: $light-grey;
 }
 
+.cursor-fx__inner__outside{
+    z-index: 9999;
+    &.transparent{
+        border-color: transparent!important;
+        width: 15px!important;
+        height:15px!important;
+        transition-timing-function: ease!important;
+        transition-duration: 0.5s!important;
+        transition-property: color, width, height, border-color!important;
+    }
+    &.hover{
+        border-color: #FF9170 !important;
+        width: 15px !important;
+        height:15px !important;
+        transition-timing-function: ease !important;
+        transition-duration: 0.5s !important;
+        transition-property: color, width, height, border-color!important;
+    }
+}
+
 .cross {
     position: absolute;
     top: 15px;
@@ -27,8 +50,9 @@ body{
     // border-radius: 100px;
     transform: translateX(-50%);
     z-index: 999;
+    cursor: none;
     &:hover {
-        cursor: pointer;
+        cursor: none;
     }
 
     &.active {

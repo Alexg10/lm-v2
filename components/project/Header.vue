@@ -13,7 +13,7 @@
             <div class="project-description">
                 <p>{{description}}</p>
                 <div v-if="link" class="link-container" >
-                    <a :href="link" target="_blank" class="project-link link linkHover link-stagger">View the website</a>
+                    <a :href="link" target="_blank" class="project-link link link-hover link-stagger" rel="noopener" data-cursor-hover>View the website</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,9 @@
 <script>
     import gsap from "gsap"
 
+
     export default {
+
         props: [
             'title',
             'description',
@@ -31,8 +33,26 @@
             'link',
             'cover'
         ],
+        methods: {
+            hoverAddClass(){
+                var link = document.getElementsByClassName("link-hover");
+                var hoverAddClassFunction = function() {
+                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    console.log('hoverlink');
+                };
+                var hoverRemoveClassFunction = function() {
+                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    console.log('hoverlink');
+                };
+
+                for (var i = 0; i < link.length; i++) {
+                    link[i].addEventListener('mouseenter', hoverAddClassFunction, false);
+                    link[i].addEventListener('mouseleave', hoverRemoveClassFunction, false);
+                }
+            }
+        },
         mounted() {
-            
+            this.hoverAddClass();
             var anim = gsap.timeline({});
             var sectionTl= new TimelineMax({ paused: false});
 
@@ -60,7 +80,8 @@
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
                     .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
                     .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
-                    .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" );
+                    .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
+                    .set('.link-container',{overflow:"visible"});
             }else{
                 anim
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
@@ -137,6 +158,7 @@
             color: white;
             font-size: 18px;
             font-family: 'GTWalsheimProMedium';
+            padding: 2px 0 15px;
         }
         @media only screen and ( max-width : 1280px ) {
             .project-name{

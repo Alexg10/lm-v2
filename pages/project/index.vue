@@ -151,13 +151,15 @@
             },
             projectEnter(){
                 if(!this.isLeave){
+                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                     document.querySelector('.project-title').classList.add('hover');
                     document.querySelector('.slick-current .project-slide').classList.add('hover');
                 }
 
             },
-            projectLeave(){
-                if(!this.isLeave){
+            projectLeave(){ 
+                if(!this.iseave){
+                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.project-title').classList.remove('hover');
                     document.querySelector('.slick-current .project-slide').classList.remove('hover');
                 }
@@ -167,10 +169,12 @@
                 this.$refs.slick.prev();
             },
             prevSlideEnter(){
+                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                 document.querySelector('.prev-project').classList.add('hover');
                 document.querySelector('.slick-current').previousSibling.classList.add('hover');
             },
             prevSlideLeave(){
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                 document.querySelector('.prev-project').classList.remove('hover');
                 document.querySelector('.slick-current').previousSibling.classList.remove('hover');
             },
@@ -179,10 +183,12 @@
                 this.$refs.slick.next();
             },
             nextSlideEnter(){
+                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                 document.querySelector('.next-project').classList.add('hover');
                 document.querySelector('.slick-current+div').classList.add('hover');
             },
             nextSlideLeave(){
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                 document.querySelector('.next-project').classList.remove('hover');
                 document.querySelector('.slick-current+div').classList.remove('hover');
             },
@@ -237,6 +243,7 @@
                 var next           = this.$refs.slick.$el.slick.$slides[currentNbSlide].nextElementSibling;
 
                 document.querySelector('.slide-layer').classList.add('visible');
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
 
                 this.animLeaveLetters();
 
@@ -283,7 +290,7 @@
         background-color: transparent;
         transform: translateY(-50%);
         transition: 0.6s ease-in-out;
-        cursor: pointer;
+        cursor: none;
         &.hover{
             width: calc(10% + 30px);
             transition: 0.6s ease-in-out;

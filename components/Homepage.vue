@@ -10,7 +10,7 @@
                         <img class="bg-love-cover cover-5" src="/images/home/lm_55.png" alt="">
                     </div>
                     <LoveContent/>
-                    <div class="word-container link-hover" v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
+                    <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
                         <div class="word-wrapper word-wrapper-elle">
                             <div class="word elle">
                                 <span class="hide">
@@ -40,8 +40,8 @@
             <div class="swiper-slide work-container">
                 <div class="home-slide-content orange">
                     <nuxt-link to="project">
-                        <div class="word-container" v-on:mouseenter="workHover" v-on:mouseleave="particuleAnimLeave"  v-on:click="workClick">
-                            <div class="word-wrapper word-wrapper-work">
+                        <div class="word-container" v-on:mouseenter="workHover" v-on:mouseleave="particuleAnimLeave"  v-on:click="workClick" >
+                            <div class="word-wrapper word-wrapper-work" >
                                 <span class="word work">work</span>
                             </div>
                             <div class="word-wrapper word-wrapper-work">
@@ -169,6 +169,7 @@
                 }
             },
             loveHover(){
+                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                 document.querySelector('.bg-love').classList.add("visible");
                 this.playing = setInterval(() => {
                     this.gif();
@@ -177,6 +178,7 @@
             loveLeave(){
                 document.querySelector('.bg-love').classList.remove("visible");
                 clearInterval(this.playing);
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
             },
             loveClick(){
                 document.querySelector('.word-container').classList.add("clicked");
@@ -220,12 +222,14 @@
                 var tlexplosion = gsap.timeline({});
                 var num = 0;
 
+                document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
+
                 this.inter = window.setInterval(function () {
                     var typeParticule = random(1,12);
                     var div = document.createElement("div");
                     div.setAttribute("class", "sparkle part-" + num);
-                    var particules = document.getElementById("cursor")[0];
-                    document.querySelector("#cursor").appendChild(div);
+                    var particules = document.querySelector('.cursor-fx__inner__outside');
+                    particules.appendChild(div);
                     var lastPart = document.querySelector(".part-" + num);
                     lastPart.classList.add("sparkle-"+typeParticule);
                     createDot(lastPart)
@@ -250,6 +254,7 @@
             },
             particuleAnimLeave(){
                 clearInterval(this.inter);
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
                 setTimeout(function(){
                     document.querySelectorAll('.sparkle').forEach(
                         e => e.remove()
@@ -394,6 +399,8 @@
         // }
         .word-container{
             display: block;
+            cursor: none!important;
+
             &:hover{
                 cursor: pointer;
                 .word,

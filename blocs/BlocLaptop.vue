@@ -27,11 +27,13 @@
             var scrollM = this.$scrollmagic;
             var tl = new TimelineMax({ paused: false});
             var img = document.getElementsByClassName("project-laptop-preview");
+            var video = document.querySelector('.project-laptop-preview-video');
             tl.fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});        
-            tl.eventCallback("onComplete", ()=> {
-                console.log('play');
-                document.querySelector('.project-laptop-preview-video').play();
-            });
+            if(video){
+                tl.eventCallback("onComplete", ()=> {
+                    document.querySelector('.project-laptop-preview-video').play();
+                });
+            }    
 
             const animSectionScene = scrollM.scene({
                 triggerElement: ".project-laptop-preview",

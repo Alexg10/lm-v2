@@ -4,33 +4,25 @@
       <img :src="cover.acfProjectFields.headerPicture.sourceUrl" alt="cover.acfProjectFields.projectTitle">
     </div>
     <nuxt/>
+    <cursor-fx color="#FF9170" color-hover="#FF9170" outside-size="45px" :hide-inside="true" ></cursor-fx>
+
   </div>
 </template>
 
 <script>
-  import curDot from 'cursor-dot'
-
+  import { CursorFx } from '@luxdamore/vue-cursor-fx';
+  import '@luxdamore/vue-cursor-fx/dist/CursorFx.css';
   export default {
+    components:{
+      'cursor-fx': CursorFx,
+    },
     computed: {
       cover(){
         return this.$store.state.cover;
       }
     },
     mounted() {
-      const cursor = curDot({
-        borderColor: '#B4B3B1',
-        easing: 6,
-        diameter: 45
-      });
-      
-      cursor.over('.work-container .word-container', {
-          borderColor: 'transparent',
-      });
 
-      cursor.over('.link-hover', {
-          diameter: 25,
-          borderColor: 'transparent'
-      });
     },
   }
 </script>
@@ -58,7 +50,7 @@ html {
 .loading-cover {
   // opacity: 0;
   position: fixed;
-  z-index: 99999;
+  z-index: 999;
   top: 0;
   left: 0;
   height: 100vh;
