@@ -1,5 +1,25 @@
 <template>
         <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp">
+            <div class="intro">
+                <div class="word-container ">
+                    <div class="word-wrapper word-wrapper-elle">
+                        <div class="word louise">
+                            <span class="hide">l</span>
+                            <span class="hide">
+                                <div class="hide-left">ouise</div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="word-wrapper word-wrapper-aime">
+                        <div class="word margueritat">
+                            <span class="hide">m</span>
+                            <span class="hide">
+                                <div class="hide-left">argueritat</div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="swiper-slide love-container">
                 <div class="home-slide-content red">
                     <div class="bg-love">
@@ -71,6 +91,7 @@
                 coverIndex     : 1,
                 playing        : '',
                 scrollable     : true,
+                tlIntro        : gsap.timeline({delay:1}),
                 LoveClickTl    : gsap.timeline({paused: true}),
                 workClickTl    : gsap.timeline({paused: true}),
                 loveInit       : gsap.timeline(),
@@ -187,6 +208,7 @@
                 this.loveShowContent.pause(0);
                 this.LoveClickTl.play();
                 this.LoveClickTl.eventCallback("onComplete", function () {
+                    document.querySelector('.bg-love').classList.remove("visible");
                     document.querySelector('.love-content').classList.add("visible");
                 });
                 this.loveShowContent.play();
@@ -264,13 +286,24 @@
             }
         },
         mounted() {
+
+            this.tlIntro
+                .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
+                .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
+                .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
+                .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
+                .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
+            this.tlIntro.eventCallback("onComplete", function () {
+                console.log("nonono");
+                document.querySelector('.intro').style.display = "none";
+            });
             this.loveShowContent
-                .to({}, 2, {})
-                .to(".love-content", {opacity:1, duration:1, ease: "power4.inOut" }, "loveShowContent")
-                .from(".marquee-text-text", {opacity:0, duration:1, ease: "power4.inOut" }, "loveShowContent")
-                .from(".love-description", {y: 20, opacity:0, duration: 1.8, ease: "power4.inOut" }, "loveShowContent+=0.5")
-                .from(".infos-link a", {y: 50, duration:1, ease: "power4.inOut", stagger: 0.5 }, "loveShowContent+=1")
-                .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=1.7");
+                .to({}, 2.5, {})
+                .to(".love-content", {opacity:1, duration:1.2, ease: "power4.inOut" }, "loveShowContent")
+                .from(".marquee-text-text", {opacity:0, duration:1.5, ease: "power4.inOut" }, "loveShowContent")
+                .from(".love-description", {y: 20, opacity:0, duration: 1.8, ease: "power4.inOut" }, "loveShowContent+=0.8")
+                .from(".infos-link a", {y: 50, duration:1, ease: "power4.inOut", stagger: 0.5 }, "loveShowContent+=1.3")
+                .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=2");
 
             this.loveShowContent.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
@@ -328,7 +361,39 @@
     body{
         overflow: hidden;
     }
+    .intro{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        z-index: 9;
+        .word-container{
+            .word{
+                line-height: 260px;
+            }
+            .word-wrapper-aime{
+                top: -89px;
+                left: 125px;
 
+            }
+            .word-wrapper-elle{
+                bottom: -88px;
+                left: -79px;
+
+            }
+            .hide{
+                .hide-left{
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
     .homepage-container{
         position: relative;
         overflow: hidden;
@@ -363,10 +428,10 @@
         background-color: green;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+        transition: all 1.4s cubic-bezier(.19,.77,.2,1);
         &.visible{
             opacity: 1;
-            transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+            transition: all 1.4s cubic-bezier(.19,.77,.2,1);
         }
         img{
             width: 100%;
@@ -385,176 +450,184 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size: 200px;
-        text-align: center;
-        font-weight: bold;
+
         // background: white;
-        @media ( max-width : 680px ) {
-            font-size: 130px;
-        }
+
         // &.red{
         //     background-color: red;
         // }
         // &.orange{
         //     background-color: orange;
         // }
-        .word-container{
-            display: block;
-            cursor: none!important;
-
-            &:hover{
-                cursor: pointer;
-                .word,
-                a{
-                    color: #FF9170;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                }
-                .hide{
-                    color: #FF9170;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    .hide-right,
-                    .hide-left{
-                        color: #FF9170;
-                        transform: translateX(0);
-                        opacity: 1;
-                        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    }
-                }
-                //ELLE AIME
-                .word-wrapper{
-                    &-elle{
-                        left: -79px;
-                        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    }
-                    &-aime{
-                        left: 125px;
-                        transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    }
-                }
-                .elle{
-                    color: #FF9170;
-                    transition: color 0.9s cubic-bezier(.19,.77,.2,1);
-                }
-                .aime{
-                    color: #FF9170;
-                    transition: color 0.9s cubic-bezier(.19,.77,.2,1);
-                }
-
-                //WORK
-                .word-wrapper-work{
-                    transition: all 1.05s cubic-bezier(.19,.77,.2,1);
-                    &:nth-child(1){
-                        position: relative;
-                        left: 107px;
-                    }
-                    &:nth-child(2){
-                        position: relative;
-                        left: -22px;
-                    }
-                    &:nth-child(3){
-                        position: relative;
-                        left: 182px;
-                    }
+    }
+    .word-container{
+        display: block;
+        font-size: 200px;
+        text-align: center;
+        font-weight: bold;
+        cursor: none!important;
+        @media ( max-width : 680px ) {
+            font-size: 130px;
+        }
+        .elle,
+        .aime{
+            .hide{
+                transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                .hide-left,
+                .hide-right{
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                 }
             }
-            &.clicked{
-                .elle{
-                    // left: -79px;
-                    // transform: translateX(-80vh);
-                    // transition: all 2s cubic-bezier(.19,.77,.2,1);
-
-                }
-                .aime{
-                    // transform: translateX(80vh);
-                    // left: 125px;
-                    // transition: all 2s cubic-bezier(.19,.77,.2,1);
-
-                }
-                .hide{
-                    .hide-right,
-                    .hide-left{
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
-            }
-
-            .word{
-                display: flex;
-                line-height: 160px;
-                color: black;
+        }
+        &:hover{
+            cursor: pointer;
+            .word,
+            a{
+                color: #FF9170;
+                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
             }
             .hide{
-                width: auto;
-                overflow: hidden;
-                display: inline-block;
-                color: black;
+                color: #FF9170;
                 transition: all 1.4s cubic-bezier(.19,.77,.2,1);
-                .hide-right{
-                    color: black;
-                    transform: translateX(100%);
-                    opacity: 0;
-                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
-                }
+                .hide-right,
                 .hide-left{
-                    color: black;
-                    transform: translateX(-100%);
-                    opacity: 0;
+                    color: #FF9170;
+                    transform: translateX(0);
+                    opacity: 1;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
-                }
-            }
-            .word-wrapper{
-                overflow: hidden;
-                &-elle{
-                    position: relative;
-                    bottom: -38px;
-                    left: -37px;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    @media ( max-width : 680px ) {
-                        bottom: -48px;
-                        left: -27px;
-                    }
-                }
-                &-aime{
-                    position: relative;
-                    top: -39px;
-                    left: 9px;
-                    transition: all 0.9s cubic-bezier(.19,.77,.2,1);
-                    @media ( max-width : 680px ) {
-                        top: -58px;
-                        left: 3px;
-                    }
                 }
             }
             //ELLE AIME
+            .word-wrapper{
+                &-elle{
+                    left: -79px;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                }
+                &-aime{
+                    left: 125px;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                }
+            }
+            .elle{
+                color: #FF9170;
+                transition: color 1.4s cubic-bezier(.19,.77,.2,1);
+            }
+            .aime{
+                color: #FF9170;
+                transition: color 1.4s cubic-bezier(.19,.77,.2,1);
+            }
 
             //WORK
             .word-wrapper-work{
-                transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+                transition: all 1.05s cubic-bezier(.19,.77,.2,1);
                 &:nth-child(1){
                     position: relative;
-                    bottom: -77px;
-                    left: 27px;
-                    @media ( max-width : 680px ) {
-                        bottom: -106px;
-                        left: 0px;
-                    }
+                    left: 107px;
                 }
                 &:nth-child(2){
                     position: relative;
-                    left: 155px;
-                    @media ( max-width : 680px ) {
-                        left: 71px;
-                    }
+                    left: -22px;
                 }
                 &:nth-child(3){
                     position: relative;
-                    top: -73px;
-                    left: -79px;
-                    @media ( max-width : 680px ) {
-                        top: -99px;
-                        left: -82px;
-                    }
+                    left: 182px;
+                }
+            }
+        }
+        &.clicked{
+            .elle{
+                // left: -79px;
+                // transform: translateX(-80vh);
+                // transition: all 2s cubic-bezier(.19,.77,.2,1);
+
+            }
+            .aime{
+                // transform: translateX(80vh);
+                // left: 125px;
+                // transition: all 2s cubic-bezier(.19,.77,.2,1);
+
+            }
+            .hide{
+                .hide-right,
+                .hide-left{
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        .word{
+            display: flex;
+            line-height: 160px;
+            color: black;
+        }
+        .hide{
+            width: auto;
+            overflow: hidden;
+            display: inline-block;
+            color: black;
+            .hide-right{
+                color: black;
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            .hide-left{
+                color: black;
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+        .word-wrapper{
+            overflow: hidden;
+            &-elle{
+                position: relative;
+                bottom: -38px;
+                left: -67px;
+                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                @media ( max-width : 680px ) {
+                    bottom: -48px;
+                    left: -27px;
+                }
+            }
+            &-aime{
+                position: relative;
+                top: -39px;
+                left: -25px;
+                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                @media ( max-width : 680px ) {
+                    top: -58px;
+                    left: 3px;
+                }
+            }
+        }
+        //ELLE AIME
+
+        //WORK
+        .word-wrapper-work{
+            transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+            &:nth-child(1){
+                position: relative;
+                bottom: -77px;
+                left: 27px;
+                @media ( max-width : 680px ) {
+                    bottom: -106px;
+                    left: 0px;
+                }
+            }
+            &:nth-child(2){
+                position: relative;
+                left: 155px;
+                @media ( max-width : 680px ) {
+                    left: 71px;
+                }
+            }
+            &:nth-child(3){
+                position: relative;
+                top: -73px;
+                left: -79px;
+                @media ( max-width : 680px ) {
+                    top: -99px;
+                    left: -82px;
                 }
             }
         }
