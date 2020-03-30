@@ -35,14 +35,20 @@ export default {
     {src: '~/plugins/vue-scrollmagic.js', ssr: false},
     {src: '~/plugins/gsap.js', ssr: false},
     {src: '~/plugins/cursor.js', ssr: false},
-    {src: '~/plugins/touch.js', ssr: false}
+    {src: '~/plugins/touch.js', ssr: false},
+    {src: '~/plugins/ga.js', mode: 'client'}
+
 
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/google-analytics'
   ],
+  googleAnalytics: {
+    id: 'UA-37342679-6'
+  },
   /*
   ** Nuxt.js modules
   */

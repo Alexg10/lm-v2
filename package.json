@@ -13,6 +13,7 @@
   "dependencies": {
     "@luxdamore/vue-cursor-fx": "^1.4.0",
     "@nuxtjs/apollo": "^4.0.0-rc19",
+    "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/style-resources": "^1.0.0",
     "cursor-dot": "^1.0.4",
     "graphql-tag": "^2.10.3",
