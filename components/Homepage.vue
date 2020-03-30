@@ -74,13 +74,14 @@
                     </nuxt-link>
                 </div>
             </div>
+            <img class="arrow link" :src="arrowDown" alt="">
         </div>
 </template>
 
 <script>
     import gsap from "gsap"
     import LoveContent from '~/components/project/LoveContent.vue'
-
+    import arrowDown from '~/assets/images/ico/arrow-down-ico.svg'
 
     export default {
         components:{
@@ -88,6 +89,7 @@
         },
         data(){
             return{
+                arrowDown,
                 coverIndex     : 1,
                 playing        : '',
                 scrollable     : true,
@@ -138,6 +140,7 @@
             scrollDown(){
                 var vm = this;
                 vm.scrollable = false;
+                document.getElementsByClassName("arrow")[0].classList.remove("visible");
                 if( document.querySelector('.work-container').classList.contains('visible') ){
                     console.log('Down FROM Work ');
                     vm.workUpUp.time(0);
@@ -203,6 +206,7 @@
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
             },
             loveClick(){
+                document.getElementsByClassName("arrow")[0].classList.remove("visible");
                 document.querySelector('.word-container').classList.add("clicked");
                 this.LoveClickTl.pause(0);
                 this.loveShowContent.pause(0);
@@ -294,8 +298,8 @@
                 .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
                 .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
             this.tlIntro.eventCallback("onComplete", function () {
-                console.log("nonono");
                 document.querySelector('.intro').style.display = "none";
+                document.getElementsByClassName("arrow")[0].classList.add("visible");
             });
             this.loveShowContent
                 .to({}, 2.5, {})
@@ -360,6 +364,21 @@
 
     body{
         overflow: hidden;
+    }
+    .arrow{
+        position: fixed;
+        bottom: 55px;
+        left: 50%;
+        opacity: 0;
+        transition: 0.5s ease;
+        transform: translateX(-50%);
+        z-index: 2;
+        &.visible{
+            opacity: 1;
+            bottom: 45px;
+            transition: 0.8s ease;
+            transition-delay: 2s;
+        }
     }
     .intro{
         position: absolute;
@@ -427,6 +446,7 @@
         height: 100%;
         background-color: green;
         opacity: 0;
+        z-index: 5;
         pointer-events: none;
         transition: all 1.4s cubic-bezier(.19,.77,.2,1);
         &.visible{
@@ -465,6 +485,7 @@
         font-size: 200px;
         text-align: center;
         font-weight: bold;
+        z-index: 50;
         cursor: none!important;
         @media ( max-width : 680px ) {
             font-size: 130px;
