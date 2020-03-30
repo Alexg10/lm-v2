@@ -1,5 +1,6 @@
 <template>
     <div class="list-container">
+        <Logo />
         <div v-if="projects" class="project-list">
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
@@ -35,8 +36,12 @@
 
     import gsap from "gsap"
     import projects from '~/queries/projects'
+    import Logo from '~/components/project/Logo.vue'
 
     export default {
+        components:{
+            Logo
+        },
         transition: 'listFade',
         data(){
             return{
@@ -88,6 +93,9 @@
                 introTl.eventCallback("onComplete", ()=> {
                     this.$refs.cover.style.display = "none";
                     document.querySelector('.project-title').classList.add("visible");
+                    setTimeout(() => {
+                        document.querySelector('.logo').classList.add("visible");
+                    }, 2000);
                 });
 
                 document.querySelector('.list-container').onmousemove = event => {
@@ -296,6 +304,16 @@
             transition: 0.6s ease-in-out;
         }
     }
+    .home-slider{
+        height: 100%;
+
+        &.hidden{
+            height: 0;
+            overflow: hidden;
+            transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+            transition-delay: 1s;
+        }
+    }
     .next-project{
         left: auto;
         right: 0;
@@ -330,6 +348,11 @@
         overflow: hidden;
         transition: all 1.1s cubic-bezier(.19,.77,.2,1);
         margin: 0 15%;
+        &.hidden{
+            height: 0!important;
+            transition: all 1.7s cubic-bezier(.19,.77,.2,1);
+            transition-delay: 1s;
+        }
     }
     .project-name-container,
     .project-type-container{
@@ -388,6 +411,11 @@
             }
             &.hover{
                 opacity: 1;
+            }
+            &.hidden{
+                transform: translateY(230px)!important;
+                transition: all 0.6s ease;
+                transition-delay: 0.5s;
             }
         }
 

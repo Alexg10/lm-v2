@@ -390,7 +390,7 @@
         justify-content: center;
         align-items: center;
         background-color: #fff;
-        z-index: 9;
+        z-index: 20;
         .word-container{
             .word{
                 line-height: 260px;
@@ -423,6 +423,7 @@
             display: none;
             &.visible{
                 display: block;
+                z-index: 50;
             }
         }
     }
@@ -480,12 +481,16 @@
         //     background-color: orange;
         // }
     }
+    .love-container{
+        .word-container{
+            z-index: 15;
+        }
+    }   
     .word-container{
         display: block;
         font-size: 200px;
         text-align: center;
         font-weight: bold;
-        z-index: 50;
         cursor: none!important;
         @media ( max-width : 680px ) {
             font-size: 130px;
