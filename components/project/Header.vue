@@ -1,6 +1,14 @@
 <template>
     <div class="project-header">
         <img class="bg-cover" :src="cover.sourceUrl" alt="">
+        <div class="cross link-hover" v-on:click="goToList">
+            <div class="crossLineOne">
+                <div class="crossLineOne_content"></div>
+            </div>
+            <div class="crossLineTwo">
+                <div class="crossLineTwo_content"></div>
+            </div>
+        </div>
         <div class="project-header-content">
             <div class="project-header-content-top">
                 <div class="category">
@@ -34,6 +42,42 @@
             'cover'
         ],
         methods: {
+            goToList(){
+            var vm = this;
+
+                var VueScrollTo = require('vue-scrollto');
+                const scrollOptions = {
+                    easing: 'ease-in',
+                    force: true,
+                    cancelable: false,
+                    onDone: function(element) {
+                        VueScrollTo.unbind(element);
+                        vm.changeProject();
+                    }
+                }
+                document.querySelector('.cross').classList.remove("active");
+                VueScrollTo.scrollTo('.project-header', 800, scrollOptions);
+
+            },
+            detectScroll(){
+                var lastScrollTop = 0;
+                var winHeight = window.innerHeight;
+
+                window.addEventListener("scroll", function(){ 
+                    var st = window.pageYOffset || document.documentElement.scrollTop; 
+                    if(st>winHeight){
+                        document.querySelector('.cross').classList.remove("active");
+                        document.querySelector('.cross').classList.add("fixed");
+                    }else{
+                        document.querySelector('.cross').classList.remove("active");
+                        document.querySelector('.cross').classList.remove("fixed");
+                    }
+                    if (st < lastScrollTop){
+                        document.querySelector('.cross').classList.add("active");
+                    } 
+                    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+                }, false);
+            },
             hoverAddClass(){
                 var link = document.getElementsByClassName("link-hover");
                 var hoverAddClassFunction = function() {
@@ -49,12 +93,24 @@
                     link[i].addEventListener('mouseenter', hoverAddClassFunction, false);
                     link[i].addEventListener('mouseleave', hoverRemoveClassFunction, false);
                 }
-            }
+            },
+            changeProject() {
+                // Set project to store
+                // this.$store.commit('setCover', this.link);
+
+                // Animate out
+                this.$router.push({
+                    path: `/project`
+                })
+            },
         },
         mounted() {
+            var vm = this;
             this.hoverAddClass();
+            this.detectScroll();
             var anim = gsap.timeline({});
             var sectionTl= new TimelineMax({ paused: false});
+
 
             var projectName = document.querySelector('.project-name-content');
             var categoryType = document.querySelector('.category-type');
@@ -86,7 +142,12 @@
                 anim
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
                     .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                    .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" );            }
+                    .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" );            
+            }
+            anim.eventCallback("onComplete", function () {
+                document.querySelector('.cross').classList.add("active");
+            });
+
         },
     }
 </script>
@@ -187,6 +248,29 @@
             }
             .project-name{
                 font-size: 65px;
+            }
+        }
+        .cross{
+            padding-right: 15px;
+            padding-bottom: 15px;
+            &.fixed{
+                position: fixed;
+                .crossLineOne_content,
+                .crossLineTwo_content{
+                    background-color: black;
+                }
+            }
+            .crossLineOne,
+            .crossLineTwo{
+                width: 25px;
+            }
+            .crossLineOne_content,
+            .crossLineTwo_content{
+                background-color: white;
+            }
+            .back-link{
+                display: block;
+                height: 100%;
             }
         }
     }

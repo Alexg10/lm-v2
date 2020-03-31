@@ -528,10 +528,12 @@
                 &-elle{
                     left: -79px;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
                 }
                 &-aime{
                     left: 125px;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
                 }
             }
             .elle{
@@ -631,6 +633,8 @@
         //WORK
         .word-wrapper-work{
             transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+            transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+
             &:nth-child(1){
                 position: relative;
                 bottom: -77px;
