@@ -2,6 +2,7 @@
     <div class="list-container">
         <Logo />
         <div v-if="projects" class="project-list">
+
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
@@ -81,14 +82,19 @@
                 const projectSlideWidth  = current.querySelector('.project-slide').offsetWidth;
                 const projectSlideHeight = current.querySelector('.project-slide').offsetHeight;
 
+                if(this.$store.state.back){
+                    document.querySelector('.project-cover').classList.add('hide');
+                }
+
                 var introTl = gsap.timeline({delay: 1})
                 introTl.add('start');
-                introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
-                    .to(this.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                    .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
-                    .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
+                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
+                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                        .to(this.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
+                        .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
 
                 introTl.eventCallback("onComplete", ()=> {
                     this.$refs.cover.style.display = "none";
@@ -96,11 +102,17 @@
                     setTimeout(() => {
                         document.querySelector('.logo').classList.add("visible");
                     }, 2000);
+                    //SET STORE VAR BACK TO FALSE
+                    this.$store.commit("setBack", false);
+                    document.querySelector('.project-cover').classList.remove('hide');
                 });
 
                 document.querySelector('.list-container').onmousemove = event => {
                     this.parallax(event);
                 }
+
+
+
             },
             handleAfterChange(event, slick, currentId){
                 this.currentIndex = currentId;
@@ -166,7 +178,7 @@
 
             },
             projectLeave(){ 
-                if(!this.iseave){
+                if(!this.isLeave){
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.project-title').classList.remove('hover');
                     document.querySelector('.slick-current .project-slide').classList.remove('hover');
@@ -277,6 +289,8 @@
         mounted() {
             this.scrollSlide();
             this.keySlide();
+
+            console.log(this.$store.state.back);
         }
     }
 </script>
@@ -335,6 +349,10 @@
             top: 50%;
             left: 50%;
             transform: scale(1.1) translate(-50%,-50%);
+        }
+        &.hide{
+            visibility: hidden;
+            opacity: 0;
         }
     }
     .project-slide{

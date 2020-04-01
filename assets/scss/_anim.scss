@@ -26,3 +26,18 @@
     visibility: visible;
     display: block;
 }
+
+.projectToList-leave-to,
+.projectToList-leave-active {
+  animation: listFade-out 2s
+}
+
+@keyframes listFade-out {
+  0% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
+}

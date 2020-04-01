@@ -31,9 +31,7 @@
 <script>
     import gsap from "gsap"
 
-
     export default {
-
         props: [
             'title',
             'description',
@@ -43,20 +41,8 @@
         ],
         methods: {
             goToList(){
-            var vm = this;
-
-                var VueScrollTo = require('vue-scrollto');
-                const scrollOptions = {
-                    easing: 'ease-in',
-                    force: true,
-                    cancelable: false,
-                    onDone: function(element) {
-                        VueScrollTo.unbind(element);
-                        vm.changeProject();
-                    }
-                }
                 document.querySelector('.cross').classList.remove("active");
-                VueScrollTo.scrollTo('.project-header', 800, scrollOptions);
+                this.changeProject();
 
             },
             detectScroll(){
@@ -75,18 +61,16 @@
                     if (st < lastScrollTop){
                         document.querySelector('.cross').classList.add("active");
                     } 
-                    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+                    lastScrollTop = st <= 0 ? 0 : st;
                 }, false);
             },
             hoverAddClass(){
                 var link = document.getElementsByClassName("link-hover");
                 var hoverAddClassFunction = function() {
                     document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
-                    console.log('hoverlink');
                 };
                 var hoverRemoveClassFunction = function() {
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
-                    console.log('hoverlink');
                 };
 
                 for (var i = 0; i < link.length; i++) {
@@ -95,10 +79,7 @@
                 }
             },
             changeProject() {
-                // Set project to store
-                // this.$store.commit('setCover', this.link);
-
-                // Animate out
+                this.$store.commit("setBack", true);
                 this.$router.push({
                     path: `/project`
                 })
@@ -131,7 +112,7 @@
             .setTween(sectionTl)
             scrollB.addScene(sceneParallax);
 
-            if( link){
+            if( link ){
                 anim
                     .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
                     .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
@@ -147,7 +128,6 @@
             anim.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
             });
-
         },
     }
 </script>

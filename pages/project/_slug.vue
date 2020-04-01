@@ -40,6 +40,8 @@
 
 
     export default {
+        scrollToTop: true,
+        pageTransition: 'projectToList',
         components: {
             Header,
             Footer,
