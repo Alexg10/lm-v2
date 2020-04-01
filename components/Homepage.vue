@@ -1,6 +1,6 @@
 <template>
         <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp">
-            <div class="intro">
+            <div v-if='!this.$store.state.back' class="intro">
                 <div class="word-container ">
                     <div class="word-wrapper word-wrapper-elle">
                         <div class="word louise">
@@ -224,7 +224,9 @@
                 var vm=this;
                 this.workClickTl.play();
                 this.particuleAnimLeave();
+                this.$store.commit("setBack", false);
                 this.workClickTl.eventCallback("onComplete", function () {
+                    this.workClickTl.kill();
                     vm.$router.push({
                         path: '/project/'
                     })
@@ -291,16 +293,20 @@
         },
         mounted() {
 
-            this.tlIntro
-                .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
-                .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
-                .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
-                .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
-                .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
-            this.tlIntro.eventCallback("onComplete", function () {
-                document.querySelector('.intro').style.display = "none";
-                document.getElementsByClassName("arrow")[0].classList.add("visible");
-            });
+            if(!this.$store.state.back){
+                this.tlIntro
+                    .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
+                    .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
+                    .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
+                    .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
+                    .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
+                this.tlIntro.eventCallback("onComplete", function () {
+                    document.querySelector('.intro').style.display = "none";
+                    document.getElementsByClassName("arrow")[0].classList.add("visible");
+                });
+            }
+
+
             this.loveShowContent
                 .to({}, 2.5, {})
                 .to(".love-content", {opacity:1, duration:1.2, ease: "power4.inOut" }, "loveShowContent")

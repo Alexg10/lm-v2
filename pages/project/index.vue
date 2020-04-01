@@ -102,7 +102,6 @@
                     setTimeout(() => {
                         document.querySelector('.logo').classList.add("visible");
                     }, 2000);
-                    //SET STORE VAR BACK TO FALSE
                     this.$store.commit("setBack", false);
                     document.querySelector('.project-cover').classList.remove('hide');
                 });
@@ -289,8 +288,6 @@
         mounted() {
             this.scrollSlide();
             this.keySlide();
-
-            console.log(this.$store.state.back);
         }
     }
 </script>

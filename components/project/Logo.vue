@@ -25,6 +25,7 @@
                 for (var i = 0; i < slide.length; ++i) {
                     slide[i].classList.add('hidden');
                 }
+                this.$store.commit("setBack", true);
                 setTimeout(function(){
                     vm.$router.push({
                         path: '/'
