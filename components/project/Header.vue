@@ -217,6 +217,7 @@
         @media only screen and ( max-width : 680px ) {
             .project-header-content{
                 .project-header-content-top{
+                    position: initial;
                     top: 30%;
                 }
             }
@@ -225,6 +226,10 @@
                 max-width: 90%;
                 font-size: 19px;
                 transform: translateY(0);
+                position: absolute;
+                left: 20px;
+                bottom: 80px;
+                padding-right: 20px;
             }
             .project-name{
                 font-size: 65px;

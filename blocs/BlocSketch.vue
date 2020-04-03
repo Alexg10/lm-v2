@@ -46,29 +46,26 @@
                 var img2 = document.querySelector(".img-section-container:nth-child(2) .img-container img");
                 var img3 = document.querySelector(".img-section-container:nth-child(3) .img-container img");
 
-                var sectionTl= new TimelineMax({ paused: false});
-                var scrollB = this.$scrollmagic;
+                if(!this.$device.mobile){
 
-                // if(this.$device.mobile){
-                //     // console.log("mobile");
-                //     sectionTl.fromTo(img1, 1, {y: 0},{y: -50, overwrite: false},"start")
-                //     .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
-                //     .fromTo(img3, 1, {y: 0},{y: -150, overwrite: false}, "start");
-                // }else{
-                    // console.log("Not mobile");
+                    var sectionTl= new TimelineMax({ paused: false});
+                    var scrollB = this.$scrollmagic;
+
+                    const sceneHalfSection = scrollB.scene({
+                        triggerElement: ".img-section",
+                        triggerHook: 0.65,
+                        offset: -150,
+                        duration: window.innerHeight*2.5
+                    })
+                    .setTween(sectionTl)
+                    scrollB.addScene(sceneHalfSection);
+
                     sectionTl.fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
                     .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
                     .fromTo(img3, 1, {y: 0},{y: -100, overwrite: false}, "start");
-                // }
+                }
 
-                const sceneHalfSection = scrollB.scene({
-                    triggerElement: ".img-section",
-                    triggerHook: 0.65,
-                    offset: -150,
-                    duration: window.innerHeight*2.5
-                })
-                .setTween(sectionTl)
-                scrollB.addScene(sceneHalfSection);
+
         },
     }
 </script>
@@ -78,12 +75,25 @@
         // background-color: $white;
         background-color: #fff;
     }
+    .container{
+        @media only screen and ( max-width : 680px ) {
+            display: flex;
+            flex-direction: column;
+        }
+    }
     .img-section-container{
         display: inline-block;
         width: 50%;
         float: left;
+        @media only screen and ( max-width : 680px ) {
+            width: 100%;
+            order: 2;
+        }
         &:nth-child(2){
             margin-bottom: 60px;
+            @media only screen and ( max-width : 680px ) {
+                order: 1;
+            }
             .img-container{
                 max-width: 240px;
                 margin: 0 auto;

@@ -46,6 +46,9 @@
         padding-bottom: 108px;
         &.transition{
             padding-bottom: 250px;
+            @media only screen and ( max-width : 680px ) {
+                padding-bottom: 60px;
+            }
         }
         p{
             text-align: center;

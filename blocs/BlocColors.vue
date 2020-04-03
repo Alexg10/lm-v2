@@ -74,6 +74,7 @@
             }
         }
         @media only screen and ( max-width : 680px ) {
+            padding: 60px 0 50px;
 
         }
     }

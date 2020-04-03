@@ -36,8 +36,6 @@
             var imgH1 = document.querySelector(".bloc-after-full-height-container");
             var imgH2 = document.querySelector(".bloc-after-full-height-container:last-of-type");
 
-            tlPara.fromTo(imgH1, 1, {y: 0},{y: 100, overwrite: false}, "start")
-            .fromTo(imgH2, 1, {y: 0},{y: -50, overwrite: false}, "start");                
 
             tl.staggerFromTo(".bloc-after-full-height-container", 2, {y: 40, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false}, 0.35);                
             const imgSectionScene = scrollM.scene({
@@ -50,7 +48,9 @@
             // .addIndicators({ name: 'bloc-after-full-height-container' })
             scrollM.addScene(imgSectionScene)
 
-            // if(!this.$device.mobile){
+            if(!this.$device.mobile){
+                tlPara.fromTo(imgH1, 1, {y: 0},{y: 100, overwrite: false}, "start")
+                    .fromTo(imgH2, 1, {y: 0},{y: -50, overwrite: false}, "start");                
 
                 const animFullHeightScenePara = scrollM.scene({
                     triggerElement: ".bloc-after-full-height-container:last-of-type",
@@ -61,7 +61,7 @@
                 .setTween(tlPara)
                 // .addIndicators({ name: 'bloc-after-full-height-container' })
                 scrollM.addScene(animFullHeightScenePara);
-            // }
+            }
             
             lottie.loadAnimation({
                 container: document.getElementById('animation'),

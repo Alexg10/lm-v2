@@ -1,4 +1,3 @@
-
 export default {
   mode: 'spa',
   /*
@@ -36,6 +35,7 @@ export default {
     {src: '~/plugins/gsap.js', ssr: false},
     {src: '~/plugins/cursor.js', ssr: false},
     {src: '~/plugins/touch.js', ssr: false},
+    {src: '~/plugins/device-detector.js', ssr: false},
     {src: '~/plugins/ga.js', mode: 'client'}
 
 
@@ -72,6 +72,9 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  server: {
+    host: 'localhost'
   }
   // modules: ['@nuxtjs/style-resources'],
   // styleResources: {
