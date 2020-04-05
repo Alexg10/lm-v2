@@ -294,16 +294,27 @@
         mounted() {
 
             if(!this.$store.state.back){
-                this.tlIntro
-                    .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
-                    .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
-                    .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
-                    .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
-                    .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
-                this.tlIntro.eventCallback("onComplete", function () {
-                    document.querySelector('.intro').style.display = "none";
-                    document.getElementsByClassName("arrow")[0].classList.add("visible");
-                });
+                if(!this.$device.mobile){
+                    this.tlIntro
+                        .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
+                        .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
+                        .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
+                        .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
+                        .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
+                    this.tlIntro.eventCallback("onComplete", function () {
+                        document.querySelector('.intro').style.display = "none";
+                        document.getElementsByClassName("arrow")[0].classList.add("visible");
+                    });
+                }else{
+                    this.tlIntro
+                        .fromTo('.intro .word-wrapper-elle', {x: "-200vw"},{x: "170vw", duration: 3, ease: "Linear.easeNone" }, "intro")
+                        .fromTo('.intro .word-wrapper-aime', {x: "150vw"},{x: "-250vw", duration: 3, ease: "Linear.easeNone" }, "intro+=1");
+                    this.tlIntro.eventCallback("onComplete", function () {
+                        document.querySelector('.intro').style.display = "none";
+                        document.getElementsByClassName("arrow")[0].classList.add("visible");
+                    });
+
+                }
             }
 
 
