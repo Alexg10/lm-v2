@@ -69,6 +69,7 @@
                 setTimeout(function(){
                     document.querySelector('.word-container').classList.remove("clicked");
                     document.querySelector('.love-content').classList.remove("visible");
+                    document.querySelector('.circle-container').classList.add("visible");
                 },3500);
             },
             cocktailPlay(){

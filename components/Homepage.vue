@@ -54,8 +54,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hold-on" v-touch:start="loveHover" v-touch:end="loveHoldEnd">
-                        Hold me
+                    <div class="circle-container like" v-touch:start="loveHover" v-touch:end="loveHoldEnd">
+                        <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                            <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
+                            </g>
+                        </svg>
+                        <div class="hover-text-container">
+                            <div class="circle-text">Hold me</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -226,6 +233,8 @@
                 this.LoveClickTl.eventCallback("onComplete", function () {
                     document.querySelector('.bg-love').classList.remove("visible");
                     document.querySelector('.love-content').classList.add("visible");
+                    document.querySelector('.circle-container').classList.remove("visible");
+
                 });
                 this.loveShowContent.play();
             },
@@ -326,6 +335,7 @@
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
                         vm.loveDownDown.play();
+                        document.querySelector('.circle-container').classList.add("visible");
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                     });
                 }
@@ -418,7 +428,7 @@
             opacity: 1;
             bottom: 45px;
             transition: 0.8s ease;
-            transition-delay: 2s;
+            transition-delay: 7s;
         }
     }
     .intro{
@@ -486,6 +496,89 @@
             z-index: 999;
         }
     }
+    .circle-container{
+        display: inline-block;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        display: none;
+        -webkit-user-select: none; 
+        -webkit-touch-callout: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none; 
+        @media ( max-width : 780px ) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 76px;
+            height: 76px;
+            margin: 0 auto;
+            font-size: 12px;
+            color: #B4B3B1;
+            font-family: 'GTWalsheimProRegular';
+            text-transform: uppercase;
+            z-index: 9;
+        } 
+        &.visible{
+            .circle-text{
+                transform: translate(0px, 0);
+                transition: all 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                transition-delay: 1.2s;
+
+
+            }
+            .circle{
+                .foreground {
+                    stroke-dashoffset: 0;
+                    transform: rotate(-90deg);
+                    transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
+                    transition-delay: 2.5s;
+                }
+            }
+        }
+        .hover-text-container{
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .circle-text{
+            color: #B4B3B1;
+            font-family: sans-serif;
+            transform: translate(0px, 25px);
+            text-transform: uppercase;
+            pointer-events: none;
+            white-space: nowrap;
+            -webkit-user-select: none; 
+            -webkit-touch-callout: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
+            transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .circle {
+            height: 75px;
+            width: 75px;
+            .foreground {
+                fill: transparent;
+                stroke-dasharray: 377;
+                stroke-dashoffset: 377;
+                stroke: #B4B3B1;
+                transform-origin: 50% 50%;
+                transform: rotate(-90deg);
+                transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
+            }
+        }
+    }
+
+
+
     .homepage-container{
         position: relative;
         overflow: hidden;
