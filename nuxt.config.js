@@ -59,7 +59,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://api.louise-margueritat.love/graphql'
+        httpEndpoint: 'https://api.louise-margueritat.love/graphql'
       }
     }
   },
