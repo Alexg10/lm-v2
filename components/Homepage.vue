@@ -269,9 +269,11 @@
                 this.loveShowContent.play();
             },
             workHold(){
+                document.querySelector('.work-container .word-container').classList.add("hover");
                 this.particuleAnim()
             },
             workHoldEnd(){
+                document.querySelector('.work-container .word-container').classList.remove("hover");
                 this.particuleAnimLeave();
             },
             workHover(){
@@ -318,7 +320,7 @@
                     if(!vm.$device.mobile){
                         var particules = document.querySelector('.cursor-fx__inner__outside');
                     }else{
-                        var particules = document.querySelector('.word-wrapper.word-wrapper-work:nth-child(2)');
+                        var particules = document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)');
                         particules.classList.add('overflow-visible');
                     }
                     particules.appendChild(div);
@@ -345,9 +347,10 @@
                 }
             },
             particuleAnimLeave(){
+                let vm = this;
                 clearInterval(this.inter);
                 if(vm.$device.mobile){
-                    document.querySelector('.word-wrapper.word-wrapper-work:nth-child(2)').classList.remove('overflow-visible');
+                    document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)').classList.remove('overflow-visible');
                 }
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
                 setTimeout(function(){
@@ -717,6 +720,11 @@
             }
         }
         &.hover{
+            .word,
+            a{
+                color: #FF9170;
+                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+            }
             .elle{
                 color: #FF9170;
             }
@@ -744,6 +752,21 @@
                     left: 60px;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                     transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                }
+            }
+            .word-wrapper-work{
+                transition: all 1.05s cubic-bezier(.19,.77,.2,1);
+                &:nth-child(1){
+                    position: relative;
+                    left: 73px;
+                }
+                &:nth-child(2){
+                    position: relative;
+                    left: -46px;
+                }
+                &:nth-child(3){
+                    position: relative;
+                    left: 2px;
                 }
             }
 
