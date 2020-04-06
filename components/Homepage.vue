@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="circle-container like" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
+                    <div class="circle-container love" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
                         <svg class="circle" xmlns="http://www.w3.org/2000/svg">
                             <g>
                             <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
@@ -81,6 +81,16 @@
                             </div>
                         </div>
                     </nuxt-link>
+                </div>
+                <div class="circle-container work-hold" v-touch:start="workHold" v-touch:end="workHoldEnd">
+                    <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                        <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
+                        </g>
+                    </svg>
+                    <div class="hover-text-container">
+                        <div class="circle-text">Hold me</div>
+                    </div>
                 </div>
             </div>
             <img class="arrow link" :src="arrowDown" alt="">
@@ -123,6 +133,9 @@
             scrollUp(){
                 var vm = this;
                 vm.scrollable = false;
+                if(vm.$device.mobile){
+                    document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
+                }
                 if( !document.querySelector('.work-container').classList.contains('visible') ){
                     document.querySelector('.work-container').classList.add("visible");
                     console.log('UP FROM LOVE ');
@@ -131,6 +144,9 @@
                     vm.loveDown.eventCallback("onComplete", function () {
                         vm.workDownDown.pause(0);
                         vm.workDownDown.play();
+                        if(vm.$device.mobile){
+                            document.querySelector('.circle-container.work-hold').classList.add("visible");
+                        }
                     });
                 }else{
                     console.log('UP FROM WORK ')
@@ -140,6 +156,9 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveDownDown.pause(0);
                         vm.loveDownDown.play();
+                        if(vm.$device.mobile){
+                            document.querySelector('.circle-container.love').classList.add("visible");
+                        }
                     });
                 }
                 setTimeout(() => {
@@ -150,6 +169,9 @@
                 var vm = this;
                 vm.scrollable = false;
                 document.getElementsByClassName("arrow")[0].classList.remove("visible");
+                if(vm.$device.mobile){
+                    document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
+                }
                 if( document.querySelector('.work-container').classList.contains('visible') ){
                     console.log('Down FROM Work ');
                     vm.workUpUp.time(0);
@@ -158,6 +180,9 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveUpR.pause(0);
                         vm.loveUpR.play();
+                        if(vm.$device.mobile){
+                            document.querySelector('.circle-container.love').classList.add("visible");
+                        }
                     });
                 }else{
                     document.querySelector('.work-container').classList.add("visible");
@@ -167,6 +192,9 @@
                     vm.loveUpUp.eventCallback("onComplete", function () {
                         vm.workUp.pause(0);
                         vm.workUp.play();
+                        if(vm.$device.mobile){
+                            document.querySelector('.circle-container.work-hold').classList.add("visible");
+                        }
                     });
                 }
                 setTimeout(() => {
@@ -240,6 +268,12 @@
                 });
                 this.loveShowContent.play();
             },
+            workHold(){
+                this.particuleAnim()
+            },
+            workHoldEnd(){
+                this.particuleAnimLeave();
+            },
             workHover(){
                 this.particuleAnim()
             },
@@ -273,6 +307,7 @@
                 }
                 var tlexplosion = gsap.timeline({});
                 var num = 0;
+                let vm = this;
 
                 document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
 
@@ -280,7 +315,12 @@
                     var typeParticule = random(1,12);
                     var div = document.createElement("div");
                     div.setAttribute("class", "sparkle part-" + num);
-                    var particules = document.querySelector('.cursor-fx__inner__outside');
+                    if(!vm.$device.mobile){
+                        var particules = document.querySelector('.cursor-fx__inner__outside');
+                    }else{
+                        var particules = document.querySelector('.word-wrapper.word-wrapper-work:nth-child(2)');
+                        particules.classList.add('overflow-visible');
+                    }
                     particules.appendChild(div);
                     var lastPart = document.querySelector(".part-" + num);
                     lastPart.classList.add("sparkle-"+typeParticule);
@@ -306,6 +346,9 @@
             },
             particuleAnimLeave(){
                 clearInterval(this.inter);
+                if(vm.$device.mobile){
+                    document.querySelector('.word-wrapper.word-wrapper-work:nth-child(2)').classList.remove('overflow-visible');
+                }
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
                 setTimeout(function(){
                     document.querySelectorAll('.sparkle').forEach(
@@ -337,7 +380,7 @@
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
                         vm.loveDownDown.play();
-                        document.querySelector('.circle-container').classList.add("visible");
+                        document.querySelector('.circle-container.love').classList.add("visible");
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                     });
                 }
@@ -729,11 +772,17 @@
                     left: -79px;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                     transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                    @media ( max-width : 680px ) {
+                        left: -49px;
+                    }
                 }
                 &-aime{
                     left: 125px;
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                     transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                    @media ( max-width : 680px ) {
+                        left: 60px;
+                    }
                 }
             }
             .elle{
@@ -826,6 +875,9 @@
                     top: -58px;
                     left: 3px;
                 }
+            }
+            &.overflow-visible{
+                overflow: visible;
             }
         }
         //ELLE AIME
