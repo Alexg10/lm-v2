@@ -97,11 +97,11 @@
                 LoveClickTl    : gsap.timeline({paused: true}),
                 workClickTl    : gsap.timeline({paused: true}),
                 loveInit       : gsap.timeline(),
-                loveUp         : gsap.timeline(),
-                loveUpR        : gsap.timeline(),
+                loveUp         : gsap.timeline({paused: true}),
+                loveUpR        : gsap.timeline({paused: true}),
                 loveUpUp       : gsap.timeline({paused: true}),
-                loveDown       : gsap.timeline(),
-                loveDownDown   : gsap.timeline(),
+                loveDown       : gsap.timeline({paused: true}),
+                loveDownDown   : gsap.timeline({paused: true}),
                 workUp         : gsap.timeline({progress: 1}),
                 workUpUp       : gsap.timeline({progress: 1}),
                 workDownDown   : gsap.timeline({progress: 1}),
@@ -292,7 +292,6 @@
             }
         },
         mounted() {
-
             if(!this.$store.state.back){
                 if(!this.$device.mobile){
                     this.tlIntro
@@ -306,14 +305,16 @@
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                     });
                 }else{
+                    let vm = this;
                     this.tlIntro
+                        .set('.intro .word-wrapper-elle, .intro .word-wrapper-aime', {opacity:1})
                         .fromTo('.intro .word-wrapper-elle', {x: "-200vw"},{x: "170vw", duration: 3, ease: "Linear.easeNone" }, "intro")
                         .fromTo('.intro .word-wrapper-aime', {x: "150vw"},{x: "-250vw", duration: 3, ease: "Linear.easeNone" }, "intro+=1");
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
+                        vm.loveDownDown.play();
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                     });
-
                 }
             }
 
@@ -341,8 +342,8 @@
             });
 
             this.LoveClickTl
-            .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
-            .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+                .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
+                .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
 
             this.workClickTl
                 .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
@@ -425,11 +426,13 @@
             .word-wrapper-aime{
                 top: -89px;
                 left: 125px;
+                opacity: 0;
 
             }
             .word-wrapper-elle{
                 bottom: -88px;
                 left: -79px;
+                opacity: 0;
 
             }
             .hide{
