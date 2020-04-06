@@ -238,16 +238,19 @@
                 }, 250);
             },
             loveHold(){
+                this.scrollable = false;
                 document.querySelector('.bg-love').classList.add("visible");
                 document.querySelector('.love-container .word-container').classList.add("hover");
                 this.playing = setInterval(() => {
                     this.gif();
                 }, 250);
+
             },
             loveHoldEnd(){
                 document.querySelector('.bg-love').classList.remove("visible");
                 document.querySelector('.love-container .word-container').classList.remove("hover");
                 clearInterval(this.playing);
+                this.scrollable = true;
             },
             loveLeave(){
                 document.querySelector('.bg-love').classList.remove("visible");
@@ -270,11 +273,13 @@
             },
             workHold(){
                 document.querySelector('.work-container .word-container').classList.add("hover");
-                this.particuleAnim()
+                this.particuleAnim();
+                this.scrollable = false;
             },
             workHoldEnd(){
                 document.querySelector('.work-container .word-container').classList.remove("hover");
                 this.particuleAnimLeave();
+                this.scrollable = true;
             },
             workHover(){
                 this.particuleAnim()
