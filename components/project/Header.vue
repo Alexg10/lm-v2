@@ -32,6 +32,14 @@
     import gsap from "gsap"
 
     export default {
+        head () {
+            return {
+            title: `Louise Margueritat - ${this.title} project`,
+            meta: [
+                { hid: 'description', name: 'description', content: `Louise Margueritat - Folio - ${this.title}` }
+            ]
+        }
+        },
         props: [
             'title',
             'description',
