@@ -380,8 +380,12 @@
             top: 50%;
             left: 50%;
             height: 100vh;
-            width: 100vw;
+            width: auto;
             transform: scale(1.1) translate(-50%,-50%);
+            @media ( max-width : 680px ) {
+                font-size: 70px;
+                width: auto;
+            }
         }
     }
 

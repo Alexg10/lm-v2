@@ -53,7 +53,9 @@
                                 </span>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="hold-on" v-touch:start="loveHover" v-touch:end="loveHoldEnd">
+                        Hold me
                     </div>
                 </div>
             </div>
@@ -198,7 +200,17 @@
                 document.querySelector('.bg-love').classList.add("visible");
                 this.playing = setInterval(() => {
                     this.gif();
-                }, 250)
+                }, 250);
+            },
+            loveHold(){
+                document.querySelector('.bg-love').classList.add("visible");
+                this.playing = setInterval(() => {
+                    this.gif();
+                }, 250);
+            },
+            loveHoldEnd(){
+                document.querySelector('.bg-love').classList.remove("visible");
+                clearInterval(this.playing);
             },
             loveLeave(){
                 document.querySelector('.bg-love').classList.remove("visible");
@@ -293,7 +305,9 @@
         },
         mounted() {
             if(!this.$store.state.back){
+                let vm = this;
                 if(!this.$device.mobile){
+                    vm.loveDownDown.play();
                     this.tlIntro
                         .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
                         .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
@@ -305,7 +319,6 @@
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                     });
                 }else{
-                    let vm = this;
                     this.tlIntro
                         .set('.intro .word-wrapper-elle, .intro .word-wrapper-aime', {opacity:1})
                         .fromTo('.intro .word-wrapper-elle', {x: "-200vw"},{x: "170vw", duration: 3, ease: "Linear.easeNone" }, "intro")
@@ -426,14 +439,16 @@
             .word-wrapper-aime{
                 top: -89px;
                 left: 125px;
-                opacity: 0;
-
+                @media ( max-width : 680px ) {
+                    opacity: 0;
+                }
             }
             .word-wrapper-elle{
                 bottom: -88px;
                 left: -79px;
-                opacity: 0;
-
+                @media ( max-width : 680px ) {
+                    opacity: 0;
+                }
             }
             .hide{
                 .hide-left{
@@ -441,6 +456,29 @@
                     opacity: 1;
                 }
             }
+        }
+    }
+
+    .hold-on{
+        display: none;
+        @media ( max-width : 780px ) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            font-size: 12px;
+            border: 1px solid #B4B3B1;
+            border-radius: 200px;
+            color: #B4B3B1;
+            font-family: 'GTWalsheimProRegular';
+            text-transform: uppercase;
+            z-index: 999;
         }
     }
     .homepage-container{
