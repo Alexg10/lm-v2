@@ -95,13 +95,23 @@
             }
         },
         mounted() {
-            this.loveContentLeave
-                .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
-                .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
-                .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2")
-                .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2");
+            if(!this.$device.mobile){
+                this.loveContentLeave
+                    .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
+                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
+                    .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2")
+                    .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2");
+            }else{
+                this.loveContentLeave
+                    .to(".developped-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".infos-link a", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave+=0.3")
+                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.6")
+                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=1")
+                    .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8")
+                    .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8");
+            }
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({
                 container: document.getElementById('pizza-ico'),
