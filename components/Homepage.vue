@@ -211,12 +211,14 @@
             },
             loveHold(){
                 document.querySelector('.bg-love').classList.add("visible");
+                document.querySelector('.love-container .word-container').classList.add("hover");
                 this.playing = setInterval(() => {
                     this.gif();
                 }, 250);
             },
             loveHoldEnd(){
                 document.querySelector('.bg-love').classList.remove("visible");
+                document.querySelector('.love-container .word-container').classList.remove("hover");
                 clearInterval(this.playing);
             },
             loveLeave(){
@@ -670,6 +672,38 @@
                     transition: all 1.4s cubic-bezier(.19,.77,.2,1);
                 }
             }
+        }
+        &.hover{
+            .elle{
+                color: #FF9170;
+            }
+            .aime{
+                color: #FF9170;
+            }
+            .hide{
+                color: #FF9170;
+                transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                .hide-right,
+                .hide-left{
+                    color: #FF9170;
+                    transform: translateX(0);
+                    opacity: 1;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                }
+            }
+            .word-wrapper{
+                &-elle{
+                    left: -49px;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                }
+                &-aime{
+                    left: 60px;
+                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                }
+            }
+
         }
         &:hover{
             cursor: pointer;
