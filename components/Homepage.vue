@@ -461,6 +461,11 @@
 
     .hold-on{
         display: none;
+        -webkit-user-select: none; 
+        -webkit-touch-callout: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none;    
         @media ( max-width : 780px ) {
             display: flex;
             justify-content: center;
