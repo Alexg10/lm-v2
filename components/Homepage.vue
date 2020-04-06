@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="circle-container like" v-touch:start="loveHover" v-touch:end="loveHoldEnd">
+                    <div class="circle-container like" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
                         <svg class="circle" xmlns="http://www.w3.org/2000/svg">
                             <g>
                             <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
