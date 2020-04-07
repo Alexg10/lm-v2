@@ -23,11 +23,12 @@
             <div class="swiper-slide love-container">
                 <div class="home-slide-content red">
                     <div class="bg-love">
-                        <img class="bg-love-cover cover-1 visible" src="/images/home/lm_22.png" alt="">
-                        <img class="bg-love-cover cover-2" src="/images/home/lm_1.jpg" alt="">
-                        <img class="bg-love-cover cover-3" src="/images/home/lm_33.png" alt="">
-                        <img class="bg-love-cover cover-4" src="/images/home/lm_44.png" alt="">
-                        <img class="bg-love-cover cover-5" src="/images/home/lm_55.png" alt="">
+                        <img class="bg-love-cover cover-1 visible" src="/images/home/lm_33.png" alt="">
+                        <img class="bg-love-cover cover-2" src="/images/home/lm_44.png" alt="">
+                        <img class="bg-love-cover cover-3" src="/images/home/lm_22.png" alt="">
+                        <img class="bg-love-cover cover-4" src="/images/home/lm_flower.png" alt="">
+                        <img class="bg-love-cover cover-5" src="/images/home/lm_fluffy.png" alt="">
+                        <img class="bg-love-cover cover-6" src="/images/home/lm_clouds.png" alt="">
                     </div>
                     <LoveContent/>
                     <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
@@ -111,7 +112,7 @@
                 arrowDown,
                 coverIndex     : 1,
                 playing        : '',
-                scrollable     : true,
+                scrollable     : false,
                 tlIntro        : gsap.timeline({delay:1}),
                 LoveClickTl    : gsap.timeline({paused: true}),
                 workClickTl    : gsap.timeline({paused: true}),
@@ -133,7 +134,7 @@
             scrollUp(){
                 var vm = this;
                 vm.scrollable = false;
-                if(vm.$device.mobile){
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
                     document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
                 }
                 if( !document.querySelector('.work-container').classList.contains('visible') ){
@@ -144,7 +145,7 @@
                     vm.loveDown.eventCallback("onComplete", function () {
                         vm.workDownDown.pause(0);
                         vm.workDownDown.play();
-                        if(vm.$device.mobile){
+                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
                             document.querySelector('.circle-container.work-hold').classList.add("visible");
                         }
                     });
@@ -156,7 +157,7 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveDownDown.pause(0);
                         vm.loveDownDown.play();
-                        if(vm.$device.mobile){
+                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
                             document.querySelector('.circle-container.love').classList.add("visible");
                         }
                     });
@@ -169,7 +170,7 @@
                 var vm = this;
                 vm.scrollable = false;
                 document.getElementsByClassName("arrow")[0].classList.remove("visible");
-                if(vm.$device.mobile){
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
                     document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
                 }
                 if( document.querySelector('.work-container').classList.contains('visible') ){
@@ -180,7 +181,7 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveUpR.pause(0);
                         vm.loveUpR.play();
-                        if(vm.$device.mobile){
+                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
                             document.querySelector('.circle-container.love').classList.add("visible");
                         }
                     });
@@ -192,7 +193,7 @@
                     vm.loveUpUp.eventCallback("onComplete", function () {
                         vm.workUp.pause(0);
                         vm.workUp.play();
-                        if(vm.$device.mobile){
+                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
                             document.querySelector('.circle-container.work-hold').classList.add("visible");
                         }
                     });
@@ -267,7 +268,6 @@
                     document.querySelector('.bg-love').classList.remove("visible");
                     document.querySelector('.love-content').classList.add("visible");
                     document.querySelector('.circle-container').classList.remove("visible");
-
                 });
                 this.loveShowContent.play();
             },
@@ -322,7 +322,7 @@
                     var typeParticule = random(1,12);
                     var div = document.createElement("div");
                     div.setAttribute("class", "sparkle part-" + num);
-                    if(!vm.$device.mobile){
+                    if((!vm.$device.ipad) && (!vm.$device.mobile)){
                         var particules = document.querySelector('.cursor-fx__inner__outside');
                     }else{
                         var particules = document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)');
@@ -354,7 +354,8 @@
             particuleAnimLeave(){
                 let vm = this;
                 clearInterval(this.inter);
-                if(vm.$device.mobile){
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+
                     document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)').classList.remove('overflow-visible');
                 }
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
@@ -368,7 +369,7 @@
         mounted() {
             if(!this.$store.state.back){
                 let vm = this;
-                if(!this.$device.mobile){
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     vm.loveDownDown.play();
                     this.tlIntro
                         .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
@@ -379,6 +380,7 @@
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
+                        vm.scrollable = true;
                     });
                 }else{
                     this.tlIntro
@@ -390,11 +392,15 @@
                         vm.loveDownDown.play();
                         document.querySelector('.circle-container.love').classList.add("visible");
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
+                        vm.scrollable = true;
                     });
                 }
+            }else{
+                let vm = this;
+                vm.scrollable = true;
             }
 
-            if(!this.$device.mobile){
+            if((!this.$device.ipad) && (!this.$device.mobile)){
                 this.loveShowContent
                     .to({}, 2.5, {})
                     .to(".love-content", {opacity:1, duration:1.2, ease: "power4.inOut" }, "loveShowContent")
