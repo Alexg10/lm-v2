@@ -1,65 +1,65 @@
 @font-face {
     font-family: 'Didot';
-    src: url('../fonts/Didot.eot');
-    src: url('../fonts/Didot.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Didot.woff2') format('woff2'),
-        url('../fonts/Didot.woff') format('woff'),
-        url('../fonts/Didot.ttf') format('truetype');
+    src: url('~assets/fonts/Didot.eot');
+    src: url('~assets/fonts/Didot.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/Didot.woff2') format('woff2'),
+        url('~assets/fonts/Didot.woff') format('woff'),
+        url('~assets/fonts/Didot.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'GTWalsheimProRegular';
-    src: url('../fonts/GTWalsheimProRegular.eot');
-    src: url('../fonts/GTWalsheimProRegular.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/GTWalsheimProRegular.woff2') format('woff2'),
-        url('../fonts/GTWalsheimProRegular.woff') format('woff'),
-        url('../fonts/GTWalsheimProRegular.ttf') format('truetype');
+    src: url('~assets/fonts/GTWalsheimProRegular.eot');
+    src: url('~assets/fonts/GTWalsheimProRegular.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/GTWalsheimProRegular.woff2') format('woff2'),
+        url('~assets/fonts/GTWalsheimProRegular.woff') format('woff'),
+        url('~assets/fonts/GTWalsheimProRegular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'GTWalsheimProMedium';
-    src: url('../fonts/GTWalsheimProMedium.eot');
-    src: url('../fonts/GTWalsheimProMedium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/GTWalsheimProMedium.woff2') format('woff2'),
-        url('../fonts/GTWalsheimProMedium.woff') format('woff'),
-        url('../fonts/GTWalsheimProMedium.ttf') format('truetype');
+    src: url('~assets/fonts/GTWalsheimProMedium.eot');
+    src: url('~assets/fonts/GTWalsheimProMedium.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/GTWalsheimProMedium.woff2') format('woff2'),
+        url('~assets/fonts/GTWalsheimProMedium.woff') format('woff'),
+        url('~assets/fonts/GTWalsheimProMedium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'GTWalsheimProBold';
-    src: url('../fonts/GTWalsheimProBold.eot');
-    src: url('../fonts/GTWalsheimProBold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/GTWalsheimProBold.woff2') format('woff2'),
-        url('../fonts/GTWalsheimProBold.woff') format('woff'),
-        url('../fonts/GTWalsheimProBold.ttf') format('truetype');
+    src: url('~assets/fonts/GTWalsheimProBold.eot');
+    src: url('~assets/fonts/GTWalsheimProBold.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/GTWalsheimProBold.woff2') format('woff2'),
+        url('~assets/fonts/GTWalsheimProBold.woff') format('woff'),
+        url('~assets/fonts/GTWalsheimProBold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Didot';
-    src: url('../fonts/Didot-Bold.eot');
-    src: url('../fonts/Didot-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Didot-Bold.woff2') format('woff2'),
-        url('../fonts/Didot-Bold.woff') format('woff'),
-        url('../fonts/Didot-Bold.ttf') format('truetype');
+    src: url('~assets/fonts/Didot-Bold.eot');
+    src: url('~assets/fonts/Didot-Bold.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/Didot-Bold.woff2') format('woff2'),
+        url('~assets/fonts/Didot-Bold.woff') format('woff'),
+        url('~assets/fonts/Didot-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Didot';
-    src: url('../fonts/Didot-Italic.eot');
-    src: url('../fonts/Didot-Italic.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/Didot-Italic.woff2') format('woff2'),
-        url('../fonts/Didot-Italic.woff') format('woff'),
-        url('../fonts/Didot-Italic.ttf') format('truetype');
+    src: url('~assets/fonts/Didot-Italic.eot');
+    src: url('~assets/fonts/Didot-Italic.eot?#iefix') format('embedded-opentype'),
+        url('~assets/fonts/Didot-Italic.woff2') format('woff2'),
+        url('~assets/fonts/Didot-Italic.woff') format('woff'),
+        url('~assets/fonts/Didot-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
@@ -69,8 +69,8 @@
     src: url("//db.onlinewebfonts.com/t/e8c6a63541de0a4211a9358cbe74690f.eot");
     src: url('//db.onlinewebfonts.com/t/e8c6a63541de0a4211a9358cbe74690f.eot') format('embedded-opentype'),
         url('//db.onlinewebfonts.com/t/e8c6a63541de0a4211a9358cbe74690f.woff2') format('woff2'),
-        url('../fonts/futura-pt.woff') format('woff'),
-        url('../fonts/futura-pt.ttf') format('truetype');
+        url('~assets/fonts/futura-pt.woff') format('woff'),
+        url('~assets/fonts/futura-pt.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
