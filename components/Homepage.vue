@@ -259,11 +259,11 @@
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
             },
             loveClick(){
-                document.getElementsByClassName("arrow")[0].classList.remove("visible");
-                document.querySelector('.word-container').classList.add("clicked");
                 this.LoveClickTl.pause(0);
                 this.loveShowContent.pause(0);
                 this.LoveClickTl.play();
+                document.getElementsByClassName("arrow")[0].classList.remove("visible");
+                document.querySelector('.word-container').classList.add("clicked");
                 this.LoveClickTl.eventCallback("onComplete", function () {
                     document.querySelector('.bg-love').classList.remove("visible");
                     document.querySelector('.love-content').classList.add("visible");
@@ -373,7 +373,7 @@
                     vm.loveDownDown.play();
                     this.tlIntro
                         .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
-                        .from('.margueritat', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro+=0.25")
+                        .from('.margueritat', {y: 230, duration: 2.3, ease: "power4.inOut" }, "intro+=0.25")
                         .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
                         .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
                         .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
@@ -423,10 +423,15 @@
                 document.querySelector('.cross').classList.add("active");
             });
 
-            this.LoveClickTl
-                .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
-                .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
-
+            if((!this.$device.ipad) && (!this.$device.mobile)){
+                this.LoveClickTl
+                    .to(".word-wrapper-elle", {x:"-70vw", duration: 1.5, repeatRefresh: true, ease: "power4.inOut" }, "loveClickStart")
+                    .to(".word-wrapper-aime", {x:"70vw", duration: 1.5, repeatRefresh: true, ease: "power4.inOut" }, "loveClickStart");
+            }else{
+                this.LoveClickTl
+                    .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
+                    .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+            }
             this.workClickTl
                 .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
                 .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
@@ -501,7 +506,19 @@
         align-items: center;
         background-color: #fff;
         z-index: 20;
+
         .word-container{
+            &:hover{
+                .word,
+                .elle,
+                .aime,
+                .hide{
+                    color: black;
+                    .hide-left{
+                        color: black;
+                    }
+                }
+            }
             .word{
                 line-height: 260px;
             }
@@ -804,16 +821,16 @@
             .word-wrapper{
                 &-elle{
                     left: -79px;
-                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
-                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                    // transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
                     @media ( max-width : 680px ) {
                         left: -49px;
                     }
                 }
                 &-aime{
                     left: 125px;
-                    transition: all 1.4s cubic-bezier(.19,.77,.2,1);
-                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
+                    // transition: all 1.4s cubic-bezier(.19,.77,.2,1);
+                    transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
                     @media ( max-width : 680px ) {
                         left: 60px;
                     }
@@ -894,7 +911,7 @@
                 position: relative;
                 bottom: -38px;
                 left: -67px;
-                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                transition: all 1s cubic-bezier(.19,.77,.2,1);
                 @media ( max-width : 680px ) {
                     bottom: -48px;
                     left: -27px;
@@ -904,7 +921,7 @@
                 position: relative;
                 top: -39px;
                 left: -25px;
-                transition: all 0.9s cubic-bezier(.19,.77,.2,1);
+                transition: all 1s cubic-bezier(.19,.77,.2,1);
                 @media ( max-width : 680px ) {
                     top: -58px;
                     left: 3px;
