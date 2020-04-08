@@ -45,7 +45,13 @@
         text-align: center;
         font-size: 22px;
         z-index: 9;
-        padding-top: 20px;
+        padding-top: 30px;
+        @media ( max-width : 780px ) {
+            padding-top: 40px;
+        }
+        @media ( max-width : 680px ) {
+            padding-top: 40px;
+        }
         &.visible{
             .logo-container{
                 .first-letter,

@@ -88,6 +88,7 @@
 
                 var introTl = gsap.timeline({delay: 1})
                 introTl.add('start');
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
                         .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
                         .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
@@ -95,6 +96,15 @@
                         .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                         .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
                         .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
+                }else{
+                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
+                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                        .to(this.$refs.coverImg, {scale:0.7, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .to(".slide-img", { scale:0.7, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .from(prev, {x:'-30%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
+                        .from(next, {x:'30%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
+                }
 
                 introTl.eventCallback("onComplete", ()=> {
                     this.$refs.cover.style.display = "none";
@@ -106,8 +116,10 @@
                     document.querySelector('.project-cover').classList.remove('hide');
                 });
 
-                document.querySelector('.list-container').onmousemove = event => {
-                    this.parallax(event);
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.list-container').onmousemove = event => {
+                        this.parallax(event);
+                    }
                 }
 
 
@@ -161,12 +173,13 @@
                 }
             },
             parallax(e){
-                var imgW         = window.innerWidth*0.53;
-                var imgH         = window.innerHeight*0.53;
-                var amountMovedX = (e.pageX * -0.3 / 10)-imgW;
-                var amountMovedY = (e.pageY * -0.3 / 10)-imgH;
-
-                document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
+//                 var imgW         = window.innerWidth*0.48;
+//                 var imgH         = window.innerHeight*0.48;
+//                 var amountMovedX = (e.pageX * -0.3 / 10)-imgW;
+//                 var amountMovedY = (e.pageY * -0.3 / 10)-imgH;
+                
+// //TRANSFORMER EN %%%
+//                 document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
                 if(!this.isLeave){
@@ -268,14 +281,24 @@
 
                 var outroTl = gsap.timeline({timeScale: 0.5})
                 outroTl.add('start');
-                outroTl
-                    .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
-                    .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
-                    .to('.slick-current .slide-img',{x:"-50%", y:"-50%", scale:1, duration: 2, ease: "power4.inOut"},'start')
-                    .to('.slide-layer',{opacity:0, duration: 0.5, ease: "power4.inOut"},'start+=1.5')
-                    .set('.project-cover',{display:"block"},'start+=2')
-                    .set('.project-cover-img',{x:"-50%", y:"-50%"},'start+=2')
-                    .to('.project-cover', {width: "100vw", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    outroTl
+                        .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
+                        .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
+                        .to('.slick-current .slide-img',{xPercent:-50, yPercent:-50, scale:1, duration: 2, ease: "power4.inOut"},'start')
+                        .to('.slide-layer',{opacity:0, duration: 0.5, ease: "power4.inOut"},'start+=1.5')
+                        .set('.project-cover',{display:"block"},'start+=2')
+                        .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+                }else{
+                    outroTl
+                        .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
+                        .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
+                        .to('.slick-current .slide-img',{xPercent:-50, yPercent:-50, duration: 2, ease: "power4.inOut"},'start')
+                        .to('.slide-layer',{opacity:0, duration: 0.8, ease: "power4.inOut"},'start+=1.5')
+                        .set('.project-cover',{display:"block"},'start+=2.3')
+                        .to('.project-cover-img', {scale: 1, duration: 2, ease: "power4.inOut"}, 'start+=2.5')
+                        .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+                }
 
                 outroTl.eventCallback("onComplete", ()=> {
                     vm.$store.commit('setCover', vm.currentProject);
@@ -341,11 +364,15 @@
         pointer-events: none;
         .project-cover-img{
             position: absolute;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             top: 50%;
             left: 50%;
-            transform: scale(1.1) translate(-50%,-50%);
+            transform: scale(1) translate(-50%,-50%);
+            object-fit: cover;
+            @media ( max-width : 780px ) {
+                width: auto;
+            }
         }
         &.hide{
             visibility: hidden;
@@ -380,9 +407,10 @@
             top: 50%;
             left: 50%;
             height: 100vh;
-            width: auto;
-            transform: scale(1.1) translate(-50%,-50%);
-            @media ( max-width : 680px ) {
+            width: 100%;
+            object-fit: cover;
+            transform: translate(-50%,-50%);
+            @media ( max-width : 780px ) {
                 font-size: 70px;
                 width: auto;
             }
