@@ -1,5 +1,5 @@
 <template>
-    <section v-if="bloc" class="color-section">
+    <section v-if="bloc" class="color-section" v-bind:style='{backgroundColor: bloc.color}'>
         <div class="container">
             <div class="color-section-container">
                 <div class="color-container" v-for="color in bloc.blocColorsColor" v-bind:key>

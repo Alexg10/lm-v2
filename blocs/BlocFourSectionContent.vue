@@ -1,5 +1,5 @@
 <template>
-    <section v-if="bloc" class="img-4-section">
+    <section v-if="bloc" class="img-4-section" v-bind:style='{backgroundColor: bloc.color}'>
         <div class="container">
             <div class="img-4-section-container" >
                 <div class="img-4-container grid-item" v-for="four_image in bloc.blocFourSectionImg" v-bind:key>

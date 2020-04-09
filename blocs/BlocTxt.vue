@@ -1,6 +1,5 @@
 <template>
-
-    <section class="text-bloc transition">
+    <section class="text-bloc transition" v-bind:style='{backgroundColor: bloc.color}'>
         <div class="container">
             <p class="text-content">
                 {{bloc.text}}

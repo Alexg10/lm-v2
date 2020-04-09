@@ -1,5 +1,5 @@
 <template>
-    <div v-if="bloc">
+    <div v-if="bloc" v-bind:style='{backgroundColor: bloc.color}'>
         <section v-if="bloc.pictureVideo === 'picture'" class="project-laptop-preview container">
             <img :src="bloc.laptopPicture.sourceUrl" alt="">
         </section>

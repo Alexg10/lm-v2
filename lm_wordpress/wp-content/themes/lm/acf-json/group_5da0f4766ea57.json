@@ -196,6 +196,32 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e8f89c9c02c1",
+                            "label": "Background color",
+                            "name": "color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "choices": {
+                                "#F7F6F5": "Light Grey",
+                                "#FFF": "White"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
                             "key": "field_5e41e0b4bd478",
                             "label": "Picture or video",
                             "name": "picture_video",
@@ -300,6 +326,32 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e8f8a21fb288",
+                            "label": "Background color",
+                            "name": "color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "choices": {
+                                "#F7F6F5": "Light Grey",
+                                "#FFF": "White"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
                             "key": "field_5da111486a0cd",
                             "label": "texte",
                             "name": "text",
@@ -383,6 +435,32 @@
                     "label": "4 section images",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5e8f889091c57",
+                            "label": "Background color",
+                            "name": "color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "choices": {
+                                "#F7F6F5": "Light Grey",
+                                "#FFF": "White"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
                         {
                             "key": "field_5dae421f7ee65",
                             "label": "Images",
@@ -527,6 +605,32 @@
                     "label": "Colors",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5e8f8927e70f6",
+                            "label": "Background color",
+                            "name": "color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "choices": {
+                                "#F7F6F5": "Light Grey",
+                                "#FFF": "White"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
                         {
                             "key": "field_5daf6a87806e1",
                             "label": "Color",
@@ -1125,5 +1229,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "acfProjectFields",
-    "modified": 1585254910
+    "modified": 1586465341
 }

@@ -1,6 +1,5 @@
 <template>
-
-    <section class="chapter" v-bind:style='{backgroundColor: bloc.bg_color}'>
+    <section class="chapter" v-bind:style='{backgroundColor: bloc.color}'>
         <div class="container">
             <div class="project-chapter">
                 <span class="number">{{bloc.number}}.</span>
@@ -42,7 +41,7 @@
           .reverse(false)
           scrollM.addScene(scene2)
       });
-    },
+    }
   }
 </script>
 
