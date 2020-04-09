@@ -16,13 +16,12 @@
             'bloc'
         ],
         mounted(){
-            var imgs = document.getElementsByClassName("img-4-container");
+            var imgs = document.getElementsByClassName("img-4-section-container");
             var scrollM = this.$scrollmagic;
             
             Array.prototype.forEach.call(imgs,function(el, i) {
-                var img = el.getElementsByClassName("img-4");
                 var tl = new TimelineMax({ paused: false});
-                tl.staggerFromTo(".img-4", 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},0.35);
+                tl.staggerFromTo(el.getElementsByClassName("img-4"), 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.35);
                 const scene2 = scrollM.scene({
                     triggerElement: el,
                     triggerHook: 0.65,

@@ -97,13 +97,14 @@
                         .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
                         .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
                 }else{
-                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
                         .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
-                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
-                        .to(this.$refs.coverImg, {scale:0.7, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                        .to(".slide-img", { scale:0.7, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                        .from(prev, {x:'-30%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
-                        .from(next, {x:'30%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
+                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 4, ease: "power4.inOut"},'animIntroStart=+0.5')
+                        .to(this.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                        .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                        .from(prev, {x:'-30%', duration: 4, ease: "power4.inOut"},'animIntroStart=+4')
+                        .from(next, {x:'30%', duration: 4, ease: "power4.inOut"},'animIntroStart=+4')
+                        .to({}, 1, {});
                 }
 
                 introTl.eventCallback("onComplete", ()=> {
@@ -225,6 +226,7 @@
                 document.querySelector('.slick-current+div').classList.remove('hover');
             },
             animLeaveLetters(){
+                let vm = this;
                 var word = document.querySelector(".project-title");
 
                 //ADD SPAN TO LETTERS
@@ -236,7 +238,11 @@
                 for(var i=0; i< wordContentSplit.length; i++){
                     var newSpan = document.createElement('span');
                     newSpan.style.display = "inline-block";
-                    newSpan.style.minWidth = "40px";
+                    if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        newSpan.style.minWidth = "40px";
+                    }else{
+                        newSpan.style.minWidth = "25px";
+                    }
                     newSpan.setAttribute("class", "letter-"+i);
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
@@ -402,6 +408,7 @@
     }
 
     .project-list{
+        position: relative;
         .slide-img{
             position: absolute;
             top: 50%;
@@ -449,6 +456,10 @@
         }
         .project-title{
             opacity: 0.3;
+            @media ( max-width : 780px ) {
+                opacity: 1;
+                letter-spacing: -1px;
+            }
             &.visibleOpacity{
                 opacity: 1;
             }
@@ -497,6 +508,11 @@
                 .project-type{
                     transform: translateY(0);
                     transition: transform 0.4s ease;
+                }
+            }
+            @media ( max-width : 780px ) {
+                .slide-layer{
+                    opacity: 0.4;
                 }
             }
         }

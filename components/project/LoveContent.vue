@@ -252,6 +252,12 @@
                 p{
                     display: flex;
                 }
+                .toppings-me{
+                    display: flex;
+                    .ico-anim{
+                        max-width: 33px;
+                    }
+                }
                 .contact-me{
                     font-family : 'GTWalsheimProMedium';
                     margin-right: 88px;
