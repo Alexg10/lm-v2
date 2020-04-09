@@ -381,6 +381,32 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e8f8e0195ea6",
+                            "label": "Background color",
+                            "name": "color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "show_in_graphql": 1,
+                            "choices": {
+                                "#F7F6F5": "Light Grey",
+                                "#FFF": "White"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
                             "key": "field_5da180b771af4",
                             "label": "Images",
                             "name": "sketch_images",
@@ -1229,5 +1255,5 @@
     "description": "",
     "show_in_graphql": 1,
     "graphql_field_name": "acfProjectFields",
-    "modified": 1586465341
+    "modified": 1586466330
 }

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="bloc">
+    <div v-if="bloc" v-bind:style='{backgroundColor: bloc.color}'>
         <section class="img-section">
             <div class="container">
                 <div id="img-section-container" class="img-section-container" v-for="image in bloc.sketchImages" :key="bloc.id">
