@@ -15,7 +15,7 @@ query getProjectBySlug($slug: String!) {
           id
           slug
           acfProjectFields {
-            projectTitle
+          	projectTitle
             headerPicture{
               sourceUrl(size: LARGE)
             }
@@ -31,7 +31,6 @@ query getProjectBySlug($slug: String!) {
         }
         ... on Project_Acfprojectfields_Blocs_BlocLaptop {
           fieldGroupName
-          color
           laptopPicture {
             sourceUrl(size: SKETCH_PICTURE)
           }
@@ -40,12 +39,10 @@ query getProjectBySlug($slug: String!) {
         }
         ... on Project_Acfprojectfields_Blocs_BlocTxt {
           fieldGroupName
-          color
           text
         }
         ... on Project_Acfprojectfields_Blocs_BlocSketch {
           fieldGroupName
-          color
           sketchImages {
             sketchImage {
               sourceUrl(size: SKETCH_PICTURE)
@@ -54,7 +51,6 @@ query getProjectBySlug($slug: String!) {
         }
         ... on Project_Acfprojectfields_Blocs_BlocFourSectionContent {
           fieldGroupName
-          color
           blocFourSectionImg {
             image {
               sourceUrl(size: LARGE)
