@@ -485,12 +485,17 @@
         opacity: 0;
         transition: 0.5s ease;
         transform: translateX(-50%);
+        animation: upNdown 1s infinite alternate;
         z-index: 2;
         &.visible{
             opacity: 1;
             bottom: 45px;
             transition: 0.8s ease;
             transition-delay: 7s;
+        }
+        @keyframes upNdown {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
     }
     .intro{
