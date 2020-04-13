@@ -283,7 +283,7 @@
                 this.particuleAnim()
             },
             workClick(){
-                var vm=this;
+                var vm = this;
                 this.workClickTl.play();
                 this.particuleAnimLeave();
                 this.$store.commit("setBack", false);
@@ -432,8 +432,9 @@
             }
             this.workClickTl
                 .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
-                .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
-                .to(".word-wrapper-work:nth-child(3)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl");
+                .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl+=0.1")
+                .to(".word-wrapper-work:nth-child(3)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl+=0.2")
+                .to({}, 3, {});
 
             this.loveUpUp
                 .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
@@ -853,15 +854,15 @@
                 transition: all 1.05s cubic-bezier(.19,.77,.2,1);
                 &:nth-child(1){
                     position: relative;
-                    left: 107px;
+                    left: -13px;
                 }
                 &:nth-child(2){
                     position: relative;
-                    left: -22px;
+                    left: -83px;
                 }
                 &:nth-child(3){
                     position: relative;
-                    left: 182px;
+                    left: 92px;
                 }
             }
         }
