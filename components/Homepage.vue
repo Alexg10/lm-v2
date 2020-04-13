@@ -31,7 +31,7 @@
                         <img class="bg-love-cover cover-6" src="/images/home/lm_clouds.png" alt="">
                     </div>
                     <LoveContent/>
-                    <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
+                    <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick" data-cursor-hover>
                         <div class="word-wrapper word-wrapper-elle">
                             <div class="word elle">
                                 <span class="hide">
@@ -232,7 +232,6 @@
                 }
             },
             loveHover(){
-                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                 document.querySelector('.bg-love').classList.add("visible");
                 this.playing = setInterval(() => {
                     this.gif();
@@ -256,7 +255,6 @@
             loveLeave(){
                 document.querySelector('.bg-love').classList.remove("visible");
                 clearInterval(this.playing);
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
             },
             loveClick(){
                 this.LoveClickTl.pause(0);

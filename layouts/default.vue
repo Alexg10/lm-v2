@@ -4,8 +4,25 @@
       <img :src="cover.acfProjectFields.headerPicture.sourceUrl" alt="cover.acfProjectFields.projectTitle">
     </div>
     <nuxt/>
-    <cursor-fx color="#FF9170" color-hover="#FF9170" outside-size="45px" :hide-inside="true" ></cursor-fx>
-
+    <cursor-fx 
+      :config="{
+        lerps: {
+            dot: 1,
+            circle: 0.18,
+            custom: 0.23,
+        },
+        scale: {
+            ratio: 0.18,
+            min: 1,
+            max: 0.5,
+        },
+        opacity: 0.1,
+      }" 
+      color="#FF9170" 
+      color-hover="#FF9170" 
+      outside-size="45px" 
+      :hide-inside="true" >
+    </cursor-fx>
   </div>
 </template>
 

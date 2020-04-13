@@ -1,6 +1,6 @@
 <template>
     <div class="love-content">
-        <div class="cross link-hover" v-on:click="backHome">
+        <div class="cross link-hover" v-on:click="backHome" data-cursor-hover>
             <div class="crossLineOne">
                 <div class="crossLineOne_content"></div>
             </div>
@@ -10,7 +10,7 @@
         </div>
         <div class="base-line-container">
             <marquee-text :repeat="2" :duration="20">
-                <div class="base-line">images are stronger than words</div>
+                <div class="base-line">images are stronger than words.</div>
             </marquee-text>
         </div>
         <div class="love-description">
@@ -21,13 +21,13 @@
         <div class="bottom-container">
             <div class="left-bottom">
                 <div class="contact-me infos-link">
-                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay">
+                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay" data-cursor-hover>
                         <div id="ico-cocktail" class="ico-anim"></div>
                         <p>contact me</p>
                     </a>
                 </div>
                 <div class="toppings-me infos-link">
-                    <a href="" class="link link-hover" v-on:mouseenter="pizzaPlay">
+                    <a href="" class="link link-hover" v-on:mouseenter="pizzaPlay" data-cursor-hover>
                         <div id="pizza-ico" class="ico-anim"></div>
                         <p>my toppings</p>
                     </a>
@@ -35,7 +35,7 @@
             </div>
             <div class="right-bottom">
                 <div class="developped">
-                    <a href=""  class="developped-link link-hover">
+                    <a href="https://twitter.com/AlexGuerard" class="developped-link link-hover" target="_blank" data-cursor-hover>
                         <div class="ico-heart">
                             <img src="~/assets/images/ico/heart.svg" alt="">
                         </div>
@@ -78,20 +78,21 @@
             pizzaPlay(){
                 this.pizzaAnim.goToAndPlay(1,1);
             },
-            hoverAddClass(){
-                var link = document.getElementsByClassName("link-hover");
-                var hoverAddClassFunction = function() {
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
-                    console.log('hoverlink');
-                };
-                var hoverRemoveClassFunction = function() {
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
-                    console.log('hoverlink');
-                };
+            letterContainer(className){
+                var word = document.getElementsByClassName(className)[0];
+                var wordContent = word.textContent.trim();
+                var wordContentSplit = wordContent.split("");
+                word.innerHTML = "";
 
-                for (var i = 0; i < link.length; i++) {
-                    link[i].addEventListener('mouseenter', hoverAddClassFunction, false);
-                    link[i].addEventListener('mouseleave', hoverRemoveClassFunction, false);
+                for(var i=0; i< wordContentSplit.length; i++){
+                    var newSpan = document.createElement('span');
+                    newSpan.style.display = "inline-block";
+                    newSpan.className = "staggerLetter";
+                    if (wordContentSplit[i] == " "){
+                        newSpan.style.width = "7px";
+                    }
+                    newSpan.innerHTML = wordContentSplit[i];
+                    word.appendChild(newSpan);
                 }
             }
         },
@@ -132,7 +133,16 @@
             });
             this.cocktailAnim.goToAndStop(75,1);
             //* END LOTTIE ANIMATION
-            this.hoverAddClass();
+
+            this.letterContainer("link-stagger");
+
+            var staggerLink = document.querySelector('.developped-link');
+            var tl = new TimelineMax();
+
+            staggerLink.addEventListener('mouseenter', e => {
+                tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -15, ease: Power4.easeInOut }, 0.025)
+                    .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
+            });
         },
     }
 </script>
@@ -194,6 +204,9 @@
                     .ico-heart{
                         animation: heart-beat 0.45s ease;
                     }
+                }
+                p{
+                    overflow: hidden;
                 }
             }
         }

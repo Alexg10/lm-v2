@@ -23,6 +23,9 @@ body{
 
 .cursor-fx__inner__outside{
     z-index: 9999;
+    width: 48px!important;
+    height:48px!important;
+    padding: 2px;
     &.transparent{
         border-color: transparent!important;
         width: 15px!important;
