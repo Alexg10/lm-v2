@@ -45,6 +45,7 @@
                 for(var i=0; i< wordContentSplit.length; i++){
                     var newSpan = document.createElement('span');
                     newSpan.style.display = "inline-block";
+                    newSpan.style.minWidth = "5px";
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
@@ -57,7 +58,7 @@
             var scrollM = this.$scrollmagic;
             var VueScrollTo = require('vue-scrollto');
             const scrollOptions = {
-                easing: 'ease-in',
+                easing: 'ease-in-out',
                 force: true,
                 cancelable: false,
                 onDone: function(element) {
@@ -71,20 +72,20 @@
             this.letterContainer("next-project");
             this.letterContainer("next-project-name");
 
-            footerTl.fromTo(".next-cover",1, {opacity: 0.25, width: "70%"},{opacity: 1, width: "100%"},"start")
-            .fromTo(".arrow",2, {opacity: 1, y:0},{opacity: 0, y:100},"start");
+            footerTl.fromTo(".next-cover",1, {opacity: 0, width: "75%"},{opacity: 1, width: "100%"},"start")
+            .fromTo(".arrow",2, {opacity: 1},{opacity: 0},"start");
             const sceneFooter = scrollB.scene({
                 triggerElement: '.footer-project-content',
-                triggerHook: 0.9,
-                offset: -100,
-                duration: 1000
+                triggerHook: 0.8,
+                offset: -200,
+                duration: 900
             })
             .setTween(footerTl)
             // .addIndicators({ name: 'Footer' })
             scrollB.addScene(sceneFooter);
 
             footerTl.eventCallback("onComplete", function () {
-                VueScrollTo.scrollTo('.next-cover', 800, scrollOptions);
+                VueScrollTo.scrollTo('.next-cover', 1400, scrollOptions);
                 footerTl.kill();
             });
 
@@ -98,9 +99,8 @@
                 }
                 const animLetterScene = scrollM.scene({
                     triggerElement: ".footer-project",
-                    triggerHook: 0.70,
-                    duration: 900,
-                    offset: -120
+                    triggerHook: 0.7,
+                    duration: 900
                 })
                 .setTween(upLetterTl)
                 // .addIndicators({ name: 'upLetter' })
@@ -113,15 +113,31 @@
 
 <style lang="scss" scoped>
     .footer-project{
+        position: relative;
         text-align: center;
+        z-index: 9;
         a{
             color: black;
             text-decoration: none;
             font-family: 'GTWalsheimProMedium';
             font-size: 16px;
-            .next-project-name{
-                margin-bottom: 20px;
+
+        }
+        .next-project-name{
+            margin-bottom: 20px;
+            font-family: 'GTWalsheimProMedium';
+            span{
+
+                font-family: 'GTWalsheimProMedium';
             }
+        }
+        .next-project{
+            span{
+                min-width: 7px!important;
+                display: inline-block;
+                font-family: 'GTWalsheimProMedium';
+            }
+            font-family: 'GTWalsheimProMedium';
         }
         .arrow{
             margin-bottom: 100px;
