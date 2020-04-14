@@ -92,6 +92,23 @@
                     path: `/project`
                 })
             },
+            letterContainer(className){
+                var word             = document.getElementsByClassName(className)[0];
+                var wordContent      = word.textContent.trim();
+                var wordContentSplit = wordContent.split("");
+                word.innerHTML       = "";
+
+                for(var i=0; i< wordContentSplit.length; i++){
+                    var newSpan = document.createElement('span');
+                    newSpan.style.display = "inline-block";
+                    newSpan.className = "staggerLetter";
+                    if (wordContentSplit[i] == " "){
+                        newSpan.style.width = "7px";
+                    }
+                    newSpan.innerHTML = wordContentSplit[i];
+                    word.appendChild(newSpan);
+                }
+            }
         },
         mounted() {
             var vm = this;
@@ -135,6 +152,16 @@
             }
             anim.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
+            });
+
+            this.letterContainer("link-stagger");
+
+            var staggerLink = document.querySelector('.project-link');
+            var tl = new TimelineMax();
+
+            staggerLink.addEventListener('mouseenter', e => {
+                tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -20, ease: Power4.easeInOut }, 0.025)
+                    .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
             });
         },
     }
@@ -207,7 +234,8 @@
             color: white;
             font-size: 18px;
             font-family: 'GTWalsheimProMedium';
-            padding: 2px 0 15px;
+            padding: 2px 0 0;
+            overflow: hidden;
         }
         @media only screen and ( max-width : 1280px ) {
             .project-name{
