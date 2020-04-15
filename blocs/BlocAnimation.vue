@@ -66,7 +66,7 @@
 
                 tl.fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
                 .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
-                .staggerFromTo('.hand-anim', 2, {y: 40},{y: 0, ease: Power4.easeInOut, stagger:0.2},  "start+=");  
+                .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
                 
                 tlPara.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
 

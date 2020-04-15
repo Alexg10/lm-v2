@@ -108,6 +108,7 @@
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
+
             }
         },
         mounted() {
@@ -154,15 +155,18 @@
                 document.querySelector('.cross').classList.add("active");
             });
 
-            this.letterContainer("link-stagger");
+            if(this.link){
+        
+                this.letterContainer("link-stagger");
 
-            var staggerLink = document.querySelector('.project-link');
-            var tl = new TimelineMax();
+                var staggerLink = document.querySelector('.project-link');
+                var tl = new TimelineMax();
 
-            staggerLink.addEventListener('mouseenter', e => {
-                tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -20, ease: Power4.easeInOut }, 0.025)
-                    .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
-            });
+                staggerLink.addEventListener('mouseenter', e => {
+                    tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -20, ease: Power4.easeInOut }, 0.025)
+                        .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
+                });
+            }
         },
     }
 </script>

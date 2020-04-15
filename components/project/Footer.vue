@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-project" v-bind:style='{backgroundColor: color.acfProjectFields.footerBgcolor}'>
+    <div class="footer-project" v-bind:style='{backgroundColor: color}'>
         <div class="footer-project-content">
             <div @click="changeProject" class="link-to-link">
                 <div class="link-to linkHover">
@@ -86,7 +86,7 @@
             scrollB.addScene(sceneFooter);
 
             footerTl.eventCallback("onComplete", function () {
-                VueScrollTo.scrollTo('.next-cover', 1400, scrollOptions);
+                VueScrollTo.scrollTo('.next-cover', 1000, scrollOptions);
                 footerTl.kill();
             });
 
