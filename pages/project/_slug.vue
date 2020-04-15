@@ -11,7 +11,7 @@
         <div v-for="bloc in project.acfProjectFields.blocs" :key="bloc.id">
             <component :is="bloc.fieldGroupName.split('_').reverse().shift()" :bloc="bloc"/>
         </div>
-        <Footer :link="project.acfProjectFields.footerLink" v-if="project.acfProjectFields.footerLink"/>
+        <Footer :link="project.acfProjectFields.footerLink" :color="project.acfProjectFields.footerBgcolor" v-if="project.acfProjectFields.footerLink"/>
     </div>
 </template>
 

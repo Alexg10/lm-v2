@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-project">
+    <div class="footer-project" v-bind:style='{backgroundColor: color.acfProjectFields.footerBgcolor}'>
         <div class="footer-project-content">
             <div @click="changeProject" class="link-to-link">
                 <div class="link-to linkHover">
@@ -24,7 +24,8 @@
             }
         },
         props: [
-            'link'
+            'link',
+            'color'
         ],
         methods: {
             changeProject() {

@@ -394,11 +394,11 @@
         height: 100%;
         max-width: 590px;
         overflow: hidden;
-        transition: all 1.1s cubic-bezier(.19,.77,.2,1);
+        transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
         margin: 0 15%;
         &.hidden{
             height: 0!important;
-            transition: all 1.7s cubic-bezier(.19,.77,.2,1);
+            transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
             transition-delay: 1s;
         }
     }

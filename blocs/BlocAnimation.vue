@@ -64,12 +64,11 @@
                 var animImg    = el.getElementsByClassName("bloc-animation-desktop-img");
                 var animImgMob = el.getElementsByClassName("bloc-animation-mobile-img");
 
-                tl.fromTo(animImg, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
+                tl.fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
                 .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
                 .staggerFromTo('.hand-anim', 2, {y: 40},{y: 0, ease: Power4.easeInOut, stagger:0.2},  "start+=");  
                 
-                tlPara.fromTo(animImg, 2, {y: 0},{y: 50, overwrite: false}, "start")
-                .fromTo(animImgMob, 2, {y: -50},{y: -200, overwrite: false}, "start");                
+                tlPara.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
 
                 const animSectionScene = scrollM.scene({
                     triggerElement: el,
@@ -114,26 +113,36 @@
         .bloc-animation-mobile-container{
             position: relative;
             display: inline-block;
-            margin-top: -153px;
+            position: absolute;
+            bottom: 0;
+            z-index: 9;
+            // margin-top: -153px;
         }
         .anim-container{
             display: flex;
-            width: 50%;
+            width: 45%;
             position: relative;
             left: 35%;
-            top: 20px;
+            top: -20px;
+            justify-content: space-between;
             .hand-anim{
                 flex: 1;
                 padding: 0 10px;
+                svg{
+                    width: 70%!important;
+                }
+            }
+            #animation-hand{
+                max-width: 130px;
             }
             #animation-accessibility{
-                max-width: 90px;
+                max-width: 60px;
             }
             #animation-smart{
-                max-width: 140px;
+                max-width: 100px;
             }
             #animation-creativ{
-                max-width: 120px;
+                max-width: 80px;
             }
         }
         @media ( max-width : 780px ) {

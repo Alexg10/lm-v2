@@ -96,7 +96,8 @@
     .bloc-after{
         position: relative;
         // margin-top: -130px;
-        padding-top: 118px;
+        background-color: #F7F6F5;
+        padding-top: 95px;
         padding-bottom: 125px;
         overflow: hidden;
         .after-bg{

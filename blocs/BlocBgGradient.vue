@@ -30,8 +30,6 @@
             var textContent            = document.getElementsByClassName("text")[0];
             var tl                     = new TimelineMax({ paused: false});
 
-            tl.fromTo(textContent, 1.5, {y: 80, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false});
-            
             const textScene = scrollM.scene({
                 triggerElement: ".gradient-bg",
                 triggerHook   : 0.65,
@@ -72,7 +70,7 @@
         z-index: 99;
         .gradient-column{
             flex:1;
-            min-height: 652px;
+            min-height: 740px;
             min-width: 16.666666667%;
             width: 16.666666667%;
             border-right: 1.5px solid rgba(227,225,225,0.33);
