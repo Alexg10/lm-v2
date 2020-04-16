@@ -49,6 +49,8 @@
         ],
         methods: {
             goToList(){
+                let fromProject = this.$route.params.slug;
+                this.$store.commit("fromProject", fromProject);
                 document.querySelector('.cross').classList.remove("active");
                 this.changeProject();
 

@@ -1,6 +1,7 @@
 export const state = () => ({
     cover: null,
-    back: false
+    back: false,
+    fromProject: null
 })
 
 export const mutations = {
@@ -9,7 +10,10 @@ export const mutations = {
         state.cover = cover;
     },
     setBack(state, back) {
-        console.log(back);
         state.back = back;
+    },
+    fromProject(state, fromProject) {
+        console.log(fromProject);
+        state.fromProject = fromProject;
     }
 }

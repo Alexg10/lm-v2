@@ -65,7 +65,7 @@
             },
             currentProject(){
                 return this.projects[this.currentIndex];
-            }
+            },
         },
         apollo: {
             projects : {
@@ -76,55 +76,72 @@
         },
         methods: {
             handleInit(event, slick){
-                const current            = slick.$slides[0];
-                const prev               = current.previousSibling;
-                const next               = current.nextSibling;
-                const projectSlideWidth  = current.querySelector('.project-slide').offsetWidth;
-                const projectSlideHeight = current.querySelector('.project-slide').offsetHeight;
+                let slickSlider = slick;
+                let back = this.$store.state.back;
+                var vm = this;
 
-                if(this.$store.state.back){
-                    document.querySelector('.project-cover').classList.add('hide');
-                }
+                function animIntro(index){
+                    var index = 0;
 
-                var introTl = gsap.timeline({delay: 1})
-                introTl.add('start');
-                if((!this.$device.ipad) && (!this.$device.mobile)){
-                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                    if(back){
+                        document.querySelector('.project-cover').classList.add('hide');
+
+                        let project = vm.$store.state.fromProject;
+                        let projectLength = vm.projects.length;
+                        for (var i = 0; i<projectLength; i++){
+                            if(vm.projects[i].slug == project){
+                                index = i;
+                            }
+                        }
+                        slickSlider.goTo(index);
+                    }
+
+                    const current            = slickSlider.$slides[index];
+                    const prev               = current.previousSibling;
+                    const next               = current.nextSibling;
+                    const projectSlideWidth  = current.querySelector('.project-slide').offsetWidth;
+                    const projectSlideHeight = current.querySelector('.project-slide').offsetHeight;
+
+                    var introTl = gsap.timeline({delay: 1})
+                    introTl.add('start');
+
+                    if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
                         .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
-                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
-                        .to(this.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                        .to( vm.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart=+0.5')
+                        .to(vm.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                         .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                        .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3')
-                        .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart=+3');
-                }else{
-                    introTl.to( this.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
-                        .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
-                        .to( this.$refs.cover, {height: projectSlideHeight, duration: 4, ease: "power4.inOut"},'animIntroStart=+0.5')
-                        .to(this.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
-                        .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
-                        .from(prev, {x:'-30%', duration: 4, ease: "power4.inOut"},'animIntroStart=+4')
-                        .from(next, {x:'30%', duration: 4, ease: "power4.inOut"},'animIntroStart=+4')
-                        .to({}, 1, {});
+                        .from(prev, {x:'-20%', duration: 3},'animIntroStart=+3')
+                        .from(next, {x:'20%', duration: 3},'animIntroStart=+3');
+                    }else{
+                        introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                            .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
+                            .to( vm.$refs.cover, {height: projectSlideHeight, duration: 4, ease: "power4.inOut"},'animIntroStart=+0.5')
+                            .to(vm.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                            .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                            .from(prev, {x:'-30%', duration: 4},'animIntroStart=+4')
+                            .from(next, {x:'30%', duration: 4},'animIntroStart=+4')
+                            .to({}, 1, {});
+                    }
+
+                    introTl.eventCallback("onComplete", ()=> {
+                        vm.$refs.cover.style.display = "none";
+                        document.querySelector('.project-title').classList.add("visible");
+                        setTimeout(() => {
+                            document.querySelector('.logo').classList.add("visible");
+                        }, 2000);
+                        vm.$store.commit("setBack", false);
+                        document.querySelector('.project-cover').classList.remove('hide');
+                    });
                 }
 
-                introTl.eventCallback("onComplete", ()=> {
-                    this.$refs.cover.style.display = "none";
-                    document.querySelector('.project-title').classList.add("visible");
-                    setTimeout(() => {
-                        document.querySelector('.logo').classList.add("visible");
-                    }, 2000);
-                    this.$store.commit("setBack", false);
-                    document.querySelector('.project-cover').classList.remove('hide');
-                });
+                animIntro()
 
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.list-container').onmousemove = event => {
                         this.parallax(event);
                     }
                 }
-
-
-
             },
             handleAfterChange(event, slick, currentId){
                 this.currentIndex = currentId;
@@ -183,6 +200,7 @@
 //                 document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
+                console.log(this.isLeave);
                 if(!this.isLeave){
                     document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                     document.querySelector('.project-title').classList.add('hover');
@@ -191,6 +209,7 @@
 
             },
             projectLeave(){ 
+                console.log(this.isLeave);
                 if(!this.isLeave){
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.project-title').classList.remove('hover');
