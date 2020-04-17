@@ -1,6 +1,6 @@
 <template>
         <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp">
-            <div v-if='!this.$store.state.back' class="intro">
+            <div v-if='!this.$store.state.back' :class="!this.$store.state.back ? 'intro': 'intro hide'">
                 <div class="word-container ">
                     <div class="word-wrapper word-wrapper-elle">
                         <div class="word louise">
@@ -209,7 +209,7 @@
                         vm.scrollUp();
                     }
                     if (e.deltaY > 0 && vm.scrollable) {
-                        vm.scrollDown()
+                        vm.scrollDown();
                     }
                 });
             },
@@ -396,6 +396,12 @@
             }else{
                 let vm = this;
                 vm.scrollable = true;
+                console.log("play");
+                document.querySelector('.work-container').classList.remove('visible');
+                // this.workUpUp.pause(0);
+                // this.workUpUp.play();
+                // this.scrollUp();
+                this.loveDownDown.play();
             }
 
             if((!this.$device.ipad) && (!this.$device.mobile)){
@@ -510,7 +516,9 @@
         align-items: center;
         background-color: #fff;
         z-index: 20;
-
+        &.hide{
+            display: none;
+        }
         .word-container{
             &:hover{
                 .word,

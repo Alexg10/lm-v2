@@ -1,6 +1,11 @@
 <template>
     <div class="list-container">
-        <Logo />
+        <div class="logo" >
+            <div class="logo-container" v-on:mouseenter="logoHover" v-on:mouseleave="logoLeave" v-on:click="logoClick">
+                <span class="letter first-letter">L</span>
+                <span class="letter second-letter">M</span>
+            </div>
+        </div>
         <div v-if="projects" class="project-list">
 
             <div ref="cover" class="project-cover" >
@@ -37,12 +42,8 @@
 
     import gsap from "gsap"
     import projects from '~/queries/projects'
-    import Logo from '~/components/project/Logo.vue'
 
     export default {
-        components:{
-            Logo
-        },
         transition: 'listFade',
         data(){
             return{
@@ -135,7 +136,7 @@
                     });
                 }
 
-                animIntro()
+                animIntro();
 
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.list-container').onmousemove = event => {
@@ -289,6 +290,29 @@
                         letterTrans.fromTo(elemToAnim , 0.4, {scaleX:1, scaleY:1, opacity:1},{scaleX:3, scaleY:3, opacity:0, ease: Power4.easeInOut, overwrite: false},"-=0.2");    
                     });
                 }, 300);
+            },
+            logoHover(){
+                document.querySelector('.cursor-fx__inner__outside').classList.add('hover'); 
+            },
+            logoLeave(){
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover'); 
+            },
+            logoClick(){
+                var vm = this;
+                this.isLeave = true;
+                document.querySelector('.logo').classList.remove('visible'); 
+                document.querySelector('.project-title').classList.add('hidden'); 
+                var slide;
+                slide = document.querySelectorAll(".project-slide");
+                for (var i = 0; i < slide.length; ++i) {
+                    slide[i].classList.add('hidden');
+                }
+                this.$store.commit("setBack", true);
+                setTimeout(function(){
+                    vm.$router.push({
+                        path: '/'
+                    })
+                }, 2500); 
             },
 
             //CLICK
@@ -556,6 +580,60 @@
         transition: opacity 0.5s ease;
         &.visible{
             opacity: 1;
+        }
+    }
+    .logo{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        text-align: center;
+        font-size: 22px;
+        z-index: 9;
+        padding-top: 30px;
+        @media ( max-width : 780px ) {
+            padding-top: 40px;
+        }
+        @media ( max-width : 680px ) {
+            padding-top: 40px;
+        }
+        &.visible{
+            .logo-container{
+                .first-letter,
+                .second-letter{
+                    transform: translateY(0%);
+                    transition: 0.5s ease-in-out;
+                }
+                .second-letter{
+                    transition-delay:0.35s;
+                }
+            }
+        }
+        .logo-container{
+            display: inline-block;
+            padding-top: 4px;
+            overflow: hidden;
+            padding-bottom: 20px;
+            padding-right: 20px;
+            .letter{
+                float: left;
+            }
+            .first-letter{
+                position: relative;
+                top: -8px;
+                left: 1px;
+                transform: translateY(-120%);
+                transition: 0.3s ease;
+            }
+            .second-letter{
+                position: relative;
+                top: 8px;
+                left: -1px;
+                transform: translateY(0%);
+                transform: translateY(-120%);
+                transition: 0.3s ease;
+                transition-delay:0.4s;
+            }
         }
     }
 
