@@ -8,7 +8,7 @@ query getProjectBySlug($slug: String!) {
       projectDescription
       projectLink
       headerPicture{
-        sourceUrl(size: LARGE)
+        sourceUrl(size: HEADER_PICTURE)
       }
       footerBgcolor
       footerLink{
@@ -16,7 +16,7 @@ query getProjectBySlug($slug: String!) {
           id
           slug
           acfProjectFields {
-            projectTitle
+          projectTitle
             headerPicture{
               sourceUrl(size: LARGE)
             }

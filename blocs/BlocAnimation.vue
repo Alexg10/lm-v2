@@ -150,7 +150,7 @@
                 max-width: 60px;
             }
             #animation-smart{
-                max-width: 100px;
+                max-width: 90px;
             }
             #animation-creativ{
                 max-width: 80px;
