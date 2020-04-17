@@ -57,6 +57,7 @@
 
             var scrollM = this.$scrollmagic;
             var blocsAnim = document.getElementsByClassName("bloc-animation");
+            var vm = this;
 
             Array.prototype.forEach.call(blocsAnim,function(el, i) {
                 var tl         = new TimelineMax({ paused: false});
@@ -64,31 +65,38 @@
                 var animImg    = el.getElementsByClassName("bloc-animation-desktop-img");
                 var animImgMob = el.getElementsByClassName("bloc-animation-mobile-img");
 
+
                 tl.fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
-                .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
-                .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
+                    .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
+                    .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
+
+
+                if(!vm.$device.mobile){
+                    tlPara.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
+
+                    const animSectionScene = scrollM.scene({
+                        triggerElement: el,
+                        triggerHook: 0.7,
+                        offset: -200
+                    })
+                    .setTween(tl)
+                    .reverse(false)
+                    // .addIndicators({ name: 'AnimeSection' })
+                    scrollM.addScene(animSectionScene)
+
+                    const animSectionScenePara = scrollM.scene({
+                        triggerElement: el,
+                        triggerHook: 0.65,
+                        offset: -80,
+                        duration: window.innerHeight*2
+                    })
+                    .setTween(tlPara)
+                    // .addIndicators({ name: 'AnimeSection' })
+                    scrollM.addScene(animSectionScenePara);
+
+                }
                 
-                tlPara.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
 
-                const animSectionScene = scrollM.scene({
-                    triggerElement: el,
-                    triggerHook: 0.7,
-                    offset: -200
-                })
-                .setTween(tl)
-                .reverse(false)
-                // .addIndicators({ name: 'AnimeSection' })
-                scrollM.addScene(animSectionScene)
-
-                const animSectionScenePara = scrollM.scene({
-                    triggerElement: el,
-                    triggerHook: 0.65,
-                    offset: -80,
-                    duration: window.innerHeight*2
-                })
-                .setTween(tlPara)
-                // .addIndicators({ name: 'AnimeSection' })
-                scrollM.addScene(animSectionScenePara);
             });
         }
     }
@@ -99,6 +107,9 @@
         // background: $white;
         background-color: #fff;
         position: relative;
+        @media ( max-width : 680px ) {
+            margin-bottom: 200px;
+        }
         .container{
             width: 100%;
         }
@@ -170,21 +181,34 @@
             .bloc-animation-mobile-container{
                 width: 40%;
                 margin-top: 57px;
+                bottom: -270px;
                 img{
                     width: 100%;
                 }
             }
             .anim-container{
                 display: flex;
-                width: 50%;
+                width: 45%;
                 position: absolute;
                 left: 50%;
-                top: 290px;
+                top: 240px;
                 right: 50px;
                 flex-wrap: wrap;
                 .hand-anim{
                     width: 50%;
                     flex: initial;
+                }
+                #animation-hand{
+                    max-width: 130px;
+                }
+                #animation-accessibility{
+                    max-width: 60px;
+                }
+                #animation-smart{
+                    max-width: 70px;
+                }
+                #animation-creativ{
+                    max-width: 70px;
                 }
             }
         }

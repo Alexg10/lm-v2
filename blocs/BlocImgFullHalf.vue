@@ -27,6 +27,9 @@
                 justify-content: center;
                 width: 50%;
                 overflow: hidden;
+                @media only screen and ( max-width : 680px ) {
+                    width: 100%;
+                }
                 img{
                     width: 100%;
                     transform: scale(1.1);

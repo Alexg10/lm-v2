@@ -37,11 +37,11 @@
             var imgH2 = document.querySelector(".bloc-after-full-height-container:last-of-type");
 
 
-            tl.staggerFromTo(".bloc-after-full-height-container", 2, {y: 40, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false}, 0.35);                
+            tl.staggerFromTo(".bloc-after-full-height-container", 2, {opacity: 0},{ opacity: 1, ease: Power4.easeInOut, overwrite: false}, 0.35);                
             const imgSectionScene = scrollM.scene({
                 triggerElement: imgContain,
-                triggerHook: 0.55,
-                offset: -50
+                triggerHook: 0.7,
+                offset: -100
             })
             .setTween(tl)
             .reverse(false)
@@ -153,6 +153,7 @@
         }
         @media ( max-width : 780px ) {
             padding: 0 10px;
+            padding-top: 100px;
             .bloc-after-full-height-container{
                 img{
                     width: 100%;
@@ -173,6 +174,8 @@
             .container{
                 text-align: center;
             }
+
+            padding-top: 140px;
             .bloc-after-top-left-container{
                 float: none;
                 right: auto;;
