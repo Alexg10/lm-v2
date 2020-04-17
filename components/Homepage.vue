@@ -134,7 +134,7 @@
             scrollUp(){
                 var vm = this;
                 vm.scrollable = false;
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((vm.$device.ipad) || (vm.$device.mobile)){
                     document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
                 }
                 if( !document.querySelector('.work-container').classList.contains('visible') ){
@@ -145,7 +145,7 @@
                     vm.loveDown.eventCallback("onComplete", function () {
                         vm.workDownDown.pause(0);
                         vm.workDownDown.play();
-                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        if((vm.$device.ipad) || (vm.$device.mobile)){
                             document.querySelector('.circle-container.work-hold').classList.add("visible");
                         }
                     });
@@ -157,7 +157,7 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveDownDown.pause(0);
                         vm.loveDownDown.play();
-                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        if((vm.$device.ipad) || (vm.$device.mobile)){
                             document.querySelector('.circle-container.love').classList.add("visible");
                         }
                     });
@@ -170,7 +170,7 @@
                 var vm = this;
                 vm.scrollable = false;
                 document.getElementsByClassName("arrow")[0].classList.remove("visible");
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((vm.$device.ipad) || (vm.$device.mobile)){
                     document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
                 }
                 if( document.querySelector('.work-container').classList.contains('visible') ){
@@ -181,7 +181,7 @@
                         document.querySelector('.work-container').classList.remove("visible");
                         vm.loveUpR.pause(0);
                         vm.loveUpR.play();
-                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        if((vm.$device.ipad) || (vm.$device.mobile)){
                             document.querySelector('.circle-container.love').classList.add("visible");
                         }
                     });
@@ -193,7 +193,7 @@
                     vm.loveUpUp.eventCallback("onComplete", function () {
                         vm.workUp.pause(0);
                         vm.workUp.play();
-                        if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        if((vm.$device.ipad) || (vm.$device.mobile)){
                             document.querySelector('.circle-container.work-hold').classList.add("visible");
                         }
                     });
@@ -491,7 +491,7 @@
         left: 50%;
         opacity: 0;
         transition: 0.5s ease;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         animation: upNdown 1s infinite alternate;
         z-index: 2;
         &.visible{
@@ -501,8 +501,8 @@
             transition-delay: 7s;
         }
         @keyframes upNdown {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
+            0% { transform: translate(-50%, 0); }
+            100% { transform: translateY(-50%, -10px); }
         }
     }
     .intro{
