@@ -448,6 +448,10 @@
         overflow: hidden;
         transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
         margin: 0 15%;
+        @media ( max-width : 780px ) {
+            width: 70%!important;
+        }
+
         &.hidden{
             height: 0!important;
             transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
