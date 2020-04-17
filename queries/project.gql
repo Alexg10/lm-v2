@@ -66,14 +66,14 @@ query getProjectBySlug($slug: String!) {
         ... on Project_Acfprojectfields_Blocs_BlocImgFullCenter {
           fieldGroupName
           blocImgFullCenterImg {
-            sourceUrl(size: SKETCH_PICTURE)
+            sourceUrl(size: FULL_WIDTH)
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocImgFullHalf{
           fieldGroupName
           blocImgFullHalfImages{
             blocImgFullHalfImage{
-              sourceUrl(size: SKETCH_PICTURE)
+              sourceUrl(size: FULL_WIDTH)
             }
           }
           
