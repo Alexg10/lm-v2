@@ -8,7 +8,7 @@
         projectTitle
         projectType
         headerPicture{
-          sourceUrl(size: SKETCH_PICTURE)
+          sourceUrl(size: HEADER_PICTURE)
         }
       }
     }
