@@ -32,7 +32,7 @@
                     </div>
                 </div> 
             </slick-slide>
-            <div class="prev-project" @mouseenter="prevSlideEnter" @mouseleave="prevSlideLeave" @click="prevSlide"></div>
+            <div  class="prev-project" @mouseenter="prevSlideEnter" @mouseleave="prevSlideLeave" @click="prevSlide"></div>
             <div class="next-project" @mouseenter="nextSlideEnter" @mouseleave="nextSlideLeave" @click="nextSlide"></div>
         </div>
     </div>
@@ -222,28 +222,36 @@
                 this.$refs.slick.prev();
             },
             prevSlideEnter(){
-                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
-                document.querySelector('.prev-project').classList.add('hover');
-                document.querySelector('.slick-current').previousSibling.classList.add('hover');
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    document.querySelector('.prev-project').classList.add('hover');
+                    document.querySelector('.slick-current').previousSibling.classList.add('hover');
+                }
             },
             prevSlideLeave(){
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
-                document.querySelector('.prev-project').classList.remove('hover');
-                document.querySelector('.slick-current').previousSibling.classList.remove('hover');
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    document.querySelector('.prev-project').classList.remove('hover');
+                    document.querySelector('.slick-current').previousSibling.classList.remove('hover');
+                }
             },
             //NEXT
             nextSlide(){
                 this.$refs.slick.next();
             },
             nextSlideEnter(){
-                document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
-                document.querySelector('.next-project').classList.add('hover');
-                document.querySelector('.slick-current+div').classList.add('hover');
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    document.querySelector('.next-project').classList.add('hover');
+                    document.querySelector('.slick-current+div').classList.add('hover');
+                }
             },
             nextSlideLeave(){
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
-                document.querySelector('.next-project').classList.remove('hover');
-                document.querySelector('.slick-current+div').classList.remove('hover');
+                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    document.querySelector('.next-project').classList.remove('hover');
+                    document.querySelector('.slick-current+div').classList.remove('hover');
+                }
             },
             animLeaveLetters(){
                 let vm = this;
