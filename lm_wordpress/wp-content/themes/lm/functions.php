@@ -14,8 +14,7 @@
 add_image_size( post_size, 360, 200, true );
 add_image_size( header_picture, 2200);
 add_image_size( sketch_picture, 600);
-
-
+add_image_size( full_width, 1200);
 
 remove_filter ('the_content',  'wpautop');
 remove_filter ('acf_the_content', 'wpautop');
