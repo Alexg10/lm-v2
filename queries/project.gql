@@ -18,7 +18,7 @@ query getProjectBySlug($slug: String!) {
           acfProjectFields {
           projectTitle
             headerPicture{
-              sourceUrl(size: LARGE)
+              sourceUrl(size: HEADER_PICTURE)
             }
           }
         }
@@ -59,21 +59,21 @@ query getProjectBySlug($slug: String!) {
           typo
           blocFourSectionImg {
             image {
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocImgFullCenter {
           fieldGroupName
           blocImgFullCenterImg {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocImgFullHalf{
           fieldGroupName
           blocImgFullHalfImages{
             blocImgFullHalfImage{
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
           
@@ -85,7 +85,7 @@ query getProjectBySlug($slug: String!) {
           chapterName
           blocSixImages{
             blocSixImg{
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
           
@@ -102,7 +102,7 @@ query getProjectBySlug($slug: String!) {
           blocBgGradientTxt
           gradientBackground {
             gradientBackgroundImage {
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
         }
@@ -110,39 +110,39 @@ query getProjectBySlug($slug: String!) {
           fieldGroupName
           firstPatchwork {
             firstPatchworkImages {
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
           patchworkTxt
           secondPatchwork {
             secondPatchworkImg {
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocAnimation {
           fieldGroupName
           imageDesktop {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
           imageMobile {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
         }
         ... on Project_Acfprojectfields_Blocs_BlocAfterEffect {
           fieldGroupName
           imageMiddle {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
           imageTopLeft {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
           imageTopRight {
-            sourceUrl(size: LARGE)
+            sourceUrl(size: SKETCH_PICTURE)
           }
           imagesFullHeight {
             imageFullHeight {
-              sourceUrl(size: LARGE)
+              sourceUrl(size: SKETCH_PICTURE)
             }
           }
         }
