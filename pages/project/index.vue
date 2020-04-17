@@ -51,7 +51,7 @@
                 isLeave: false,
                 slickOptions: {
                     slidesToShow : 1,
-                    speed        : 1200,
+                    speed        : 1500,
                     infinite     : true,
                     centerMode   : true,
                     centerPadding: '20%',
@@ -222,14 +222,14 @@
                 this.$refs.slick.prev();
             },
             prevSlideEnter(){
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                     document.querySelector('.prev-project').classList.add('hover');
                     document.querySelector('.slick-current').previousSibling.classList.add('hover');
                 }
             },
             prevSlideLeave(){
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.prev-project').classList.remove('hover');
                     document.querySelector('.slick-current').previousSibling.classList.remove('hover');
@@ -240,14 +240,14 @@
                 this.$refs.slick.next();
             },
             nextSlideEnter(){
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                     document.querySelector('.next-project').classList.add('hover');
                     document.querySelector('.slick-current+div').classList.add('hover');
                 }
             },
             nextSlideLeave(){
-                if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.next-project').classList.remove('hover');
                     document.querySelector('.slick-current+div').classList.remove('hover');
@@ -443,6 +443,7 @@
         overflow: visible;
         display: block;
         height: 100%;
+        width: 50%!important;
         max-width: 590px;
         overflow: hidden;
         transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
