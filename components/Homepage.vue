@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <img class="arrow link" :src="arrowDown" alt="">
+            <img class="arrow link link-hover" :src="arrowDown" alt="" v-on:click="scrollDown" data-cursor-hover>
         </div>
 </template>
 
@@ -169,7 +169,6 @@
             scrollDown(){
                 var vm = this;
                 vm.scrollable = false;
-                document.getElementsByClassName("arrow")[0].classList.remove("visible");
                 if((vm.$device.ipad) || (vm.$device.mobile)){
                     document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
                 }
@@ -260,7 +259,6 @@
                 this.LoveClickTl.pause(0);
                 this.loveShowContent.pause(0);
                 this.LoveClickTl.play();
-                document.getElementsByClassName("arrow")[0].classList.remove("visible");
                 document.querySelector('.word-container').classList.add("clicked");
                 this.LoveClickTl.eventCallback("onComplete", function () {
                     document.querySelector('.bg-love').classList.remove("visible");
@@ -493,12 +491,12 @@
         transition: 0.5s ease;
         transform: translate(-50%, -50%);
         animation: upNdown 1s infinite alternate;
-        z-index: 2;
+        z-index: 60;
         &.visible{
             opacity: 1;
             bottom: 45px;
             transition: 0.8s ease;
-            transition-delay: 7s;
+            transition-delay: 1s;
         }
         @keyframes upNdown {
             0% { transform: translate(-50%, 0); }

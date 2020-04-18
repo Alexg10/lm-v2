@@ -89,7 +89,7 @@
                     newSpan.style.display = "inline-block";
                     newSpan.className = "staggerLetter";
                     if (wordContentSplit[i] == " "){
-                        newSpan.style.width = "7px";
+                        newSpan.style.width = "5px";
                     }
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
@@ -170,12 +170,16 @@
         }
         .base-line{
             font-size: 190px;
+            font-size: 11vw;
             // color: $main-color;
             color        : #FF9170;
             white-space  : nowrap;
             line-height  : 270px;
             padding-right: 40px;
             margin-right : 40px;
+            @media ( min-width : 1500px ) {
+                font-size: 190px;
+            }
             @media ( max-width : 680px ) {
                 font-size  : 78px;
                 line-height: 100px;
@@ -186,6 +190,10 @@
             width   : 100vw;
             overflow: hidden;
             margin  : 110px 0;
+            margin: 4vh 0;
+            @media ( min-width : 1500px ) {
+                margin  : 110px 0;
+            }
             @media ( max-width : 680px ) {
                 margin-bottom: 30px;
             }
@@ -217,6 +225,7 @@
             max-width      : 1180px;
             position       : fixed;
             bottom         : 90px;
+            bottom         : 7vh;
             left           : 50%;
             transform      : translateX(-50%);
             padding        : 0 20px;
