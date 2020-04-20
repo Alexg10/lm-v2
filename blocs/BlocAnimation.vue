@@ -131,10 +131,10 @@
         }
         .anim-container{
             display: flex;
-            width: 45%;
+            width: 60%;
             position: relative;
-            left: 35%;
-            top: -20px;
+            left: 28%;
+            top: -27px;
             justify-content: space-between;
             .hand-anim{
                 flex: 1;
@@ -162,6 +162,8 @@
                 left: 20px;
             }
             .anim-container{
+                width: 55%;
+                left: 38%;
                 .hand-anim{
                     flex: 1;
                     padding: 0 10px;
@@ -194,6 +196,7 @@
                 top: 240px;
                 right: 50px;
                 flex-wrap: wrap;
+                justify-content: space-evenly;
                 .hand-anim{
                     width: 50%;
                     flex: initial;
@@ -202,13 +205,13 @@
                     max-width: 130px;
                 }
                 #animation-accessibility{
-                    max-width: 60px;
+                    max-width: 50px;
                 }
                 #animation-smart{
                     max-width: 70px;
                 }
                 #animation-creativ{
-                    max-width: 70px;
+                    max-width: 63px;
                 }
             }
         }

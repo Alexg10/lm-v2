@@ -40,6 +40,11 @@
 
 
     export default {
+        data(){
+            return{
+                bloc:''
+            }
+        },
         scrollToTop: true,
         pageTransition: 'projectToList',
         components: {

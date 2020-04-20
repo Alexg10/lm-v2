@@ -1,7 +1,13 @@
 <template>
     <div class="footer-project" v-bind:style='{backgroundColor: color}'>
         <div class="footer-project-content">
-            <div @click="changeProject" class="link-to-link">
+            <div class="link-to-link" v-scroll-to="{
+                el: '.next-cover',
+                duration: 2000,
+                easing: [0.24, 0.88, 0.41, 1],
+                cancelable: false,
+                onDone: changeProject
+            }">
                 <div class="link-to linkHover">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
@@ -31,7 +37,6 @@
             changeProject() {
                 // Set project to store
                 this.$store.commit('setCover', this.link);
-
                 // Animate out
                 this.$router.push({
                     path: `/project/${this.link.slug}`
@@ -50,7 +55,7 @@
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
-            },
+            }
         },
         mounted() {
             var vm = this;
@@ -65,11 +70,7 @@
                 cancelable: false,
                 onDone: function(element) {
                     VueScrollTo.unbind(element);
-                    setTimeout(() => {
-                        console.log('Done');
-                        vm.changeProject();
-                    }, 200);
-  
+                    vm.changeProject();
                 }
             }
 
@@ -111,7 +112,6 @@
                 .setTween(upLetterTl)
                 // .addIndicators({ name: 'upLetter' })
                 scrollM.addScene(animLetterScene)
-
             });
         }
     }

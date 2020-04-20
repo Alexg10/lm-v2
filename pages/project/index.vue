@@ -373,10 +373,14 @@
 </script>
 
 <style lang="scss" scoped>
+    body {
+        overscroll-behavior-x: none;
+    }
     .list-container{
         overflow: hidden;
         width: 100vw;
         height: 100vh;
+        overscroll-behavior-x: none;
     }
     .prev-project,
     .next-project{
@@ -443,13 +447,14 @@
         overflow: visible;
         display: block;
         height: 100%;
-        width: 50%!important;
+        width: 48%!important;
         max-width: 590px;
         overflow: hidden;
         transition: all 1.4s cubic-bezier(0.24, 0.88, 0.41, 0.99);
         margin: 0 15%;
         @media ( max-width : 780px ) {
-            width: 70%!important;
+            width: 80%!important;
+            margin: 0 14%;
         }
 
         &.hidden{
