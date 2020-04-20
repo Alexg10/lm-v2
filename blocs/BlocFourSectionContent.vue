@@ -84,9 +84,12 @@
                         &:last-of-type{
                             margin-bottom: 20px;
                         }
+                        img{
+                            width: 100%;
+                        }
                     }
                     img{
-                        width: 100%;
+                        width: 50%;
                     }
                 }
             }

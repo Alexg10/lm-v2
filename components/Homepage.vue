@@ -54,6 +54,9 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="word-wrapper-about">
+                            <div class="about-content">about me</div>    
+                        </div> 
                     </div>
                     <div class="circle-container love" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
                         <svg class="circle" xmlns="http://www.w3.org/2000/svg">
@@ -936,6 +939,12 @@
                     top: -58px;
                     left: 3px;
                 }
+            }
+            &-about{
+                font-size:18px;
+                font-family    : 'GTWalsheimProMedium';
+                margin-top: -5px;
+                overflow: hidden;
             }
             &.overflow-visible{
                 overflow: visible;

@@ -10,7 +10,7 @@
         </div>
         <div class="base-line-container">
             <marquee-text :repeat="2" :duration="20">
-                <div class="base-line">images are stronger than words.</div>
+                <div class="base-line">let's take a slice of pizza.</div>
             </marquee-text>
         </div>
         <div class="love-description">

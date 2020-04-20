@@ -7,7 +7,7 @@
                 easing: [0.24, 0.88, 0.41, 1],
                 cancelable: false,
                 onDone: changeProject
-            }">
+            }" data-cursor-hover>
                 <div class="link-to linkHover">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>

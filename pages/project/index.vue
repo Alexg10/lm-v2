@@ -122,6 +122,7 @@
                             .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
                             .from(prev, {x:'-30%', duration: 4},'animIntroStart=+4')
                             .from(next, {x:'30%', duration: 4},'animIntroStart=+4')
+                            .from('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=1.5')
                             .to({}, 1, {});
                     }
 
@@ -343,15 +344,17 @@
                         .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
                         .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
                         .to('.slick-current .slide-img',{xPercent:-50, yPercent:-50, scale:1, duration: 2, ease: "power4.inOut"},'start')
-                        .to('.slide-layer',{opacity:0, duration: 0.5, ease: "power4.inOut"},'start+=1.5')
-                        .set('.project-cover',{display:"block"},'start+=2')
-                        .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+                        .to('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=1.5')
+                        .to('.slide-layer',{opacity:0, duration: 0.7, ease: "power4.inOut"},'start+=1.8')
+                        .set('.project-cover',{display:"block"},'start+=3')
+                        .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=3');
                 }else{
                     outroTl
                         .to(prev, {x:'-20%', duration: 0.3, ease: "power4.in"},'start')
                         .to(next, {x:'20%', duration: 0.3, ease: "power4.in"},'start')
                         .to('.slick-current .slide-img',{xPercent:-50, yPercent:-50, duration: 2, ease: "power4.inOut"},'start')
                         .to('.slide-layer',{opacity:0, duration: 0.8, ease: "power4.inOut"},'start+=1.5')
+                        .to('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=1.5')
                         .set('.project-cover',{display:"block"},'start+=2.3')
                         .to('.project-cover-img', {scale: 1, duration: 2, ease: "power4.inOut"}, 'start+=2.5')
                         .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
@@ -574,6 +577,12 @@
             @media ( max-width : 780px ) {
                 .slide-layer{
                     opacity: 0.4;
+                }
+                .project-type{
+                    transform: translateY(0);
+                    transition: transform 0.6s ease;
+                    transition-delay: 2s;
+
                 }
             }
         }
