@@ -34,11 +34,17 @@
     export default {
         head () {
             return {
-            title: `Louise Margueritat - ${this.title} project`,
-            meta: [
-                { hid: 'description', name: 'description', content: `Louise Margueritat - Folio - ${this.title}` }
-            ]
-        }
+                title: `Louise Margueritat - ${this.title} project`,
+                meta: [
+                    { hid: 'description', name: 'description', content: `Louise Margueritat - Folio - ${this.title}` }
+                ]
+            }
+        },
+        data(){
+            return{
+                lastScrollTop : 0,
+                winHeight :0
+            }
         },
         props: [
             'title',
@@ -53,26 +59,21 @@
                 this.$store.commit("fromProject", fromProject);
                 document.querySelector('.cross').classList.remove("active");
                 this.changeProject();
-
             },
             detectScroll(){
-                var lastScrollTop = 0;
-                var winHeight = window.innerHeight;
+                const st = window.pageYOffset || document.documentElement.scrollTop; 
 
-                window.addEventListener("scroll", function(){ 
-                    var st = window.pageYOffset || document.documentElement.scrollTop; 
-                    if(st>winHeight){
-                        document.querySelector('.cross').classList.remove("active");
-                        document.querySelector('.cross').classList.add("fixed");
-                    }else{
-                        document.querySelector('.cross').classList.remove("active");
-                        document.querySelector('.cross').classList.remove("fixed");
-                    }
-                    if (st < lastScrollTop){
-                        document.querySelector('.cross').classList.add("active");
-                    } 
-                    lastScrollTop = st <= 0 ? 0 : st;
-                }, false);
+                if(st>this.winHeight){
+                    document.querySelector('.cross').classList.remove("active");
+                    document.querySelector('.cross').classList.add("fixed");
+                }else{
+                    document.querySelector('.cross').classList.remove("active");
+                    document.querySelector('.cross').classList.remove("fixed");
+                }
+                if (st < this.lastScrollTop){
+                    document.querySelector('.cross').classList.add("active");
+                } 
+                this.lastScrollTop = st <= 0 ? 0 : st;
             },
             hoverAddClass(){
                 var link = document.getElementsByClassName("link-hover");
@@ -115,8 +116,11 @@
         },
         mounted() {
             var vm = this;
+            this.winHeight = window.innerHeight;
             this.hoverAddClass();
-            this.detectScroll();
+            
+            window.addEventListener("scroll", this.detectScroll);
+
             var anim = gsap.timeline({});
             var sectionTl= new TimelineMax({ paused: false});
 
@@ -170,6 +174,9 @@
                 });
             }
         },
+        destroyed(){
+            window.removeEventListener("scroll", this.detectScroll);
+        }
     }
 </script>
 

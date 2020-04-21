@@ -2,12 +2,12 @@
     <div class="footer-project" v-bind:style='{backgroundColor: color}'>
         <div class="footer-project-content">
             <div class="link-to-link" v-scroll-to="{
-                el: '.next-cover',
+                el: '.footer-project-content',
+                offset: 50,
                 duration: 2000,
                 easing: [0.24, 0.88, 0.41, 1],
-                cancelable: false,
-                onDone: changeProject
-            }" data-cursor-hover>
+                cancelable: false            
+                }" data-cursor-hover>
                 <div class="link-to linkHover">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
@@ -26,7 +26,9 @@
     export default {
         data(){
             return{
-                arrowDown
+                arrowDown,
+                timelines: {},
+                scenes: []
             }
         },
         props: [
@@ -35,6 +37,7 @@
         ],
         methods: {
             changeProject() {
+                console.log("changeProject");
                 // Set project to store
                 this.$store.commit('setCover', this.link);
                 // Animate out
@@ -55,65 +58,78 @@
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
+            },
+            createTimelines(){
+                // Footer timeline
+                const footerTimeline = new TimelineMax({paused: false})
+                .fromTo(".next-cover", 1, {opacity: 0, width: "75%"}, {opacity: 1, width: "100%"}, "start")
+                .fromTo(".arrow", 2, {opacity: 1}, {opacity: 0}, "start")
+                .eventCallback("onComplete", this.scrollToBottom);
+
+                // Letter timeline
+                const upLetterTimeline = new TimelineMax({ paused: false});
+                for(let word of document.getElementsByClassName("up-letters")){
+                    const letters = word.childNodes;
+                    for(let i=0; i<letters.length; i++ ){
+                        var yValue= Math.floor(Math.random() * 90) + 1;
+                        upLetterTimeline.fromTo(letters[i], 2, {y: 0},{y: -yValue, opacity: 0, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }
+                }
+
+                this.timelines = {
+                    footer: footerTimeline,
+                    letter: upLetterTimeline
+                }
+            },
+            createScenes(){
+                // Footer scene
+                this.scenes = [
+                    // Footer scene
+                    this.$scrollmagic.scene({
+                        triggerElement: '.footer-project-content',
+                        triggerHook: 0.8,
+                        offset: -200,
+                        duration: 900
+                    })
+                    .setTween(this.timelines.footer),
+                    // Letter scene
+                    this.$scrollmagic.scene({
+                        triggerElement: ".footer-project",
+                        triggerHook: 0.7,
+                        duration: 900
+                    })
+                    .setTween(this.timelines.letter)
+                ];
+            },
+            scrollToBottom(){
+                const vm = this;
+                const VueScrollTo = require('vue-scrollto');
+                VueScrollTo.scrollTo('.next-cover', 1400, {
+                    duration: 1400,
+                    easing: [0.24, 0.88, 0.41, 1],
+                    force: true,
+                    cancelable: false,
+                    onDone: this.changeProject
+                });
             }
         },
         mounted() {
             var vm = this;
-            var footerTl= new TimelineMax({ paused: false});
-            var scrollB = this.$scrollmagic;
-            var scrollM = this.$scrollmagic;
-            var VueScrollTo = require('vue-scrollto');
-            const scrollOptions = {
-                duration: 1400,
-                easing: [0.24, 0.88, 0.41, 1],
-                force: true,
-                cancelable: false,
-                onDone: function(element) {
-                    VueScrollTo.unbind(element);
-                    vm.changeProject();
-                }
-            }
 
-            var upLetter = document.getElementsByClassName("up-letters");
-
+            // Add span arround the word
             this.letterContainer("next-project");
             this.letterContainer("next-project-name");
 
-            footerTl.fromTo(".next-cover",1, {opacity: 0, width: "75%"},{opacity: 1, width: "100%"},"start")
-            .fromTo(".arrow",2, {opacity: 1},{opacity: 0},"start");
-            const sceneFooter = scrollB.scene({
-                triggerElement: '.footer-project-content',
-                triggerHook: 0.8,
-                offset: -200,
-                duration: 900
-            })
-            .setTween(footerTl)
-            // .addIndicators({ name: 'Footer' })
-            scrollB.addScene(sceneFooter);
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
 
-            footerTl.eventCallback("onComplete", function () {
-                VueScrollTo.scrollTo('.next-cover', 1400, scrollOptions);
-                footerTl.kill();
-            });
-
-            Array.prototype.forEach.call(upLetter,function(el, i) {
-                var elements = el.childNodes;
-                var upLetterTl = new TimelineMax({ paused: false});
-                var element;
-                for(var i=0; i<el.childNodes.length; i++ ){
-                    var yValue= Math.floor(Math.random() * 90) + 1;
-                    upLetterTl.fromTo(el.childNodes[i], 2, {y: 0},{y: -yValue, opacity: 0, ease: Power4.easeInOut, overwrite: false}, "start");                
-                }
-                const animLetterScene = scrollM.scene({
-                    triggerElement: ".footer-project",
-                    triggerHook: 0.7,
-                    duration: 900
-                })
-                .setTween(upLetterTl)
-                // .addIndicators({ name: 'upLetter' })
-                scrollM.addScene(animLetterScene)
-            });
-        }
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
+        },
     }
 </script>
 

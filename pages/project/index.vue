@@ -44,6 +44,11 @@
     import projects from '~/queries/projects'
 
     export default {
+        head: {
+            bodyAttrs: {
+                class: 'fixed'
+            }
+        },
         transition: 'listFade',
         data(){
             return{
@@ -202,7 +207,7 @@
 //                 document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
-                console.log(this.isLeave);
+                // console.log(this.isLeave);
                 if(!this.isLeave){
                     document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
                     document.querySelector('.project-title').classList.add('hover');
@@ -211,7 +216,7 @@
 
             },
             projectLeave(){ 
-                console.log(this.isLeave);
+                // console.log(this.isLeave);
                 if(!this.isLeave){
                     document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
                     document.querySelector('.project-title').classList.remove('hover');

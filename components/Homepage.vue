@@ -382,17 +382,17 @@
                         vm.scrollable = true;
                     });
                 }else{
-                    this.tlIntro
-                        .set('.intro .word-wrapper-elle, .intro .word-wrapper-aime', {opacity:1})
-                        .fromTo('.intro .word-wrapper-elle', {x: "-200vw"},{x: "170vw", duration: 3, ease: "Linear.easeNone" }, "intro")
-                        .fromTo('.intro .word-wrapper-aime', {x: "150vw"},{x: "-250vw", duration: 3, ease: "Linear.easeNone" }, "intro+=1");
-                    this.tlIntro.eventCallback("onComplete", function () {
+                    // this.tlIntro
+                    //     .set('.intro .word-wrapper-elle, .intro .word-wrapper-aime', {opacity:1})
+                    //     .fromTo('.intro .word-wrapper-elle', {x: "-200vw"},{x: "170vw", duration: 3, ease: "Linear.easeNone" }, "intro")
+                    //     .fromTo('.intro .word-wrapper-aime', {x: "150vw"},{x: "-250vw", duration: 3, ease: "Linear.easeNone" }, "intro+=1");
+                    // this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
                         vm.loveDownDown.play();
                         document.querySelector('.circle-container.love').classList.add("visible");
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
                         vm.scrollable = true;
-                    });
+                    // });
                 }
             }else{
                 let vm = this;
