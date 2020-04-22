@@ -19,54 +19,67 @@
     export default {
         data(){
             return{
+                timelines: {},
+                scenes: []
             }
         },
         props: [
             'bloc'
         ],
-        mounted() {
-                var scrollM = this.$scrollmagic;
-                var tl= new TimelineMax({ paused: false});
+        methods: {
+            createTimelines(){
+                const blocSketchTimeline = new TimelineMax({ paused: false});
+                blocSketchTimeline.fromTo(".img-section .container", 2, {y: 40, opacity: 0}, {y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
 
-                var imgContain = document.getElementsByClassName("img-container");
-                var imgContainEl = document.getElementsByClassName("img-container")[0];
+                // if(!this.$device.mobile){
+                // }
 
-                tl.fromTo(".img-section .container", 2, {y: 40, opacity: 0}, {y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
-                const imgSectionScene = scrollM.scene({
-                    triggerElement: ".img-section ",
-                    triggerHook: 0.65,
-                    offset: -50
-                })
-                .setTween(tl)
-                .reverse(false)
-                // .addIndicators({ name: '2 (imgCain00)' })
-                scrollM.addScene(imgSectionScene)
+                const blocSketchParallax = new TimelineMax({ paused: false});
+                const img1 = document.querySelector(".img-section-container:nth-child(1) .img-container img");
+                const img2 = document.querySelector(".img-section-container:nth-child(2) .img-container img");
+                const img3 = document.querySelector(".img-section-container:nth-child(3) .img-container img");
+                blocSketchParallax
+                    .fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
+                    .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
+                    .fromTo(img3, 1, {y: 0},{y: -100, overwrite: false}, "start");
 
-                var img1 = document.querySelector(".img-section-container:nth-child(1) .img-container img");
-                var img2 = document.querySelector(".img-section-container:nth-child(2) .img-container img");
-                var img3 = document.querySelector(".img-section-container:nth-child(3) .img-container img");
-
-                if(!this.$device.mobile){
-
-                    var sectionTl= new TimelineMax({ paused: false});
-                    var scrollB = this.$scrollmagic;
-
-                    const sceneHalfSection = scrollB.scene({
+                this.timelines = {
+                    sketch        : blocSketchTimeline,
+                    sketchParallax: blocSketchParallax
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: ".img-section",
+                        triggerHook: 0.65,
+                        offset: -50
+                    })
+                    .setTween(this.timelines.sketch)
+                    .reverse(false),
+                    this.$scrollmagic.scene({
                         triggerElement: ".img-section",
                         triggerHook: 0.65,
                         offset: -150,
                         duration: window.innerHeight*2.5
                     })
-                    .setTween(sectionTl)
-                    scrollB.addScene(sceneHalfSection);
+                    .setTween(this.timelines.sketchParallax)
+                    .reverse(false),
 
-                    sectionTl.fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
-                    .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
-                    .fromTo(img3, 1, {y: 0},{y: -100, overwrite: false}, "start");
-                }
-
-
+                ]
+            }
         },
+        mounted() {
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
+
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
+        }
     }
 </script>
 

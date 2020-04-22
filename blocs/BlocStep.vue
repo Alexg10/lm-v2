@@ -27,18 +27,18 @@
     ],
     methods: {
       createTimelines(){
-          // blocStep timeline
-          const blocStepTimeline = new TimelineMax({ paused: false});
-          const number = this.$el.children[0].querySelector(".number");
-          const name   = this.$el.children[0].querySelector(".project-category-name");
+        // blocStep timeline
+        const blocStepTimeline = new TimelineMax({ paused: false});
+        const number = this.$el.children[0].querySelector(".number");
+        const name   = this.$el.children[0].querySelector(".project-category-name");
 
-          blocStepTimeline
-            .fromTo(number, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false})
-            .fromTo(name, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false}, 0.3);
+        blocStepTimeline
+          .fromTo(number, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false})
+          .fromTo(name, 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false}, 0.3);
 
-          this.timelines = {
-            step: blocStepTimeline
-          }
+        this.timelines = {
+          step: blocStepTimeline
+        }
       },
       createScenes(){
         this.scenes = [

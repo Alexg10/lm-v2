@@ -114,7 +114,6 @@
             }
         },
         mounted() {
-            var vm = this;
 
             // Add span arround the word
             this.letterContainer("next-project");
@@ -129,7 +128,7 @@
         },
         destroyed() {
             this.$scrollmagic.removeScene(this.scenes);
-        },
+        }
     }
 </script>
 

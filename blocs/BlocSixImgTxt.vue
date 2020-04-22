@@ -24,42 +24,60 @@
     import gsap from 'gsap'
     
     export default {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
+            }
+        },
         props: [
             'bloc'
         ],
-        mounted(){
-            var imgsSquare = document.getElementsByClassName("img-square-section-content");
-            var scrollM = this.$scrollmagic;
+        methods: {
+            createTimelines(){
+                const chapterTimeline = new TimelineMax({ paused: true});
+                chapterTimeline
+                    .fromTo(".img-square-container .number", 1, {y: 10},{y: 0, ease: Power4.easeInOut, overwrite: false})
+                    .fromTo(".img-square-container .name", 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false});
+                
+                const blocSixTimeline = new TimelineMax({ paused: false});
+                blocSixTimeline.staggerFromTo(".img-square-section-content img", 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},0.3);
 
-            var name = document.querySelector(".img-square-container .number");
-            var tlChapter = new TimelineMax({ paused: true});
-            tlChapter.fromTo(name, 1, {y: 10},{y: 0, ease: Power4.easeInOut, overwrite: false})
-            .fromTo(".img-square-container .name", 1, {y: 40},{y: 0, ease: Power4.easeInOut, overwrite: false});
-            
-            const sceneChapter = scrollM.scene({
-                triggerElement: ".img-square-container",
-                triggerHook: 0.65,
-                offset: 100
-            })
-            .setTween(tlChapter)
-            .reverse(false)
-            // .addIndicators({ name: '2 (duration: 300)' })
-            scrollM.addScene(sceneChapter);
-            
-            Array.prototype.forEach.call(imgsSquare,function(el, i) {
-                var img = el.getElementsByTagName("img");
-                var tl = new TimelineMax({ paused: false});
-                tl.staggerFromTo(".img-square-section-content img", 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},0.3);
-                const scene2 = scrollM.scene({
-                    triggerElement: ".img-square-container",
-                    triggerHook: 0.65,
-                    offset: -100
-                })
-                .setTween(tl)
-                .reverse(false)
-                // .addIndicators({ name: '2 (IMG 4' })
-                scrollM.addScene(scene2)
-            });
+                this.timelines = {
+                    chapter: chapterTimeline,
+                    six    : blocSixTimeline
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: ".img-square-container",
+                        triggerHook: 0.65,
+                        offset: 100
+                    })
+                    .reverse(false)
+                    .setTween(this.timelines.chapter),
+
+                    this.$scrollmagic.scene({
+                        triggerElement: ".img-square-container",
+                        triggerHook: 0.65,
+                        offset: -100
+                    })
+                    .setTween(this.timelines.six)
+                    .reverse(false)
+                ]
+            }
+        },
+        mounted() {
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
+
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
         }
     }
 </script>
