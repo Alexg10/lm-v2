@@ -1,5 +1,5 @@
 <template>
-    <div class="list-container">
+    <div class="list-container" v-on:mousewheel="scrollSlide">
         <div class="logo" >
             <div class="logo-container" v-on:mouseenter="logoHover" v-on:mouseleave="logoLeave" v-on:click="logoClick">
                 <span class="letter first-letter">L</span>
@@ -157,27 +157,26 @@
             handleBeforeChange(){
                 document.querySelector('.project-title').classList.remove("visible");
             },
-            scrollSlide(){
+            scrollSlide(e){
                 var vm         = this;
                 var scrollable = true;
-                window.addEventListener('wheel', function(e) {
-                    if (e.deltaY < 0 && scrollable) {
-                        scrollable = false;
-                        console.log('up');
-                        vm.$refs.slick.prev();
-                        setTimeout(() => {
-                            scrollable = true;
-                        }, 1000);
-                    }
-                    if (e.deltaY > 0 && scrollable) {
-                        console.log('down');
-                        scrollable = false;
-                        vm.$refs.slick.next();
-                        setTimeout(() => {
-                            scrollable = true;
-                        }, 1000);
-                    }
-                });
+
+                if (e.deltaY < 0 && scrollable) {
+                    scrollable = false;
+                    console.log('up');
+                    vm.$refs.slick.prev();
+                    setTimeout(() => {
+                        scrollable = true;
+                    }, 1000);
+                }
+                if (e.deltaY > 0 && scrollable) {
+                    console.log('down');
+                    scrollable = false;
+                    vm.$refs.slick.next();
+                    setTimeout(() => {
+                        scrollable = true;
+                    }, 1000);
+                }
             },
             keySlide(e) {
                 var vm = this;
@@ -374,7 +373,6 @@
             }
         },
         mounted() {
-            this.scrollSlide();
             this.keySlide();
         }
     }

@@ -1,5 +1,5 @@
 <template>
-        <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp">
+        <div class="homepage-container" v-touch:swipe.top="scrollDown" v-touch:swipe.bottom="scrollUp" v-on:mousewheel="scrollSlide">
             <div v-if='!this.$store.state.back' :class="!this.$store.state.back ? 'intro': 'intro hide'">
                 <div class="word-container ">
                     <div class="word-wrapper word-wrapper-elle">
@@ -204,16 +204,14 @@
                     vm.scrollable = true;
                 }, 1500);
             },
-            scrollSlide(){
+            scrollSlide(e){
                 var vm = this;
-                window.addEventListener('wheel', function(e) {
-                    if (e.deltaY < 0 && vm.scrollable) {
-                        vm.scrollUp();
-                    }
-                    if (e.deltaY > 0 && vm.scrollable) {
-                        vm.scrollDown();
-                    }
-                });
+                if (e.deltaY < 0 && vm.scrollable) {
+                    vm.scrollUp();
+                }
+                if (e.deltaY > 0 && vm.scrollable) {
+                    vm.scrollDown();
+                }
             },
             keySlide(e) {
                 var vm = this;
@@ -475,7 +473,6 @@
             this.workDown
                 .fromTo(".work", {y: 0},{y: 170, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
 
-            this.scrollSlide();
             this.keySlide();
         }
     }
