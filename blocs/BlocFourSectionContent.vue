@@ -12,26 +12,48 @@
 
 <script>
     export default {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
+            }
+        },
         props: [
             'bloc'
         ],
-        mounted(){
-            var imgs = document.getElementsByClassName("img-4-section-container");
-            var scrollM = this.$scrollmagic;
-            
-            Array.prototype.forEach.call(imgs,function(el, i) {
-                var tl = new TimelineMax({ paused: false});
-                tl.staggerFromTo(el.getElementsByClassName("img-4"), 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.35);
-                const scene2 = scrollM.scene({
-                    triggerElement: el,
-                    triggerHook: 0.65,
-                    offset: -100
-                })
-                .setTween(tl)
-                .reverse(false)
-                // .addIndicators({ name: '2 (IMG 4' })
-                scrollM.addScene(scene2)
-            });
+        methods: {
+            createTimelines(){
+                // blocStep timeline
+                const blocFourSectionTimeline = new TimelineMax({ paused: false});
+                blocFourSectionTimeline.staggerFromTo(this.$el.getElementsByClassName("img-4"), 1.5, {y: 140, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.35);
+
+                this.timelines = {
+                    fourSection: blocFourSectionTimeline
+
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: this.$el,
+                        triggerHook: 0.65,
+                        offset: -100
+                    })
+                    .reverse(false)
+                    .setTween(this.timelines.fourSection)
+                ]
+            }
+        },
+        mounted() {
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
+
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
         }
     }
 </script>

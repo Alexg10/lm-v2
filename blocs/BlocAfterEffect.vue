@@ -25,42 +25,52 @@
     import lottie from 'lottie-web'
 
     export default {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
+            }
+        },
         props: [
             'bloc'
         ],
+            methods: {
+            createTimelines(){
+                // blocStep timeline
+                const afterParallaxTimeline = new TimelineMax({ paused: false});
+                const imgH1 = document.querySelector(".bloc-after-full-height-container");
+                const imgH2 = document.querySelector(".bloc-after-full-height-container:last-of-type");
+
+                afterParallaxTimeline
+                    .fromTo(imgH1, 1, {y: 0},{y: 100, overwrite: false}, "start")
+                    .fromTo(imgH2, 1, {y: 0},{y: -50, overwrite: false}, "start");  
+
+                this.timelines = {
+                    afterParallax: afterParallaxTimeline
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: ".bloc-after-full-height-container:last-of-type",
+                        triggerHook: 0.75,
+                        offset: 100,
+                        duration: window.innerHeight*2
+                    })
+                    .setTween(this.timelines.afterParallax)
+                ]
+            }
+        },
         mounted(){
-            var scrollM = this.$scrollmagic;
-            var tl = new TimelineMax({ paused: false});
-            var tlPara = new TimelineMax({ paused: false});
-            var imgContain = document.getElementsByClassName("bloc-after-full-height-container")[0];
-            var imgH1 = document.querySelector(".bloc-after-full-height-container");
-            var imgH2 = document.querySelector(".bloc-after-full-height-container:last-of-type");
-
-
-            tl.staggerFromTo(".bloc-after-full-height-container", 2, {opacity: 0},{ opacity: 1, ease: Power4.easeInOut, overwrite: false}, 0.35);                
-            const imgSectionScene = scrollM.scene({
-                triggerElement: imgContain,
-                triggerHook: 0.7,
-                offset: -100
-            })
-            .setTween(tl)
-            .reverse(false)
-            // .addIndicators({ name: 'bloc-after-full-height-container' })
-            scrollM.addScene(imgSectionScene)
+            const vm = this;
 
             if(!this.$device.mobile){
-                tlPara.fromTo(imgH1, 1, {y: 0},{y: 100, overwrite: false}, "start")
-                    .fromTo(imgH2, 1, {y: 0},{y: -50, overwrite: false}, "start");                
+                // Create timelines and scenes
+                vm.createTimelines();
+                vm.createScenes();
 
-                const animFullHeightScenePara = scrollM.scene({
-                    triggerElement: ".bloc-after-full-height-container:last-of-type",
-                    triggerHook: 0.75,
-                    offset: 100,
-                    duration: window.innerHeight*2
-                })
-                .setTween(tlPara)
-                // .addIndicators({ name: 'bloc-after-full-height-container' })
-                scrollM.addScene(animFullHeightScenePara);
+                // Add scenes to controller
+                vm.$scrollmagic.addScene(vm.scenes);
             }
             
             lottie.loadAnimation({
@@ -85,12 +95,20 @@
                 autoplay: true,
                 path: "/images/anim_img/anim-result.json"
             });
+        },
+        destroyed(){
+            const vm = this;
+
+            if(!this.$device.mobile){
+                vm.$scrollmagic.removeScene(vm.scenes);
+
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
- .container{
+    .container{
         position: relative;
     }
     .bloc-after{

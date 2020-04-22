@@ -12,31 +12,48 @@
     import gsap from "gsap"
     
     export default {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
+            }
+        },
         props: [
             'bloc'
         ],
-        mounted(){
+        methods: {
+            createTimelines(){
+                const blocImgFullCenterTimeline = new TimelineMax({ paused: false});
 
-            var scrollM = this.$scrollmagic;
-            var blocsImgFullCenter = document.getElementsByClassName("img-full-center-section");
+                var img = this.$el.children[0].querySelector(".img-full-center-section-container img");
+                blocImgFullCenterTimeline.fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
 
-            Array.prototype.forEach.call(blocsImgFullCenter,function(el, i) {
-                var tl = new TimelineMax({ paused: false});
+                this.timelines = {
+                    imgFullCenter: blocImgFullCenterTimeline
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: this.$el,
+                        triggerHook: 0.65,
+                        offset: -250
+                    })
+                    .reverse(false)
+                    .setTween(this.timelines.imgFullCenter)
+                ]
+            }
+        },
+        mounted() {
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
 
-                var img = el.children[0].querySelector(".img-full-center-section-container img");
-                tl.fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
-                
-                const animSectionScene = scrollM.scene({
-                    triggerElement: el,
-                    triggerHook: 0.65,
-                    offset: -250
-                })
-                .setTween(tl)
-                .reverse(false)
-                // .addIndicators({ name: 'blocsImgFullCenter' })
-                scrollM.addScene(animSectionScene)
-
-            });
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
         }
     }
 </script>

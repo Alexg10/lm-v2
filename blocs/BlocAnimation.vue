@@ -22,9 +22,54 @@
     import lottie from 'lottie-web'
 
     export default {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
+            }
+        },
         props: [
             'bloc'
         ],
+        methods: {
+            createTimelines(){
+                var animationTimeline         = new TimelineMax({ paused: false});
+                var animationParallaxTimeline = new TimelineMax({ paused: false});
+                var animImg                   = this.$el.getElementsByClassName("bloc-animation-desktop-img");
+                var animImgMob                = this.$el.getElementsByClassName("bloc-animation-mobile-img");
+
+                animationTimeline
+                    .fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
+                    .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
+                    .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
+
+                animationParallaxTimeline.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
+
+                this.timelines = {
+                    animation: animationTimeline,
+                    animationParallax: animationParallaxTimeline
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: this.$el,
+                        triggerHook: 0.7,
+                        offset: -200
+                    })
+                    .reverse(false)
+                    .setTween(this.timelines.animation),
+                    this.$scrollmagic.scene({
+                        triggerElement: this.$el,
+                        triggerHook: 0.65,
+                        offset: -80,
+                        duration: window.innerHeight*2
+                    })
+                    .reverse(true)
+                    .setTween(this.timelines.animationParallax),
+                ]
+            }
+        },
         mounted(){
             lottie.loadAnimation({
                 container: document.getElementById('animation-hand'),
@@ -55,49 +100,15 @@
                 path     : "/images/anim_img/anim-hand-creativ.json"
             });
 
-            var scrollM = this.$scrollmagic;
-            var blocsAnim = document.getElementsByClassName("bloc-animation");
-            var vm = this;
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
 
-            Array.prototype.forEach.call(blocsAnim,function(el, i) {
-                var tl         = new TimelineMax({ paused: false});
-                var tlPara     = new TimelineMax({ paused: false});
-                var animImg    = el.getElementsByClassName("bloc-animation-desktop-img");
-                var animImgMob = el.getElementsByClassName("bloc-animation-mobile-img");
-
-
-                tl.fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
-                    .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
-                    .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
-
-
-                if(!vm.$device.mobile){
-                    tlPara.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
-
-                    const animSectionScene = scrollM.scene({
-                        triggerElement: el,
-                        triggerHook: 0.7,
-                        offset: -200
-                    })
-                    .setTween(tl)
-                    .reverse(false)
-                    // .addIndicators({ name: 'AnimeSection' })
-                    scrollM.addScene(animSectionScene)
-
-                    const animSectionScenePara = scrollM.scene({
-                        triggerElement: el,
-                        triggerHook: 0.65,
-                        offset: -80,
-                        duration: window.innerHeight*2
-                    })
-                    .setTween(tlPara)
-                    // .addIndicators({ name: 'AnimeSection' })
-                    scrollM.addScene(animSectionScenePara);
-
-                }
-                
-
-            });
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
         }
     }
 </script>
