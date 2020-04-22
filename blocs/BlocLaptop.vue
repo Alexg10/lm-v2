@@ -16,35 +16,56 @@
     import gsap from 'gsap'
 
     export default {
-        data() {
-            return {
+        data(){
+            return{
+                timelines: {},
+                scenes: []
             }
-        },
+        },  
         props: [
             'bloc'
         ],
-        mounted() {
-            var scrollM = this.$scrollmagic;
-            var tl = new TimelineMax({ paused: false});
-            var img = document.getElementsByClassName("project-laptop-preview");
-            var video = document.querySelector('.project-laptop-preview-video');
-            tl.fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});        
-            if(video){
-                tl.eventCallback("onComplete", ()=> {
-                    document.querySelector('.project-laptop-preview-video').play();
-                });
-            }    
+        methods: {
+            createTimelines(){
+                const laptopTImeline = new TimelineMax({ paused: false});
+                const img            = document.getElementsByClassName("project-laptop-preview");
+                const video          = document.querySelector('.project-laptop-preview-video');
 
-            const animSectionScene = scrollM.scene({
-                triggerElement: ".project-laptop-preview",
-                triggerHook: 0.65,
-                offset: -250
-            })
-            .setTween(tl)
-            .reverse(false)
-            // .addIndicators({ name: 'blocsImgFullCenter' })
-            scrollM.addScene(animSectionScene)
+                laptopTImeline
+                    .fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});        
+                if(video){
+                    laptopTImeline.eventCallback("onComplete", ()=> {
+                        document.querySelector('.project-laptop-preview-video').play();
+                    });
+                }  
+
+                this.timelines = {
+                    laptop: laptopTImeline
+                }
+            },
+            createScenes(){
+                this.scenes = [
+                    this.$scrollmagic.scene({
+                        triggerElement: ".project-laptop-preview",
+                        triggerHook: 0.65,
+                        offset: -250
+                    })
+                    .reverse(false)
+                    .setTween(this.timelines.laptop)
+                ]
+            }
         },
+        mounted() {
+            // Create timelines and scenes
+            this.createTimelines();
+            this.createScenes();
+
+            // Add scenes to controller
+            this.$scrollmagic.addScene(this.scenes);
+        },
+        destroyed() {
+            this.$scrollmagic.removeScene(this.scenes);
+        }
     }
 </script>
 
