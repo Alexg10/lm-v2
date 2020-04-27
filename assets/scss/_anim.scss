@@ -2,7 +2,7 @@
     animation: listFade-in 1s
 }
 .listFade-leave-active {
-    animation: listFade-out 2s
+    animation: listFade-out 3s
 }
 
 @keyframes listFade-in{
@@ -12,13 +12,14 @@
 
 @keyframes listFade-out{
     0%{ opacity: 1}
-    100%{ opacity: 1}
+    50%{ opacity: 1}
+    100%{ opacity: 0}
 }
 
 
 .cover-enter-active .cover-project,
 .cover-leave-active  .cover-project{
-    transition: all 10s;
+    transition: all 2s;
 }
 
 .cover-enter .cover-project,
@@ -32,12 +33,12 @@
   animation: listFade-out 3s
 }
 
-@keyframes listFade-out {
-  0% {
-    opacity: 1
-  }
+// @keyframes listFade-out {
+//   0% {
+//     opacity: 1
+//   }
 
-  100% {
-    opacity: 0
-  }
-}
+//   100% {
+//     opacity: 0
+//   }
+// }

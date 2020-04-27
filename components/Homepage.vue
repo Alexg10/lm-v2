@@ -31,7 +31,7 @@
                         <img class="bg-love-cover cover-6" src="/images/home/lm_clouds.png" alt="">
                     </div>
                     <LoveContent/>
-                    <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick" data-cursor-hover>
+                    <div class="word-container " v-on:mouseenter="loveHover" v-on:mouseleave="loveLeave" v-on:click="loveClick">
                         <div class="word-wrapper word-wrapper-elle">
                             <div class="word elle">
                                 <span class="hide">
@@ -54,9 +54,6 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="word-wrapper-about">
-                            <div class="about-content">about me</div>    
-                        </div> 
                     </div>
                     <div class="circle-container love" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
                         <svg class="circle" xmlns="http://www.w3.org/2000/svg">
@@ -231,8 +228,20 @@
                     }
                 }
             },
+            createAbout(){
+                const aboutBlock = document.createElement('div');
+                aboutBlock.className = 'about-block';
+                aboutBlock.innerHTML = 'about me';
+                
+                const aboutContainer = document.querySelector('.cursor-fx__inner');
+                aboutContainer.appendChild( aboutBlock );
+            },
             loveHover(){
                 document.querySelector('.bg-love').classList.add("visible");
+                document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
+                document.querySelector('.about-block').classList.add('visible');
+
+
                 this.playing = setInterval(() => {
                     this.gif();
                 }, 250);
@@ -254,6 +263,9 @@
             },
             loveLeave(){
                 document.querySelector('.bg-love').classList.remove("visible");
+                document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
+                document.querySelector('.about-block').classList.remove('visible');
+
                 clearInterval(this.playing);
             },
             loveClick(){
@@ -474,6 +486,7 @@
                 .fromTo(".work", {y: 0},{y: 170, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
 
             this.keySlide();
+            this.createAbout();
         }
     }
 </script>
@@ -483,6 +496,7 @@
     body{
         overflow: hidden;
     }
+
     .arrow{
         position: fixed;
         bottom: 55px;
@@ -716,6 +730,7 @@
             }
         }
     }
+
     .home-slide-content{
         position: relative;
         height: 100vh;

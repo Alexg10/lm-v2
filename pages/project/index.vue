@@ -588,6 +588,10 @@
 
                 }
             }
+            @media ( max-width : 680px ) {
+                width: 95%!important;
+            }
+
         }
     }
 

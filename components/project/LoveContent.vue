@@ -195,6 +195,7 @@
                 margin  : 110px 0;
             }
             @media ( max-width : 680px ) {
+                margin-top: 110px;
                 margin-bottom: 30px;
             }
         }
