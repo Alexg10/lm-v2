@@ -10,7 +10,7 @@
         </div>
         <div class="base-line-container">
             <marquee-text :repeat="2" :duration="20">
-                <div class="base-line">let's take a slice of pizza.</div>
+                <div class="base-line">Let's take a slice of pizza!</div>
             </marquee-text>
         </div>
         <div class="love-description">
@@ -64,11 +64,13 @@
         methods: {
             backHome(){
                 document.querySelector('.cross').classList.remove("active");
+                document.querySelector('.developped').classList.remove("overflow");
                 this.loveContentLeave.pause(0);
                 this.loveContentLeave.play();
                 setTimeout(function(){
                     document.querySelector('.word-container').classList.remove("clicked");
                     document.querySelector('.love-content').classList.remove("visible");
+                    document.querySelector('.developped').classList.remove("overflow");
                     document.querySelector('.circle-container').classList.add("visible");
                 },3500);
             },
@@ -114,6 +116,8 @@
                     .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8")
                     .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8");
             }
+
+
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({
                 container: document.getElementById('pizza-ico'),
@@ -137,12 +141,27 @@
             this.letterContainer("link-stagger");
 
             var staggerLink = document.querySelector('.developped-link');
-            var tl = new TimelineMax();
+            var hoverEffect = new TimelineMax({ paused: false});
 
+            for(let word of document.getElementsByClassName("link-stagger")){
+                const letters = word.childNodes;
+                for(let i=1; i<letters.length; i++ ){
+                    var yValue= Math.floor(Math.random() * 10) + 1;
+                    if(i % 2 == 0){
+                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }else{
+                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }
+                }
+            }
+
+            hoverEffect.pause(0);
             staggerLink.addEventListener('mouseenter', e => {
-                tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -15, ease: Power4.easeInOut }, 0.025)
-                    .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
-            });
+                hoverEffect.play(0);
+            });    
+            staggerLink.addEventListener('mouseleave', e => {
+                hoverEffect.play(1).reverse();
+            });  
         },
     }
 </script>
@@ -303,6 +322,12 @@
                 font-size   : 18px;
                 padding-left: 6px;
                 overflow    : hidden;
+                &.overflow{
+                    overflow: visible;   
+                    p{
+                        overflow: visible;   
+                    }
+                }
                 @media ( max-width : 780px ) {
                     transform: translateY(50px);
                 }

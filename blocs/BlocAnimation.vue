@@ -126,6 +126,7 @@
         }
         .bloc-animation-desktop-container{
             text-align: right;
+            margin-bottom: 70px;
             // overflow: hidden;
             .bloc-animation-desktop-img{
                 width: 100%;
@@ -145,7 +146,7 @@
             width: 60%;
             position: relative;
             left: 28%;
-            top: -27px;
+            top: -63px;
             justify-content: space-between;
             .hand-anim{
                 flex: 1;

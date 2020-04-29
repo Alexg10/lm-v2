@@ -126,7 +126,9 @@
                 workUpUp       : gsap.timeline({progress: 1}),
                 workDownDown   : gsap.timeline({progress: 1}),
                 workDown       : gsap.timeline({progress: 1}),
-                loveShowContent: gsap.timeline({paused: true})
+                loveShowContent: gsap.timeline({paused: true}),
+                hoverEffect    : new TimelineMax({ paused: false})
+
             }
         },
 
@@ -240,7 +242,7 @@
                 document.querySelector('.bg-love').classList.add("visible");
                 document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
                 document.querySelector('.about-block').classList.add('visible');
-
+                this.hoverEffect.play();
 
                 this.playing = setInterval(() => {
                     this.gif();
@@ -265,6 +267,7 @@
                 document.querySelector('.bg-love').classList.remove("visible");
                 document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
                 document.querySelector('.about-block').classList.remove('visible');
+                this.hoverEffect.play().timeScale(2).reverse();
 
                 clearInterval(this.playing);
             },
@@ -373,9 +376,28 @@
                         e => e.remove()
                     );
                 }, 1500)
+            },
+            letterContainer(className){
+                var word = document.getElementsByClassName(className)[0];
+                var wordContent = word.textContent.trim();
+                var wordContentSplit = wordContent.split("");
+                word.innerHTML = "";
+
+                for(var i=0; i< wordContentSplit.length; i++){
+                    var newSpan = document.createElement('span');
+                    newSpan.style.display = "inline-block";
+                    newSpan.className = "staggerLetter";
+                    if (wordContentSplit[i] == " "){
+                        newSpan.style.width = "5px";
+                    }
+                    newSpan.innerHTML = wordContentSplit[i];
+                    word.appendChild(newSpan);
+                }
             }
         },
         mounted() {
+            let vm = this;
+
             if(!this.$store.state.back){
                 let vm = this;
                 if((!this.$device.ipad) && (!this.$device.mobile)){
@@ -409,9 +431,6 @@
                 vm.scrollable = true;
                 console.log("play");
                 document.querySelector('.work-container').classList.remove('visible');
-                // this.workUpUp.pause(0);
-                // this.workUpUp.play();
-                // this.scrollUp();
                 this.loveDownDown.play();
             }
 
@@ -423,6 +442,9 @@
                     .from(".love-description", {y: 20, opacity:0, duration: 1.8, ease: "power4.inOut" }, "loveShowContent+=0.8")
                     .from(".infos-link a", {y: 50, duration:1, ease: "power4.inOut", stagger: 0.5 }, "loveShowContent+=1.3")
                     .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=2");
+
+                this.createAbout();
+                this.letterContainer("about-block");
             }else{
                 this.loveShowContent
                     .to({}, 2.5, {})
@@ -436,6 +458,7 @@
 
             this.loveShowContent.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
+                document.querySelector('.developped').classList.add("overflow");
             });
 
             if((!this.$device.ipad) && (!this.$device.mobile)){
@@ -447,6 +470,22 @@
                     .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
                     .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
             }
+
+
+            for(let word of document.getElementsByClassName("about-block")){
+                const letters = word.childNodes;
+                for(let i=0; i<letters.length; i++ ){
+                    var yValue= Math.floor(Math.random() * 10) + 1;
+                    if(i % 2 == 0){
+                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: -yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }else{
+                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }
+                }
+            }
+            this.hoverEffect.pause(0);
+
+
             this.workClickTl
                 .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
                 .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl+=0.1")
@@ -486,7 +525,6 @@
                 .fromTo(".work", {y: 0},{y: 170, duration: 1, ease: "power4.inOut", stagger:-0.3 },"workInit");
 
             this.keySlide();
-            this.createAbout();
         }
     }
 </script>

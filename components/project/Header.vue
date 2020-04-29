@@ -21,7 +21,7 @@
             <div class="project-description">
                 <p>{{description}}</p>
                 <div v-if="link" class="link-container" >
-                    <a :href="link" target="_blank" class="project-link link link-hover link-stagger" rel="noopener" data-cursor-hover>View the website</a>
+                    <a :href="link" target="_blank" class="project-link link link-hover link-stagger" data-cursor-hover>View the website</a>
                 </div>
             </div>
         </div>
@@ -159,6 +159,8 @@
             }
             anim.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
+                document.querySelector('.project-link').classList.add("overflow");
+
             });
 
             if(this.link){
@@ -166,12 +168,27 @@
                 this.letterContainer("link-stagger");
 
                 var staggerLink = document.querySelector('.project-link');
-                var tl = new TimelineMax();
+                var hoverEffect = new TimelineMax({ paused: false});
 
+                for(let word of document.getElementsByClassName("project-link")){
+                    const letters = word.childNodes;
+                    for(let i=1; i<letters.length; i++ ){
+                        var yValue= Math.floor(Math.random() * 12) + 1;
+                        if(i % 2 == 0){
+                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        }else{
+                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        }
+                    }
+                }
+
+                hoverEffect.pause(0);
                 staggerLink.addEventListener('mouseenter', e => {
-                    tl.staggerFromTo(".staggerLetter", 0.45, { y: 0, ease: Power4.easeInOut },{ y: -20, ease: Power4.easeInOut }, 0.025)
-                        .staggerFromTo(".staggerLetter", 0.45, { y: 20, ease: Power4.easeOut },{ y: 0, ease: Power4.easeInOut }, 0.025, "-=0.45");
-                });
+                    hoverEffect.play(0);
+                });    
+                staggerLink.addEventListener('mouseleave', e => {
+                    hoverEffect.play(1).reverse();
+                });           
             }
         },
         destroyed(){
@@ -229,7 +246,7 @@
             position: relative;
             align-self: flex-end;
             max-width: 370px;
-            font-size: 23px;
+            font-size: 20px;
             font-weight: bold;
             transform: translateY(210px);
         }
@@ -249,6 +266,9 @@
             font-family: 'GTWalsheimProMedium';
             padding: 2px 0 0;
             overflow: hidden;
+            &.overflow{
+                overflow: visible;
+            }
         }
         @media only screen and ( max-width : 1280px ) {
             .project-name{
