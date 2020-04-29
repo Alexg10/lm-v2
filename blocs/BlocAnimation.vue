@@ -11,7 +11,12 @@
                 <div id="animation-creativ" class="hand-anim"></div>
             </div>
             <div class="bloc-animation-mobile-container">
-                <img class="bloc-animation-mobile-img" :src="bloc.imageMobile.sourceUrl">
+                <div v-if="bloc.videoMobile" >
+                    <video class="bloc-animation-mobile-img video" loop>
+                        <source :src="bloc.videoMobile" type="video/mp4">
+                    </video>
+                </div>
+                <img v-else class="bloc-animation-mobile-img" :src="bloc.imageMobile.sourceUrl">
             </div>
         </div>
     </section>
@@ -137,9 +142,13 @@
             position: relative;
             display: inline-block;
             position: absolute;
+            max-width: 250px;
             bottom: 0;
             z-index: 9;
             // margin-top: -153px;
+            .bloc-animation-mobile-img.video{
+                width: 100%;
+            }
         }
         .anim-container{
             display: flex;

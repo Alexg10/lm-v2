@@ -129,6 +129,7 @@ query getProjectBySlug($slug: String!) {
           imageMobile {
             sourceUrl(size: SKETCH_PICTURE)
           }
+          videoMobile
         }
         ... on Project_Acfprojectfields_Blocs_BlocAfterEffect {
           fieldGroupName
