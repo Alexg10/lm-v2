@@ -159,7 +159,9 @@
             }
             anim.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
-                document.querySelector('.project-link').classList.add("overflow");
+                if( link ){
+                    document.querySelector('.project-link').classList.add("overflow");
+                }
 
             });
 

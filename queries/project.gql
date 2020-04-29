@@ -16,7 +16,7 @@ query getProjectBySlug($slug: String!) {
           id
           slug
           acfProjectFields {
-          projectTitle
+            projectTitle
             headerPicture{
               sourceUrl(size: HEADER_PICTURE)
             }
@@ -52,6 +52,7 @@ query getProjectBySlug($slug: String!) {
               sourceUrl(size: SKETCH_PICTURE)
             }
           }
+          sketchMobileVideo
         }
         ... on Project_Acfprojectfields_Blocs_BlocFourSectionContent {
           fieldGroupName

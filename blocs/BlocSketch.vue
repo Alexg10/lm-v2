@@ -2,9 +2,16 @@
     <div v-if="bloc" v-bind:style='{backgroundColor: bloc.color}'>
         <section class="img-section">
             <div class="container">
-                <div id="img-section-container" class="img-section-container" v-for="image in bloc.sketchImages" :key="bloc.id">
+                <div id="img-section-container" class="img-section-container" v-for="(image, index) in bloc.sketchImages" :key="bloc.id">
                     <div class="img-container grid-item">
-                        <img :src="image.sketchImage.sourceUrl">
+                        <div v-if="bloc.sketchMobileVideo && index == 1" >
+                            <video class="sketch-mobile-preview-video" loop>
+                                <source :src="bloc.sketchMobileVideo" type="video/mp4">
+                            </video>
+                        </div>
+                        <div v-else>
+                            <img  :src="image.sketchImage.sourceUrl">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,9 +42,9 @@
                 // }
 
                 const blocSketchParallax = new TimelineMax({ paused: false});
-                const img1 = document.querySelector(".img-section-container:nth-child(1) .img-container img");
-                const img2 = document.querySelector(".img-section-container:nth-child(2) .img-container img");
-                const img3 = document.querySelector(".img-section-container:nth-child(3) .img-container img");
+                const img1 = document.querySelector(".img-section-container:nth-child(1) .img-container div");
+                const img2 = document.querySelector(".img-section-container:nth-child(2) .img-container div");
+                const img3 = document.querySelector(".img-section-container:nth-child(3) .img-container div");
                 blocSketchParallax
                     .fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
                     .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
@@ -64,8 +71,6 @@
                         duration: window.innerHeight*2.5
                     })
                     .setTween(this.timelines.sketchParallax)
-                    .reverse(false),
-
                 ]
             }
         },
@@ -93,6 +98,9 @@
             display: flex;
             flex-direction: column;
         }
+    }
+    .sketch-mobile-preview-video{
+        width: 100%;
     }
     .img-section-container{
         display: inline-block;
