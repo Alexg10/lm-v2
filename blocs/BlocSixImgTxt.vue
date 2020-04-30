@@ -126,7 +126,7 @@
         text-align: center; 
     }
     .img-square-txt{
-        font-size: 28px;
+        font-size: 23px;
         text-align: center;
         max-width: 475px;
         margin: 0 auto;
@@ -149,6 +149,9 @@
                 max-width: 220px;
                 margin: 0 auto;
             }
+            &:last-child{
+                margin-top: 65px;
+            }
         }
     }
     .img-square-txt.mobile{
@@ -169,6 +172,9 @@
                 width: 50%;
                 margin-bottom: 50px;
                 &:nth-child(2){
+                    margin-top: 0;
+                }
+                &:last-child{
                     margin-top: 0;
                 }
             }

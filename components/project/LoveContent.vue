@@ -16,9 +16,22 @@
         <div class="love-description">
             Oh, hi there!<br>
             I’m Louise Margueritat, 26, a french artistic director who would love to work with u.
-            <div class="go-to-work" v-on:click="goToWork">See my project</div> 
+            <div class="go-to-work" v-on:click="goToWork">See my projects</div> 
         </div>
         <div class="bottom-container">
+            <div class="left-bottom">
+                <ul class="social-links">
+                    <li class="social-link">
+                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">I<span>ns</span>t<span>a</span>g<span>ram</span>.</a>
+                    </li>
+                    <li class="social-link">
+                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">L<span>in</span>k<span>e</span>d<span>in</span>.</a>
+                    </li>
+                    <li class="social-link">
+                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">B<span>e</span>h<span>an</span>c<span>e</span>.</a>
+                    </li>
+                </ul>
+            </div>
             <div class="left-bottom">
                 <div class="contact-me infos-link">
                     <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay" data-cursor-hover>
@@ -111,11 +124,37 @@
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
-            }
+            },
+            childNodes(){
+                for (let link of document.getElementsByClassName("social-link")){
+                    const spans = link.querySelectorAll("span");
+                    for (let span of spans){
+                        const spanW = span.offsetWidth;
+                        spanW= spanW +1;
+                        span.dataset.width = spanW;
+                        span.style.width = 0;
+                    }
+                }
+            },
+            socialHover(e){
+                let el = e.target
+                let spans = el.querySelectorAll("span");
+                for (let span of spans){
+                    const spanWDeployed = span.dataset.width;
+                    span.style.width = spanWDeployed+"px";
+                }
+            },
+            socialLeave(e){
+                let el = e.target
+                let spans = el.querySelectorAll("span");
+                for (let span of spans){
+                    span.style.width = 0+"px";;
+                }
+            },
         },
         mounted() {
-
-            const vm =this;
+            this.childNodes();
+            const vm = this;
 
             if(!this.$device.mobile){
                 this.loveContentLeave
@@ -266,11 +305,15 @@
                 margin-bottom: 30px;
             }
         }
+
         .go-to-work{
             font-size: 18px;
             margin-top: 28px;
         }
         .developped{
+            span{
+                font-family: 'GTWalsheimProRegular';
+            }
             @media ( max-width : 780px ) {
                 width: 100%;
             }
@@ -294,7 +337,7 @@
             display        : flex;
             justify-content: space-between;
             width          : 100%;
-            max-width      : 1180px;
+            max-width      : 1200px;
             position       : fixed;
             bottom         : 90px;
             bottom         : 7vh;
@@ -350,6 +393,32 @@
                     display: flex;
                     .ico-anim{
                         max-width: 33px;
+                    }
+                }
+                .social-links{
+                    display: flex;
+                    padding: 0;
+                    li{
+                        display: flex;
+                        justify-content: center;
+                        list-style-type: none;
+                        min-width: 85px;
+                        text-align: center;
+                        font-size: 14px;
+                        a{
+                            color: black;
+                            font-size: 14px;
+                            text-align: center;
+                        }
+                        span{
+                            overflow: hidden;
+                            transition: width 0.6s ease;
+                        }
+                        &:hover{
+                            span{
+                                overflow: hidden;
+                            } 
+                        }
                     }
                 }
                 .contact-me{
