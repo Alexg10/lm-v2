@@ -146,10 +146,8 @@
             bottom: 0;
             z-index: 9;
             // margin-top: -153px;
-            .bloc-animation-mobile-img{
-                img{
-                    width: 100%;
-                }
+            img{
+                width: 100%;
             }
             .bloc-animation-mobile-img.video{
                 width: 100%;

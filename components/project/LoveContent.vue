@@ -10,13 +10,13 @@
         </div>
         <div class="base-line-container">
             <marquee-text :repeat="2" :duration="20">
-                <div class="base-line">Let's take a slice of pizza!</div>
+                <div class="base-line">Let's share a pizza!</div>
             </marquee-text>
         </div>
         <div class="love-description">
             Oh, hi there!<br>
             I’m Louise Margueritat, 26, a french artistic director who would love to work with u.
-            <div class="love-description-separator"></div>
+            <div class="go-to-work" v-on:click="goToWork">See my project</div> 
         </div>
         <div class="bottom-container">
             <div class="left-bottom">
@@ -58,7 +58,9 @@
         },
         data(){
             return{
-                loveContentLeave : gsap.timeline({paused: true}),
+                loveContentLeave: gsap.timeline({paused: true}),
+                loveContentFade : gsap.timeline({paused: true}),
+                hoverEffectWork : new TimelineMax({ paused: false})
             }
         },
         methods: {
@@ -73,6 +75,19 @@
                     document.querySelector('.developped').classList.remove("overflow");
                     document.querySelector('.circle-container').classList.add("visible");
                 },3500);
+            },
+            goToWork(){
+                const vm = this;
+                this.hoverEffectWork.pause(1);
+                document.querySelector('.cross').classList.remove("active");
+                document.querySelector('.developped').classList.remove("overflow");
+                this.loveContentFade.pause(0);
+                this.loveContentFade.play();
+                this.loveContentFade.eventCallback("onComplete", function () {
+                    vm.$router.push({
+                        path: '/project/'
+                    })
+                })
             },
             cocktailPlay(){
                 this.cocktailAnim.goToAndPlay(1,1);
@@ -99,6 +114,9 @@
             }
         },
         mounted() {
+
+            const vm =this;
+
             if(!this.$device.mobile){
                 this.loveContentLeave
                     .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
@@ -117,6 +135,12 @@
                     .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8");
             }
 
+            this.loveContentFade
+                    .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
+                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
+                    .to(".arrow", {opacity:0, duration: 0.5, ease: "power4.inOut" }, "loveContentLeave");
 
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({
@@ -139,14 +163,17 @@
             //* END LOTTIE ANIMATION
 
             this.letterContainer("link-stagger");
+            this.letterContainer("go-to-work");
 
-            var staggerLink = document.querySelector('.developped-link');
-            var hoverEffect = new TimelineMax({ paused: false});
+            const staggerLink = document.querySelector('.developped-link');
+            const workLink = document.querySelector('.go-to-work');
+
+            const hoverEffect = new TimelineMax({ paused: false});
 
             for(let word of document.getElementsByClassName("link-stagger")){
                 const letters = word.childNodes;
                 for(let i=1; i<letters.length; i++ ){
-                    var yValue= Math.floor(Math.random() * 10) + 1;
+                    const yValue= Math.floor(Math.random() * 10) + 1;
                     if(i % 2 == 0){
                         hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
                     }else{
@@ -155,12 +182,33 @@
                 }
             }
 
+            for(let word of document.getElementsByClassName("go-to-work")){
+                const letters = word.childNodes;
+                for(let i=1; i<letters.length; i++ ){
+                    const yValue= Math.floor(Math.random() * 10) + 1;
+                    if(i % 2 == 0){
+                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }else{
+                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                    }
+                }
+            }
+
             hoverEffect.pause(0);
+            this.hoverEffectWork.pause(0);
+
             staggerLink.addEventListener('mouseenter', e => {
                 hoverEffect.play(0);
             });    
             staggerLink.addEventListener('mouseleave', e => {
                 hoverEffect.play(1).reverse();
+            });  
+
+            workLink.addEventListener('mouseenter', e => {
+                vm.hoverEffectWork.play(0);
+            });    
+            workLink.addEventListener('mouseleave', e => {
+                vm.hoverEffectWork.play(1).reverse();
             });  
         },
     }
@@ -217,6 +265,10 @@
                 margin-top: 110px;
                 margin-bottom: 30px;
             }
+        }
+        .go-to-work{
+            font-size: 18px;
+            margin-top: 28px;
         }
         .developped{
             @media ( max-width : 780px ) {
