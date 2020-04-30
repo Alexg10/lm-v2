@@ -49,7 +49,7 @@ query getProjectBySlug($slug: String!) {
           color
           sketchImages {
             sketchImage {
-              sourceUrl(size: SKETCH_PICTURE)
+              sourceUrl(size: FULL_WIDTH)
             }
           }
           sketchMobileVideo
@@ -144,7 +144,7 @@ query getProjectBySlug($slug: String!) {
           }
           imagesFullHeight {
             imageFullHeight {
-              sourceUrl(size: SKETCH_PICTURE)
+              sourceUrl(size: FULL_WIDTH)
             }
           }
         }

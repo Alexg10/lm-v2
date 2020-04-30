@@ -40,8 +40,8 @@
             createTimelines(){
                 var animationTimeline         = new TimelineMax({ paused: false});
                 var animationParallaxTimeline = new TimelineMax({ paused: false});
-                var animImg                   = this.$el.getElementsByClassName("bloc-animation-desktop-img");
-                var animImgMob                = this.$el.getElementsByClassName("bloc-animation-mobile-img");
+                var animImg                   = document.getElementsByClassName("bloc-animation-desktop-img");
+                var animImgMob                = document.getElementsByClassName("bloc-animation-mobile-img");
 
                 animationTimeline
                     .fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
@@ -146,6 +146,11 @@
             bottom: 0;
             z-index: 9;
             // margin-top: -153px;
+            .bloc-animation-mobile-img{
+                img{
+                    width: 100%;
+                }
+            }
             .bloc-animation-mobile-img.video{
                 width: 100%;
             }

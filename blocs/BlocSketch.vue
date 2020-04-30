@@ -110,9 +110,20 @@
             width: 100%;
             order: 2;
         }
+        &:nth-child(1){
+            .img-container{
+                img{
+                    margin-bottom: 300px;
+                }
+            }
+        }
+
         &:nth-child(2){
-            margin-bottom: 60px;
+            margin-bottom: 120px;
+            margin-top: -120px;
             @media only screen and ( max-width : 680px ) {
+                margin-top: 0;
+                margin-bottom: 60px;
                 order: 1;
             }
             .img-container{

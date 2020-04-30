@@ -86,6 +86,9 @@
                         &:last-of-type{
                             margin-bottom: 20px;
                         }
+                        img{
+                            width: 100%;
+                        }
                     }
                 }
             }
