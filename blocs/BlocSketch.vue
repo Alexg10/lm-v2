@@ -27,7 +27,8 @@
         data(){
             return{
                 timelines: {},
-                scenes: []
+                scenes: [],
+                durationPara: 0
             }
         },
         props: [
@@ -56,6 +57,9 @@
                 }
             },
             createScenes(){
+                console.log("durationP");
+                const durationP = this.durationPara;
+                console.log(durationP);
                 this.scenes = [
                     this.$scrollmagic.scene({
                         triggerElement: ".img-section",
@@ -68,19 +72,24 @@
                         triggerElement: ".img-section",
                         triggerHook: 0.65,
                         offset: -150,
-                        duration: window.innerHeight*2.5
+                        duration: durationP
                     })
                     .setTween(this.timelines.sketchParallax)
                 ]
             }
         },
         mounted() {
+            this.durationPara = document.querySelector(".img-section").offsetHeight*1.5;
+            console.log(this.durationPara);
             // Create timelines and scenes
             this.createTimelines();
             this.createScenes();
 
             // Add scenes to controller
             this.$scrollmagic.addScene(this.scenes);
+        },
+        computed(){
+            this.durationPara = document.querySelector(".img-section").offsetHeight*1.5;
         },
         destroyed() {
             this.$scrollmagic.removeScene(this.scenes);

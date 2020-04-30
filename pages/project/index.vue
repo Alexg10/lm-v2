@@ -56,7 +56,7 @@
                 isLeave: false,
                 slickOptions: {
                     slidesToShow : 1,
-                    speed        : 1500,
+                    speed        : 1600,
                     infinite     : true,
                     centerMode   : true,
                     centerPadding: '20%',

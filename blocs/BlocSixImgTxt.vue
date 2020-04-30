@@ -144,6 +144,11 @@
             &:nth-child(2){
                 margin-top: 94px;
             }
+            img{
+                width: 100%;
+                max-width: 220px;
+                margin: 0 auto;
+            }
         }
     }
     .img-square-txt.mobile{

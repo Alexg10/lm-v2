@@ -62,8 +62,7 @@
             createTimelines(){
                 // Footer timeline
                 const footerTimeline = new TimelineMax({paused: false})
-                .fromTo(".next-cover", 1, {opacity: 0, width: "75%"}, {opacity: 1, width: "100%"}, "start")
-                .fromTo(".arrow", 2, {opacity: 1}, {opacity: 0}, "start")
+                .fromTo(".next-cover", 1, {opacity: 0, width: "70%"}, {opacity: 1, width: "100%"}, "start")
                 .eventCallback("onComplete", this.scrollToBottom);
 
                 // Letter timeline
@@ -87,9 +86,9 @@
                     // Footer scene
                     this.$scrollmagic.scene({
                         triggerElement: '.footer-project-content',
-                        triggerHook: 0.8,
-                        offset: -200,
-                        duration: 900
+                        triggerHook: 0.6,
+                        offset: -300,
+                        duration: 800
                     })
                     .setTween(this.timelines.footer),
                     // Letter scene
@@ -137,6 +136,7 @@
         position: relative;
         text-align: center;
         z-index: 9;
+        padding-top: 100px;
         a{
             color: black;
             text-decoration: none;

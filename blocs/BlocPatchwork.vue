@@ -226,7 +226,7 @@
         .patchwork-txt{
             text-align: center;
             max-width: 765px;
-            margin: 110px auto;
+            margin: 150px auto;
             font-size: 28px;
         }
     }
