@@ -5,7 +5,8 @@
                 <div class="color-container" v-for="color in bloc.blocColorsColor" v-bind:key>
                     <div class="color" v-bind:style="{background: color.colorHexa}"></div>
                     <div class="color-name">
-                        {{color.colorTitle}}{{color.colorHexa}}
+                        <div>{{color.colorTitle}}</div>
+                        {{color.colorHexa}}
                     </div>
                 </div>
             </div>

@@ -93,6 +93,7 @@ query getProjectBySlug($slug: String!) {
         }
         ... on Project_Acfprojectfields_Blocs_BlocColors {
           fieldGroupName
+          color
           blocColorsColor {
             colorHexa
             colorTitle
