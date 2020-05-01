@@ -277,6 +277,11 @@
         z-index    : 99;
         opacity    : 0;
         transition : opacity 1.1s cubic-bezier(.19,.77,.2,1);
+        -webkit-user-select: none; 
+        -webkit-touch-callout: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none;
         &.visible{
             visibility: visible;
             opacity   : 1;
@@ -392,6 +397,11 @@
             .left-bottom{
                 display : flex;
                 overflow: hidden;
+                -webkit-user-select: none; 
+                -webkit-touch-callout: none; 
+                -moz-user-select: none; 
+                -ms-user-select: none; 
+                user-select: none;
                 @media ( max-width : 780px ) {
                     justify-content: center;
                     order: 2;
@@ -472,6 +482,11 @@
                 .contact-me{
                     font-family : 'GTWalsheimProMedium';
                     margin-right: 88px;
+                    -webkit-user-select: none; 
+                    -webkit-touch-callout: none; 
+                    -moz-user-select: none; 
+                    -ms-user-select: none; 
+                    user-select: none;
                     @media ( max-width : 780px ) {
                         margin-right: 148px;
                     }
@@ -486,6 +501,11 @@
                     a{
                         letter-spacing : 0.3px;
                         text-decoration: none;
+                        -webkit-user-select: none; 
+                        -webkit-touch-callout: none; 
+                        -moz-user-select: none; 
+                        -ms-user-select: none; 
+                        user-select: none;
                     }
                 }
             }

@@ -253,10 +253,9 @@
             },
             countdown(action, part){
                 const vm = this;
-                let time = 2;
+                let time = 1;
                 if(action == "play"){
                     this.coundownTime = setInterval(() => {
-                        time--;
                         if (time == 0){
                             if(part == "work"){
                                 vm.workClick();
@@ -266,9 +265,9 @@
                                     vm.loveHoldEnd();
                                 }, 1000);
                             }
-
                             clearInterval(this.coundownTime);
                         }
+                        time--;
                     }, 1000);
                 }else {
                     clearInterval(this.coundownTime);
@@ -277,7 +276,6 @@
             loveHold(){
                 const vm = this;
                 this.scrollable = false;
-                let time = 5;
                 document.querySelector('.bg-love').classList.add("visible");
                 document.querySelector('.love-container .word-container').classList.add("hover");
                 document.querySelector('.circle-container.love').classList.add("hold");
