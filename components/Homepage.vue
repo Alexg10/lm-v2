@@ -1011,6 +1011,10 @@
             display: flex;
             line-height: 160px;
             color: black;
+            -webkit-user-select: none;
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;   
         }
         .hide{
             width: auto;
