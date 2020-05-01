@@ -253,7 +253,7 @@
             },
             countdown(action, part){
                 const vm = this;
-                let time = 3;
+                let time = 2;
                 if(action == "play"){
                     this.coundownTime = setInterval(() => {
                         time--;
@@ -723,7 +723,7 @@
                     stroke-dashoffset: 0;
                     transform: rotate(-90deg);
                     transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
-                    transition-delay: 2.5s;
+                    transition-delay: 1.5s;
                 }
             }
         }
@@ -731,7 +731,7 @@
             svg{
                 transform: scale(2);
                 opacity: 0;
-                transition: all 4s ease-in;
+                transition: all 3s ease-in;
             }
         }
         .hover-text-container{

@@ -317,6 +317,11 @@
         .go-to-work{
             font-size: 18px;
             margin-top: 28px;
+            -webkit-user-select: none; 
+            -webkit-touch-callout: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
             @media ( max-width : 680px ) {
                 font-size: 16px;
             }
@@ -430,6 +435,11 @@
                         height: 20px;
                         text-align: center;
                         font-size: 14px;
+                        -webkit-user-select: none; 
+                        -webkit-touch-callout: none; 
+                        -moz-user-select: none; 
+                        -ms-user-select: none; 
+                        user-select: none; 
                         @media ( max-width : 780px ) {
                             min-width: 195px;
                         }
@@ -557,6 +567,11 @@
             max-width  : 444px;
             line-height: 32px;
             margin     : 0 auto;
+            -webkit-user-select: none; 
+            -webkit-touch-callout: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
             @media ( max-width : 780px ) {
                 margin-top : 45px;
                 line-height: 30px;
