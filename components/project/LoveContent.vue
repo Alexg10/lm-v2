@@ -107,10 +107,14 @@
                 })
             },
             cocktailPlay(){
-                this.cocktailAnim.goToAndPlay(1,1);
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    this.cocktailAnim.goToAndPlay(1,1);
+                }
             },
             pizzaPlay(){
-                this.pizzaAnim.goToAndPlay(1,1);
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    this.pizzaAnim.goToAndPlay(1,1);
+                }
             },
             letterContainer(className){
                 var word = document.getElementsByClassName(className)[0];

@@ -34,7 +34,7 @@ query getProjectBySlug($slug: String!) {
           fieldGroupName
           color
           laptopPicture {
-            sourceUrl(size: SKETCH_PICTURE)
+            sourceUrl
           }
           laptopVideo
           pictureVideo
