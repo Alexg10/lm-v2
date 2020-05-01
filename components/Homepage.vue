@@ -251,17 +251,22 @@
                     }, 250);
                 }
             },
-            countdown(action){
+            countdown(action, part){
                 const vm = this;
                 let time = 3;
                 if(action == "play"){
                     this.coundownTime = setInterval(() => {
                         time--;
                         if (time == 0){
-                            vm.loveClick();
-                            setTimeout(() => {
-                                vm.loveHoldEnd();
-                            }, 1000);
+                            if(part == "work"){
+                                vm.workClick();
+                            }else{
+                                vm.loveClick();
+                                setTimeout(() => {
+                                    vm.loveHoldEnd();
+                                }, 1000);
+                            }
+
                             clearInterval(this.coundownTime);
                         }
                     }, 1000);
@@ -280,7 +285,7 @@
                     this.gif();
                 }, 250);
 
-                this.countdown("play")
+                this.countdown("play", "love");
             },
             loveHoldEnd(){
                 document.querySelector('.bg-love').classList.remove("visible");
@@ -288,7 +293,7 @@
                 document.querySelector('.circle-container.love').classList.remove("hold");
 
                 clearInterval(this.playing);
-                this.countdown("stop")
+                this.countdown("stop", "love")
                 this.scrollable = true;
             },
             loveLeave(){
@@ -318,13 +323,17 @@
             },
             workHold(){
                 document.querySelector('.work-container .word-container').classList.add("hover");
+                document.querySelector('.circle-container.work-hold').classList.add("hold");
                 this.particuleAnim();
                 this.scrollable = false;
+                this.countdown("play", "work");
             },
             workHoldEnd(){
                 document.querySelector('.work-container .word-container').classList.remove("hover");
+                document.querySelector('.circle-container.work-hold').classList.remove("hold");
                 this.particuleAnimLeave();
                 this.scrollable = true;
+                this.countdown("stop", "work");
             },
             workHover(){
                 this.particuleAnim()
