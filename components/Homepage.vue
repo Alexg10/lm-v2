@@ -112,7 +112,7 @@
                 arrowDown,
                 coverIndex     : 1,
                 playing        : '',
-                countdown      : '',
+                coundownTime: '',
                 scrollable     : false,
                 tlIntro        : gsap.timeline({delay:1}),
                 LoveClickTl    : gsap.timeline({paused: true}),
@@ -251,6 +251,24 @@
                     }, 250);
                 }
             },
+            countdown(action){
+                const vm = this;
+                let time = 5;
+                if(action == "play"){
+                    this.coundownTime = setInterval(() => {
+                        time--;
+                        if (time == 0){
+                            vm.loveClick();
+                            setTimeout(() => {
+                                vm.loveHoldEnd();
+                            }, 1000);
+                            clearInterval(this.coundownTime);
+                        }
+                    }, 1000);
+                }else {
+                    clearInterval(this.coundownTime);
+                }
+            },
             loveHold(){
                 const vm = this;
                 this.scrollable = false;
@@ -262,19 +280,7 @@
                     this.gif();
                 }, 250);
 
-                this.countdown = setInterval(() => {
-                    time--;
-                    console.log(time);
-                    if (time == 0){
-                        console.log("Go to page");
-                        vm.loveClick();
-                        clearInterval(this.countdown);
-                        setTimeout(() => {
-                            vm.loveHoldEnd();
-                        }, 1000);
-                    }
-                }, 1000);
-
+                this.countdown("play")
             },
             loveHoldEnd(){
                 document.querySelector('.bg-love').classList.remove("visible");
@@ -282,6 +288,7 @@
                 document.querySelector('.circle-container.love').classList.remove("hold");
 
                 clearInterval(this.playing);
+                this.countdown("stop")
                 this.scrollable = true;
             },
             loveLeave(){
@@ -713,7 +720,7 @@
         }
         &.hold{
             svg{
-                transform: scale(1.5);
+                transform: scale(2);
                 opacity: 0;
                 transition: all 5s ease-in;
             }
