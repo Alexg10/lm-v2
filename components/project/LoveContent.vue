@@ -32,7 +32,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="left-bottom">
+            <div class="center-bottom">
                 <div class="contact-me infos-link">
                     <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay" data-cursor-hover>
                         <div id="ico-cocktail" class="ico-anim"></div>
@@ -78,12 +78,16 @@
         },
         methods: {
             backHome(){
+                const vm = this;
+
                 document.querySelector('.cross').classList.remove("active");
                 document.querySelector('.developped').classList.remove("overflow");
                 this.loveContentLeave.pause(0);
                 this.loveContentLeave.play();
                 setTimeout(function(){
-                    document.querySelector('.word-container').classList.remove("clicked");
+                    if((!vm.$device.ipad) && (!vm.$device.mobile)){
+                        document.querySelector('.word-container').classList.remove("clicked");
+                    }
                     document.querySelector('.love-content').classList.remove("visible");
                     document.querySelector('.developped').classList.remove("overflow");
                     document.querySelector('.circle-container').classList.add("visible");
@@ -153,13 +157,16 @@
             },
         },
         mounted() {
-            this.childNodes();
+            if((!this.$device.ipad) && (!this.$device.mobile)){
+                this.childNodes();
+            }
             const vm = this;
 
             if(!this.$device.mobile){
                 this.loveContentLeave
                     .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".social-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
                     .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
                     .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2")
@@ -168,6 +175,7 @@
                 this.loveContentLeave
                     .to(".developped-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".infos-link a", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave+=0.3")
+                    .to(".social-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.6")
                     .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=1")
                     .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8")
@@ -301,7 +309,7 @@
                 margin  : 110px 0;
             }
             @media ( max-width : 680px ) {
-                margin-top: 110px;
+                margin-top: 80px;
                 margin-bottom: 30px;
             }
         }
@@ -346,6 +354,10 @@
             padding        : 0 20px;
             @media ( max-width : 780px ) {
                 flex-direction: column;
+                bottom : 11vh;
+            }
+            @media ( max-width : 780px ) {
+                bottom : 4vh;
             }
 
             .ico-anim{
@@ -364,11 +376,14 @@
                     }
                 }
             }
+            .center-bottom,
             .left-bottom{
                 display : flex;
                 overflow: hidden;
                 @media ( max-width : 780px ) {
                     justify-content: center;
+                    order: 2;
+                    margin-bottom: 30px;
                 }
                 a{
                     display    : flex;
@@ -397,18 +412,31 @@
                 }
                 .social-links{
                     display: flex;
+                    align-items: center;
                     padding: 0;
+                    overflow: hidden;
                     li{
                         display: flex;
                         justify-content: center;
                         list-style-type: none;
                         min-width: 85px;
+                        height: 20px;
                         text-align: center;
                         font-size: 14px;
+                        @media ( max-width : 780px ) {
+                            min-width: 195px;
+                        }
+                        @media ( max-width : 680px ) {
+                            min-width: 105px;
+                        }
                         a{
                             color: black;
                             font-size: 14px;
                             text-align: center;
+                            @media ( max-width : 780px ) {
+                                flex-direction: row;
+                                font-size: 16px;
+                            }
                         }
                         span{
                             overflow: hidden;
@@ -424,6 +452,13 @@
                 .contact-me{
                     font-family : 'GTWalsheimProMedium';
                     margin-right: 88px;
+                    @media ( max-width : 780px ) {
+                        margin-right: 148px;
+                    }
+                    @media ( max-width : 680px ) {
+                        margin-right: 88px;
+                    }
+
                     img{
                         width        : 45px;
                         margin-bottom: 20px;
@@ -434,9 +469,22 @@
                     }
                 }
             }
+            .center-bottom{
+                @media ( max-width : 780px ) {
+                    order: 1;
+                    margin-bottom: 200px;
+                }
+                @media ( max-width : 680px ) {
+                    margin-bottom: 30px;
+                }
+
+            }
             .right-bottom{
                 display: flex;
                 align-items: center;
+                @media ( max-width : 780px ) {
+                    order: 3
+                }
             }
             .developped{
                 font-family : 'GTWalsheimProMedium';
@@ -451,10 +499,11 @@
                 }
                 @media ( max-width : 780px ) {
                     transform: translateY(50px);
+
                 }
                 @media ( max-width : 680px ) {
                     width: 100%;
-
+                    transform: translateY(0);
                 }
                 a{
                     color          : black;
@@ -465,6 +514,7 @@
                     margin-top     : 10px;
                     @media ( max-width : 780px ) {
                         justify-content: center;
+                        font-size   : 16px;
                     }
                 }
                 span{
@@ -496,9 +546,9 @@
             margin     : 0 auto;
             @media ( max-width : 780px ) {
                 margin-top : 45px;
-                line-height: 40px;
-                font-size  : 28px;
-                max-width  : 415px;
+                line-height: 30px;
+                font-size: 23px;
+                max-width  : 455px;
                 margin     : 0 auto;
             }
             @media ( max-width : 680px ) {
