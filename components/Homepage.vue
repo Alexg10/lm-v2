@@ -58,7 +58,7 @@
                     <div class="circle-container love" v-touch:start="loveHold" v-touch:end="loveHoldEnd">
                         <svg class="circle" xmlns="http://www.w3.org/2000/svg">
                             <g>
-                            <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
+                                <ellipse class="foreground" ry="43" rx="43" cy="46" cx="46" stroke-width="1"/>
                             </g>
                         </svg>
                         <div class="hover-text-container">
@@ -86,7 +86,7 @@
                 <div class="circle-container work-hold" v-touch:start="workHold" v-touch:end="workHoldEnd">
                     <svg class="circle" xmlns="http://www.w3.org/2000/svg">
                         <g>
-                        <ellipse class="foreground" ry="35" rx="35" cy="38" cx="39" stroke-width="1"/>
+                            <ellipse class="foreground" ry="43" rx="43" cy="46" cx="46" stroke-width="1"/>
                         </g>
                     </svg>
                     <div class="hover-text-container">
@@ -112,6 +112,7 @@
                 arrowDown,
                 coverIndex     : 1,
                 playing        : '',
+                countdown      : '',
                 scrollable     : false,
                 tlIntro        : gsap.timeline({delay:1}),
                 LoveClickTl    : gsap.timeline({paused: true}),
@@ -251,17 +252,35 @@
                 }
             },
             loveHold(){
+                const vm = this;
                 this.scrollable = false;
+                let time = 5;
                 document.querySelector('.bg-love').classList.add("visible");
                 document.querySelector('.love-container .word-container').classList.add("hover");
+                document.querySelector('.circle-container.love').classList.add("hold");
                 this.playing = setInterval(() => {
                     this.gif();
                 }, 250);
+
+                this.countdown = setInterval(() => {
+                    time--;
+                    console.log(time);
+                    if (time == 0){
+                        console.log("Go to page");
+                        vm.loveClick();
+                        clearInterval(this.countdown);
+                        setTimeout(() => {
+                            vm.loveHoldEnd();
+                        }, 1000);
+                    }
+                }, 1000);
 
             },
             loveHoldEnd(){
                 document.querySelector('.bg-love').classList.remove("visible");
                 document.querySelector('.love-container .word-container').classList.remove("hover");
+                document.querySelector('.circle-container.love').classList.remove("hold");
+
                 clearInterval(this.playing);
                 this.scrollable = true;
             },
@@ -658,11 +677,11 @@
             justify-content: center;
             align-items: center;
             position: fixed;
-            bottom: 100px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
-            width: 76px;
-            height: 76px;
+            width: 92px;
+            height: 92px;
             margin: 0 auto;
             font-size: 12px;
             color: #B4B3B1;
@@ -670,6 +689,11 @@
             text-transform: uppercase;
             z-index: 9;
         } 
+        svg{
+            transform: scale(1);
+            opacity: 1;
+            transition: all 2s ease;
+        }
         &.visible{
             .circle-text{
                 transform: translate(0px, 0);
@@ -685,6 +709,13 @@
                     transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
                     transition-delay: 2.5s;
                 }
+            }
+        }
+        &.hold{
+            svg{
+                transform: scale(1.5);
+                opacity: 0;
+                transition: all 5s ease-in;
             }
         }
         .hover-text-container{
@@ -709,8 +740,8 @@
             transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .circle {
-            height: 75px;
-            width: 75px;
+            height: 92px;
+            width: 88px;
             .foreground {
                 fill: transparent;
                 stroke-dasharray: 377;
@@ -728,6 +759,9 @@
     .homepage-container{
         position: relative;
         overflow: hidden;
+        @media ( max-width : 680px ) {
+            height: 100vh;
+        }
         .work-container{
             position: absolute;
             top: 0;
@@ -807,6 +841,8 @@
         cursor: none!important;
         @media ( max-width : 680px ) {
             font-size: 130px;
+            position: relative;
+            top: -80px;
         }
         .elle,
         .aime{
