@@ -317,6 +317,9 @@
         .go-to-work{
             font-size: 18px;
             margin-top: 28px;
+            @media ( max-width : 680px ) {
+                font-size: 16px;
+            }
         }
         .developped{
             span{
@@ -375,6 +378,10 @@
                         min-height: 59px;
                     }
                 }
+                @media ( max-width : 680px ) {
+                    margin-right: 0px;
+                }
+
             }
             .center-bottom,
             .left-bottom{
@@ -437,6 +444,9 @@
                                 flex-direction: row;
                                 font-size: 16px;
                             }
+                            @media ( max-width : 680px ) {
+                                font-size: 14px
+                            }
                         }
                         span{
                             overflow: hidden;
@@ -475,7 +485,7 @@
                     margin-bottom: 200px;
                 }
                 @media ( max-width : 680px ) {
-                    margin-bottom: 30px;
+                    margin-bottom: 45px;
                 }
 
             }
@@ -516,6 +526,9 @@
                         justify-content: center;
                         font-size   : 16px;
                     }
+                    @media ( max-width : 780px ) {
+                        font-size   : 14px;
+                    }
                 }
                 span{
                     font-weight: bold;
@@ -553,9 +566,9 @@
             }
             @media ( max-width : 680px ) {
                 margin-top : 45px;
-                line-height: 28px;
-                font-size  : 16px;
                 max-width  : 300px;
+                line-height: 24px;
+                font-size: 18px;
             }
         }
         .word-container{

@@ -253,7 +253,7 @@
             },
             countdown(action){
                 const vm = this;
-                let time = 5;
+                let time = 3;
                 if(action == "play"){
                     this.coundownTime = setInterval(() => {
                         time--;
@@ -722,7 +722,7 @@
             svg{
                 transform: scale(2);
                 opacity: 0;
-                transition: all 5s ease-in;
+                transition: all 4s ease-in;
             }
         }
         .hover-text-container{
