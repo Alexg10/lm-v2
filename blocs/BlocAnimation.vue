@@ -11,8 +11,9 @@
                 <div id="animation-creativ" class="hand-anim"></div>
             </div>
             <div class="bloc-animation-mobile-container">
-                <div v-if="bloc.videoMobile" >
-                    <video class="bloc-animation-mobile-img video" loop>
+                <div v-if="bloc.videoMobile" class="bloc-animation-mobile-img  mobile-container">
+                    <img class="mobile-svg" src="~/assets/images/block/mobile.svg" alt="">
+                    <video class="video" loop muted>
                         <source :src="bloc.videoMobile" type="video/mp4">
                     </video>
                 </div>
@@ -38,15 +39,23 @@
         ],
         methods: {
             createTimelines(){
-                var animationTimeline         = new TimelineMax({ paused: false});
-                var animationParallaxTimeline = new TimelineMax({ paused: false});
-                var animImg                   = document.getElementsByClassName("bloc-animation-desktop-img");
-                var animImgMob                = document.getElementsByClassName("bloc-animation-mobile-img");
+                const animationTimeline         = new TimelineMax({ paused: false});
+                const animationParallaxTimeline = new TimelineMax({ paused: false});
+                const animImg                   = document.getElementsByClassName("bloc-animation-desktop-img");
+                const animImgMob                = document.getElementsByClassName("bloc-animation-mobile-img");
+                const video                     = document.getElementsByClassName("video");
+
 
                 animationTimeline
                     .fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
                     .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
                     .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
+
+                if(video){
+                    animationTimeline.eventCallback("onComplete", ()=> {
+                        document.querySelector('.video').play();
+                    });
+                }  
 
                 animationParallaxTimeline.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
 
@@ -149,9 +158,34 @@
             img{
                 width: 100%;
             }
-            .bloc-animation-mobile-img.video{
-                width: 100%;
+            .mobile-container{
+                position: relative;
+                &:before{
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    top: 27px;
+                    transform: translateX(-50%);
+                    height: 21px;
+                    width: 94px;
+                    border-radius: 17px;
+                    background-color: black;
+                    z-index: 9;
+                }
+                .mobile-svg{
+                    position: relative;
+                }
+                .video{
+                    width: 100%;
+                    position: absolute;
+                    left: 50%;
+                    top: 34px;
+                    width: 72%;
+                    transform: translateX(-50%);
+                    border-radius: 17px;
+                }
             }
+
         }
         .anim-container{
             display: flex;
