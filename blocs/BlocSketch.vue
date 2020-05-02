@@ -1,6 +1,6 @@
 <template>
     <div v-if="bloc" v-bind:style='{backgroundColor: bloc.color}'>
-        <section class="img-section">
+        <section class="img-section" ref="sectionBox">
             <div class="container">
                 <div id="img-section-container" class="img-section-container" v-for="(image, index) in bloc.sketchImages" :key="bloc.id">
                     <div class="img-container grid-item">
@@ -80,7 +80,7 @@
             }
         },
         mounted() {
-            this.durationPara = document.querySelector(".img-section").offsetHeight*1.5;
+            this.durationPara = this.$refs.sectionBox.offsetHeight*1.5;
             console.log(this.durationPara);
             // Create timelines and scenes
             this.createTimelines();

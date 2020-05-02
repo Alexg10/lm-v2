@@ -347,6 +347,11 @@
                 .ico-heart{
                     margin-right: 10px;
                     transition  : 0.5s ease;
+                    @media ( max-width : 780px ) {
+                        transform: scale(0.8);
+                        animation: heart-beat-mobile 5s ease;
+                        animation-iteration-count: infinite;
+                    }
                 }
                 &:hover{
                     .ico-heart{
@@ -635,6 +640,20 @@
             }
             100%{
                 transform: scale(1);
+            }
+        }
+        @keyframes heart-beat-mobile {
+            0%{
+                transform: scale(0.8);
+            }
+            10%{
+                transform: scale(0.8);
+            }
+            20%{
+                transform: scale(1.1);
+            }
+            30%{
+                transform: scale(0.8);
             }
         }
     }
