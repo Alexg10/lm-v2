@@ -310,6 +310,7 @@
                 this.loveShowContent.pause(0);
                 this.LoveClickTl.play();
                 document.querySelector('.word-container').classList.add("clicked");
+                document.querySelector('.work-container .word-container').classList.add("hover");
                 this.LoveClickTl.eventCallback("onComplete", function () {
                     if((!vm.$device.ipad) && (!vm.$device.mobile)){
                         document.querySelector('.bg-love').classList.remove("visible");
@@ -593,8 +594,8 @@
             transition-delay: 1s;
         }
         @keyframes upNdown {
-            0% { transform: translate(-50%, -50px); }
-            100% { transform: translateY(-25%, -50px); }
+            0% { transform: translate(-50%, -0px); }
+            100% { transform: translate(-50%, -10px); }
         }
     }
     .intro{
