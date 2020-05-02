@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
     export default {
         props: [
             'bloc'
@@ -27,6 +26,9 @@
                 justify-content: center;
                 width: 50%;
                 overflow: hidden;
+                @media only screen and ( max-width : 780px ) {
+                    display: block;
+                }
                 @media only screen and ( max-width : 680px ) {
                     width: 100%;
                 }
