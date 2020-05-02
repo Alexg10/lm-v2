@@ -59,7 +59,7 @@
             },
             createScenes(){
                 console.log("durationP");
-                const durationP = this.durationPara;
+                const durationP = document.querySelector(".img-section").offsetHeight*1.5;
                 console.log(durationP);
                 this.scenes = [
                     this.$scrollmagic.scene({
@@ -89,9 +89,6 @@
             // Add scenes to controller
             this.$scrollmagic.addScene(this.scenes);
         },
-        computed(){
-            this.durationPara = document.querySelector(".img-section").offsetHeight*1.5;
-        },
         destroyed() {
             this.$scrollmagic.removeScene(this.scenes);
         }
@@ -104,6 +101,7 @@
         background-color: #fff;
     }
     .container{
+        max-width: 1320px;
         @media only screen and ( max-width : 680px ) {
             display: flex;
             flex-direction: column;
@@ -115,9 +113,14 @@
     .img-section-container{
         display: inline-block;
         width: 50%;
+        padding: 0 45px;
         float: left;
         @media only screen and ( max-width : 680px ) {
+            padding: 0 25px;
+        }
+        @media only screen and ( max-width : 680px ) {
             width: 100%;
+            padding: 0;
             order: 2;
         }
         &:nth-child(1){
@@ -137,7 +140,7 @@
                 order: 1;
             }
             .img-container{
-                max-width: 240px;
+                max-width: 310px;
                 margin: 0 auto;
             }
         }
@@ -158,7 +161,7 @@
             content: '';
             position: absolute;
             left: 50%;
-            top: 27px;
+            top: 31px;
             transform: translateX(-50%);
             height: 21px;
             width: 94px;
@@ -173,7 +176,7 @@
             width: 100%;
             position: absolute;
             left: 50%;
-            top: 34px;
+            top: 42px;
             width: 72%;
             transform: translateX(-50%);
             border-radius: 17px;
