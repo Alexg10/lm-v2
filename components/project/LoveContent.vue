@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="toppings-me infos-link">
-                    <a href="" class="link link-hover" v-on:mouseenter="pizzaPlay" data-cursor-hover>
+                    <a href="http://api.louise-margueritat.love/cv.pdf" target="_blank" class="link link-hover" v-on:mouseenter="pizzaPlay" data-cursor-hover>
                         <div id="pizza-ico" class="ico-anim"></div>
                         <p>my toppings</p>
                     </a>

@@ -179,7 +179,6 @@
                     border-radius: 17px;
                 }
             }
-
         }
         .anim-container{
             display: flex;
