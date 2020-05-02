@@ -578,8 +578,9 @@
 
     .arrow{
         position: fixed;
-        bottom: 55px;
+        bottom: 25px;
         left: 50%;
+        padding: 20px;
         opacity: 0;
         transition: 0.5s ease;
         transform: translate(-50%, -50%);
@@ -587,13 +588,13 @@
         z-index: 60;
         &.visible{
             opacity: 1;
-            bottom: 45px;
+            bottom: 25px;
             transition: 0.8s ease;
             transition-delay: 1s;
         }
         @keyframes upNdown {
-            0% { transform: translate(-50%, 0); }
-            100% { transform: translateY(-50%, -10px); }
+            0% { transform: translate(-50%, -50px); }
+            100% { transform: translateY(-25%, -50px); }
         }
     }
     .intro{
