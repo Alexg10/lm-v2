@@ -13,7 +13,7 @@
             <div class="bloc-animation-mobile-container">
                 <div v-if="bloc.videoMobile" class="bloc-animation-mobile-img  mobile-container">
                     <img class="mobile-svg" src="~/assets/images/block/mobile.svg" alt="">
-                    <video class="video" loop muted>
+                    <video class="video" loop muted autoplay>
                         <source :src="bloc.videoMobile" type="video/mp4">
                     </video>
                 </div>
@@ -50,12 +50,6 @@
                     .fromTo(animImg, 2, {yPercent: 10, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start")
                     .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
                     .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
-
-                if(video){
-                    animationTimeline.eventCallback("onComplete", ()=> {
-                        document.querySelector('.video').play();
-                    });
-                }  
 
                 animationParallaxTimeline.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
 

@@ -4,8 +4,9 @@
             <div class="container">
                 <div id="img-section-container" class="img-section-container" v-for="(image, index) in bloc.sketchImages" :key="bloc.id">
                     <div class="img-container grid-item">
-                        <div v-if="bloc.sketchMobileVideo && index == 1" >
-                            <video class="sketch-mobile-preview-video" loop>
+                        <div v-if="bloc.sketchMobileVideo && index == 1" class="mobile-container">
+                            <img class="mobile-svg" src="~/assets/images/block/mobile.svg" alt="">
+                            <video class="sketch-mobile-preview-video video" loop muted autoplay>
                                 <source :src="bloc.sketchMobileVideo" type="video/mp4">
                             </video>
                         </div>
@@ -149,6 +150,33 @@
         .phone-container{
             text-align: center;
             padding: 100px 0;
+        }
+    }
+    .mobile-container{
+        position: relative;
+        &:before{
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 27px;
+            transform: translateX(-50%);
+            height: 21px;
+            width: 94px;
+            border-radius: 17px;
+            background-color: black;
+            z-index: 9;
+        }
+        .mobile-svg{
+            position: relative;
+        }
+        .video{
+            width: 100%;
+            position: absolute;
+            left: 50%;
+            top: 34px;
+            width: 72%;
+            transform: translateX(-50%);
+            border-radius: 17px;
         }
     }
 

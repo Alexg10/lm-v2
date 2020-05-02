@@ -9,7 +9,7 @@
         <section v-if="bloc.pictureVideo === 'video'" class="project-laptop-preview container">
             <div class="computer-content">
                 <img class="laptop-svg" src="~/assets/images/block/laptop.svg" alt="">
-                <video class="laptop-content project-laptop-preview-video" loop muted>
+                <video class="laptop-content project-laptop-preview-video" loop muted autoplay>
                     <source :src="bloc.laptopVideo" type="video/mp4">
                 </video>
             </div>
@@ -39,11 +39,6 @@
 
                 laptopTImeline
                     .fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});        
-                if(video){
-                    laptopTImeline.eventCallback("onComplete", ()=> {
-                        document.querySelector('.project-laptop-preview-video').play();
-                    });
-                }  
 
                 this.timelines = {
                     laptop: laptopTImeline
