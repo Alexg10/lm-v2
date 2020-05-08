@@ -1,6 +1,6 @@
 <template>
     <div class="love-content">
-        <div class="cross link-hover" v-on:click="backHome" data-cursor-hover>
+        <div class="cross link-hover" v-on:click="backHome" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave">
             <div class="crossLineOne">
                 <div class="crossLineOne_content"></div>
             </div>
@@ -16,7 +16,7 @@
         <div class="love-description">
             Oh, hi there!<br>
             I’m Louise Margueritat, 26, a french artistic director who would love to work with u.
-            <div class="go-to-work" v-on:click="goToWork">See my projects</div> 
+            <div class="go-to-work" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave" v-on:click="goToWork">See my projects</div> 
         </div>
         <div class="bottom-container">
             <div class="left-bottom">
@@ -34,13 +34,13 @@
             </div>
             <div class="center-bottom">
                 <div class="contact-me infos-link">
-                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay" data-cursor-hover>
+                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay"  v-on:mouseleave="linkLeave">
                         <div id="ico-cocktail" class="ico-anim"></div>
                         <p>contact me</p>
                     </a>
                 </div>
                 <div class="toppings-me infos-link">
-                    <a href="http://api.louise-margueritat.love/cv.pdf" target="_blank" class="link link-hover" v-on:mouseenter="pizzaPlay" data-cursor-hover>
+                    <a href="http://api.louise-margueritat.love/cv.pdf" target="_blank" class="link link-hover" v-on:mouseenter="pizzaPlay"  v-on:mouseleave="linkLeave">
                         <div id="pizza-ico" class="ico-anim"></div>
                         <p>my toppings</p>
                     </a>
@@ -48,7 +48,7 @@
             </div>
             <div class="right-bottom">
                 <div class="developped">
-                    <a href="https://twitter.com/AlexGuerard" class="developped-link link-hover" target="_blank" data-cursor-hover>
+                    <a href="https://twitter.com/AlexGuerard" class="developped-link link-hover" target="_blank" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave">
                         <div class="ico-heart">
                             <img src="~/assets/images/ico/heart.svg" alt="">
                         </div>
@@ -107,12 +107,16 @@
                 })
             },
             cocktailPlay(){
+                const vm = this;
                 if((!this.$device.ipad) && (!this.$device.mobile)){
+                    vm.linkHover();
                     this.cocktailAnim.goToAndPlay(1,1);
                 }
             },
             pizzaPlay(){
+                const vm = this;
                 if((!this.$device.ipad) && (!this.$device.mobile)){
+                    vm.linkHover();
                     this.pizzaAnim.goToAndPlay(1,1);
                 }
             },
@@ -147,6 +151,8 @@
             socialHover(e){
                 let el = e.target
                 let spans = el.querySelectorAll("span");
+                this.linkHover();
+
                 for (let span of spans){
                     const spanWDeployed = span.dataset.width;
                     span.style.width = spanWDeployed+"px";
@@ -155,9 +161,16 @@
             socialLeave(e){
                 let el = e.target
                 let spans = el.querySelectorAll("span");
+                this.linkLeave();
                 for (let span of spans){
                     span.style.width = 0+"px";;
                 }
+            },
+            linkHover(){
+                document.querySelector('.cursor').classList.add('hover'); 
+            },
+            linkLeave(){
+                document.querySelector('.cursor').classList.remove('hover'); 
             },
         },
         mounted() {

@@ -8,7 +8,7 @@
                 easing: [0.24, 0.88, 0.41, 1],
                 cancelable: false            
                 }" data-cursor-hover>
-                <div class="link-to linkHover">
+                <div class="link-to linkHover" v-on:mouseenter="linkNextHover" v-on:mouseleave="linkNextLeave" v-on:click="linkNextClick">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
                     <img class="arrow" :src="arrowDown" alt="">
@@ -110,10 +110,15 @@
                     cancelable: false,
                     onDone: this.changeProject
                 });
-            }
+            },
+            linkNextHover(){
+                document.querySelector('.cursor').classList.add('hover'); 
+            },
+            linkNextLeave(){
+                document.querySelector('.cursor').classList.remove('hover'); 
+            },
         },
         mounted() {
-
             // Add span arround the word
             this.letterContainer("next-project");
             this.letterContainer("next-project-name");
@@ -162,6 +167,9 @@
         }
         .arrow{
             margin-bottom: 100px;
+        }
+        .link-to{
+            display: inline-block;
         }
     }
     span{

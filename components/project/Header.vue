@@ -1,7 +1,7 @@
 <template>
     <div class="project-header">
         <img class="bg-cover" :src="cover.sourceUrl" alt="">
-        <div class="cross link-hover" v-on:click="goToList">
+        <div class="cross link-hover" v-on:mouseenter="crossHover" v-on:mouseleave="crossLeave" v-on:click="goToList">
             <div class="crossLineOne">
                 <div class="crossLineOne_content"></div>
             </div>
@@ -75,20 +75,6 @@
                 } 
                 this.lastScrollTop = st <= 0 ? 0 : st;
             },
-            hoverAddClass(){
-                var link = document.getElementsByClassName("link-hover");
-                var hoverAddClassFunction = function() {
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
-                };
-                var hoverRemoveClassFunction = function() {
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
-                };
-
-                for (var i = 0; i < link.length; i++) {
-                    link[i].addEventListener('mouseenter', hoverAddClassFunction, false);
-                    link[i].addEventListener('mouseleave', hoverRemoveClassFunction, false);
-                }
-            },
             changeProject() {
                 this.$store.commit("setBack", true);
                 this.$router.push({
@@ -111,13 +97,17 @@
                     newSpan.innerHTML = wordContentSplit[i];
                     word.appendChild(newSpan);
                 }
-
-            }
+            },
+            crossHover(){
+                document.querySelector('.cursor').classList.add('hover'); 
+            },
+            crossLeave(){
+                document.querySelector('.cursor').classList.remove('hover'); 
+            },
         },
         mounted() {
             var vm = this;
             this.winHeight = window.innerHeight;
-            this.hoverAddClass();
             
             window.addEventListener("scroll", this.detectScroll);
 
@@ -187,9 +177,13 @@
                 hoverEffect.pause(0);
                 staggerLink.addEventListener('mouseenter', e => {
                     hoverEffect.play(0);
+                    document.querySelector('.cursor').classList.add('hover'); 
+
                 });    
                 staggerLink.addEventListener('mouseleave', e => {
                     hoverEffect.play(1).reverse();
+                    document.querySelector('.cursor').classList.remove('hover'); 
+
                 });           
             }
         },

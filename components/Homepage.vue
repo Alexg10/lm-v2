@@ -236,13 +236,13 @@
                 aboutBlock.className = 'about-block';
                 aboutBlock.innerHTML = 'about me';
                 
-                const aboutContainer = document.querySelector('.cursor-fx__inner');
+                const aboutContainer = document.querySelector('.cursor');
                 aboutContainer.appendChild( aboutBlock );
             },
             loveHover(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.bg-love').classList.add("visible");
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
+                    document.querySelector('.cursor').classList.add('transparent');
                     document.querySelector('.about-block').classList.add('visible');
                     this.hoverEffect.play();
 
@@ -297,7 +297,7 @@
             loveLeave(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     document.querySelector('.bg-love').classList.remove("visible");
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
+                    document.querySelector('.cursor').classList.remove('transparent');
                     document.querySelector('.about-block').classList.remove('visible');
                     this.hoverEffect.play().timeScale(2).reverse();
                     clearInterval(this.playing);
@@ -369,14 +369,14 @@
                 var num = 0;
                 let vm = this;
 
-                document.querySelector('.cursor-fx__inner__outside').classList.add('transparent');
+                document.querySelector('.cursor').classList.add('transparent');
 
                 this.inter = window.setInterval(function () {
                     var typeParticule = random(1,12);
                     var div = document.createElement("div");
                     div.setAttribute("class", "sparkle part-" + num);
                     if((!vm.$device.ipad) && (!vm.$device.mobile)){
-                        var particules = document.querySelector('.cursor-fx__inner__outside');
+                        var particules = document.querySelector('.cursor');
                     }else{
                         var particules = document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)');
                         particules.classList.add('overflow-visible');
@@ -411,7 +411,7 @@
 
                     document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)').classList.remove('overflow-visible');
                 }
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('transparent');
+                document.querySelector('.cursor').classList.remove('transparent');
                 setTimeout(function(){
                     document.querySelectorAll('.sparkle').forEach(
                         e => e.remove()
@@ -485,7 +485,9 @@
                     .from(".infos-link a", {y: 50, duration:1.5, ease: "power4.inOut"}, "loveShowContent+=1.8")
                     .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=2.3");
 
-                this.createAbout();
+                if (document.querySelector('.about-block') === null){
+                    this.createAbout();
+                }
                 this.letterContainer("about-block");
             }else{
                 this.loveShowContent

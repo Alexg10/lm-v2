@@ -4,48 +4,27 @@
       <img :src="cover.acfProjectFields.headerPicture.sourceUrl" alt="cover.acfProjectFields.projectTitle">
     </div>
     <nuxt/>
-    <cursor-fx 
-      color="#FF9170" 
-      color-hover="#FF9170" 
-      outside-size="45px" 
-      :hide-inside='true'
-      :config="{
-        lerps: {
-            dot: 1,
-            circle: 0.18,
-            custom: 0.23,
-        },
-        scale: {
-            ratio: 0.18,
-            min: 1,
-            max: 0.5,
-        },
-        opacity: 0.1,
-      }"
-      >
-    </cursor-fx>
+    <smoothCursor />
   </div>
 </template>
 
 <script>
-  import { CursorFx } from '@luxdamore/vue-cursor-fx';
-  import '@luxdamore/vue-cursor-fx/dist/CursorFx.css';
+  import smoothCursor from '~/components/Cursor.vue'
   export default {
     components:{
       'cursor-fx': CursorFx,
+      smoothCursor
     },
     computed: {
       cover(){
         return this.$store.state.cover;
       }
-    },
-    mounted() {
-
-    },
+    }
   }
 </script>
 
 <style lang="scss">
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;

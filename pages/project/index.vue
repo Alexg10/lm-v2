@@ -125,15 +125,17 @@
                             .to( vm.$refs.cover, {height: projectSlideHeight, duration: 4, ease: "power4.inOut"},'animIntroStart=+0.5')
                             .to(vm.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
                             .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                            .from('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=1.5')
                             .from(prev, {x:'-30%', duration: 4},'animIntroStart=+4')
                             .from(next, {x:'30%', duration: 4},'animIntroStart=+4')
-                            .from('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=1.5')
                             .to({}, 1, {});
                     }
 
                     introTl.eventCallback("onComplete", ()=> {
                         vm.$refs.cover.style.display = "none";
                         document.querySelector('.project-title').classList.add("visible");
+                        current.querySelector(".project-slide").classList.remove("hover");
+
                         setTimeout(() => {
                             document.querySelector('.logo').classList.add("visible");
                         }, 2000);
@@ -153,6 +155,10 @@
             handleAfterChange(event, slick, currentId){
                 this.currentIndex = currentId;
                 document.querySelector('.project-title').classList.add("visible");
+                if((this.$device.ipad) && (this.$device.mobile)){
+                    vm.currentProject.child(".project-slide").classList.remove("hover");
+                }
+
             },
             handleBeforeChange(){
                 document.querySelector('.project-title').classList.remove("visible");
@@ -208,7 +214,7 @@
             projectEnter(){
                 // console.log(this.isLeave);
                 if(!this.isLeave){
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    document.querySelector('.cursor').classList.add('hover');
                     document.querySelector('.project-title').classList.add('hover');
                     document.querySelector('.slick-current .project-slide').classList.add('hover');
                 }
@@ -217,7 +223,7 @@
             projectLeave(){ 
                 // console.log(this.isLeave);
                 if(!this.isLeave){
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    document.querySelector('.cursor').classList.remove('hover');
                     document.querySelector('.project-title').classList.remove('hover');
                     document.querySelector('.slick-current .project-slide').classList.remove('hover');
                 }
@@ -228,14 +234,14 @@
             },
             prevSlideEnter(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    document.querySelector('.cursor').classList.add('hover');
                     document.querySelector('.prev-project').classList.add('hover');
                     document.querySelector('.slick-current').previousSibling.classList.add('hover');
                 }
             },
             prevSlideLeave(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    document.querySelector('.cursor').classList.remove('hover');
                     document.querySelector('.prev-project').classList.remove('hover');
                     document.querySelector('.slick-current').previousSibling.classList.remove('hover');
                 }
@@ -246,14 +252,14 @@
             },
             nextSlideEnter(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor-fx__inner__outside').classList.add('hover');
+                    document.querySelector('.cursor').classList.add('hover');
                     document.querySelector('.next-project').classList.add('hover');
                     document.querySelector('.slick-current+div').classList.add('hover');
                 }
             },
             nextSlideLeave(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                    document.querySelector('.cursor').classList.remove('hover');
                     document.querySelector('.next-project').classList.remove('hover');
                     document.querySelector('.slick-current+div').classList.remove('hover');
                 }
@@ -305,10 +311,10 @@
                 }, 300);
             },
             logoHover(){
-                document.querySelector('.cursor-fx__inner__outside').classList.add('hover'); 
+                document.querySelector('.cursor').classList.add('hover'); 
             },
             logoLeave(){
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover'); 
+                document.querySelector('.cursor').classList.remove('hover'); 
             },
             logoClick(){
                 var vm = this;
@@ -337,7 +343,7 @@
                 var next           = this.$refs.slick.$el.slick.$slides[currentNbSlide].nextElementSibling;
 
                 document.querySelector('.slide-layer').classList.add('visible');
-                document.querySelector('.cursor-fx__inner__outside').classList.remove('hover');
+                document.querySelector('.cursor').classList.remove('hover');
 
                 this.animLeaveLetters();
 
@@ -582,7 +588,7 @@
                     opacity: 0.4;
                 }
                 .project-type{
-                    transform: translateY(0);
+                    transform: translateY(0)!important;
                     transition: transform 0.6s ease;
                     transition-delay: 2s;
 
