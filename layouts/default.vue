@@ -4,7 +4,7 @@
       <img :src="cover.acfProjectFields.headerPicture.sourceUrl" alt="cover.acfProjectFields.projectTitle">
     </div>
     <nuxt/>
-    <smoothCursor />
+    <smoothCursor v-if="(!this.$device.ipad) && (!this.$device.mobile)" />
   </div>
 </template>
 
@@ -12,7 +12,6 @@
   import smoothCursor from '~/components/Cursor.vue'
   export default {
     components:{
-      'cursor-fx': CursorFx,
       smoothCursor
     },
     computed: {
