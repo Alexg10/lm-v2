@@ -82,12 +82,23 @@
         margin-bottom: 40px;
         margin-top: 20px;
         z-index: 99;
+        @media only screen and ( max-width : 680px ) {
+            min-height: 500px;
+            padding: 30px 0;
+        }
         .gradient-column{
             flex:1;
             min-height: 740px;
             min-width: 16.666666667%;
             width: 16.666666667%;
             border-right: 1.5px solid rgba(227,225,225,0.33);
+            @media only screen and ( max-width : 780px ) {
+                min-width: 25%;
+                width: 25%;
+            }
+            @media only screen and ( max-width : 680px ) {
+                min-height: 400px;
+            }
         }
     }
     .text{
