@@ -2,18 +2,18 @@
     <div class="footer-project" v-bind:style='{backgroundColor: color}'>
         <div class="footer-project-content">
             <div class="link-to-link" v-scroll-to="{
-                el: '.footer-project-content',
-                offset: 50,
+                el: '.next-cover',
+                offset: 0,
                 duration: 2000,
                 easing: [0.24, 0.88, 0.41, 1],
-                cancelable: false            
-                }" data-cursor-hover>
+                cancelable: false
+                }">
                 <div class="link-to linkHover" v-on:mouseenter="linkNextHover" v-on:mouseleave="linkNextLeave" v-on:click="linkNextClick">
                     <div class="next-project up-letters">next project</div> 
                     <div class="next-project-name up-letters">{{link.acfProjectFields.projectTitle}}</div>
                     <img class="arrow" :src="arrowDown" alt="">
                 </div>
-                <div class="next-cover" :style="{ backgroundImage: `url(${link.acfProjectFields.headerPicture.sourceUrl})` }"></div>
+                <div class="next-cover" :style="{ backgroundImage: `url(${link.acfProjectFields.headerPicture.sourceUrl})` }" v-on:mouseenter="linkNextHover" v-on:mouseleave="linkNextLeave" v-on:click="linkNextClick"></div>
             </div>
         </div>
     </div>
@@ -28,7 +28,8 @@
             return{
                 arrowDown,
                 timelines: {},
-                scenes: []
+                scenes: [],
+                clicked: false
             }
         },
         props: [
@@ -36,6 +37,9 @@
             'color'
         ],
         methods: {
+            linkNextClick(){
+                this.clicked = true;
+            },
             changeProject() {
                 console.log("changeProject");
                 // Set project to store
@@ -60,10 +64,18 @@
                 }
             },
             createTimelines(){
-                // Footer timeline
+                const vm = this;
                 const footerTimeline = new TimelineMax({paused: false})
                 .fromTo(".next-cover", 1, {opacity: 0, width: "70%"}, {opacity: 1, width: "100%"}, "start")
-                .eventCallback("onComplete", this.scrollToBottom);
+                .eventCallback("onComplete", () => {
+                    if(vm.clicked == false){
+                        vm.scrollToBottom();
+                    }else{
+                        setTimeout(() => {
+                            vm.changeProject();
+                        }, 1800);
+                    }
+                });
 
                 // Letter timeline
                 const upLetterTimeline = new TimelineMax({ paused: false});

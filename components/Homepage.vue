@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <img class="arrow link link-hover" :src="arrowDown" alt="" v-on:click="scrollDown" data-cursor-hover>
+            <img class="arrow link link-hover" :src="arrowDown" alt="" v-on:click="scrollDown">
         </div>
 </template>
 

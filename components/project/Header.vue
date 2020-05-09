@@ -21,7 +21,7 @@
             <div class="project-description">
                 <p>{{description}}</p>
                 <div v-if="link" class="link-container" >
-                    <a :href="link" target="_blank" class="project-link link link-hover link-stagger" data-cursor-hover>View the website</a>
+                    <a :href="link" target="_blank" class="project-link link link-hover link-stagger">View the website</a>
                 </div>
             </div>
         </div>
