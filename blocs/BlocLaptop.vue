@@ -87,6 +87,12 @@
                 left: 50%;
                 width: 64%;
                 transform: translateX(-50%);
+                @media ( max-width : 780px ) {
+                    top: 21px;
+                }
+                @media ( max-width : 680px ) {
+                    top: 9px;
+                }
             }
 
         }
