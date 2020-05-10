@@ -4,16 +4,18 @@
             <div class="after-bg">
                 <img src="~/assets/images/block/ae_anim.svg" alt="">
             </div>
-            
-            <div class="bloc-after-top-left-container">
-                <div id="animation"></div>
-            </div>
-            <div class="bloc-after-top-right-container">
-                <div id="anim-result"></div>
-            </div>
-            <div class="bloc-after-top-middle-container">
-                <div id="anim-htu"></div>
-            </div>
+            <slick-slide ref="slickAnim" :options="slickOptions" class="anim-slider" >
+                <div class="bloc-after-top-left-container">
+                    <div id="animation"></div>
+                </div>
+                <div class="bloc-after-top-right-container">
+                    <div id="anim-result"></div>
+                </div>
+                <div class="bloc-after-top-middle-container">
+                    <div id="anim-htu"></div>
+                </div>
+
+            </slick-slide>
             <div class="bloc-after-full-height-container" v-for="image in bloc.imagesFullHeight" v-bind:key>
                 <img class="bloc-after-top-middle-img" :src="image.imageFullHeight.sourceUrl">
             </div>
@@ -28,7 +30,27 @@
         data(){
             return{
                 timelines: {},
-                scenes: []
+                scenes: [],
+                slickOptions: {
+                    speed        : 1600,
+                    infinite     : true,
+                    centerMode   : true,
+                    dots: true,
+                    arrows       : false,
+                    cssEase      : 'cubic-bezier(.19,.77,.2,1)',
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: "unslick"
+                        },
+                        {
+                        breakpoint: 860,
+                            settings: {
+                                infinite     : true,
+                            }
+                        }
+                    ]
+                }
             }
         },
         props: [
@@ -125,6 +147,10 @@
             transform: translateX(-50%);
             z-index: 0;
             width: 100%;
+            @media ( max-width : 680px ) {
+                top: 100px;
+            }
+
             img{
                 width: 100%;
             }
@@ -149,12 +175,22 @@
             right: 115px;
             float: right;
             max-width: 311px;
+            @media ( max-width : 780px ) {
+                max-width: 80%;
+                right: auto;
+            }
+
         }
         .bloc-after-top-right-container{
             padding-top: 144px;
             position: relative;
             left: 130px;
             max-width: 400px;
+            @media ( max-width : 780px ) {
+                max-width: 80%;
+                left: auto;
+                right: auto;
+            }
         }
         #anim-htu{
             max-width: 580px;

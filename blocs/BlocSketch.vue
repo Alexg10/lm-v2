@@ -180,6 +180,12 @@
             width: 72%;
             transform: translateX(-50%);
             border-radius: 17px;
+            @media only screen and ( max-width : 780px ) {
+                top: 39px;
+            }
+            @media only screen and ( max-width : 680px ) {
+                top: 39px;
+            }
         }
     }
 

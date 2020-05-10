@@ -165,6 +165,11 @@
                     border-radius: 17px;
                     background-color: black;
                     z-index: 9;
+                    @media ( max-width : 680px ) {
+                        top: 15px;
+                        height: 8px;
+                        width: 54px;
+                    }
                 }
                 .mobile-svg{
                     position: relative;
@@ -177,6 +182,10 @@
                     width: 72%;
                     transform: translateX(-50%);
                     border-radius: 17px;
+                    @media ( max-width : 680px ) {
+                        top: 20px;
+                    }
+
                 }
             }
         }

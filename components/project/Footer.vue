@@ -124,10 +124,14 @@
                 });
             },
             linkNextHover(){
-                document.querySelector('.cursor').classList.add('hover'); 
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.cursor').classList.add('hover'); 
+                }
             },
             linkNextLeave(){
-                document.querySelector('.cursor').classList.remove('hover'); 
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.cursor').classList.remove('hover'); 
+                }
             },
         },
         mounted() {
