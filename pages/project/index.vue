@@ -298,23 +298,12 @@
                     var newSpan = document.createElement('span');
                     newSpan.style.display = "inline-block";
                     if((!vm.$device.ipad) && (!vm.$device.mobile)){
-                        newSpan.style.minWidth = "40px";
+                        newSpan.style.minWidth = "38px";
                     }else{
                         newSpan.style.minWidth = "25px";
                     }
                     newSpan.setAttribute("class", "letter-"+i);
-                    console.log(wordContentSplit[i]);
-                    if(wordContentSplit[i] == " "){
                     newSpan.innerHTML = wordContentSplit[i];
-
-                        var div = document.createElement("div");
-                    div.innerHTML = wordContentSplit[i];
-
-                        console.log()
-                    }else{
-                    newSpan.innerHTML = wordContentSplit[i];
-
-                    }
                     word.appendChild(newSpan);
                     tabLetterLength.push(i)
                 }
@@ -324,10 +313,10 @@
                     randomIndex;
                 while (0 !== currentIndex) {
                     randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex -= 1;
-                    temporaryValue = tabLetterLength[currentIndex];
-                    tabLetterLength[currentIndex] = tabLetterLength[randomIndex];
-                    tabLetterLength[randomIndex] = temporaryValue;
+                    currentIndex   -= 1;
+                    temporaryValue  = tabLetterLength[currentIndex];
+                    tabLetterLength[currentIndex]   = tabLetterLength[randomIndex];
+                    tabLetterLength[randomIndex]    = temporaryValue;
                 }
 
                 document.querySelector(".project-title-container").classList.add('visible');
@@ -552,6 +541,7 @@
     }
     .two-lines{
         width: 90%;
+        max-width: 960px;
         .project-name,
         .project-title{
             transform: translateY(470px);
