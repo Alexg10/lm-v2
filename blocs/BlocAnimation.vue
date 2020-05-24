@@ -51,7 +51,9 @@
                     .fromTo(animImgMob, 2, {yPercent: 50, opacity:0},{yPercent: 0, opacity:1, ease: Power4.easeInOut, overwrite: false},  "start=+0.5")
                     .staggerFromTo('.hand-anim', 2, {opacity:0},{opacity: 1, ease: Power4.easeInOut, stagger:0.3},  "start+=");  
 
-                animationParallaxTimeline.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    animationParallaxTimeline.fromTo(animImgMob, 2, {y: 500},{y: -30, overwrite: false}, "start");                
+                }
 
                 this.timelines = {
                     animation: animationTimeline,
@@ -59,23 +61,35 @@
                 }
             },
             createScenes(){
-                this.scenes = [
-                    this.$scrollmagic.scene({
-                        triggerElement: this.$el,
-                        triggerHook: 0.7,
-                        offset: -200
-                    })
-                    .reverse(false)
-                    .setTween(this.timelines.animation),
-                    this.$scrollmagic.scene({
-                        triggerElement: this.$el,
-                        triggerHook: 0.65,
-                        offset: -80,
-                        duration: window.innerHeight*2
-                    })
-                    .reverse(true)
-                    .setTween(this.timelines.animationParallax),
-                ]
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    this.scenes = [
+                        this.$scrollmagic.scene({
+                            triggerElement: this.$el,
+                            triggerHook: 0.7,
+                            offset: -200
+                        })
+                        .reverse(false)
+                        .setTween(this.timelines.animation),
+                        this.$scrollmagic.scene({
+                            triggerElement: this.$el,
+                            triggerHook: 0.65,
+                            offset: -80,
+                            duration: window.innerHeight*2
+                        })
+                        .reverse(true)
+                        .setTween(this.timelines.animationParallax),
+                    ]
+                }else{
+                    this.scenes = [
+                        this.$scrollmagic.scene({
+                            triggerElement: this.$el,
+                            triggerHook: 0.7,
+                            offset: -200
+                        })
+                        .reverse(false)
+                        .setTween(this.timelines.animation)
+                    ] 
+                }
             }
         },
         mounted(){

@@ -213,7 +213,6 @@
                     width: 100%;
                 }
             }
-
         }
     }
 
@@ -225,11 +224,10 @@
             width: 100%;
         }
         .bloc-after{
+            padding-top: 50px;
             .container{
                 text-align: center;
             }
-
-            padding-top: 140px;
             .bloc-after-top-left-container{
                 float: none;
                 right: auto;;

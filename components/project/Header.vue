@@ -111,15 +111,19 @@
             
             window.addEventListener("scroll", this.detectScroll);
 
-            var anim = gsap.timeline({});
-            var sectionTl= new TimelineMax({ paused: false});
+            const anim = gsap.timeline({});
+            const sectionTl= new TimelineMax({ paused: false});
 
 
-            var projectName = document.querySelector('.project-name-content');
-            var categoryType = document.querySelector('.category-type');
-            var description = document.querySelector('.project-description p');
-            var link = document.querySelector('.project-link');
-            var img = document.querySelector('.bg-cover');
+            const projectName = document.querySelector('.project-name-content');
+            const projectNameH = projectName.offsetHeight;
+
+            console.log(projectNameH);
+
+            const categoryType = document.querySelector('.category-type');
+            const description = document.querySelector('.project-description p');
+            const link = document.querySelector('.project-link');
+            const img = document.querySelector('.bg-cover');
 
             var scrollB = this.$scrollmagic;
 
@@ -135,17 +139,34 @@
             scrollB.addScene(sceneParallax);
 
             if( link ){
-                anim
-                    .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                    .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                    .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
-                    .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
-                    .set('.link-container',{overflow:"visible"});
+                if(projectNameH > 200){
+                    anim
+                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 350,  duration: 6 , ease: "power4.inOut"},"-=1" )
+                        .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
+                        .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
+                        .set('.link-container',{overflow:"visible"});
+                }else{
+                    anim
+                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
+                        .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
+                        .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
+                        .set('.link-container',{overflow:"visible"});
+                }
+
             }else{
-                anim
-                    .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                    .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                    .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" );            
+                if(projectNameH > 200){
+                    anim
+                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 350,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
+                        .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" ); 
+                }else{
+                    anim
+                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
+                        .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" ); 
+                }
             }
             anim.eventCallback("onComplete", function () {
                 document.querySelector('.cross').classList.add("active");
@@ -232,11 +253,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             overflow: hidden;
+            margin-bottom: 25px;
         }
         .project-name{
             font-size: 200px;
             font-weight: bold;
             overflow: hidden;
+            line-height: 170px;
         }
         .project-description{
             position: relative;
@@ -298,6 +321,7 @@
             }
             .project-name{
                 font-size: 65px;
+                line-height: 85px;
             }
         }
         .cross{
