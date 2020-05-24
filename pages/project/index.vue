@@ -11,7 +11,7 @@
             <div ref="cover" class="project-cover" >
                 <img class="project-cover-img" :src="cover" alt="" ref="coverImg">
             </div>
-            <div v-if="currentProject.acfProjectFields" class="project-title-container"  @mouseenter="projectEnter" @mouseleave="projectLeave">
+            <div v-if="currentProject.acfProjectFields" :class="currentProject.acfProjectFields.projectTitle  == 'Terres de Sable' ? 'project-title-container two-lines' : 'project-title-container'" @mouseenter="projectEnter" @mouseleave="projectLeave">
                 <div class="project-title link-hover" @click="clickSlide">{{currentProject.acfProjectFields.projectTitle}}</div>
             </div>
             <slick-slide ref="slick" :options="slickOptions" class="home-slider" @afterChange="handleAfterChange" @beforeChange="handleBeforeChange" @init="handleInit" >
@@ -303,7 +303,18 @@
                         newSpan.style.minWidth = "25px";
                     }
                     newSpan.setAttribute("class", "letter-"+i);
+                    console.log(wordContentSplit[i]);
+                    if(wordContentSplit[i] == " "){
                     newSpan.innerHTML = wordContentSplit[i];
+
+                        var div = document.createElement("div");
+                    div.innerHTML = wordContentSplit[i];
+
+                        console.log()
+                    }else{
+                    newSpan.innerHTML = wordContentSplit[i];
+
+                    }
                     word.appendChild(newSpan);
                     tabLetterLength.push(i)
                 }
@@ -518,7 +529,6 @@
             }
         }
     }
-
     .project-name,
     .project-title{
         position: relative;
@@ -526,11 +536,12 @@
         text-decoration: none;      
         white-space: nowrap;  
         font-size: 200px;
+        text-align: center;
         text-decoration: none;     
-        transform: translateY(210px);
+        transform: translateY(470px);
         color: #FF9170;
         opacity: 0;
-        transition: all 0.5s ease;
+        transition: all 1s ease;
         z-index: 101;
         @media ( max-width : 780px ) {
             font-size: 140px;
@@ -539,8 +550,23 @@
             font-size: 70px;
         }
     }
+    .two-lines{
+        width: 90%;
+        .project-name,
+        .project-title{
+            transform: translateY(470px);
+            transition: all 1s ease;
+            white-space: normal;  
+            line-height: 170px;
+
+        }
+    }
+    .project-name-container{
+        max-height: 250px;
+    }
     .project-title-container{
         position: absolute;
+        text-align: center;
         top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);

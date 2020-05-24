@@ -40,17 +40,17 @@
                 const blocSketchTimeline = new TimelineMax({ paused: false});
                 blocSketchTimeline.fromTo(".img-section .container", 2, {y: 40, opacity: 0}, {y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
 
-                // if(!this.$device.mobile){
-                // }
-
                 const blocSketchParallax = new TimelineMax({ paused: false});
                 const img1 = document.querySelector(".img-section-container:nth-child(1) .img-container div");
                 const img2 = document.querySelector(".img-section-container:nth-child(2) .img-container div");
                 const img3 = document.querySelector(".img-section-container:nth-child(3) .img-container div");
-                blocSketchParallax
-                    .fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
-                    .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
-                    .fromTo(img3, 1, {y: 0},{y: -100, overwrite: false}, "start");
+
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    blocSketchParallax
+                        .fromTo(img1, 1, {y: 0},{y: 300, overwrite: false},"start")
+                        .fromTo(img2, 1, {y: 0},{y: -80, overwrite: false}, "start")
+                        .fromTo(img3, 1, {y: 0},{y: -100, overwrite: false}, "start");
+                }
 
                 this.timelines = {
                     sketch        : blocSketchTimeline,
@@ -58,25 +58,29 @@
                 }
             },
             createScenes(){
+                const vm = this;
                 console.log("durationP");
                 const durationP = document.querySelector(".img-section").offsetHeight*1.5;
-                console.log(durationP);
-                this.scenes = [
-                    this.$scrollmagic.scene({
-                        triggerElement: ".img-section",
-                        triggerHook: 0.65,
-                        offset: -50
-                    })
-                    .setTween(this.timelines.sketch)
-                    .reverse(false),
-                    this.$scrollmagic.scene({
-                        triggerElement: ".img-section",
-                        triggerHook: 0.65,
-                        offset: -150,
-                        duration: durationP
-                    })
-                    .setTween(this.timelines.sketchParallax)
-                ]
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    vm.scenes = [
+                        vm.$scrollmagic.scene({
+                            triggerElement: ".img-section",
+                            triggerHook: 0.65,
+                            offset: -50
+                        })
+                        .setTween(vm.timelines.sketch)
+                    ]
+                }else{
+                    vm.scenes = [
+                        vm.$scrollmagic.scene({
+                            triggerElement: ".img-section",
+                            triggerHook: 0.65,
+                            offset: -50
+                        })
+                        .reverse(false)
+                        .setTween(vm.timelines.sketch)
+                    ]
+                }
             }
         },
         mounted() {
@@ -99,6 +103,9 @@
     .img-section{
         // background-color: $white;
         background-color: #fff;
+        @media only screen and ( max-width : 680px ) {
+            padding-top: 20px;
+        }
     }
     .container{
         max-width: 1320px;
@@ -127,6 +134,10 @@
             .img-container{
                 img{
                     margin-bottom: 300px;
+                    @media only screen and ( max-width : 680px ) {
+                        margin-bottom: 30px;
+                    }
+
                 }
             }
         }
