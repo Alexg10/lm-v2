@@ -32,21 +32,21 @@
                 timelines: {},
                 scenes: [],
                 slickOptions: {
-                    speed        : 1600,
-                    infinite     : true,
-                    centerMode   : true,
-                    dots: true,
-                    arrows       : false,
-                    cssEase      : 'cubic-bezier(.19,.77,.2,1)',
+                    speed     : 1600,
+                    infinite  : true,
+                    centerMode: true,
+                    dots      : true,
+                    arrows    : false,
+                    cssEase   : 'cubic-bezier(.19,.77,.2,1)',
                     responsive: [
                         {
-                            breakpoint: 1024,
+                            breakpoint: 9999,
                             settings: "unslick"
                         },
                         {
-                        breakpoint: 860,
+                            breakpoint: 860,
                             settings: {
-                                infinite     : true,
+                                infinite: true,
                             }
                         }
                     ]
