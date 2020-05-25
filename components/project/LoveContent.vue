@@ -87,9 +87,9 @@
                 setTimeout(function(){
                     if((!vm.$device.ipad) && (!vm.$device.mobile)){
                         document.querySelector('.word-container').classList.remove("clicked");
-                        document.querySelector('.home-slide-content .word-wrapper-elle').classList.remove("anim");
-                        document.querySelector('.home-slide-content .word-wrapper-aime').classList.remove("anim");
                     }
+                    document.querySelector('.home-slide-content .word-wrapper-elle').classList.remove("anim");
+                    document.querySelector('.home-slide-content .word-wrapper-aime').classList.remove("anim");
                     document.querySelector('.love-content').classList.remove("visible");
                     document.querySelector('.developped').classList.remove("overflow");
                     document.querySelector('.circle-container').classList.add("visible");
