@@ -87,6 +87,8 @@
                 setTimeout(function(){
                     if((!vm.$device.ipad) && (!vm.$device.mobile)){
                         document.querySelector('.word-container').classList.remove("clicked");
+                        document.querySelector('.home-slide-content .word-wrapper-elle').classList.remove("anim");
+                        document.querySelector('.home-slide-content .word-wrapper-aime').classList.remove("anim");
                     }
                     document.querySelector('.love-content').classList.remove("visible");
                     document.querySelector('.developped').classList.remove("overflow");
@@ -185,18 +187,14 @@
                     .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".social-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
-                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
-                    .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2")
-                    .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=2");
+                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8");
             }else{
                 this.loveContentLeave
                     .to(".developped-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".infos-link a", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave+=0.3")
                     .to(".social-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
                     .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.6")
-                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=1")
-                    .to(".word-wrapper-elle", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8")
-                    .to(".word-wrapper-aime", {x:"0", duration: 2, repeatRefresh: true, ease: "power4.inOut" },"loveContentLeave+=1.8");
+                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=1");
             }
 
             this.loveContentFade

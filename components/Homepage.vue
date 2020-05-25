@@ -308,6 +308,9 @@
 
                 this.LoveClickTl.pause(0);
                 this.loveShowContent.pause(0);
+                document.querySelector('.home-slide-content .word-wrapper-elle').classList.add("anim");
+                document.querySelector('.home-slide-content .word-wrapper-aime').classList.add("anim");
+
                 this.LoveClickTl.play();
                 document.querySelector('.word-container').classList.add("clicked");
                 document.querySelector('.work-container .word-container').classList.add("hover");
@@ -340,6 +343,8 @@
             workClick(){
                 var vm = this;
                 this.workClickTl.play();
+                document.querySelector('.work-container .word-container').classList.add("anim");
+                document.querySelector('.work-container .word-container').classList.add("anim");
                 this.particuleAnimLeave();
                 this.$store.commit("setBack", false);
                 this.workClickTl.eventCallback("onComplete", function () {
@@ -507,8 +512,7 @@
 
             if((!this.$device.ipad) && (!this.$device.mobile)){
                 this.LoveClickTl
-                    .to(".word-wrapper-elle", {x:"-70vw", duration: 1.5, repeatRefresh: true, ease: "power4.inOut" }, "loveClickStart")
-                    .to(".word-wrapper-aime", {x:"70vw", duration: 1.5, repeatRefresh: true, ease: "power4.inOut" }, "loveClickStart");
+                    .to({}, 1.5, {})
             }else{
                 this.LoveClickTl
                     .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
@@ -531,10 +535,7 @@
 
 
             this.workClickTl
-                .to(".word-wrapper-work:nth-child(1)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl")
-                .to(".word-wrapper-work:nth-child(2)", {x:"-80vw", duration: 2, ease: "power4.inOut" },"workClickTl+=0.1")
-                .to(".word-wrapper-work:nth-child(3)", {x:"80vw", duration: 2, ease: "power4.inOut" },"workClickTl+=0.2")
-                .to({}, 3, {});
+                .to({}, 0.2, {});
 
             this.loveUpUp
                 .fromTo(".elle", {y: 0},{y:-170, duration: 1, repeatRefresh: true, ease: "power4.inOut" },"loveUpUp")
@@ -850,7 +851,7 @@
         .word-container{
             z-index: 15;
         }
-    }   
+    }  
     .word-container{
         display: block;
         font-size: 200px;
@@ -1041,6 +1042,10 @@
                 bottom: -38px;
                 left: -67px;
                 transition: all 1s cubic-bezier(.19,.77,.2,1);
+                &.anim{
+                    transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);
+                    transform: translateX(-70vw);
+                }
                 @media ( max-width : 680px ) {
                     bottom: -48px;
                     left: -27px;
@@ -1051,6 +1056,10 @@
                 top: -39px;
                 left: -25px;
                 transition: all 1s cubic-bezier(.19,.77,.2,1);
+                &.anim{
+                    transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);
+                    transform: translateX(70vw);
+                }
                 @media ( max-width : 680px ) {
                     top: -58px;
                     left: 3px;
@@ -1069,6 +1078,7 @@
         //ELLE AIME
 
         //WORK
+
         .word-wrapper-work{
             transition: all 1.1s cubic-bezier(.19,.77,.2,1);
             transition: all 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) .08s;
@@ -1100,4 +1110,25 @@
             }
         }
     }
+    .work-container{
+        .word-container{
+            &.anim{
+                .word-wrapper-work{
+                    transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);
+
+                    &:nth-child(1){
+                        transform: translateX(80vw);
+                    }
+                    &:nth-child(2){
+                        transform: translateX(-80vw);
+                        transition-delay: 0.1s;
+                    }
+                    &:nth-child(3){
+                        transform: translateX(80vw);
+                        transition-delay: 0.2s;
+                    }
+                }
+            }
+        }
+    } 
 </style>
