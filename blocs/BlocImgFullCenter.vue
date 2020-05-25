@@ -26,7 +26,7 @@
                 const blocImgFullCenterTimeline = new TimelineMax({ paused: false});
 
                 var img = this.$el.children[0].querySelector(".img-full-center-section-container img");
-                blocImgFullCenterTimeline.fromTo(img, 2.5, {y: 100, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
+                blocImgFullCenterTimeline.fromTo(img, 2.5, {y: 50, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
 
                 this.timelines = {
                     imgFullCenter: blocImgFullCenterTimeline

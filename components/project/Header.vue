@@ -14,7 +14,8 @@
                 <div class="category">
                     <div class="category-type">{{type}}</div>
                 </div>
-                <div class="project-name">
+                
+                <div :class="title== 'Terres de Sable' ? 'project-name two-lines' : 'project-name'">
                     <div class="project-name-content">{{title}}</div>
                 </div>
             </div>
@@ -108,24 +109,18 @@
         mounted() {
             var vm = this;
             this.winHeight = window.innerHeight;
-            
+
             window.addEventListener("scroll", this.detectScroll);
 
             const anim = gsap.timeline({});
             const sectionTl= new TimelineMax({ paused: false});
-
-
             const projectName = document.querySelector('.project-name-content');
             const projectNameH = projectName.offsetHeight;
-
-            console.log(projectNameH);
-
             const categoryType = document.querySelector('.category-type');
             const description = document.querySelector('.project-description p');
             const link = document.querySelector('.project-link');
             const img = document.querySelector('.bg-cover');
-
-            var scrollB = this.$scrollmagic;
+            const scrollB = this.$scrollmagic;
 
             sectionTl.fromTo(img, 2,{y:0}, {y:200});
 
@@ -139,7 +134,7 @@
             scrollB.addScene(sceneParallax);
 
             if( link ){
-                if(projectNameH > 200){
+                if(projectNameH > 261){
                     anim
                         .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
                         .from(projectName, {y: 350,  duration: 6 , ease: "power4.inOut"},"-=1" )
@@ -149,9 +144,9 @@
                 }else{
                     anim
                         .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                        .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
-                        .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
+                        .from(projectName, {y: 250,  duration: 2.5 , ease: "power4.inOut"},"-=1.2" )
+                        .from(description, {y: 30, opacity:0, duration: 0.9 },"-=0.25" )
+                        .from(link, {y:30, opacity:0, duration: 0.9  },"-=0.5" )
                         .set('.link-container',{overflow:"visible"});
                 }
 
@@ -180,8 +175,8 @@
         
                 this.letterContainer("link-stagger");
 
-                var staggerLink = document.querySelector('.project-link');
-                var hoverEffect = new TimelineMax({ paused: false});
+                const staggerLink = document.querySelector('.project-link');
+                const hoverEffect = new TimelineMax({ paused: false});
 
                 for(let word of document.getElementsByClassName("project-link")){
                     const letters = word.childNodes;
@@ -259,7 +254,10 @@
             font-size: 200px;
             font-weight: bold;
             overflow: hidden;
-            line-height: 170px;
+            line-height: 260px;
+            &.two-lines{
+                line-height: 170px;
+            }
         }
         .project-description{
             position: relative;

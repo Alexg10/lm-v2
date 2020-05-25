@@ -38,7 +38,7 @@
         methods: {
             createTimelines(){
                 const blocSketchTimeline = new TimelineMax({ paused: false});
-                blocSketchTimeline.fromTo(".img-section .container", 2, {y: 40, opacity: 0}, {y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
+                blocSketchTimeline.fromTo(".img-section .container", 2, {y: 50, opacity: 0}, {y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});                
 
                 const blocSketchParallax = new TimelineMax({ paused: false});
                 const img1 = document.querySelector(".img-section-container:nth-child(1) .img-container div");
@@ -68,7 +68,15 @@
                             triggerHook: 0.65,
                             offset: -50
                         })
-                        .setTween(vm.timelines.sketch)
+                        .reverse(false)
+                        .setTween(vm.timelines.sketch),
+                        vm.$scrollmagic.scene({
+                            triggerElement: ".img-section",
+                            triggerHook: 0.65,
+                            offset: -150,
+                            duration: durationP
+                        })
+                        .setTween(this.timelines.sketchParallax)
                     ]
                 }else{
                     vm.scenes = [

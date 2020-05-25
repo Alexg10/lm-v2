@@ -118,16 +118,15 @@
                                 .to( vm.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart+=0.5')
                                 .to(vm.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
                                 .to(".slide-img", { scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                                .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'animIntroStart+=1.2')
-                                .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'animIntroStart+=1.2')
-                                .to({}, 0.8, {});
+                                .from(prev, {x:'-20%', duration: 2.5, ease: "power4.inOut"},'animIntroStart+=1.6')
+                                .from(next, {x:'20%', duration: 2.5, ease: "power4.inOut"},'animIntroStart+=1.6');
                         }else{
                             introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 3, ease: "power4.inOut"},'animIntroStart')
                                 .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
                                 .to( vm.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart+=0.5')
                                 .to(vm.$refs.coverImg, {scale:1, duration: 3, ease: "power4.inOut"},'animIntroStart')
-                                .from(prev, {x:'-20%', duration: 2.5, ease: "power4.inOut"},'-=4')
-                                .from(next, {x:'20%', duration: 2.5, ease: "power4.inOut"},'-=4')
+                                .from(prev, {x:'-20%', duration: 3, ease: "power4.inOut"},'-=3')
+                                .from(next, {x:'20%', duration: 3, ease: "power4.inOut"},'-=3')
                         }
                     }else{
                         introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
@@ -144,6 +143,7 @@
                         vm.$refs.cover.style.display = "none";
                         document.querySelector('.project-title').classList.add("visible");
                         current.querySelector(".project-slide").classList.remove("hover");
+                        document.querySelector('.home-slider').classList.add('ready');
                         setTimeout(() => {
                             document.querySelector('.logo').classList.add("visible");
                         }, 1500);

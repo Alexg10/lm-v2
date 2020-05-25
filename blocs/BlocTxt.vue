@@ -27,7 +27,7 @@
                 const blocTxtTimeline = new TimelineMax({ paused: false});
                 const textContent = this.$el.children[0].getElementsByClassName("text-content")[0];
                 
-                blocTxtTimeline.fromTo(textContent, 1.5, {y: 80, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false});
+                blocTxtTimeline.fromTo(textContent, 1.5, {y: 50, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false});
 
                 this.timelines = {
                     txt: blocTxtTimeline
