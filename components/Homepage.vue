@@ -515,8 +515,7 @@
                     .to({}, 1.5, {})
             }else{
                 this.LoveClickTl
-                    .to(".word-wrapper-elle", {x:"-80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl")
-                    .to(".word-wrapper-aime", {x:"80vw", duration: 1.75, repeatRefresh: true, ease: "power4.inOut" },"LoveClickTl");
+                    .to({}, 1.5, {})
             }
 
 
