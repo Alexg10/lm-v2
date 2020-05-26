@@ -451,8 +451,8 @@
                     this.tlIntro
                         .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
                         .from('.margueritat', {y: 230, duration: 2.3, ease: "power4.inOut" }, "intro+=0.25")
-                        .to('.intro .word-wrapper-elle', {left: -37, duration: 2.4, ease: "power4.inOut" }, "intro+=3")
-                        .to('.intro .word-wrapper-aime', {left: 9, duration: 2.3, ease: "power4.inOut" }, "intro+=3")
+                        .to('.intro .word-wrapper-elle', {left: -37, duration: 1.2, ease: "power4.inOut" }, "intro+=3.7")
+                        .to('.intro .word-wrapper-aime', {left: 9, duration: 1.8, ease: "power4.inOut" }, "intro+=3.1")
                         .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
@@ -1040,6 +1040,7 @@
                 position: relative;
                 bottom: -38px;
                 left: -67px;
+                // transition: all 1.6s cubic-bezier(0.38, 0.95, 0.55, 1);
                 transition: all 1s cubic-bezier(.19,.77,.2,1);
                 &.anim{
                     transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);
@@ -1054,6 +1055,7 @@
                 position: relative;
                 top: -39px;
                 left: -25px;
+                // transition: all 1.6s cubic-bezier(0.38, 0.95, 0.55, 1);
                 transition: all 1s cubic-bezier(.19,.77,.2,1);
                 &.anim{
                     transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);

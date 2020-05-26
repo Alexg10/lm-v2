@@ -257,6 +257,12 @@
             line-height: 260px;
             &.two-lines{
                 line-height: 170px;
+                @media ( max-width : 780px ) {
+                    line-height: 140px;
+                }
+                @media ( max-width : 680px ) {
+                    line-height: 65px;
+                }
             }
         }
         .project-description{
