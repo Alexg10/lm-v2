@@ -600,13 +600,16 @@
     .project-type{
         color: white;
         font-size: 16px;
-        font-family: 'GTWalsheimProBold';
+        font-family: 'GTWalsheimProMedium';
         text-transform: uppercase;
         letter-spacing: 1px;
         transform: translateY(50px);
         transition: 0.5s ease-in-out;
         pointer-events: none;
         text-align: center;
+        @media ( max-width : 780px ) {
+            font-size: 14px;
+        }
     }
 
     //SWIPE ACTIVE

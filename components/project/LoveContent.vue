@@ -22,13 +22,13 @@
             <div class="left-bottom">
                 <ul class="social-links">
                     <li class="social-link">
-                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">I<span>ns</span>t<span>a</span>g<span>ram</span>.</a>
+                        <a href="https://www.instagram.com/loumargueritat/" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">I<span>ns</span>t<span>a</span>g<span>ram</span>.</a>
                     </li>
                     <li class="social-link">
-                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">L<span>in</span>k<span>e</span>d<span>in</span>.</a>
+                        <a href="https://www.linkedin.com/in/louise-margueritat-16857786/" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">L<span>in</span>k<span>e</span>d<span>in</span>.</a>
                     </li>
                     <li class="social-link">
-                        <a href="" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">B<span>e</span>h<span>an</span>c<span>e</span>.</a>
+                        <a href="https://www.behance.net/louisemarguer1" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">B<span>e</span>h<span>an</span>c<span>e</span>.</a>
                     </li>
                 </ul>
             </div>
