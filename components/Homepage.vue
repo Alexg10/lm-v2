@@ -374,8 +374,9 @@
                 var num = 0;
                 let vm = this;
 
-                document.querySelector('.cursor').classList.add('transparent');
-
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.cursor').classList.add('transparent');
+                }
                 this.inter = window.setInterval(function () {
                     var typeParticule = random(1,12);
                     var div = document.createElement("div");
@@ -413,10 +414,9 @@
                 let vm = this;
                 clearInterval(this.inter);
                 if((!vm.$device.ipad) && (!vm.$device.mobile)){
-
                     document.querySelector('.word-wrapper.word-wrapper-work:nth-child(1)').classList.remove('overflow-visible');
+                    document.querySelector('.cursor').classList.remove('transparent');
                 }
-                document.querySelector('.cursor').classList.remove('transparent');
                 setTimeout(function(){
                     document.querySelectorAll('.sparkle').forEach(
                         e => e.remove()

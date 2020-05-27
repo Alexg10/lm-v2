@@ -15,7 +15,7 @@
         </div>
         <div class="love-description">
             Oh, hi there!<br>
-            I’m Louise Margueritat, 26, a french artistic director who would love to work with u.
+            I’m Louise Margueritat, 26, a french art director who would love to work with u.
             <div class="go-to-work" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave" v-on:click="goToWork">See my projects</div> 
         </div>
         <div class="bottom-container">

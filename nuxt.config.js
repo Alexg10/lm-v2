@@ -4,11 +4,11 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'Louise Margueritat - Artistic director in Paris',
+    title: 'Louise Margueritat - Art director in Paris',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Louise Margueritat, french artistic director based Paris' }
+      { hid: 'description', name: 'description', content: 'Louise Margueritat, french art director based Paris' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
