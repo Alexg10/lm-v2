@@ -548,7 +548,12 @@
             transition: all 1s ease;
             white-space: normal;  
             line-height: 170px;
-
+            @media ( max-width : 780px ) {
+                line-height: 120px;
+            }
+            @media ( max-width : 680px ) {
+                line-height: 60px;
+            }
         }
     }
     .project-name-container{
