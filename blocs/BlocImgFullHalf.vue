@@ -22,7 +22,7 @@
             display: flex;
             flex-wrap: wrap;
             .img-full-half-container{
-                display: flex;
+                display: block;
                 justify-content: center;
                 width: 50%;
                 overflow: hidden;

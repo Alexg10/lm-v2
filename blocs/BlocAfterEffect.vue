@@ -34,7 +34,7 @@
                 slickOptions: {
                     speed     : 1600,
                     infinite  : true,
-                    centerMode: true,
+                    centerMode: false,
                     dots      : true,
                     arrows    : false,
                     cssEase   : 'cubic-bezier(.19,.77,.2,1)',
@@ -230,10 +230,16 @@
             }
             .bloc-after-top-left-container{
                 float: none;
-                right: auto;;
+                right: auto;
+                #animation{
+                    margin: 0 auto;
+                    max-width: 220px;
+                }
             }
+
             .bloc-after-top-right-container{
                 left: 0;
+                padding-top: 64px;
             }
             .bloc-after-top-right-container{
                 .anim-container {
@@ -244,7 +250,7 @@
                 }
             } 
             .bloc-after-top-middle-container{
-                margin-top: 76px;
+                margin-top: 0;
             }
             .bloc-after-full-height-container{
                 width: 100%;

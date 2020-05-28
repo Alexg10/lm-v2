@@ -69,6 +69,7 @@
                 justify-content: center;
                 overflow: hidden;
                 &.typo{
+                    display: block;
                     img{
                         width: 100%;
                     }

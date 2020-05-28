@@ -131,7 +131,7 @@
                     }else{
                         introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
                             .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
-                            .to( vm.$refs.cover, {height: projectSlideHeight, duration: 4, ease: "power4.inOut"},'animIntroStart+=0.5')
+                            .to( vm.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart+=0.5')
                             .to(vm.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
                             .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
                             .from(prev, {x:'-30%', duration: 1},'animIntroStart+=3.5')
@@ -554,7 +554,7 @@
             }
             @media ( max-width : 680px ) {
                 line-height: 60px;
-                max-width: 300px;
+                max-width: 305px;
 
             }
         }

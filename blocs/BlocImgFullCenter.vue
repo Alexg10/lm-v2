@@ -63,7 +63,7 @@
         position: relative;
         .img-full-center-section-container{
             position: relative;
-            display: flex;
+            display: block;
             justify-content: center;
             z-index: 9;
             overflow: hidden;
