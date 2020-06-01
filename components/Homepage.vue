@@ -346,9 +346,9 @@
                 document.querySelector('.work-container .word-container').classList.add("anim");
                 document.querySelector('.work-container .word-container').classList.add("anim");
                 this.particuleAnimLeave();
-                this.$store.commit("setBack", false);
                 this.workClickTl.eventCallback("onComplete", function () {
                     vm.workClickTl.kill();
+                    vm.$store.commit("setBack", false);
                     vm.$router.push({
                         path: '/project/'
                     })
@@ -476,6 +476,10 @@
                 let vm = this;
                 vm.scrollable = true;
                 console.log("play");
+                if((this.$device.ipad) || (this.$device.mobile)){
+                    document.querySelector('.circle-container.love').classList.add("visible");
+                }
+                document.getElementsByClassName("arrow")[0].classList.add("visible");
                 document.querySelector('.work-container').classList.remove('visible');
                 this.loveDownDown.play();
             }
@@ -1118,15 +1122,15 @@
                     transition: all 1.5s cubic-bezier(0.67, 0.07, 0.41, 0.88);
 
                     &:nth-child(1){
-                        transform: translateX(80vw);
+                        transform: translateX(100vw);
                     }
                     &:nth-child(2){
                         transform: translateX(-80vw);
-                        transition-delay: 0.1s;
+                        transition-delay: 0.2s;
                     }
                     &:nth-child(3){
-                        transform: translateX(80vw);
-                        transition-delay: 0.2s;
+                        transform: translateX(95vw);
+                        transition-delay: 0.4s;
                     }
                 }
             }

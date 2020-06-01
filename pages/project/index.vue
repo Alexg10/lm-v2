@@ -88,7 +88,6 @@
 
                 function animIntro(index){
                     var index = 0;
-
                     if(back){
                         document.querySelector('.project-cover').classList.add('hide');
 
@@ -146,7 +145,7 @@
                         document.querySelector('.home-slider').classList.add('ready');
                         setTimeout(() => {
                             document.querySelector('.logo').classList.add("visible");
-                        }, 1500);
+                        }, 700);
                         vm.$store.commit("setBack", false);
                         document.querySelector('.project-cover').classList.remove('hide');
                     });
@@ -331,19 +330,23 @@
                 }, 300);
             },
             logoHover(){
-                document.querySelector('.cursor').classList.add('hover'); 
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.cursor').classList.add('hover'); 
+                }
             },
             logoLeave(){
-                document.querySelector('.cursor').classList.remove('hover'); 
+                if((!this.$device.ipad) && (!this.$device.mobile)){
+                    document.querySelector('.cursor').classList.remove('hover'); 
+                }
             },
             logoClick(){
-                var vm = this;
+                const vm = this;
                 this.isLeave = true;
                 document.querySelector('.logo').classList.remove('visible'); 
                 document.querySelector('.project-title').classList.add('hidden'); 
-                var slide;
+                let slide;
                 slide = document.querySelectorAll(".project-slide");
-                for (var i = 0; i < slide.length; ++i) {
+                for (let i = 0; i < slide.length; ++i) {
                     slide[i].classList.add('hidden');
                 }
                 this.$store.commit("setBack", true);
