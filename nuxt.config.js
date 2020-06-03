@@ -8,7 +8,16 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Louise Margueritat, french art director based Paris' }
+      { hid: 'description', name: 'description', content: 'Louise Margueritat, french art director based Paris' },
+      { name: 'twitter:card', content: 'summary'},
+      { name: 'twitter:title', content: 'Louise Margueritat, french art director portfolio'},
+      { name: 'twitter:description', content: 'Louise Margueritat, french art director based Paris'},
+      { name: 'twitter:image', content: '~/static/images/folio-card.png'},
+      { property: 'og:title', content: 'Louise Margueritat, french art director portfolio'},
+      { property: 'og:site_name', content: 'Louise Margueritat portfolio'},
+      { property: 'og:type', content: 'website'},
+      { property: 'og:image', content:  '~/static/images/folio-card.png'},
+      { property: 'og:description', content: 'Louise Margueritat, french art director based Paris'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
