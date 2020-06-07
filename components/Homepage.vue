@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <img class="arrow link link-hover" :src="arrowDown" alt="" v-on:click="scrollDown">
+            <img class="arrow link link-hover" :src="arrowDown" alt="arrowDown" v-on="{click: scrollable ? scrollDown : null }">
         </div>
 </template>
 
@@ -170,35 +170,38 @@
                 }, 1500);
             },
             scrollDown(){
-                var vm = this;
+                let vm = this;
                 vm.scrollable = false;
-                if((vm.$device.ipad) || (vm.$device.mobile)){
-                    document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
-                }
-                if( document.querySelector('.work-container').classList.contains('visible') ){
-                    console.log('Down FROM Work ');
-                    vm.workUpUp.time(0);
-                    vm.workUpUp.play();
-                    vm.workUpUp.eventCallback("onComplete", function () {
-                        document.querySelector('.work-container').classList.remove("visible");
-                        vm.loveUpR.pause(0);
-                        vm.loveUpR.play();
-                        if((vm.$device.ipad) || (vm.$device.mobile)){
-                            document.querySelector('.circle-container.love').classList.add("visible");
-                        }
-                    });
-                }else{
-                    document.querySelector('.work-container').classList.add("visible");
-                    console.log('Down FROM LOVE ');
-                    vm.loveUpUp.pause(0);
-                    vm.loveUpUp.play();
-                    vm.loveUpUp.eventCallback("onComplete", function () {
-                        vm.workUp.pause(0);
-                        vm.workUp.play();
-                        if((vm.$device.ipad) || (vm.$device.mobile)){
-                            document.querySelector('.circle-container.work-hold').classList.add("visible");
-                        }
-                    });
+                console.log(vm.scrollable);
+                if(!vm.scrollable){
+                    if((vm.$device.ipad) || (vm.$device.mobile)){
+                        document.querySelectorAll('.circle-container.work-hold, .circle-container.love').forEach(el => el.classList.remove('visible'));
+                    }
+                    if( document.querySelector('.work-container').classList.contains('visible') ){
+                        console.log('Down FROM Work ');
+                        vm.workUpUp.time(0);
+                        vm.workUpUp.play();
+                        vm.workUpUp.eventCallback("onComplete", function () {
+                            document.querySelector('.work-container').classList.remove("visible");
+                            vm.loveUpR.pause(0);
+                            vm.loveUpR.play();
+                            if((vm.$device.ipad) || (vm.$device.mobile)){
+                                document.querySelector('.circle-container.love').classList.add("visible");
+                            }
+                        });
+                    }else{
+                        document.querySelector('.work-container').classList.add("visible");
+                        console.log('Down FROM LOVE ');
+                        vm.loveUpUp.pause(0);
+                        vm.loveUpUp.play();
+                        vm.loveUpUp.eventCallback("onComplete", function () {
+                            vm.workUp.pause(0);
+                            vm.workUp.play();
+                            if((vm.$device.ipad) || (vm.$device.mobile)){
+                                document.querySelector('.circle-container.work-hold').classList.add("visible");
+                            }
+                        });
+                    }
                 }
                 setTimeout(() => {
                     vm.scrollable = true;
