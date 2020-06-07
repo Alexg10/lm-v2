@@ -59,7 +59,6 @@
             },
             createScenes(){
                 const vm = this;
-                console.log("durationP");
                 const durationP = document.querySelector(".img-section").offsetHeight*1.5;
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     vm.scenes = [
@@ -93,7 +92,6 @@
         },
         mounted() {
             this.durationPara = this.$refs.sectionBox.offsetHeight*1.5;
-            console.log(this.durationPara);
             // Create timelines and scenes
             this.createTimelines();
             this.createScenes();

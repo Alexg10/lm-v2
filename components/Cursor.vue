@@ -22,19 +22,14 @@
             },
             cursorHover(){
                 var link = document.getElementsByClassName("link-hover");
-                console.log(link);
                 var hoverAddClassFunction = function() {
-                    console.log('hover');
                     document.querySelector('.cursor').classList.add('hover');
                 };
                 var hoverRemoveClassFunction = function() {
-                    console.log('hoverLeave');
-
                     document.querySelector('.cursor').classList.remove('hover');
                 };
 
                 for (var i = 0; i < link.length; i++) {
-                    console.log(link[i]);
                     link[i].addEventListener('mouseenter', hoverAddClassFunction);
                     link[i].addEventListener('mouseleave', hoverRemoveClassFunction);
                 }
