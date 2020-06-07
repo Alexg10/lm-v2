@@ -9,15 +9,16 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Louise Margueritat, french art director based Paris' },
-      { hid: 'twitter:card', content: 'summary'},
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary'},
+      { hid: 'twitter:site', name: 'twitter:site', content: 'Louise Margueritat'},
       { hid: 'twitter:title', name: 'twitter:title', content: 'Louise Margueritat, french art director portfolio'},
-      { hid: 'twitter:description', name: 'twitter:description',;content: 'Louise Margueritat, french art director based Paris'},
-      { hid: 'twitter:image',  name: 'twitter:image', content: 'https://api.louise-margueritat.love/wp-content/uploads/2020/06/folio-card.png'},
-      { hid: 'og:title',  property: 'og:title', content: 'Louise Margueritat, french art director portfolio'},
-      { hid: 'og:site_name',  property: 'og:site_name', content: 'Louise Margueritat portfolio'},
-      { hid: 'og:type',  property: 'og:type', content: 'website'},
-      { hid: 'og:image',  property: 'og:image', content:  'https://api.louise-margueritat.love/wp-content/uploads/2020/06/folio-card.png'},
-      { hid: 'og:description', content: 'Louise Margueritat, french art director based Paris'}
+      { hid: 'twitter:description', name: 'twitter:description', content: 'Louise Margueritat, french art director based Paris'},
+      { hid: 'twitter:image', name: 'twitter:image', content: 'https://api.louise-margueritat.love/wp-content/uploads/2020/06/folio-card.png'},
+      { hid: 'og:title', name: 'og:title', content: 'Louise Margueritat, french art director portfolio'},
+      { hid: 'og:site_name', name: 'og:site_name', content: 'Louise Margueritat portfolio'},
+      { hid: 'og:type', name: 'og:type', content: 'website'},
+      { hid: 'og:image', name: 'og:image', content:  'https://api.louise-margueritat.love/wp-content/uploads/2020/06/folio-card.png'},
+      { hid: 'og:description', name: 'og:description', content: 'Louise Margueritat, french art director based Paris'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
