@@ -28,13 +28,13 @@
                         <a href="https://www.linkedin.com/in/louise-margueritat-16857786/" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">L<span>in</span>k<span>e</span>d<span>in</span>.</a>
                     </li>
                     <li class="social-link">
-                        <a href="https://www.behance.net/louisemarguer1" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">B<span>e</span>h<span>an</span>c<span>e</span>.</a>
+                        <a href="https://www.behance.net/louiseArtLove/" v-on:mouseenter="socialHover" v-on:mouseleave="socialLeave">B<span>e</span>h<span>an</span>c<span>e</span>.</a>
                     </li>
                 </ul>
             </div>
             <div class="center-bottom">
                 <div class="contact-me infos-link">
-                    <a href="https://nuxtjs.org" class="link link-hover" v-on:mouseenter="cocktailPlay"  v-on:mouseleave="linkLeave">
+                    <a href="mailto:margueritatlouise@gmail.com" class="link link-hover" v-on:mouseenter="cocktailPlay"  v-on:mouseleave="linkLeave">
                         <div id="ico-cocktail" class="ico-anim"></div>
                         <p>contact me</p>
                     </a>
