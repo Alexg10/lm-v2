@@ -23,7 +23,7 @@
                 timelines: {},
                 scenes: []
             }
-        }, 
+        },
         props: [
             'bloc'
         ],
@@ -32,7 +32,7 @@
                 // blocStep timeline
                 const blocColorsTimeline = new TimelineMax({ paused: false});
 
-                blocColorsTimeline.staggerFromTo(".color-container", 2, {y: 80, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.35);
+                blocColorsTimeline.staggerFromTo(".color-container", 1.5, {y: 80, opacity:0},{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, 0.3);
 
                 this.timelines = {
                     colors: blocColorsTimeline

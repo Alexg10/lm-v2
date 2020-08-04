@@ -1,8 +1,8 @@
 .listFade-enter-active{
-    animation: listFade-in 3s
+    animation: listFade-in 1.5s
 }
 .listFade-leave-active {
-    animation: listFade-out 3s
+    animation: listFade-out 1.5s
 }
 
 @keyframes listFade-in{
@@ -30,7 +30,7 @@
 
 .projectToList-leave-to,
 .projectToList-leave-active {
-  animation: listFade-out 3s
+  animation: listFade-out 1.5s
 }
 
 // @keyframes listFade-out {

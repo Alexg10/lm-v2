@@ -27,7 +27,7 @@
                 timelines: {},
                 scenes: []
             }
-        },  
+        },
         props: [
             'bloc'
         ],
@@ -38,7 +38,7 @@
                 const video          = document.querySelector('.project-laptop-preview-video');
 
                 laptopTImeline
-                    .fromTo(img, 2.5, {y: 50, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});        
+                    .fromTo(img, 2, {y: 50, opacity: 0},{y: 0, opacity: 1, ease: Power4.easeInOut, overwrite: false});
 
                 this.timelines = {
                     laptop: laptopTImeline

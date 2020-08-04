@@ -14,7 +14,7 @@
                 <div class="category">
                     <div class="category-type">{{type}}</div>
                 </div>
-                
+
                 <div :class="title== 'Terres de Sable' ? 'project-name two-lines' : 'project-name'">
                     <div class="project-name-content">{{title}}</div>
                 </div>
@@ -62,7 +62,7 @@
                 this.changeProject();
             },
             detectScroll(){
-                const st = window.pageYOffset || document.documentElement.scrollTop; 
+                const st = window.pageYOffset || document.documentElement.scrollTop;
 
                 if(st>this.winHeight){
                     document.querySelector('.cross').classList.remove("active");
@@ -73,7 +73,7 @@
                 }
                 if (st < this.lastScrollTop){
                     document.querySelector('.cross').classList.add("active");
-                } 
+                }
                 this.lastScrollTop = st <= 0 ? 0 : st;
             },
             changeProject() {
@@ -100,10 +100,10 @@
                 }
             },
             crossHover(){
-                document.querySelector('.cursor').classList.add('hover'); 
+                document.querySelector('.cursor').classList.add('hover');
             },
             crossLeave(){
-                document.querySelector('.cursor').classList.remove('hover'); 
+                document.querySelector('.cursor').classList.remove('hover');
             },
         },
         mounted() {
@@ -136,31 +136,31 @@
             if( link ){
                 if(projectNameH > 261){
                     anim
-                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 350,  duration: 6 , ease: "power4.inOut"},"-=1" )
-                        .from(description, {y: 30, opacity:0, duration: 1 },"-=0.5" )
-                        .from(link, {y:30, opacity:0, duration: 1  },"-=0.2" )
+                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 350,  duration: 3 , ease: "power4.inOut"},"-=0.7" )
+                        .from(description, {y: 30, opacity:0, duration: 0.5 },"-=0.5" )
+                        .from(link, {y:30, opacity:0, duration: 0.5  },"-=0.3" )
                         .set('.link-container',{overflow:"visible"});
                 }else{
                     anim
-                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 250,  duration: 2.5 , ease: "power4.inOut"},"-=1.2" )
-                        .from(description, {y: 30, opacity:0, duration: 0.9 },"-=0.25" )
-                        .from(link, {y:30, opacity:0, duration: 0.9  },"-=0.5" )
+                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 250,  duration: 1.6 , ease: "power4.inOut"},"-=0.9" )
+                        .from(description, {y: 30, opacity:0, duration: 0.5 },"-=0.5" )
+                        .from(link, {y:30, opacity:0, duration: 0.5 },"-=0.2" )
                         .set('.link-container',{overflow:"visible"});
                 }
 
             }else{
                 if(projectNameH > 200){
                     anim
-                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 350,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                        .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" ); 
+                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 350,  duration: 1.8 , ease: "power4.inOut"},"-=0.9" )
+                        .from(description, {y: 30, opacity:0, duration: 1 , ease: "power4.inOut"},"-=0.7" );
                 }else{
                     anim
-                        .from(categoryType, {y: 50 , duration: 2 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 230,  duration: 1.8 , ease: "power4.inOut"},"-=1" )
-                        .from(description, {y: 30, opacity:0, duration: 1.5 , ease: "power4.inOut"},"-=0.4" ); 
+                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 230,  duration: 1.6 , ease: "power4.inOut"},"-=0.9" )
+                        .from(description, {y: 30, opacity:0, duration: 0.8 , ease: "power4.inOut"},"-=0.5" );
                 }
             }
             anim.eventCallback("onComplete", function () {
@@ -172,7 +172,7 @@
             });
 
             if(this.link){
-        
+
                 this.letterContainer("link-stagger");
 
                 const staggerLink = document.querySelector('.project-link');
@@ -183,9 +183,9 @@
                     for(let i=1; i<letters.length; i++ ){
                         var yValue= Math.floor(Math.random() * 12) + 1;
                         if(i % 2 == 0){
-                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                         }else{
-                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                            hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                         }
                     }
                 }
@@ -193,14 +193,14 @@
                 hoverEffect.pause(0);
                 staggerLink.addEventListener('mouseenter', e => {
                     hoverEffect.play(0);
-                    document.querySelector('.cursor').classList.add('hover'); 
+                    document.querySelector('.cursor').classList.add('hover');
 
-                });    
+                });
                 staggerLink.addEventListener('mouseleave', e => {
                     hoverEffect.play(1).reverse();
-                    document.querySelector('.cursor').classList.remove('hover'); 
+                    document.querySelector('.cursor').classList.remove('hover');
 
-                });           
+                });
             }
         },
         destroyed(){
