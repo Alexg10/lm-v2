@@ -1,8 +1,8 @@
 <template>
     <div class="project" v-if="project">
-        <Header :bloc        = "bloc" 
-                :title       = "project.acfProjectFields.projectTitle" 
-                :type        = "project.acfProjectFields.projectType" 
+        <Header :bloc        = "bloc"
+                :title       = "project.acfProjectFields.projectTitle"
+                :type        = "project.acfProjectFields.projectType"
                 :description = "project.acfProjectFields.projectDescription"
                 :cover       = "project.acfProjectFields.headerPicture"
                 :link        = "project.acfProjectFields.projectLink">
@@ -13,6 +13,8 @@
         </div>
         <Footer :link="project.acfProjectFields.footerLink" :color="project.acfProjectFields.footerBgcolor" v-if="project.acfProjectFields.footerLink"/>
     </div>
+
+
 </template>
 
 <script>
