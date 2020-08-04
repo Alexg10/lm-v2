@@ -16,7 +16,7 @@
         <div class="love-description">
             Oh, hi there!<br>
             I’m Louise Margueritat, 26, a french art director who would love to work with u.
-            <div class="go-to-work" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave" v-on:click="goToWork">See my projects</div> 
+            <div class="go-to-work" v-on:mouseenter="linkHover" v-on:mouseleave="linkLeave" v-on:click="goToWork">See my projects</div>
         </div>
         <div class="bottom-container">
             <div class="left-bottom">
@@ -169,12 +169,12 @@
             },
             linkHover(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor').classList.add('hover'); 
+                    document.querySelector('.cursor').classList.add('hover');
                 }
             },
             linkLeave(){
                 if((!this.$device.ipad) && (!this.$device.mobile)){
-                    document.querySelector('.cursor').classList.remove('hover'); 
+                    document.querySelector('.cursor').classList.remove('hover');
                 }
             },
         },
@@ -186,17 +186,17 @@
 
             if(!this.$device.mobile){
                 this.loveContentLeave
-                    .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".social-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
-                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8");
+                    .to(".infos-link a", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".developped-link", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".social-link", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".love-description", {y: -50, opacity:0, duration: 1.3, ease: "power4.inOut" }, "loveContentLeave+=0.4")
+                    .to(".love-content", {opacity:0, duration: 0.8, ease: "power4.inOut" }, "loveContentLeave+=0.7");
             }else{
                 this.loveContentLeave
-                    .to(".developped-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".infos-link a", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave+=0.3")
-                    .to(".social-link", {y: -80, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.6")
+                    .to(".developped-link", {y: -80, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".infos-link a", {y: -80, duration:1.3, ease: "power4.inOut"}, "loveContentLeave+=0.3")
+                    .to(".social-link", {y: -80, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+                    .to(".love-description", {y: -20, opacity:0, duration: 1.3, ease: "power4.inOut" }, "loveContentLeave+=0.6")
                     .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=1");
             }
             this.loveContentLeave.eventCallback("onComplete", function () {
@@ -217,7 +217,7 @@
                 renderer: 'svg',
                 loop: false,
                 autoplay: false,
-                path: "/images/anim_img/pizza.json" 
+                path: "/images/anim_img/pizza.json"
             });
             this.pizzaAnim.goToAndStop(70,1);
 
@@ -226,7 +226,7 @@
                 renderer: 'svg',
                 loop: false,
                 autoplay: false,
-                path: "/images/anim_img/cocktail.json" 
+                path: "/images/anim_img/cocktail.json"
             });
             this.cocktailAnim.goToAndStop(75,1);
             //* END LOTTIE ANIMATION
@@ -244,9 +244,9 @@
                 for(let i=1; i<letters.length; i++ ){
                     const yValue= Math.floor(Math.random() * 10) + 1;
                     if(i % 2 == 0){
-                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                     }else{
-                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        hoverEffect.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                     }
                 }
             }
@@ -256,9 +256,9 @@
                 for(let i=1; i<letters.length; i++ ){
                     const yValue= Math.floor(Math.random() * 10) + 1;
                     if(i % 2 == 0){
-                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: -yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                     }else{
-                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        vm.hoverEffectWork.fromTo(letters[i], 0.5, {y: 0},{y: yValue, ease: Power4.easeInOut, overwrite: false}, "start");
                     }
                 }
             }
@@ -268,17 +268,17 @@
 
             staggerLink.addEventListener('mouseenter', e => {
                 hoverEffect.play(0);
-            });    
+            });
             staggerLink.addEventListener('mouseleave', e => {
                 hoverEffect.play(1).reverse();
-            });  
+            });
 
             workLink.addEventListener('mouseenter', e => {
                 vm.hoverEffectWork.play(0);
-            });    
+            });
             workLink.addEventListener('mouseleave', e => {
                 vm.hoverEffectWork.play(1).reverse();
-            });  
+            });
         },
     }
 </script>
@@ -299,10 +299,10 @@
         z-index    : 99;
         opacity    : 0;
         transition : opacity 1.1s cubic-bezier(.19,.77,.2,1);
-        -webkit-user-select: none; 
-        -webkit-touch-callout: none; 
-        -moz-user-select: none; 
-        -ms-user-select: none; 
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
         user-select: none;
         &.visible{
             visibility: visible;
@@ -344,11 +344,11 @@
         .go-to-work{
             font-size: 18px;
             margin-top: 28px;
-            -webkit-user-select: none; 
-            -webkit-touch-callout: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none; 
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
             @media ( max-width : 680px ) {
                 font-size: 16px;
             }
@@ -361,7 +361,7 @@
                 width: 100%;
             }
             .developped-link{
-                display: flex;            
+                display: flex;
                 .ico-heart{
                     margin-right: 10px;
                     transition  : 0.5s ease;
@@ -424,10 +424,10 @@
             .left-bottom{
                 display : flex;
                 overflow: hidden;
-                -webkit-user-select: none; 
-                -webkit-touch-callout: none; 
-                -moz-user-select: none; 
-                -ms-user-select: none; 
+                -webkit-user-select: none;
+                -webkit-touch-callout: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
                 user-select: none;
                 @media ( max-width : 780px ) {
                     justify-content: center;
@@ -472,11 +472,11 @@
                         height: 20px;
                         text-align: center;
                         font-size: 14px;
-                        -webkit-user-select: none; 
-                        -webkit-touch-callout: none; 
-                        -moz-user-select: none; 
-                        -ms-user-select: none; 
-                        user-select: none; 
+                        -webkit-user-select: none;
+                        -webkit-touch-callout: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
                         @media ( max-width : 780px ) {
                             min-width: 195px;
                         }
@@ -502,17 +502,17 @@
                         &:hover{
                             span{
                                 overflow: hidden;
-                            } 
+                            }
                         }
                     }
                 }
                 .contact-me{
                     font-family : 'GTWalsheimProMedium';
                     margin-right: 88px;
-                    -webkit-user-select: none; 
-                    -webkit-touch-callout: none; 
-                    -moz-user-select: none; 
-                    -ms-user-select: none; 
+                    -webkit-user-select: none;
+                    -webkit-touch-callout: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
                     user-select: none;
                     @media ( max-width : 780px ) {
                         margin-right: 148px;
@@ -528,10 +528,10 @@
                     a{
                         letter-spacing : 0.3px;
                         text-decoration: none;
-                        -webkit-user-select: none; 
-                        -webkit-touch-callout: none; 
-                        -moz-user-select: none; 
-                        -ms-user-select: none; 
+                        -webkit-user-select: none;
+                        -webkit-touch-callout: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
                         user-select: none;
                     }
                 }
@@ -559,9 +559,9 @@
                 padding-left: 6px;
                 overflow    : hidden;
                 &.overflow{
-                    overflow: visible;   
+                    overflow: visible;
                     p{
-                        overflow: visible;   
+                        overflow: visible;
                     }
                 }
                 @media ( max-width : 780px ) {
@@ -614,11 +614,11 @@
             max-width  : 444px;
             line-height: 32px;
             margin     : 0 auto;
-            -webkit-user-select: none; 
-            -webkit-touch-callout: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none; 
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
             @media ( max-width : 780px ) {
                 margin-top : 45px;
                 line-height: 30px;

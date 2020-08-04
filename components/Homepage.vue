@@ -235,7 +235,7 @@
                 const aboutBlock = document.createElement('div');
                 aboutBlock.className = 'about-block';
                 aboutBlock.innerHTML = 'about me';
-                
+
                 const aboutContainer = document.querySelector('.cursor');
                 aboutContainer.appendChild( aboutBlock );
             },
@@ -353,7 +353,7 @@
                         path: '/project/'
                     })
                 });
-            }, 
+            },
 
             gif(){
                 const foo = document.querySelector('.bg-love');
@@ -392,7 +392,7 @@
                     lastPart.classList.add("sparkle-"+typeParticule);
                     createDot(lastPart)
                     num++
-                },100); 
+                },100);
 
                 function createDot(elem){
                     gsap.fromTo(elem, {
@@ -449,11 +449,11 @@
                 if((!this.$device.ipad) && (!this.$device.mobile)){
                     vm.loveDownDown.play();
                     this.tlIntro
-                        .from('.louise', {y: 230, duration: 2.5, ease: "power4.inOut" }, "intro")
-                        .from('.margueritat', {y: 230, duration: 2.3, ease: "power4.inOut" }, "intro+=0.25")
-                        .to('.intro .word-wrapper-elle', {left: -37, duration: 1.2, ease: "power4.inOut" }, "intro+=3.7")
-                        .to('.intro .word-wrapper-aime', {left: 9, duration: 1.8, ease: "power4.inOut" }, "intro+=3.1")
-                        .to('.intro .word-container .hide .hide-left', {width: 0, duration: 2.8, ease: "power4.inOut" }, "intro+=3");
+                        .from('.louise', {y: 230, duration: 1.9, ease: "power4.inOut" }, "intro")
+                        .from('.margueritat', {y: 230, duration: 1.7, ease: "power4.inOut" }, "intro+=0.25")
+                        .to('.intro .word-wrapper-elle', {left: -37, duration: 0.5, ease: "power4.inOut" }, "intro+=2.6")
+                        .to('.intro .word-wrapper-aime', {left: 9, duration: 0.8, ease: "power4.inOut" }, "intro+=2.3")
+                        .to('.intro .word-container .hide .hide-left', {width: 0, duration: 1.9, ease: "power4.inOut" }, "intro+=2.1");
                     this.tlIntro.eventCallback("onComplete", function () {
                         document.querySelector('.intro').style.display = "none";
                         document.getElementsByClassName("arrow")[0].classList.add("visible");
@@ -487,11 +487,11 @@
                 this.loveShowContent
                     .to({}, 2.5, {})
                     .to(".love-content", {opacity:1, duration:1.2, ease: "power4.inOut" }, "loveShowContent")
-                    .from(".marquee-text-text", {opacity:0, duration:1.5, ease: "power4.inOut" }, "loveShowContent")
-                    .from(".love-description", {y: 20, opacity:0, duration: 1.8, ease: "power4.inOut" }, "loveShowContent+=0.8")
-                    .from(".social-link", {y: 50, duration:1.5, ease: "power4.inOut"}, "loveShowContent+=1.3")
-                    .from(".infos-link a", {y: 50, duration:1.5, ease: "power4.inOut"}, "loveShowContent+=1.8")
-                    .from(".developped-link", {y: 50, duration:1.5, ease: "power4.inOut" }, "loveShowContent+=2.3");
+                    .from(".marquee-text-text", {opacity:0, duration:1, ease: "power4.inOut" }, "loveShowContent")
+                    .from(".love-description", {y: 20, opacity:0, duration: 1.2, ease: "power4.inOut" }, "loveShowContent+=0.4")
+                    .from(".social-link", {y: 50, duration:1.1, ease: "power4.inOut"}, "loveShowContent+=0.9")
+                    .from(".infos-link a", {y: 50, duration:1.1, ease: "power4.inOut"}, "loveShowContent+=0.9")
+                    .from(".developped-link", {y: 50, duration:1.1, ease: "power4.inOut" }, "loveShowContent+=0.9");
 
                 if (document.querySelector('.about-block') === null){
                     this.createAbout();
@@ -527,9 +527,9 @@
                 for(let i=0; i<letters.length; i++ ){
                     var yValue= Math.floor(Math.random() * 10) + 1;
                     if(i % 2 == 0){
-                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: -yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: -yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");
                     }else{
-                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");                
+                        vm.hoverEffect.fromTo(letters[i], 1.8, {y: yValue, opacity:0 },{y: 0, opacity:1, ease: Power4.easeInOut, overwrite: false}, "start");
                     }
                 }
             }
@@ -657,11 +657,11 @@
 
     .hold-on{
         display: none;
-        -webkit-user-select: none; 
-        -webkit-touch-callout: none; 
-        -moz-user-select: none; 
-        -ms-user-select: none; 
-        user-select: none;    
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         @media ( max-width : 780px ) {
             display: flex;
             justify-content: center;
@@ -688,11 +688,11 @@
         display: flex;
         justify-content: center;
         display: none;
-        -webkit-user-select: none; 
-        -webkit-touch-callout: none; 
-        -moz-user-select: none; 
-        -ms-user-select: none; 
-        user-select: none; 
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         @media ( max-width : 780px ) {
             display: flex;
             justify-content: center;
@@ -709,7 +709,7 @@
             font-family: 'GTWalsheimProRegular';
             text-transform: uppercase;
             z-index: 9;
-        } 
+        }
         svg{
             transform: scale(1);
             opacity: 1;
@@ -753,11 +753,11 @@
             text-transform: uppercase;
             pointer-events: none;
             white-space: nowrap;
-            -webkit-user-select: none; 
-            -webkit-touch-callout: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none; 
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
             transition: all 2s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .circle {
@@ -853,7 +853,7 @@
         .word-container{
             z-index: 15;
         }
-    }  
+    }
     .word-container{
         display: block;
         font-size: 200px;
@@ -1017,9 +1017,9 @@
             line-height: 160px;
             color: black;
             -webkit-user-select: none;
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none;   
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         .hide{
             width: auto;
@@ -1134,5 +1134,5 @@
                 }
             }
         }
-    } 
+    }
 </style>
