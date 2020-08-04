@@ -56,7 +56,7 @@
                 isLeave: false,
                 slickOptions: {
                     slidesToShow : 1,
-                    speed        : 800,
+                    speed        : 900,
                     infinite     : true,
                     centerMode   : true,
                     centerPadding: '20%',
@@ -381,8 +381,8 @@
                         .to('.slick-current .slide-img',{xPercent:-50, yPercent:-50, scale:1, duration: 1.5, ease: "power4.inOut"},'start')
                         .to('.project-type', {y: 50, duration: 0.3, ease: "power4.inOut"}, 'start+=1.3')
                         .to('.slide-layer',{opacity:0, duration: 0.7, ease: "power4.inOut"},'start+=1.8')
-                        .set('.project-cover',{display:"block"},'start+=3')
-                        .to('.project-cover', {width: "100%", height: "100vh", duration: 1.5, ease: "power4.inOut"}, 'start+=3');
+                        .set('.project-cover',{display:"block"},'start+=2')
+                        .to('.project-cover', {width: "100%", height: "100vh", duration: 1.5, ease: "power4.inOut"}, 'start+=2');
                 }else{
                     outroTl
                         .to(prev, {x:'-20%', duration: 0.5, ease: "power4.in"},'start')

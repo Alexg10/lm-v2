@@ -205,11 +205,12 @@
 
 
             this.loveContentFade
-                    .to(".infos-link a", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".developped-link", {y: -50, duration:1.5, ease: "power4.inOut"}, "loveContentLeave")
-                    .to(".love-description", {y: -20, opacity:0, duration: 1.5, ease: "power4.inOut" }, "loveContentLeave+=0.4")
-                    .to(".love-content", {opacity:0, duration:1, ease: "power4.inOut" }, "loveContentLeave+=0.8")
-                    .to(".arrow", {opacity:0, duration: 0.5, ease: "power4.inOut" }, "loveContentLeave");
+              .to(".infos-link a", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+              .to(".developped-link", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+              .to(".social-link", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
+              .to(".love-description", {y: -20, opacity:0, duration: 1.3, ease: "power4.inOut" }, "loveContentLeave+=0.4")
+              .to(".love-content", {opacity:0, duration: 0.8, ease: "power4.inOut" }, "loveContentLeave+=0.8")
+              .to(".arrow", {opacity:0, duration: 0.5, ease: "power4.inOut" }, "loveContentLeave");
 
             //* LOTTIE ANIMATION
             this.pizzaAnim = lottie.loadAnimation({

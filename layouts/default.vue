@@ -45,7 +45,7 @@ html {
 
 .loading-cover {
   // opacity: 0;
-  position: fixed;
+  position: static;
   z-index: 999;
   top: 0;
   left: 0;
