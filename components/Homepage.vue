@@ -150,6 +150,7 @@ export default {
       workUpUp: gsap.timeline({ progress: 1 }),
       workDownDown: gsap.timeline({ progress: 1 }),
       workDown: gsap.timeline({ progress: 1 }),
+      linkAppear: gsap.timeline({ paused: true, progress: 0}),
       loveShowContent: gsap.timeline({ paused: true }),
       hoverEffect: new TimelineMax({ paused: false }),
     };
@@ -181,9 +182,14 @@ export default {
               .querySelector(".circle-container.work-hold")
               .classList.add("visible");
           }
+          //show
+          setTimeout(() => {
+            vm.linkAppear.play(1).reverse();
+          }, 1000);
         });
       } else {
         // console.log('UP FROM WORK ')
+        vm.linkAppear.play(0);
         vm.workDown.pause(0);
         vm.workDown.play();
         vm.workDown.eventCallback("onComplete", function () {
@@ -215,6 +221,8 @@ export default {
         document.querySelector(".work-container").classList.contains("visible")
       ) {
         // console.log('Down FROM Work ');
+        //hide
+        vm.linkAppear.play(0);
         vm.workUpUp.time(0);
         vm.workUpUp.play();
         vm.workUpUp.eventCallback("onComplete", function () {
@@ -227,6 +235,7 @@ export default {
               .classList.add("visible");
           }
         });
+
       } else {
         document.querySelector(".work-container").classList.add("visible");
         // console.log('Down FROM LOVE ');
@@ -239,8 +248,13 @@ export default {
             document
               .querySelector(".circle-container.work-hold")
               .classList.add("visible");
-          }
+          }        
+          //show
+          setTimeout(() => {
+            vm.linkAppear.play(1).reverse();
+          }, 1000);
         });
+
       }
       setTimeout(() => {
         vm.scrollable = true;
@@ -395,6 +409,7 @@ export default {
       this.countdown("stop", "work");
     },
     workHover() {
+      this.linkAppear.play(0);
       this.particuleAnim();
     },
     workClick() {
@@ -491,6 +506,11 @@ export default {
       setTimeout(function () {
         document.querySelectorAll(".sparkle").forEach((e) => e.remove());
       }, 1500);
+
+      //show
+      setTimeout(() => {
+        vm.linkAppear.play(1).reverse();
+      }, 500);
     },
     letterContainer(className) {
       var word = document.getElementsByClassName(className)[0];
@@ -617,29 +637,7 @@ export default {
       this.letterContainer("link-indication");
 
       const staggerLink = document.querySelector('.project-link');
-      const hoverEffect = new TimelineMax({ paused: false, delay: 1});
-
-      for(let word of document.getElementsByClassName("link-indication")){
-          const letters = word.childNodes;
-          for(let i=0; i<letters.length; i++ ){
-              var yValue= Math.floor(Math.random() * 12) + 1;
-              if(i % 2 == 0){
-                  hoverEffect.fromTo(letters[i], 0.7, {y: 0},{y: -yValue, opacity:0, ease: Power4.easeInOut, overwrite: false}, "start");
-              }else{
-                  hoverEffect.fromTo(letters[i], 0.7, {y: 0},{y: yValue, opacity:0, ease: Power4.easeInOut, overwrite: false}, "start");
-              }
-          }
-      }
-
-      hoverEffect.pause(1);
-      staggerLink.addEventListener('mouseenter', e => {
-          setTimeout(() => {
-            hoverEffect.play(1).reverse();
-          }, 500);
-      });
-      staggerLink.addEventListener('mouseleave', e => {
-          hoverEffect.play(0);
-      });
+      // const hoverEffect = new TimelineMax({ paused: false, delay: 1});
 
     } else {
       this.loveShowContent
@@ -811,6 +809,19 @@ export default {
       { y: 170, duration: 1, ease: "power4.inOut", stagger: -0.3 },
       "workInit"
     );
+
+
+    for(let word of document.getElementsByClassName("link-indication")){
+        const letters = word.childNodes;
+        for(let i=0; i<letters.length; i++ ){
+            var yValue= Math.floor(Math.random() * 12) + 1;
+            if(i % 2 == 0){
+                this.linkAppear.fromTo(letters[i], 0.4, {y: 0},{y: -yValue, opacity:0, ease: Power4.easeIn, overwrite: false}, "start");
+            }else{
+                this.linkAppear.fromTo(letters[i], 0.4, {y: 0},{y: yValue, opacity:0, ease: Power4.easeIn, overwrite: false}, "start");
+            }
+        }
+    }
 
     this.keySlide();
   },
@@ -1019,17 +1030,17 @@ body {
 .project-link{
   position: relative;
   &:hover{
-  .link-indication-container{
-    .link-indication{
-      transform: translateY(0);
-      transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-      transition-delay: 0.8s;
+    .link-indication-container{
+      .link-indication{
+        transform: translateY(0);
+        transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition-delay: 0.8s;
+      }
     }
-  }
   }
   .link-indication-container{
     position: absolute;
-    top: 95px;
+    top: 93px;
     left: 50%;
     transform: translateX(-50%);
     .link-indication{
