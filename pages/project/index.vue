@@ -577,7 +577,7 @@
             overflow: visible;
         }
         .project-title{
-            opacity: 0.3;
+            opacity: 0.5;
             @media ( max-width : 780px ) {
                 opacity: 1;
                 letter-spacing: -1px;

@@ -79,7 +79,10 @@
     </div>
     <div class="swiper-slide work-container">
       <div class="home-slide-content orange">
-        <nuxt-link to="project">
+        <nuxt-link to="project" class="project-link">
+            <div class="link-indication-container">
+              <div class="link-indication">Take a look</div>
+            </div>
           <div
             class="word-container"
             v-on:mouseenter="workHover"
@@ -611,6 +614,33 @@ export default {
         this.createAbout();
       }
       this.letterContainer("about-block");
+      this.letterContainer("link-indication");
+
+      const staggerLink = document.querySelector('.project-link');
+      const hoverEffect = new TimelineMax({ paused: false, delay: 1});
+
+      for(let word of document.getElementsByClassName("link-indication")){
+          const letters = word.childNodes;
+          for(let i=0; i<letters.length; i++ ){
+              var yValue= Math.floor(Math.random() * 12) + 1;
+              if(i % 2 == 0){
+                  hoverEffect.fromTo(letters[i], 0.7, {y: 0},{y: -yValue, opacity:0, ease: Power4.easeInOut, overwrite: false}, "start");
+              }else{
+                  hoverEffect.fromTo(letters[i], 0.7, {y: 0},{y: yValue, opacity:0, ease: Power4.easeInOut, overwrite: false}, "start");
+              }
+          }
+      }
+
+      hoverEffect.pause(1);
+      staggerLink.addEventListener('mouseenter', e => {
+          setTimeout(() => {
+            hoverEffect.play(1).reverse();
+          }, 500);
+      });
+      staggerLink.addEventListener('mouseleave', e => {
+          hoverEffect.play(0);
+      });
+
     } else {
       this.loveShowContent
         .to({}, 2.5, {})
@@ -986,6 +1016,31 @@ body {
     }
   }
 }
+.project-link{
+  position: relative;
+  &:hover{
+  .link-indication-container{
+    .link-indication{
+      transform: translateY(0);
+      transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition-delay: 0.8s;
+    }
+  }
+  }
+  .link-indication-container{
+    position: absolute;
+    top: 95px;
+    left: 50%;
+    transform: translateX(-50%);
+    .link-indication{
+      color: black;
+      font-size: 18px;
+      font-family: 'GTWalsheimProMedium';
+      // transform: translateY(100%);
+      transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+  }
+}
 
 .homepage-container {
   position: relative;
@@ -1089,6 +1144,7 @@ a {
     transition: color 1.2s cubic-bezier(0.19, 0.77, 0.2, 1);
   }
   &.hover {
+
     .word,
     a {
       color: #ff9170;
