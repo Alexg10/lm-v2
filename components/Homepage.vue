@@ -150,7 +150,7 @@ export default {
       workUpUp: gsap.timeline({ progress: 1 }),
       workDownDown: gsap.timeline({ progress: 1 }),
       workDown: gsap.timeline({ progress: 1 }),
-      linkAppear: gsap.timeline({ paused: true, progress: 0}),
+      linkAppear: gsap.timeline(),
       loveShowContent: gsap.timeline({ paused: true }),
       hoverEffect: new TimelineMax({ paused: false }),
     };
