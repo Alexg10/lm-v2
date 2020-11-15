@@ -1051,6 +1051,11 @@ body {
       }
     }
   }
+  @media (max-width: 680px) {
+    .link-indication-container{
+        top: 65px;
+    }
+  }
 }
 
 .homepage-container {
