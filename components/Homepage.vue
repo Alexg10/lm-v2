@@ -184,6 +184,7 @@ export default {
           }
           //show
           setTimeout(() => {
+            document.querySelector(".link-indication").classList.add("visible");
             vm.linkAppear.play(1).reverse();
           }, 1000);
         });
@@ -194,6 +195,7 @@ export default {
         vm.workDown.play();
         vm.workDown.eventCallback("onComplete", function () {
           document.querySelector(".work-container").classList.remove("visible");
+          document.querySelector(".link-indication").classList.remove("visible");
           vm.loveDownDown.pause(0);
           vm.loveDownDown.play();
           if (vm.$device.ipad || vm.$device.mobile) {
@@ -234,6 +236,7 @@ export default {
               .querySelector(".circle-container.love")
               .classList.add("visible");
           }
+          document.querySelector(".link-indication").classList.remove("visible");
         });
 
       } else {
@@ -248,9 +251,10 @@ export default {
             document
               .querySelector(".circle-container.work-hold")
               .classList.add("visible");
-          }        
+          }
           //show
           setTimeout(() => {
+            document.querySelector(".link-indication").classList.add("visible");
             vm.linkAppear.play(1).reverse();
           }, 1000);
         });
@@ -1029,15 +1033,6 @@ body {
 }
 .project-link{
   position: relative;
-  &:hover{
-    .link-indication-container{
-      .link-indication{
-        transform: translateY(0);
-        transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-        transition-delay: 0.8s;
-      }
-    }
-  }
   .link-indication-container{
     position: absolute;
     top: 93px;
@@ -1049,6 +1044,10 @@ body {
       font-family: 'GTWalsheimProMedium';
       // transform: translateY(100%);
       transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+      display: none;
+      &.visible{
+        display: inline-block;
+      }
     }
   }
 }

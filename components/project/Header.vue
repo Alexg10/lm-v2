@@ -136,16 +136,16 @@
             if( link ){
                 if(projectNameH > 261){
                     anim
-                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 350,  duration: 3 , ease: "power4.inOut"},"-=0.7" )
+                        .from(categoryType, {y: 50 , duration: 1.2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 350,  duration: 2.5 , ease: "power4.inOut"},"-=0.6" )
                         .from(description, {y: 30, opacity:0, duration: 0.5 },"-=0.5" )
                         .from(link, {y:30, opacity:0, duration: 0.5  },"-=0.3" )
                         .set('.link-container',{overflow:"visible"});
                 }else{
                     anim
-                        .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 250,  duration: 1.6 , ease: "power4.inOut"},"-=0.9" )
-                        .from(description, {y: 30, opacity:0, duration: 0.5 },"-=0.5" )
+                        .from(categoryType, {y: 50 , duration: 1.2 , ease: "power4.inOut"}, "fire")
+                        .from(projectName, {y: 250,  duration: 1.45 , ease: "power4.inOut"},"-=0.7" )
+                        .from(description, {y: 30, opacity:0, duration: 0.5 },"-=0.4" )
                         .from(link, {y:30, opacity:0, duration: 0.5 },"-=0.2" )
                         .set('.link-container',{overflow:"visible"});
                 }
@@ -154,7 +154,7 @@
                 if(projectNameH > 200){
                     anim
                         .from(categoryType, {y: 50 , duration: 1.5 , ease: "power4.inOut"}, "fire")
-                        .from(projectName, {y: 350,  duration: 1.8 , ease: "power4.inOut"},"-=0.9" )
+                        .from(projectName, {y: 350,  duration: 1.5 , ease: "power4.inOut"},"-=0.9" )
                         .from(description, {y: 30, opacity:0, duration: 1 , ease: "power4.inOut"},"-=0.7" );
                 }else{
                     anim
