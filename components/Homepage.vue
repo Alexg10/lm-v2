@@ -419,6 +419,7 @@ export default {
     workClick() {
       var vm = this;
       this.workClickTl.play();
+      document.querySelector(".link-indication").classList.remove("visible");
       document
         .querySelector(".work-container .word-container")
         .classList.add("anim");
@@ -544,28 +545,28 @@ export default {
         this.tlIntro
           .from(
             ".louise",
-            { y: 230, duration: 1.9, ease: "power4.inOut" },
+            { y: 230, duration: 1.7, ease: "power4.inOut" },
             "intro"
           )
           .from(
             ".margueritat",
-            { y: 230, duration: 1.7, ease: "power4.inOut" },
+            { y: 230, duration: 1.5, ease: "power4.inOut" },
             "intro+=0.25"
           )
           .to(
             ".intro .word-wrapper-elle",
-            { left: -37, duration: 0.5, ease: "power4.inOut" },
-            "intro+=2.6"
+            { left: -37, duration: 0.6, ease: "power4.inOut" },
+            "intro+=2"
           )
           .to(
             ".intro .word-wrapper-aime",
-            { left: 9, duration: 0.8, ease: "power4.inOut" },
+            { left: 9, duration: 0.5, ease: "power4.inOut" },
             "intro+=2.3"
           )
           .to(
             ".intro .word-container .hide .hide-left",
             { width: 0, duration: 1.9, ease: "power4.inOut" },
-            "intro+=2.1"
+            "intro+=1.8"
           );
         this.tlIntro.eventCallback("onComplete", function () {
           document.querySelector(".intro").style.display = "none";
