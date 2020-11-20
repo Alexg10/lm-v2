@@ -183,7 +183,9 @@
                 this.childNodes();
             }
             const vm = this;
-
+            let vh = window.innerHeight * 0.01;
+            // Then we set the value in the --vh custom property to the root of the document
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
             if(!this.$device.mobile){
                 this.loveContentLeave
                     .to(".infos-link a", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
@@ -306,6 +308,10 @@
         -ms-user-select: none;
         user-select: none;
         @media ( max-width : 680px ) {
+          min-height: 100vh;
+          min-height: -webkit-fill-available;
+          height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+          height: calc(var(--vh, 1vh) * 100);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
