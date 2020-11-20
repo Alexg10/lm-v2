@@ -1116,19 +1116,14 @@ a {
 .home-slide-content {
   position: relative;
   height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: calc(1vh * 100);
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  // background: white;
-
-  // &.red{
-  //     background-color: red;
-  // }
-  // &.orange{
-  //     background-color: orange;
-  // }
 }
 .love-container {
   .word-container {
