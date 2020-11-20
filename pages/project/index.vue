@@ -128,14 +128,14 @@
                                 .from(next, {x:'20%', duration: 2, ease: "power4.inOut"},'-=2.5')
                         }
                     }else{
-                        introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 4, ease: "power4.inOut"},'animIntroStart')
+                        introTl.to( vm.$refs.cover, {width: projectSlideWidth, duration: 2.1, ease: "power4.inOut"},'animIntroStart')
                             .from('.home-slider',{opacity: 0, duration: 2, ease: "power4.inOut"},'animIntroStart')
-                            .to( vm.$refs.cover, {height: projectSlideHeight, duration: 3, ease: "power4.inOut"},'animIntroStart+=0.5')
-                            .to(vm.$refs.coverImg, {scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
-                            .to(".slide-img", { scale:0.7, duration: 4, ease: "power4.inOut"},'animIntroStart')
-                            .from(prev, {x:'-30%', duration: 1},'animIntroStart+=3.5')
-                            .from(next, {x:'30%', duration: 1},'animIntroStart+=3.5')
-                            .to({}, 0.5, {});
+                            .to( vm.$refs.cover, {height: projectSlideHeight, duration: 1.3, ease: "power4.inOut"},'animIntroStart+=0.5')
+                            .to(vm.$refs.coverImg, {scale:0.7, duration: 2.2, ease: "power4.inOut"},'animIntroStart')
+                            .to(".slide-img", { scale:0.7, duration: 3, ease: "power4.inOut"},'animIntroStart')
+                            .from(prev, {x:'-30%', duration: 0.6},'animIntroStart+=2')
+                            .from(next, {x:'30%', duration: 0.6},'animIntroStart+=2')
+                            .to({}, 0.2, {});
                     }
 
                     introTl.eventCallback("onComplete", ()=> {
@@ -208,15 +208,6 @@
                         vm.$refs.slick.next();
                     }
                 }
-            },
-            parallax(e){
-//                 var imgW         = window.innerWidth*0.48;
-//                 var imgH         = window.innerHeight*0.48;
-//                 var amountMovedX = (e.pageX * -0.3 / 10)-imgW;
-//                 var amountMovedY = (e.pageY * -0.3 / 10)-imgH;
-
-// //TRANSFORMER EN %%%
-//                 document.querySelector('.slick-current .slide-img').style.transform = 'translate(' + amountMovedX + 'px,' + amountMovedY + 'px)';
             },
             projectEnter(){
                 // console.log(this.isLeave);
@@ -391,8 +382,8 @@
                         .to('.slide-layer',{opacity:0, duration: 1, ease: "power4.inOut"},'start')
                         .to('.project-type', {y: 50, duration: 0.5, ease: "power4.inOut"}, 'start+=0.5')
                         .set('.project-cover',{display:"block"},'start+=2.3')
-                        .to('.project-cover-img', {scale: 1, duration: 2, ease: "power4.inOut"}, 'start+=2.5')
-                        .to('.project-cover', {width: "100%", height: "100vh", duration: 2, ease: "power4.inOut"}, 'start+=2.5');
+                        .to('.project-cover-img', {scale: 1, duration: 1.6, ease: "power4.inOut"}, 'start+=2.5')
+                        .to('.project-cover', {width: "100%", height: "100vh", duration: 1.6, ease: "power4.inOut"}, 'start+=2.5');
                 }
 
                 outroTl.eventCallback("onComplete", ()=> {
@@ -588,6 +579,9 @@
             &.visible{
                 transform: translateY(0);
                 transition: all 0.5s ease;
+                @media ( max-width : 680px ) {
+                  transition: all 0.8s ease;
+                }
             }
             &.hover{
                 opacity: 1;
@@ -648,6 +642,10 @@
             }
             @media ( max-width : 680px ) {
                 width: 95%!important;
+                .project-type{
+                    transition-delay: 1.4s;
+                }
+
             }
 
         }

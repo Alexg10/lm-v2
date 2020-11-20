@@ -305,6 +305,11 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        @media ( max-width : 680px ) {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
         &.visible{
             visibility: visible;
             opacity   : 1;
@@ -323,7 +328,7 @@
                 font-size: 190px;
             }
             @media ( max-width : 680px ) {
-                font-size  : 78px;
+                font-size  : 74px;
                 line-height: 100px;
             }
         }
@@ -337,8 +342,8 @@
                 margin  : 110px 0;
             }
             @media ( max-width : 680px ) {
-                margin-top: 80px;
-                margin-bottom: 30px;
+                margin-top: 70px;
+                margin-bottom: 0;
             }
         }
 
@@ -399,6 +404,9 @@
             }
             @media ( max-width : 780px ) {
                 bottom : 4vh;
+                position: initial;
+                transform: translateX(0);
+
             }
 
             .ico-anim{
@@ -433,7 +441,7 @@
                 @media ( max-width : 780px ) {
                     justify-content: center;
                     order: 2;
-                    margin-bottom: 30px;
+                    margin-bottom: 25px;
                 }
                 a{
                     display    : flex;
@@ -543,7 +551,7 @@
                     margin-bottom: 200px;
                 }
                 @media ( max-width : 680px ) {
-                    margin-bottom: 45px;
+                    margin-bottom: 35px;
                 }
 
             }
@@ -628,10 +636,10 @@
                 margin     : 0 auto;
             }
             @media ( max-width : 680px ) {
-                margin-top : 45px;
+                margin-top : 20px;
                 max-width  : 300px;
                 line-height: 24px;
-                font-size: 18px;
+                font-size: 16px;
             }
         }
         .word-container{
