@@ -177,6 +177,11 @@
                     document.querySelector('.cursor').classList.remove('hover');
                 }
             },
+            resetHeight(){
+                // reset the body height to that of the inner browser
+                console.log("resetHeight");
+                document.body.style.height = window.innerHeight + "px";
+            }
         },
         mounted() {
             if((!this.$device.ipad) && (!this.$device.mobile)){
@@ -185,7 +190,7 @@
             const vm = this;
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
-
+            this.resetHeight();
             if(!this.$device.mobile){
                 this.loveContentLeave
                     .to(".infos-link a", {y: -50, duration:1.3, ease: "power4.inOut"}, "loveContentLeave")
@@ -412,9 +417,11 @@
                 bottom : 4vh;
                 position: initial;
                 transform: translateX(0);
-
             }
 
+            @media ( max-width: 680px){
+              padding-bottom: 50px;
+            }
             .ico-anim{
                 max-width   : 40px;
                 margin-right: 17px;
