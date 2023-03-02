@@ -24,7 +24,7 @@
     "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "path": "^0.12.7",
-    "pm2": "^4.2.3",
+    "pm2": "^4.5.6",
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.3.5",
     "ts-node": "^8.6.2",
